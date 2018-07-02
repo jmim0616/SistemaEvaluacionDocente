@@ -6,7 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class TeacherBean {
 	
-	@Pattern(regexp="^[0-9]{10}$", message="En este campo solo se permiten numeros de 10 caracteres")
+	@NotEmpty(message="Este campo es requerido")
+	@Pattern(regexp="^[0-9]*$", message="En este campo solo se permiten numeros")
 	private String teacherId;
 
 	private String teacherStatus;
@@ -15,40 +16,32 @@ public class TeacherBean {
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String name;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String lastName;
 	
 	private String identificationType;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String underDegree;
 
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String masterDegree;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String doctorDegree;
 	
-	@Pattern(regexp="[a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}", message="El campo \"Email\" no cumple el formato adecuado. Ejm: ejemplo@gmail.com")
+	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Email\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 	
-	@Pattern(regexp="[a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}", message="El campo \"Email\" no cumple el formato adecuado. Ejm: ejemplo@gmail.com")
+	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Email\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String personalMail;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[0-9]*$", message="En este campo solo se permiten numeros")
-	private String cellPhoneNumber;
+	private String cellNumber;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[0-9]*$", message="En este campo solo se permiten numeros")
 	private String homeNumber;
 	
-	@NotEmpty(message="Este campo es requerido")
-	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String experience;
 	
 	
@@ -64,7 +57,7 @@ public class TeacherBean {
 
 	public TeacherBean(String teacherId, String teacherStatus, String name, String lastName, String identificationType,
 			String underDegree, String masterDegree, String doctorDegree, String institutionalMail, String personalMail,
-			String cellPhoneNumber, String homeNumber, String experience) {
+			String cellNumber, String homeNumber, String experience) {
 		this.teacherId = teacherId;
 		this.teacherStatus = teacherStatus;
 		this.name = name;
@@ -75,7 +68,7 @@ public class TeacherBean {
 		this.doctorDegree = doctorDegree;
 		this.institutionalMail = institutionalMail;
 		this.personalMail = personalMail;
-		this.cellPhoneNumber = cellPhoneNumber;
+		this.cellNumber = cellNumber;
 		this.homeNumber = homeNumber;
 		this.experience = experience;
 	}
@@ -180,16 +173,13 @@ public class TeacherBean {
 		this.personalMail = personalMail;
 	}
 
-
-	public String getCellPhoneNumber() {
-		return cellPhoneNumber;
+	public String getCellNumber() {
+		return cellNumber;
 	}
 
-
-	public void setCellPhoneNumber(String cellPhoneNumber) {
-		this.cellPhoneNumber = cellPhoneNumber;
+	public void setCellNumber(String cellNumber) {
+		this.cellNumber = cellNumber;
 	}
-
 
 	public String getHomeNumber() {
 		return homeNumber;
@@ -216,8 +206,8 @@ public class TeacherBean {
 		return "TeacherBean [teacherId=" + teacherId + ", teacherStatus=" + teacherStatus + ", name=" + name
 				+ ", lastName=" + lastName + ", identificationType=" + identificationType + ", underDegree="
 				+ underDegree + ", masterDegree=" + masterDegree + ", doctorDegree=" + doctorDegree
-				+ ", institutionalMail=" + institutionalMail + ", personalMail=" + personalMail + ", cellPhoneNumber="
-				+ cellPhoneNumber + ", homeNumber=" + homeNumber + ", experience=" + experience + "]";
+				+ ", institutionalMail=" + institutionalMail + ", personalMail=" + personalMail + ", cellNumber="
+				+ cellNumber + ", homeNumber=" + homeNumber + ", experience=" + experience + "]";
 	}
 
 	

@@ -7,7 +7,9 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 		
-		ajaxShowCreateDepartment();
+		$('.content').fadeOut(0).load('./Departments/Create').fadeIn('slow');
+		
+		$('.modalContainer').show().fadeIn('slow');
 		
 	});
 	
@@ -27,40 +29,6 @@ $(document).ready(function() {
 });
 
 
-
-function ajaxShowCreateDepartment() {
-	
-	
-	$.ajax({
-		url: './Departments/Create',
-		method: 'GET',
-			done: function() {
-				
-
-			},
-			success: function(view){
-			
-				
-				$('.content').fadeOut(0).html(view).fadeIn('slow');
-				
-				$('.modalContainer').show().fadeIn('slow');
-		
-		},
-
-	    error: function() {
-
-	        console.log("No se ha podido obtener la información");
-
-	    }
-		
-		
-		
-	});
-	
-}
-
-
-
 function ajaxSearchDepartment() {
 	
 	
@@ -73,14 +41,40 @@ function ajaxSearchDepartment() {
 
 			},
 			success: function(jsonResponse){
-			
-			$('.departmentData').show().fadeIn('slow');
-			
-			$("#tableDepartmentData").append(
-					"<tr>" +
-					"<td>1</td> " +
-					"<td>Woz</td> " +
-					"</tr>" );
+				
+				if (typeof jsonResponse == "string") {
+					
+					$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+					
+					$('.error').show().fadeIn('slow');
+			}
+				
+				console.log(jsonResponse);
+				
+				if (jsonResponse.errorMessage != null) {
+					
+					$('#tableDepartmentData').show().fadeOut('slow');
+					
+					$('.error .message').text(jsonResponse.errorMessage);
+					
+					$('.error').show().fadeIn('slow');
+					
+					
+				} else {
+					
+					$.each(jsonResponse.objectEntityList, function(key, value) {
+
+						$("#tableDepartmentData").append(
+								"<tr>" +
+								"<td>"+ jsonResponse.objectEntityList[key].departmentId +"</td> " +
+								"<td>"+ jsonResponse.objectEntityList[key].name +"</td> " +
+								"</tr>" );
+						
+					})
+
+					
+					
+				}
 		
 		},
 

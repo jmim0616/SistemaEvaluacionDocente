@@ -51,7 +51,13 @@ $('#buttonUpdateDisciplinaryAreaToolbar').click(function(event) {
 });
 
 
+$('.error .close').click(function(event) {
 
+	event.preventDefault();
+	
+	$('.error').show().fadeOut('slow');
+	
+});
 
 function obtainValuesTagTd(tr){
 

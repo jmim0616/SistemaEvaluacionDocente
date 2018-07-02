@@ -38,6 +38,14 @@ $(document).ready(function() {
 		
 	});
 	
+});
+
+
+$('.error .close').click(function(event) {
+
+	event.preventDefault();
+	
+	$('.error').show().fadeOut('slow');
 	
 });
 

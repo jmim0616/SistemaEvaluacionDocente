@@ -31,7 +31,7 @@ public class AcademicProgramDaoImpl implements AcademicProgramDaoInterface {
 	@Override
 	public void create(AcademicProgramEntity academicProgramEntity){
 
-		entityManager.persist(academicProgramEntity);
+		entityManager.merge(academicProgramEntity);
 		
 	}
 
@@ -43,23 +43,33 @@ public class AcademicProgramDaoImpl implements AcademicProgramDaoInterface {
 	}
 	
 	@Override
-	public List<AcademicProgramEntity> findByName(String name) {
+	public AcademicProgramEntity findByName(String name) {
 		
-		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.name =: name", AcademicProgramEntity.class);
+		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.name =:name", AcademicProgramEntity.class);
 		
 		query.setParameter("name", name);
 		
-		List<AcademicProgramEntity> academicPrograms = query.getResultList();
+		AcademicProgramEntity academicProgram = query.getSingleResult();
 		
-		return academicPrograms;
+		return academicProgram;
 	}
 	
 	@Override
 	public List<AcademicProgramEntity> findByFacultyId(String faculty) {
 		
-		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty =: faculty", AcademicProgramEntity.class);
+		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty =:faculty", AcademicProgramEntity.class);
 		
 		query.setParameter("faculty", faculty);
+		
+		List<AcademicProgramEntity> academicPrograms = query.getResultList();
+		
+		return academicPrograms;
+	}
+
+	@Override
+	public List<AcademicProgramEntity> getAll() {
+		
+	TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap", AcademicProgramEntity.class);
 		
 		List<AcademicProgramEntity> academicPrograms = query.getResultList();
 		

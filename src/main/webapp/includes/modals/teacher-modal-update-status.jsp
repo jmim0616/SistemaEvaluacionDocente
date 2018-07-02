@@ -1,7 +1,4 @@
-<!--teacher-update-status-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-update-status.js"></script>
-	
+<%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
 <div class="modalContainer">
 
@@ -13,15 +10,19 @@
 
 <section class="modalBody">
 
-<h2 id="tittleModal" > Ventana Modal </h2>
+<h2 id="tittleModal" > Modificar Estado de Docente </h2>
  
-<p id="dialogModal" > El estado del profesor es activo, desea inactivarlo ? </p>
+<p id="dialogModal" > El estado del docente es <strong> <span class="status"></span></strong>, desea Cambiar su estado ? </p>
+<form:form  modelAttribute="teacher">
+		
+		<form:hidden path="teacherId" id="teacherIdUpdateStatus" />
 
+</form:form>
 </section>
 
 <section class="modalFooter">
- <input id="buttonUpdateStatusTeacher" class="button sent-button" type="submit" />
- <input id="buttonCancel" class="button delete-button" type="submit" />
+ <input id="buttonUpdateStatusTeacher" class="button sent-button" type="submit" value="Modificar Estado de Docente" />
+ <input id="buttonCancel" class="button delete-button" type="submit" value="Cancelar"/>
 </section>
 
 </div>

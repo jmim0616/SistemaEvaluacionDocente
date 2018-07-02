@@ -45,11 +45,23 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	}
 	
 	@Override
-	public List<DisciplinaryAreaEntity> findByName(String name) {
+	public DisciplinaryAreaEntity findByName(String name) {
 		
-		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where ap.name =: name", DisciplinaryAreaEntity.class);
+		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where ap.name =:name", DisciplinaryAreaEntity.class);
 		
 		query.setParameter("name", name);
+		
+		DisciplinaryAreaEntity disciplinaryArea = query.getSingleResult();
+		
+		return disciplinaryArea;
+	}
+	
+	@Override
+	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty) {
+		
+		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty =:faculty", DisciplinaryAreaEntity.class);
+		
+		query.setParameter("faculty", faculty);
 		
 		List<DisciplinaryAreaEntity> disciplinaryAreas = query.getResultList();
 		
@@ -57,11 +69,9 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	}
 	
 	@Override
-	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty) {
+	public List<DisciplinaryAreaEntity> getAll() {
 		
-		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty =: faculty", DisciplinaryAreaEntity.class);
-		
-		query.setParameter("faculty", faculty);
+	TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da", DisciplinaryAreaEntity.class);
 		
 		List<DisciplinaryAreaEntity> disciplinaryAreas = query.getResultList();
 		

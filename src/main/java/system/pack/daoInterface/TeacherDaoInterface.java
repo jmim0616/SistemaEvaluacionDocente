@@ -13,12 +13,14 @@ public interface TeacherDaoInterface {
 	
 	public void updateState(TeacherEntity teacherEntity);
 	
-	public List<TeacherEntity> findByName(String name);
+	public TeacherEntity findById(int id);
 	
-	public List<TeacherEntity> findByLastName(String lastName);
+	public TeacherEntity findByName(String name);
 	
-	public List<TeacherEntity> findByIdentificationType(String identificationType);
+	public TeacherEntity findByLastName(String lastName);
 	
-	public List<TeacherEntity> findByTeacherStatusId(String teacherStatus);
+	public TeacherEntity findByIdentificationType(String identificationType);
+	
+	public TeacherEntity findByTeacherStatusId(String teacherStatus);
 
 }

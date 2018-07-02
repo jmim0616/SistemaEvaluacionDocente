@@ -7,6 +7,12 @@
 
 <div class="updateTeacher">
 
+    <div class="success">
+     <a href="#" class="close">X</a>
+	 <a class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></a> 
+	<label class="message"></label>
+    </div>
+
 	<h2>DOCENTES</h2>
 
 	<h3>Modificar Docente</h3>
@@ -101,10 +107,10 @@
 
 				<td>
 					<fieldset>
-						<form:label path="cellPhoneNumber">Telefono Celular</form:label>
-						<form:input path="cellPhoneNumber" type="text"
-							id="cellPhoneNumberUpdate" />
-						<label id="cellPhoneNumberUpdateError" class="validation-error">
+						<form:label path="cellNumber">Telefono Celular</form:label>
+						<form:input path="cellNumber" type="text"
+							id="cellNumberUpdate" />
+						<label id="cellNumberUpdateError" class="validation-error">
 						</label>
 					</fieldset>
 				</td>

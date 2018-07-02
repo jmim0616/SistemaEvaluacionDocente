@@ -20,20 +20,12 @@
 						<tr>
 
 							<td>
-								<fieldset class="row">
-									<form:label path="academicProgramId">Codigo </form:label>
-									<form:input path="academicProgramId" type="text" id="academicProgramIdCreate" />
-									<label id="academicProgramIdCreateError" class="validation-error">
-									</label>
-								</fieldset>
-
-							</td>
-
-							<td>
-								<fieldset class="row">
-									<form:label path="faculty">Codigo de la Facultad</form:label>
+								<fieldset>
+									<form:label path="faculty">Facultad</form:label>
 									<form:select path="faculty" id="facultyCreate">
-										<option value="-">Facultades</option>
+									<c:forEach items="${faculties}" var="item">
+									<option value="${item.facultyId}">${item.name}</option>
+									</c:forEach>
 									</form:select>
 									<label id="facultyCreateError" class="validation-error">
 									</label>

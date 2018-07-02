@@ -74,8 +74,12 @@ public class AcademicProgramEntity {
 
 	@Override
 	public String toString() {
-		return "AcademicProgramEntity [academicProgramId=" + academicProgramId + ", name=" + name + "]";
+		return "AcademicProgramEntity [academicProgramId=" + academicProgramId + ", faculty=" + faculty + ", name="
+				+ name + "]";
 	}
+
+
+	
 	
 	
 	

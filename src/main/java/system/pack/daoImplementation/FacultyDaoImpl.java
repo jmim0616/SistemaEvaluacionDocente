@@ -29,7 +29,7 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 	@Override
 	public void create(FacultyEntity facultyEntity) {
 
-		entityManager.persist(facultyEntity);
+		entityManager.merge(facultyEntity);
 		
 	}
 
@@ -41,21 +41,21 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 	}
 	
 	@Override
-	public List<FacultyEntity> findByName(String name) {
+	public FacultyEntity findByName(String name) {
 		
-		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.name =: name", FacultyEntity.class);
+		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.name =:name", FacultyEntity.class);
 		
 		query.setParameter("name", name);
 		
-		List<FacultyEntity> departments = query.getResultList();
+		FacultyEntity faculty = query.getSingleResult();
 		
-		return departments;
+		return faculty;
 	}
 	
 	@Override
 	public List<FacultyEntity> findByDepartmentId(String department) {
 		
-		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.department =: department", FacultyEntity.class);
+		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.department =:department", FacultyEntity.class);
 		
 		query.setParameter("department", department);
 		
@@ -64,7 +64,15 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 		return faculties;
 	}
 
-
+	@Override
+	public List<FacultyEntity> getAll() {
+		
+		TypedQuery<FacultyEntity> query = entityManager.createQuery("select new FacultyEntity(f.facultyId, f.department, f.name) from FacultyEntity f", FacultyEntity.class);
+		
+		List<FacultyEntity> faculties = query.getResultList();
+		
+		return faculties;
+	}
 	
 	
 }

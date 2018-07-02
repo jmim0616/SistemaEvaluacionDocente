@@ -14,9 +14,11 @@ public interface AcademicProgramDaoInterface {
 	
 	public void update(AcademicProgramEntity academicProgramEntity);
 	
-	public List<AcademicProgramEntity> findByName(String name);
+	public AcademicProgramEntity findByName(String name);
 	
 	public List<AcademicProgramEntity> findByFacultyId(String faculty);
+	
+	public List<AcademicProgramEntity> getAll();
 	
 
 }

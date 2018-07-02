@@ -13,9 +13,11 @@ public interface FacultyDaoInterface {
 	
 	public void update(FacultyEntity facultyEntity);
 	
-	public List<FacultyEntity> findByName(String name);
+	public FacultyEntity findByName(String name);
 	
 	public List<FacultyEntity> findByDepartmentId(String department);
+
+	List<FacultyEntity> getAll();
 	
 
 }

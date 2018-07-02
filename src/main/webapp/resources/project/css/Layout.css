@@ -240,7 +240,7 @@ header {
     padding: 20px 40px 40px 0;
     background: #fff;
     width: 70%;
-    height: 800px;
+    height: auto;
     float: left;
     overflow-x: auto;
     overflow-y: auto;

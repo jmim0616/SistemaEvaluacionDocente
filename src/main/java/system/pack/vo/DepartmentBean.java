@@ -6,10 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class DepartmentBean {
 	
-	@NotEmpty(message="Este campo es requerido")
 	private String departmentId;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String name;
 

@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import system.pack.bointerface.AcademicProgramBoInterface;
+import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.FacultyEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
@@ -38,7 +41,8 @@ import system.pack.vo.TeacherBean;
 @RequestMapping(value="/AcademicPrograms")
 public class AcademicProgramController {
 
-	
+	@Autowired
+	AcademicProgramBoInterface academicProgramBoInterface;
 	
 	@GetMapping(value = "/")
 	public String showAcademicProgramsView(Model model) {
@@ -53,6 +57,8 @@ public class AcademicProgramController {
 	public String showInsertAcademicProgramView(Model model) {
 		
 		model.addAttribute("academicProgram", new AcademicProgramBean());
+		
+		model.addAttribute("faculties", academicProgramBoInterface.getFaculty().getObjectEntityList());
 		
 		return "academicProgram-create";
 		
@@ -70,6 +76,8 @@ public class AcademicProgramController {
 		
 		model.addAttribute("academicProgram", new AcademicProgramBean());
 		
+		model.addAttribute("faculties", academicProgramBoInterface.getFaculty().getObjectEntityList());
+		
 		return "academicProgram-update";
 		
 	}
@@ -77,22 +85,13 @@ public class AcademicProgramController {
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse createAcademicProgram(@Valid @RequestBody AcademicProgramBean academicProgramBean, BindingResult bindingResult) {
+	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> createAcademicProgram(@Valid @RequestBody AcademicProgramBean academicProgramBean, BindingResult bindingResult) {
 		
-		System.out.println("00000" + academicProgramBean);
+	System.out.println("00000" + academicProgramBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors()
-					.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-			
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		} 
+		jsonResponse = academicProgramBoInterface.create(academicProgramBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -100,10 +99,14 @@ public class AcademicProgramController {
 	
 	@PostMapping(value = "/Search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse searchAcademicProgram() {
+	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> searchAcademicProgram() {
 
-		JsonResponse jsonResponse = new JsonResponse();
-
+		System.out.println("00000");
+		
+		JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
+		
+		jsonResponse = academicProgramBoInterface.search(); 
+		
 		return jsonResponse;
 		
 	}
@@ -111,26 +114,13 @@ public class AcademicProgramController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateAcademicProgram(@Valid @RequestBody AcademicProgramBean academicProgramBean, BindingResult bindingResult) {
+	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> updateAcademicProgram(@Valid @RequestBody AcademicProgramBean academicProgramBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + academicProgramBean);
+	System.out.println("00000" + academicProgramBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-
-			
-		}
-		
+		jsonResponse = academicProgramBoInterface.update(academicProgramBean, bindingResult); 
 		
 		return jsonResponse;
 		

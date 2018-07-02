@@ -15,7 +15,15 @@ $(document).ready(function() {
 		$('.modalContainer').show().fadeOut('slow');
 
 	});
+
 	
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
 	
 	$('#buttonUpdateDepartment').click(function(event) {
 
@@ -31,6 +39,8 @@ $(document).ready(function() {
 
 
 function ajaxUpdateDepartment() {
+	
+	$('#nameUpdateError').text('');
 	
 	var departmentId = $('#departmentIdUpdate').val();
 	var name = $('#nameUpdate').val();
@@ -53,13 +63,35 @@ function ajaxUpdateDepartment() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+			}
+
 			console.log(jsonResponse);
+
+			if (jsonResponse.isValid) {
+
+				$('#nameUpdate').val('');
+
+				$('.modalContainer').show().fadeOut('slow');
+				
+				$('.success .message').text(jsonResponse.successMessage);
+				
+				$('.success').show().fadeIn('slow');
+
+			} else {
+
 			
 			$.each(jsonResponse.errorMessages, function(key,value) {
 				
 				$("#"+key+"UpdateError").text(value);
 				
 			})
+			
+			}
 			
 		},
 		error: function(){

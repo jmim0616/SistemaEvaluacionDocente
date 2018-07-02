@@ -20,40 +20,27 @@
 						<tr>
 
 							<td>
-								<fieldset class="row">
-									<form:label path="departmentId">Codigo</form:label>
-									<form:input path="departmentId" type="text"
-										id="departmentIdCreate" />
-									<label id="departmentIdCreateError" class="validation-error">
-									</label>
-								</fieldset> <td>
-				
-				
-							<td>
-					<fieldset>
-						<form:label path="name">Nombre</form:label>
-						<form:input path="name" type="text" id="nameCreate" />
-						<label id="nameCreateError" class="validation-error"> </label>
-					</fieldset>
-				</td>
-				
-			</tr>
+								<fieldset>
+									<form:label path="name">Nombre</form:label>
+									<form:input path="name" type="text" id="nameCreate" />
+									<label id="nameCreateError" class="validation-error"> </label>
+								</fieldset>
+							</td>
 
-		</table>
+					</table>
 
-	</form:form>
- 
- </div>
- 
-<!-- <p id="dialogModal" > El estado del profesor es activo, desea inactivarlo ? </p> --></se
-							ction>
+				</form:form>
 
-<section class="modalFooter">
-<input id="buttonCreateDepartment" class="button add-button"
-				type="submit" value="Registrar Departamento" />
- <input id="buttonCancel" class="button delete-button" type="submit" />
-</section>
+			</div>
 
-</div>
+		</section>
+
+		<section class="modalFooter">
+			<input id="buttonCreateDepartment" class="button add-button"
+				type="submit" value="Registrar Departamento" /> 
+				<input id="buttonCancel" class="button delete-button" type="submit" value="Cancelar" />
+		</section>
+
+	</div>
 
 </div>

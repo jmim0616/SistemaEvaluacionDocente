@@ -12,7 +12,13 @@ public interface DepartmentDaoInterface {
 	
 	public void update(DepartmentEntity departmentEntity);
 	
-	public List<DepartmentEntity> findByName(String name);
+	DepartmentEntity findById(int id);
+	
+	public DepartmentEntity findByName(String name);
+
+	List<DepartmentEntity> getAll();
+
+
 	
 
 }

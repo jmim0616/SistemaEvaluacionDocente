@@ -3,6 +3,7 @@ package system.pack.daoImplementation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.TeacherStatusEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.TeacherBean;
 
@@ -26,7 +28,7 @@ public class DepartmentDaoImpl implements DepartmentDaoInterface {
 	@Override
 	public void create(DepartmentEntity departmentEntity) {
 
-		entityManager.persist(departmentEntity);
+		entityManager.merge(departmentEntity);
 		
 	}
 
@@ -38,18 +40,34 @@ public class DepartmentDaoImpl implements DepartmentDaoInterface {
 	}
 	
 	@Override
-	public List<DepartmentEntity> findByName(String name) {
+	public DepartmentEntity findById(int id) {
 		
-		TypedQuery<DepartmentEntity> query = entityManager.createQuery("select d from DepartmentEntity d where d.name =: name", DepartmentEntity.class);
+		DepartmentEntity department =  entityManager.find(DepartmentEntity.class, id);
+		
+		return department;
+	}
+	
+	@Override
+	public DepartmentEntity findByName(String name) {
+		
+		TypedQuery<DepartmentEntity> query = entityManager.createQuery("select d from DepartmentEntity d where d.name =:name", DepartmentEntity.class);
 		
 		query.setParameter("name", name);
+		
+		DepartmentEntity department = query.getSingleResult();
+		
+		return department;
+	}
+
+	@Override
+	public List<DepartmentEntity> getAll() {
+		
+		TypedQuery<DepartmentEntity> query = entityManager.createQuery("select d from DepartmentEntity d", DepartmentEntity.class);
 		
 		List<DepartmentEntity> departments = query.getResultList();
 		
 		return departments;
 	}
-
-
 
 	
 	

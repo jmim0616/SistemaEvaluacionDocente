@@ -14,5 +14,8 @@ public interface FacultyBoInterface {
 	public JsonResponse update(FacultyBean facultyBean, BindingResult bindingResult);
 	
 	public JsonResponse search();
+
+	public JsonResponse getDepartment();
+
 	
 }

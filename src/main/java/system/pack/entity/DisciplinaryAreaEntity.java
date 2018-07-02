@@ -75,8 +75,12 @@ public class DisciplinaryAreaEntity {
 
 	@Override
 	public String toString() {
-		return "DisciplinaryAreaEntity [disciplinaryAreaId=" + disciplinaryAreaId + ", name=" + name + "]";
+		return "DisciplinaryAreaEntity [disciplinaryAreaId=" + disciplinaryAreaId + ", faculty=" + faculty + ", name="
+				+ name + "]";
 	}
+
+
+
 	
 	
 	

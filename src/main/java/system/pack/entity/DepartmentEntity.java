@@ -13,6 +13,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="departments")
 public class DepartmentEntity {
@@ -26,6 +28,7 @@ public class DepartmentEntity {
 	private String name;
 	
 	@OneToMany(mappedBy="department")
+	@JsonIgnore
 	List<FacultyEntity> faculties;
 	
 	public DepartmentEntity() {
@@ -37,16 +40,14 @@ public class DepartmentEntity {
 
 	}
 	
-	public DepartmentEntity(String name, List<FacultyEntity> faculties) {
+	public DepartmentEntity(String name) {
 		this.name = name;
-		this.faculties = faculties;
 	}
 
 
-	public DepartmentEntity(int departmentId, String name, List<FacultyEntity> faculties) {
+	public DepartmentEntity(int departmentId, String name) {
 		this.departmentId = departmentId;
 		this.name = name;
-		this.faculties = faculties;
 	}
 
 	public int getDepartmentId() {
@@ -75,8 +76,17 @@ public class DepartmentEntity {
 
 	@Override
 	public String toString() {
-		return "DepartmentEntity [departmentId=" + departmentId + ", name=" + name + ", faculties=" + faculties + "]";
+		return "DepartmentEntity [departmentId=" + departmentId + ", name=" + name +  "]";
 	}
+	
+	
+	
+
+
+	
+
+
+	
 
 	
 	

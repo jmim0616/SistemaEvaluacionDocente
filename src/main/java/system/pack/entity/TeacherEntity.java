@@ -49,7 +49,7 @@ public class TeacherEntity {
 	private String personalMail;
 	
 	@Column
-	private int cellPhoneNumber;
+	private int cellNumber;
 	
 	@Column
 	private int homeNumber;
@@ -68,7 +68,7 @@ public class TeacherEntity {
 
 	public TeacherEntity(int teacherId, TeacherStatusEntity teacherStatus, String name, String lastName,
 			int identificationType, String underDegree, String masterDegree, String doctorDegree,
-			String institutionalMail, String personalMail, int cellPhoneNumber, int homeNumber, String experience) {
+			String institutionalMail, String personalMail, int cellNumber, int homeNumber, String experience) {
 		this.teacherId = teacherId;
 		this.teacherStatus = teacherStatus;
 		this.name = name;
@@ -79,7 +79,7 @@ public class TeacherEntity {
 		this.doctorDegree = doctorDegree;
 		this.institutionalMail = institutionalMail;
 		this.personalMail = personalMail;
-		this.cellPhoneNumber = cellPhoneNumber;
+		this.cellNumber = cellNumber;
 		this.homeNumber = homeNumber;
 		this.experience = experience;
 	}
@@ -164,12 +164,12 @@ public class TeacherEntity {
 		this.personalMail = personalMail;
 	}
 
-	public int getCellPhoneNumber() {
-		return cellPhoneNumber;
+	public int getCellNumber() {
+		return cellNumber;
 	}
 
-	public void setCellPhoneNumber(int cellPhoneNumber) {
-		this.cellPhoneNumber = cellPhoneNumber;
+	public void setCellNumber(int cellNumber) {
+		this.cellNumber = cellNumber;
 	}
 
 	public int getHomeNumber() {
@@ -188,16 +188,17 @@ public class TeacherEntity {
 		this.experience = experience;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "TeacherEntity [teacherId=" + teacherId + ", name=" + name + ", lastName=" + lastName
-				+ ", identificationType=" + identificationType + ", underDegree=" + underDegree + ", masterDegree="
-				+ masterDegree + ", doctorDegree=" + doctorDegree + ", institutionalMail=" + institutionalMail
-				+ ", personalMail=" + personalMail + ", cellPhoneNumber=" + cellPhoneNumber + ", homeNumber="
-				+ homeNumber + ", experience=" + experience + "]";
+		return "TeacherEntity [teacherId=" + teacherId + ", teacherStatus=" + teacherStatus + ", name=" + name
+				+ ", lastName=" + lastName + ", identificationType=" + identificationType + ", underDegree="
+				+ underDegree + ", masterDegree=" + masterDegree + ", doctorDegree=" + doctorDegree
+				+ ", institutionalMail=" + institutionalMail + ", personalMail=" + personalMail + ", cellNumber="
+				+ cellNumber + ", homeNumber=" + homeNumber + ", experience=" + experience + "]";
 	}
 
-	
+
 	
 	
 	

@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import system.pack.bointerface.FacultyBoInterface;
+import system.pack.entity.FacultyEntity;
+import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.FacultyBean;
@@ -37,7 +40,8 @@ import system.pack.vo.TeacherBean;
 @RequestMapping(value="/Faculties")
 public class FacultyController {
 
-	
+	@Autowired
+	FacultyBoInterface facultyBoInterface;
 	
 	@GetMapping(value = "/")
 	public String showFacultiesView(Model model) {
@@ -52,6 +56,8 @@ public class FacultyController {
 	public String showInsertFacultyView(Model model) {
 		
 		model.addAttribute("faculty", new FacultyBean());
+		
+		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
 		
 		return "faculty-create";
 		
@@ -69,6 +75,8 @@ public class FacultyController {
 		
 		model.addAttribute("faculty", new FacultyBean());
 		
+		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
+		
 		return "faculty-update";
 		
 	}
@@ -76,22 +84,13 @@ public class FacultyController {
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse createFaculty(@Valid @RequestBody FacultyBean facultyBean, BindingResult bindingResult) {
+	public JsonResponse<FacultyBean, FacultyEntity> createFaculty(@Valid @RequestBody FacultyBean facultyBean, BindingResult bindingResult) {
 		
 		System.out.println("00000" + facultyBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors()
-					.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-			
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		} 
+		jsonResponse = facultyBoInterface.create(facultyBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -99,10 +98,14 @@ public class FacultyController {
 	
 	@PostMapping(value = "/Search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse searchFaculty() {
+	public JsonResponse<FacultyBean, FacultyEntity> searchFaculty() {
 
-		JsonResponse jsonResponse = new JsonResponse();
-
+		System.out.println("00000");
+		
+		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
+		
+		jsonResponse = facultyBoInterface.search(); 
+		
 		return jsonResponse;
 		
 	}
@@ -112,24 +115,11 @@ public class FacultyController {
 	@ResponseBody
 	public JsonResponse updateFaculty(@Valid @RequestBody FacultyBean facultyBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + facultyBean);
+		System.out.println("00000" + facultyBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-
-			
-		}
-		
+		jsonResponse = facultyBoInterface.update(facultyBean, bindingResult); 
 		
 		return jsonResponse;
 		

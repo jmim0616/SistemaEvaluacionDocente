@@ -25,12 +25,21 @@ $(document).ready(function() {
 
 	});
 
+	$('.success .close').click(function (event){
+		
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	}); 
 	
 });
 
 
 
 function ajaxUpdateDisciplinaryArea() {
+	
+	$('#nameUpdateError').text('');
 	
 	var disciplinaryAreaId = $('#disciplinaryAreaIdUpdate').val();
 	var faculty = $('#facultyUpdate option:selected').text();
@@ -55,13 +64,34 @@ function ajaxUpdateDisciplinaryArea() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+			}
+
 			console.log(jsonResponse);
-			
-			$.each(jsonResponse.errorMessages, function(key,value) {
-				
-				$("#"+key+"UpdateError").text(value);
-				
-			})
+
+			if (jsonResponse.isValid) {
+
+				$('#nameUpdate').val('');
+
+				$('.success .message').text(jsonResponse.successMessage);
+
+				$('.success').show().fadeIn('slow');
+
+				$('.modalContainer').show().fadeOut('slow');
+
+			} else {
+
+				$.each(jsonResponse.errorMessages, function(key,value) {
+					
+					$("#"+key+"UpdateError").text(value);
+					
+				})
+
+			}
 			
 		},
 		error: function(){

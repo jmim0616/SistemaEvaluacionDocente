@@ -28,7 +28,7 @@ public class TeacherConverter {
 		teacherBean.setDoctorDegree(teacherEntity.getDoctorDegree());
 		teacherBean.setInstitutionalMail(teacherEntity.getInstitutionalMail());
 		teacherBean.setPersonalMail(teacherEntity.getPersonalMail());
-		teacherBean.setCellPhoneNumber(Integer.toString(teacherEntity.getCellPhoneNumber()));
+		teacherBean.setCellNumber(Integer.toString(teacherEntity.getCellNumber()));
 		teacherBean.setHomeNumber(Integer.toString(teacherEntity.getHomeNumber()));
 		teacherBean.setExperience(teacherEntity.getExperience());
 
@@ -50,8 +50,8 @@ public class TeacherConverter {
 		teacherEntity.setDoctorDegree(teacherBean.getDoctorDegree());
 		teacherEntity.setInstitutionalMail(teacherBean.getInstitutionalMail());
 		teacherEntity.setPersonalMail(teacherBean.getPersonalMail());
-		teacherEntity.setCellPhoneNumber(Integer.parseInt(teacherBean.getCellPhoneNumber()));
-		teacherEntity.setHomeNumber(Integer.parseInt(teacherBean.getHomeNumber()));
+		teacherEntity.setCellNumber(teacherBean.getCellNumber().equals("") ?  0 : Integer.parseInt(teacherBean.getCellNumber()));
+		teacherEntity.setHomeNumber(teacherBean.getCellNumber().equals("") ?  0 : Integer.parseInt(teacherBean.getHomeNumber()));
 		teacherEntity.setExperience(teacherBean.getExperience());
 		
 		return teacherEntity;

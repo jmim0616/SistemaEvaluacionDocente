@@ -5,7 +5,10 @@ $(document).ready(function() {
 		
 		event.preventDefault();
 		
-		ajaxShowCreateDisciplinaryArea();
+		$('.content').fadeOut(0).load('./DisciplinaryAreas/Create').fadeIn('slow');
+		
+		$('.modalContainer').show().fadeIn('slow');
+		
 		
 	});
 	
@@ -25,40 +28,6 @@ $(document).ready(function() {
 });
 
 
-
-function ajaxShowCreateDisciplinaryArea() {
-	
-	
-	$.ajax({
-		url: './DisciplinaryAreas/Create',
-		method: 'GET',
-			done: function() {
-				
-
-			},
-			success: function(view){
-			
-				
-				$('.content').fadeOut(0).html(view).fadeIn('slow');
-				
-				$('.modalContainer').show().fadeIn('slow');
-		
-		},
-
-	    error: function() {
-
-	        console.log("No se ha podido obtener la información");
-
-	    }
-		
-		
-		
-	});
-	
-}
-
-
-
 function ajaxSearchDisciplinaryArea() {
 	
 	
@@ -72,14 +41,48 @@ function ajaxSearchDisciplinaryArea() {
 			},
 			success: function(jsonResponse){
 			
-			$('.disciplinaryAreaData').show().fadeIn('slow');
-			
-			$("#tableDisciplinaryAreaData").append(
-					"<tr>" +
-					"<td>1</td> " +
-					"<td>2</td> " +
-					"<td>Woz</td> " +
-					"</tr>" );
+				if (typeof jsonResponse == "string") {
+
+					$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+							'slow');
+
+					$('.error').show().fadeIn('slow');
+				}
+
+				console.log(jsonResponse);
+
+				if (jsonResponse.errorMessage != null) {
+
+					$('#tableDisciplinaryAreaData').show().fadeOut('slow');
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+
+				} else {
+
+					$
+							.each(
+									jsonResponse.objectEntityList,
+									function(key, value) {
+
+										$("#tableDisciplinaryAreaData")
+												.append(
+														"<tr>"
+																+ "<td>"
+																+ jsonResponse.objectEntityList[key].disciplinaryAreaId
+																+ "</td> "
+																+ "<td>"
+																+ jsonResponse.objectEntityList[key].faculty.name
+																+ "</td> "
+																+ "<td>"
+																+ jsonResponse.objectEntityList[key].name
+																+ "</td> "
+																+ "</tr>");
+
+									})
+
+				}
 		
 		},
 

@@ -27,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import system.pack.bointerface.DepartmentBoInterface;
+import system.pack.entity.DepartmentEntity;
+import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.TeacherBean;
@@ -37,6 +39,8 @@ import system.pack.vo.TeacherBean;
 @RequestMapping(value="/Departments")
 public class DepartmentController {
 
+	@Autowired
+	DepartmentBoInterface departmentBoInterface;
 	
 	
 	@GetMapping(value = "/")
@@ -76,25 +80,13 @@ public class DepartmentController {
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse createDepartment(@Valid @RequestBody DepartmentBean departmentBean, BindingResult bindingResult) {
+	public JsonResponse<DepartmentBean, DepartmentEntity> createDepartment(@Valid @RequestBody DepartmentBean departmentBean, BindingResult bindingResult) {
 		
 		System.out.println("00000" + departmentBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors()
-					.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-			
-			jsonResponse.setErrorMessages(errorMessages);
-
-			
-			jsonResponse.setIsValid(false);
-			
-			
-			
-		} 
+		jsonResponse = departmentBoInterface.create(departmentBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -102,11 +94,14 @@ public class DepartmentController {
 	
 	@PostMapping(value = "/Search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse searchDepartment() {
+	public JsonResponse<DepartmentBean, DepartmentEntity> searchDepartment() {
 
+		System.out.println("00000" );
 		
-		JsonResponse jsonResponse = new JsonResponse();
-
+		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
+		
+		jsonResponse = departmentBoInterface.search(); 
+		
 		return jsonResponse;
 		
 	}
@@ -116,24 +111,11 @@ public class DepartmentController {
 	@ResponseBody
 	public JsonResponse updateDepartment(@Valid @RequestBody DepartmentBean departmentBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + departmentBean);
+		System.out.println("00000" + departmentBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-
-			
-		}
-		
+		jsonResponse = departmentBoInterface.update(departmentBean, bindingResult); 
 		
 		return jsonResponse;
 		

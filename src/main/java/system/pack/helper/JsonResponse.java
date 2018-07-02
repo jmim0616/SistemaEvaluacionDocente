@@ -10,7 +10,7 @@ public class JsonResponse <T, S>  {
 	private T objectBean;
 	
 	private S objectEntity;
-	
+
 	private List<T> objectBeanList;
 	
 	private List<S> objectEntityList;
@@ -19,7 +19,9 @@ public class JsonResponse <T, S>  {
 	
 	private Map<String, String> errorMessages;
 	
-	private String successMessages;
+	private String successMessage;
+	
+	private String errorMessage;
 	
 	private String View;
 	
@@ -75,12 +77,21 @@ public class JsonResponse <T, S>  {
 		this.errorMessages = errorMessages;
 	}
 
-	public String getSuccessMessages() {
-		return successMessages;
+	public String getSuccessMessage() {
+		return successMessage;
 	}
 
-	public void setSuccessMessages(String successMessages) {
-		this.successMessages = successMessages;
+	public void setSuccessMessage(String successMessage) {
+		this.successMessage = successMessage;
+	}
+	
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 	public String getView() {
@@ -95,8 +106,12 @@ public class JsonResponse <T, S>  {
 	public String toString() {
 		return "JsonResponse [objectBean=" + objectBean + ", objectEntity=" + objectEntity + ", objectBeanList="
 				+ objectBeanList + ", objectEntityList=" + objectEntityList + ", isValid=" + isValid
-				+ ", errorMessages=" + errorMessages + ", successMessages=" + successMessages + ", View=" + View + "]";
+				+ ", errorMessages=" + errorMessages + ", successMessage=" + successMessage + ", errorMessage="
+				+ errorMessage + ", View=" + View + "]";
 	}
+
+
+	
 
 	
 	

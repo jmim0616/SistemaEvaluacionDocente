@@ -3,7 +3,12 @@
 	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-data.js"></script>
 	
 	
-<div class="facultyData" style="display: none;">
+<div class="facultyData">
+
+	<div class="error">
+		<a href="#" class="close">X</a> <a class="icon"><ion-icon
+				name="warning"></ion-icon></a> <label class="message"></label>
+	</div>
 
 	<h2>FACULTADES</h2>
 
@@ -18,39 +23,14 @@
 			<tr class="not">
 			
 				<th>Codigo</th>
-				<th>Codigo Departamento</th>
+				<th>Departamento</th>
 				<th>Nombre</th>
 
 			</tr>
 
 		</thead>
 
-		<tr>
-			<td>12345</td>
-			<td>67890</td>
-			<td>Vlad</td>
-		</tr>
-
-
-		<tr>
-			<td>energia</td>
-			<td>Febrero</td>
-
-		</tr>
-
-		<tr>
-			<td>Internet</td>
-			<td>Junio</td>
-
-		</tr>
-
-		<tr>
-			<td>Telefono</td>
-			<td>Junio</td>
-
-		</tr>
-
-
+		
 	</table>
 
 

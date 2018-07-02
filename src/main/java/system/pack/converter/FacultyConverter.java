@@ -28,7 +28,19 @@ public class FacultyConverter {
 		return facultyBean;
 	}
 
-	public static FacultyEntity ConvertToEntity(FacultyBean facultyBean) {
+	public static FacultyEntity ConvertToEntity1(FacultyBean facultyBean) {
+		
+		FacultyEntity facultyEntity = new FacultyEntity();
+
+		facultyEntity.setDepartment(new DepartmentEntity(Integer.parseInt(facultyBean.getDepartment())));
+		facultyEntity.setName(facultyBean.getName());
+		
+		return facultyEntity;
+
+	}
+	
+	
+	public static FacultyEntity ConvertToEntity2(FacultyBean facultyBean) {
 		
 		FacultyEntity facultyEntity = new FacultyEntity();
 
@@ -39,5 +51,7 @@ public class FacultyConverter {
 		return facultyEntity;
 
 	}
+	
+	
 
 }

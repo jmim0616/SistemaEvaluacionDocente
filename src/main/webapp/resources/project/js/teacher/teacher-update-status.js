@@ -23,29 +23,39 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		
-		
-//		ajaxUpdateTeacher();
+		ajaxUpdateTeacherStatus();
 
 	});
 	
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
 	
 });
 
 
 
-function ajaxUpdateTeacher() {
+function ajaxUpdateTeacherStatus() {
 	
-	var teacherId = $('#teacherIdUpdate').val();
+	$('.modalContainer').show().fadeOut('slow');
+	
+	var teacherId = $('#teacherIdUpdateStatus').val();
+	var teacherStatus = $('.status').text();
 	
 	var json = {
 			"teacherId": teacherId,
+			"teacherStatus": teacherStatus
 
 			}
 	
 	console.log(json);
 	
 	$.ajax({
-		url: "./Teachers/Update",
+		url: "./Teachers/UpdateStatus",
 		data: JSON.stringify(json),
 		contentType : "application/json",
 		method: "POST",
@@ -54,14 +64,21 @@ function ajaxUpdateTeacher() {
 			
 		},
 		success: function(jsonResponse){
+		
+			if (typeof jsonResponse == "string") {
+				
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+				
+				$('.error').show().fadeIn('slow');
+			}
 			
 			console.log(jsonResponse);
 			
-			$.each(jsonResponse.errorMessages, function(key,value) {
-				
-				$("#"+key+"UpdateError").text(value);
-				
-			})
+			$('.modalContainer').show().fadeOut('slow');
+			
+			$('.success .message').text(jsonResponse.successMessage);
+			
+			$('.success').show().fadeIn('slow');
 			
 		},
 		error: function(){

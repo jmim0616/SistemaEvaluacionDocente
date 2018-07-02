@@ -24,6 +24,14 @@ $(document).ready(function() {
 		ajaxCreateDisciplinaryArea();
 
 	});
+	
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.success').show().fadeOut('slow');
+
+	});
 
 	
 });
@@ -32,12 +40,12 @@ $(document).ready(function() {
 
 function ajaxCreateDisciplinaryArea() {
 	
-	var disciplinaryAreaId = $('#disciplinaryAreaIdCreate').val();
-	var faculty = $('#facultyCreate option:selected').text();
+	$('#nameCreateError').text('');
+	
+	var faculty = $('#facultyCreate option:selected').val();
 	var name = $('#nameCreate').val();
 	
 	var json = {
-			"disciplinaryAreaId": disciplinaryAreaId,
 			"faculty": faculty,
 			"name": name
 			}
@@ -55,13 +63,34 @@ function ajaxCreateDisciplinaryArea() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+			}
+
 			console.log(jsonResponse);
-			
-			$.each(jsonResponse.errorMessages, function(key,value) {
-				
-				$("#"+key+"CreateError").text(value);
-				
-			})
+
+			if (jsonResponse.isValid) {
+
+				$('#nameCreate').val('');
+
+				$('.success .message').text(jsonResponse.successMessage);
+
+				$('.success').show().fadeIn('slow');
+
+				$('.modalContainer').show().fadeOut('slow');
+
+			} else {
+
+				$.each(jsonResponse.errorMessages, function(key, value) {
+
+					$("#" + key + "CreateError").text(value);
+
+				})
+
+			}
 			
 		},
 		error: function(){

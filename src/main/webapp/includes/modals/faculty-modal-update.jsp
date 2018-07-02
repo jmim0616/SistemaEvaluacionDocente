@@ -14,37 +14,10 @@
 			<div id="dialogModal">
 
 				<form:form id="formUpdateFaculty" modelAttribute="faculty">
-
+				<form:hidden path="facultyId" id="facultyIdUpdate"/>
 					<table>
 
 						<tr>
-
-							<td>
-								<fieldset class="row">
-									<form:label path="facultyId">Codigo </form:label>
-									<form:input path="facultyId" type="text" id="facultyIdUpdate" />
-									<label id="facultyIdUpdateError" class="validation-error">
-									</label>
-								</fieldset>
-
-							</td>
-
-							<td>
-								<fieldset class="row">
-									<form:label path="department">Codigo del Departamento</form:label>
-									<form:select path="department" id="departmentUpdate">
-										<option value="-">Departamentos</option>
-									</form:select>
-									<label id="departmentUpdateError" class="validation-error">
-									</label>
-								</fieldset>
-
-							</td>
-
-						</tr>
-
-						<tr>
-
 							<td>
 								<fieldset>
 									<form:label path="name">Nombre</form:label>
@@ -52,6 +25,23 @@
 									<label id="nameUpdateError" class="validation-error"> </label>
 								</fieldset>
 							</td>
+
+
+							<tr><td>
+								<fieldset>
+									<form:label path="department">Departamento</form:label>
+									<form:select path="department" id="departmentUpdate">
+										<c:forEach items="${departments}" var="item">
+											<option value="${item.departmentId}">${item.name}</option>
+										</c:forEach>
+									</form:select>
+									<label id="departmentUpdateError" class="validation-error">
+									</label>
+								</fieldset>
+
+							</td>
+						</tr>
+
 						</tr>
 
 					</table>
@@ -62,12 +52,12 @@
 
 		</section>
 
-<section class="modalFooter">
-<input id="buttonUpdateFaculty" class="button edit-button"
-				type="submit" value="Modificar Facultad" />
- <input id="buttonCancel" class="button delete-button" type="submit" />
-</section>
+		<section class="modalFooter">
+			<input id="buttonUpdateFaculty" class="button edit-button"
+				type="submit" value="Modificar Facultad" /> <input
+				id="buttonCancel" class="button delete-button" type="submit" value="Cancelar" />
+		</section>
 
-</div>
+	</div>
 
 </div>

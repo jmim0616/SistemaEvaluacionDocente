@@ -14,45 +14,35 @@
 			<div id="dialogModal">
 
 				<form:form id="formCreateDepartment" modelAttribute="department">
-
+				<form:hidden path="departmentId" id="departmentIdUpdate"/>
 					<table>
 
 						<tr>
 
 							<td>
-								<fieldset class="row">
-									<form:label path="departmentId">Codigo</form:label>
-									<form:input path="departmentId" type="text"
-										id="departmentIdUpdate" />
-									<label id="departmentIdUpdateError" class="validation-error">
-									</label>
-								</fieldset> <td>
-				
-				
-							<td>
-					<fieldset>
-						<form:label path="name">Nombre</form:label>
-						<form:input path="name" type="text" id="nameUpdate" />
-						<label id="nameUpdateError" class="validation-error"> </label>
-					</fieldset>
-				</td>
-				
-			</tr>
+								<fieldset>
+									<form:label path="name">Nombre</form:label>
+									<form:input path="name" type="text" id="nameUpdate" />
+									<label id="nameUpdateError" class="validation-error"> </label>
+								</fieldset>
+							</td>
 
-		</table>
+						</tr>
 
-	</form:form>
- 
- </div>
+					</table>
 
-</section>
+				</form:form>
 
-<section class="modalFooter">
-<input id="buttonUpdateDepartment" class="button edit-button"
-				type="submit" value="Registrar Departamento" />
- <input id="buttonCancel" class="button delete-button" type="submit" />
-</section>
+			</div>
 
-</div>
+		</section>
+
+		<section class="modalFooter">
+			<input id="buttonUpdateDepartment" class="button edit-button"
+				type="submit" value="Modificar Departamento" />
+				<input id="buttonCancel" class="button delete-button" type="submit" value="Cancelar" />
+		</section>
+
+	</div>
 
 </div>

@@ -1,6 +1,15 @@
 $(document).ready(function() {
 
 	
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
+	
+	
 	$('#buttonUpdateTeacher').click(function(event) {
 
 		event.preventDefault();
@@ -16,6 +25,21 @@ $(document).ready(function() {
 
 function ajaxUpdateTeacher() {
 	
+	
+	$('#teacherIdUpdateError').text('');
+	$('#nameUpdateError').text('');
+	$('#lastNameUpdateError').text('');
+	$('#identificationTypeUpdateError option:selected').text('1');
+	$('#underDegreeUpdateError').text('');
+	$('#masterDegreeUpdateError').text('');
+	$('#masterDegreeUpdateError').text('');
+	$('#doctorDegreeUpdateError').text('');
+	$('#institutionalMailUpdateError').text('');
+	$('#personalMailUpdateError').text('');
+	$('#cellNumberUpdateError').text('');
+	$('#homeNumberUpdateError').text('');
+	$('#experienceUpdateError').text('');
+	
 	var teacherId = $('#teacherIdUpdate').val();
 	var name = $('#nameUpdate').val();
 	var lastName = $('#lastNameUpdate').val();
@@ -26,7 +50,7 @@ function ajaxUpdateTeacher() {
 	var doctorDegree = $('#doctorDegreeUpdate').val();
 	var institutionalMail = $('#institutionalMailUpdate').val();
 	var personalMail = $('#personalMailUpdate').val();
-	var cellPhoneNumber = $('#cellPhoneNumberUpdate').val();
+	var cellNumber = $('#cellNumberUpdate').val();
 	var homeNumber = $('#homeNumberUpdate').val();
 	var experience = $('#experienceUpdate').val();
 	
@@ -40,7 +64,7 @@ function ajaxUpdateTeacher() {
 			"doctorDegree": doctorDegree,
 			"institutionalMail": institutionalMail,
 			"personalMail": personalMail,
-			"cellPhoneNumber": cellPhoneNumber,
+			"cellNumber": cellNumber,
 			"homeNumber": homeNumber,
 			"experience": experience
 			}
@@ -58,13 +82,46 @@ function ajaxUpdateTeacher() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+				
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+				
+				$('.error').show().fadeIn('slow');
+			}
+			
 			console.log(jsonResponse);
 			
-			$.each(jsonResponse.errorMessages, function(key,value) {
+			if(jsonResponse.isValid) {
+			
 				
-				$("#"+key+"UpdateError").text(value);
+				$('#teacherIdUpdate').val('');
+				$('#nameUpdate').val('');
+				$('#lastNameUpdate').val('');
+				$('#identificationTypeUpdate option:selected').val('1');
+				$('#underDegreeUpdate').val('');
+				$('#masterDegreeUpdate').val('');
+				$('#masterDegreeUpdate').val('');
+				$('#doctorDegreeUpdate').val('');
+				$('#institutionalMailUpdate').val('');
+				$('#personalMailUpdate').val('');
+				$('#cellNumberUpdate').val('');
+				$('#homeNumberUpdate').val('');
+				$('#experienceUpdate').val('');
 				
-			})
+				$('.success .message').text(jsonResponse.successMessage);
+				
+				$('.success').show().fadeIn('slow');
+			
+			
+			} else {
+
+				$.each(jsonResponse.errorMessages, function(key,value) {
+					
+					$("#"+key+"UpdateError").text(value);
+					
+				})
+
+			}
 			
 		},
 		error: function(){

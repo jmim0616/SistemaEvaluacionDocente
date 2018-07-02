@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
+	
 	
 	$('#buttonCreateTeacher').click(function(event) {
 
@@ -16,24 +24,36 @@ $(document).ready(function() {
 
 function ajaxCreateTeacher() {
 	
+	$('#teacherIdCreateError').text('');
+	$('#nameCreateError').text('');
+	$('#lastNameCreateError').text('');
+	$('#identificationTypeCreateError option:selected').text('1');
+	$('#underDegreeCreateError').text('');
+	$('#masterDegreeCreateError').text('');
+	$('#masterDegreeCreateError').text('');
+	$('#doctorDegreeCreateError').text('');
+	$('#institutionalMailCreateError').text('');
+	$('#personalMailCreateError').text('');
+	$('#cellNumberCreateError').text('');
+	$('#homeNumberCreateError').text('');
+	$('#experienceCreateError').text('');
+	
 	var teacherId = $('#teacherIdCreate').val();
-	var teacherStatus = $('#teacherStatusCreate option:selected').text();
 	var name = $('#nameCreate').val();
 	var lastName = $('#lastNameCreate').val();
-	var identificationType = $('#identificationTypeCreate option:selected').text();
+	var identificationType = $('#identificationTypeCreate option:selected').val();
 	var underDegree = $('#underDegreeCreate').val();
 	var masterDegree = $('#masterDegreeCreate').val();
 	var masterDegree = $('#masterDegreeCreate').val();
 	var doctorDegree = $('#doctorDegreeCreate').val();
 	var institutionalMail = $('#institutionalMailCreate').val();
 	var personalMail = $('#personalMailCreate').val();
-	var cellPhoneNumber = $('#cellPhoneNumberCreate').val();
+	var cellNumber = $('#cellNumberCreate').val();
 	var homeNumber = $('#homeNumberCreate').val();
 	var experience = $('#experienceCreate').val();
 	
 	var json = {
 			"teacherId": teacherId,
-			"teacherStatus": teacherStatus,
 			"name": name,
 			"lastName": lastName,
 			"identificationType": identificationType,
@@ -42,7 +62,7 @@ function ajaxCreateTeacher() {
 			"doctorDegree": doctorDegree,
 			"institutionalMail": institutionalMail,
 			"personalMail": personalMail,
-			"cellPhoneNumber": cellPhoneNumber,
+			"cellNumber": cellNumber,
 			"homeNumber": homeNumber,
 			"experience": experience
 			}
@@ -60,13 +80,48 @@ function ajaxCreateTeacher() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+				
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+				
+				$('.error').show().fadeIn('slow');
+			}
+			
 			console.log(jsonResponse);
+			
+			if (jsonResponse.isValid) {
+				
+				$('#teacherIdCreate').val('');
+				$('#nameCreate').val('');
+				$('#lastNameCreate').val('');
+				$('#identificationTypeCreate option:selected').val('1');
+				$('#underDegreeCreate').val('');
+				$('#masterDegreeCreate').val('');
+				$('#masterDegreeCreate').val('');
+				$('#doctorDegreeCreate').val('');
+				$('#institutionalMailCreate').val('');
+				$('#personalMailCreate').val('');
+				$('#cellNumberCreate').val('');
+				$('#homeNumberCreate').val('');
+				$('#experienceCreate').val('');
+				
+				
+				$('.success .message').text(jsonResponse.successMessage);
+				
+				$('.success').show().fadeIn('slow');
+				
+				
+				
+			} else {
 			
 			$.each(jsonResponse.errorMessages, function(key,value) {
 				
 				$("#"+key+"CreateError").text(value);
 				
 			})
+			
+			}
+			
 			
 		},
 		error: function(){

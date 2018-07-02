@@ -3,7 +3,12 @@
 	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea-data.js"></script>
 	
 	
-<div class="disciplinaryAreaData" style="display: none;">
+<div class="disciplinaryAreaData">
+
+	<div class="error">
+		<a href="#" class="close">X</a> <a class="icon"><ion-icon
+				name="warning"></ion-icon></a> <label class="message"></label>
+	</div>
 
 	<h2>AREAS DISCIPLINARIAS</h2>
 
@@ -18,39 +23,14 @@
 			<tr class="not">
 			
 				<th>Codigo</th>
-				<th>Codigo Facultad</th>
+				<th>Facultad</th>
 				<th>Nombre</th>
 
 			</tr>
 
 		</thead>
 
-		<tr>
-			<td>12345</td>
-			<td>67890</td>
-			<td>Vlad</td>
-		</tr>
-
-
-		<tr>
-			<td>energia</td>
-			<td>Febrero</td>
-
-		</tr>
-
-		<tr>
-			<td>Internet</td>
-			<td>Junio</td>
-
-		</tr>
-
-		<tr>
-			<td>Telefono</td>
-			<td>Junio</td>
-
-		</tr>
-
-
+		
 	</table>
 
 

@@ -103,38 +103,73 @@ label {
 .success {
 	display: block;
 	width: 100%;
-	padding: 10px;
-	margin-bottom: 30px;
+	height: auto;
+	padding: 5px;
+	margin-bottom: 20px;
 	text-align: center;
 	background: #58c86d;
 	color: #fff;
 }
 
-.success a {
+.success .close {
+	display: inline;
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	text-decoration: none;
+	right: 50px;
+}
+
+.success .icon {
 	text-align: center;
 	color: #fff;
 	font-size: 120%;
 	vertical-align: middle;
-	margin-right: 20px;
+	margin-right: 10px;
 }
+
+.success .message {
+	display: inline;
+	color: #fff;
+	white-space: pre-line;
+}
+	
 
 .error {
 	display: block;
 	width: 100%;
-	padding: 10px;
-	margin-bottom: 30px;
+	height: auto;
+	padding: 5px;
+	margin-bottom: 20px;
 	text-align: center;
 	background: #c00;
 	color: #fff;
 }
 
-.error a {
+.error .close {
+	display: inline;
+	color: white;
+	font-weight: bold;
+	position: absolute;
+	text-decoration: none;
+	right: 50px;
+}
+
+.error .icon {
 	text-align: center;
 	color: #fff;
 	font-size: 120%;
 	vertical-align: middle;
-	margin-right: 20px;
+	margin-right: 10px;
 }
+
+.error .message {
+	display: inline;
+	color: #fff;
+	white-space: pre-line;
+}
+
+
 
 .validation-error {
 	font-size: 70%;
@@ -143,8 +178,9 @@ label {
 	color: #c00;
 	text-align: left;
 	word-spacing: 1px;
-	width: 60%;
 	height: auto;
+	white-space: pre-line;
+	width: 235px;
 }
 
 .validation-error a {
@@ -401,11 +437,7 @@ input[type="checkbox"] {
 }
 
 .modalBody {
-	padding: 5px;
-	word-break: break-all;
-	word-wrap: break-word;
-	hyphens: auto;
-	text-align: center;
+
 }
 
 .modalBody #tittleModal {

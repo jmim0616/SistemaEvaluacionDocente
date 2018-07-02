@@ -6,12 +6,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class AcademicProgramBean {
 	
-	@Pattern(regexp="^[0-9]{10}$", message="En este campo solo se permiten numeros de 10 caracteres")
+
 	private String academicProgramId;
 
 	private String faculty;
 	
-	@NotEmpty(message="Este campo es requerido")
 	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
 	private String name;
 	

@@ -32,7 +32,18 @@ public class DisciplinaryAreaConverter {
 		return disciplinaryAreaBean;
 	}
 
-	public static DisciplinaryAreaEntity ConvertToEntity(DisciplinaryAreaBean disciplinaryAreaBean) {
+	public static DisciplinaryAreaEntity ConvertToEntity1(DisciplinaryAreaBean disciplinaryAreaBean) {
+		
+		DisciplinaryAreaEntity disciplinaryAreaEntity = new DisciplinaryAreaEntity();
+
+		disciplinaryAreaEntity.setFaculty(new FacultyEntity(Integer.parseInt(disciplinaryAreaBean.getFaculty())));
+		disciplinaryAreaEntity.setName(disciplinaryAreaBean.getName());
+		
+		return disciplinaryAreaEntity;
+
+	}
+	
+	public static DisciplinaryAreaEntity ConvertToEntity2(DisciplinaryAreaBean disciplinaryAreaBean) {
 		
 		DisciplinaryAreaEntity disciplinaryAreaEntity = new DisciplinaryAreaEntity();
 

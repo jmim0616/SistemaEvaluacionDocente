@@ -1,5 +1,6 @@
 package system.pack.daoImplementation;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,7 +25,7 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 	@Override
 	public void create(TeacherEntity teacherEntity) {
 
-		entityManager.persist(teacherEntity);
+		entityManager.merge(teacherEntity);
 		
 	}
 
@@ -43,53 +44,61 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 	}
 
 	@Override
-	public List<TeacherEntity> findByName(String name) {
+	public TeacherEntity findById(int id) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.name =: name", TeacherEntity.class);
+		TeacherEntity teacher =  entityManager.find(TeacherEntity.class, id);
+		
+		return teacher;
+	}
+	
+	@Override
+	public TeacherEntity findByName(String name) {
+		
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.name =:name", TeacherEntity.class);
 		
 		query.setParameter("name", name);
 		
-		List<TeacherEntity> teachers = query.getResultList();
+		TeacherEntity teacher = query.getSingleResult();
 		
-		return teachers;
+		return teacher;
 	}
 
 	@Override
-	public List<TeacherEntity> findByLastName(String lastName) {
+	public TeacherEntity findByLastName(String lastName) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.lastName =: lastName", TeacherEntity.class);
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.lastName =:lastName", TeacherEntity.class);
 		
 		query.setParameter("lastName", lastName);
 		
-		List<TeacherEntity> teachers = query.getResultList();
+		TeacherEntity teacher = query.getSingleResult();
 		
-		return teachers;
+		return teacher;
 
 	}
 
 	@Override
-	public List<TeacherEntity> findByIdentificationType(String identificationType) {
+	public TeacherEntity findByIdentificationType(String identificationType) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.identificationType =: identificationType", TeacherEntity.class);
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.identificationType =:identificationType", TeacherEntity.class);
 		
 		query.setParameter("identificationType", identificationType);
 		
-		List<TeacherEntity> teachers = query.getResultList();
+		TeacherEntity teacher = query.getSingleResult();
 		
-		return teachers;
+		return teacher;
 		
 	}
 
 	@Override
-	public List<TeacherEntity> findByTeacherStatusId(String teacherStatus) {
+	public TeacherEntity findByTeacherStatusId(String teacherStatus) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus =: teacherStatus", TeacherEntity.class);
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus =:teacherStatus", TeacherEntity.class);
 		
 		query.setParameter("teacherStatus", teacherStatus);
 		
-		List<TeacherEntity> teachers = query.getResultList();
+		TeacherEntity teacher = query.getSingleResult();
 		
-		return teachers;
+		return teacher;
 		
 	}
 	

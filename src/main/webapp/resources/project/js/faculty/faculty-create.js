@@ -25,6 +25,13 @@ $(document).ready(function() {
 
 	});
 
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
 	
 });
 
@@ -32,12 +39,12 @@ $(document).ready(function() {
 
 function ajaxCreateFaculty() {
 	
-	var facultyId = $('#facultyIdCreate').val();
-	var department = $('#departmentCreate option:selected').text();
+	$('#nameCreateError').text('');
+	
+	var department = $('#departmentCreate option:selected').val();
 	var name = $('#nameCreate').val();
 	
 	var json = {
-			"facultyId": facultyId,
 			"department": department,
 			"name": name
 			}
@@ -55,13 +62,34 @@ function ajaxCreateFaculty() {
 		},
 		success: function(jsonResponse){
 			
+			if (typeof jsonResponse == "string") {
+				
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+				
+				$('.error').show().fadeIn('slow');
+			}
+			
 			console.log(jsonResponse);
+			
+			if (jsonResponse.isValid) {
+				
+				$('#nameCreate').val('');
+				
+				$('.success .message').text(jsonResponse.successMessage);
+				
+				$('.success').show().fadeIn('slow');
+				
+				$('.modalContainer').show().fadeOut('slow');
+				
+			} else {
 			
 			$.each(jsonResponse.errorMessages, function(key,value) {
 				
 				$("#"+key+"CreateError").text(value);
 				
 			})
+			
+			}
 			
 		},
 		error: function(){

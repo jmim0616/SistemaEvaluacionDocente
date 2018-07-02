@@ -42,10 +42,17 @@ $(document).ready(function() {
 });
 
 
-$('#buttonUpdateTeacherToolbar').click(function(event) {
+$('.error .close').click(function(event) {
 
 	event.preventDefault();
 	
+	$('.error').show().fadeOut('slow');
+	
+});
+
+$('#buttonUpdateTeacherToolbar').click(function(event) {
+
+	event.preventDefault();
 	
 	ajaxShowUpdateTeacher();
 
@@ -57,14 +64,9 @@ $('#buttonUpdateStateTeacherToolbar').click(function(event) {
 	
 	$('.tool-container').hide();
 	
-	$('.modalContainer').show().fadeIn('slow');
-
+	ajaxShowUpdateStatusTeacher();
 
 });
-
-
-
-
 
 
 
@@ -95,7 +97,7 @@ function ajaxShowUpdateTeacher() {
         	
         },
         success: function(view) {
-			
+        	
 			$('.tool-container').hide();
 		
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
@@ -109,7 +111,7 @@ function ajaxShowUpdateTeacher() {
 			$('#doctorDegreeUpdate').val(arrayItemsStandardTable[6]);
 			$('#institutionalMailUpdate').val(arrayItemsStandardTable[7]);
 			$('#personalMailUpdate').val(arrayItemsStandardTable[8]);
-			$('#cellPhoneNumberUpdate').val(arrayItemsStandardTable[9]);
+			$('#cellNumberUpdate').val(arrayItemsStandardTable[9]);
 			$('#homeNumberUpdate').val(arrayItemsStandardTable[10]);
 			$('#experienceUpdate').val(arrayItemsStandardTable[11]);
 			
@@ -119,4 +121,38 @@ function ajaxShowUpdateTeacher() {
 
 }
 
+
+
+function ajaxShowUpdateStatusTeacher() {
+	
+	
+	var teacherId = arrayItemsStandardTable[0];
+	
+	var json = {
+			"teacherId": teacherId
+
+			}
+	
+	$.ajax({ 
+		url : "./Teachers/UpdateStatus",
+		data: json,
+		contentType : "application/json",
+		method : 'GET',
+        beforeSend: function(xhr) {
+        	
+        },
+        success: function(view) {
+			
+			$('.tool-container').hide();
+		
+			$('.content').fadeOut(0).html(view).fadeIn('slow');
+			
+			$('#dialogModal .status').text(arrayItemsStandardTable[12]);
+
+			
+		}
+		
+	});
+
+}
 

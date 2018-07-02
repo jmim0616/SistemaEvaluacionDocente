@@ -26,12 +26,19 @@ public class DepartmentConverter {
 		return departmentBean;
 	}
 
-	public static DepartmentEntity ConvertToEntity(DepartmentBean departmentBean) {
+	public static DepartmentEntity ConvertToEntity1(DepartmentBean departmentBean) {
 		
-		DepartmentEntity departmentEntity = new DepartmentEntity();
+		DepartmentEntity departmentEntity = new DepartmentEntity(departmentBean.getName());
+		
+		return departmentEntity;
 
-		departmentEntity.setDepartmentId(Integer.parseInt(departmentBean.getDepartmentId()));
-		departmentEntity.setName(departmentBean.getName());
+	}
+	
+	public static DepartmentEntity ConvertToEntity2(DepartmentBean departmentBean) {
+		
+		DepartmentEntity departmentEntity = new DepartmentEntity(
+				Integer.parseInt(departmentBean.getDepartmentId()), 
+				departmentBean.getName());
 		
 		return departmentEntity;
 

@@ -13,34 +13,23 @@
 			<h2 id="tittleModal">Modificar Area Disciplinaria</h2>
 			<div id="dialogModal">
 
-				<form:form id="formUpdateDisciplinaryArea"
-					modelAttribute="disciplinaryArea">
-
+				<form:form id="formUpdateDisciplinaryArea" modelAttribute="disciplinaryArea">
+				<form:hidden path="disciplinaryAreaId" id="disciplinaryAreaIdUpdate"/>
 					<table>
 
 						<tr>
 
 							<td>
-								<fieldset class="row">
-									<form:label path="disciplinaryAreaId">Codigo </form:label>
-									<form:input path="disciplinaryAreaId" type="text"
-										id="disciplinaryAreaIdUpdate" />
-									<label id="disciplinaryAreaIdUpdateError"
-										class="validation-error"> </label>
-								</fieldset>
-
-							</td>
-
-							<td>
-								<fieldset class="row">
-									<form:label path="faculty">Codigo de la Facultad</form:label>
+								<fieldset>
+									<form:label path="faculty">Facultad</form:label>
 									<form:select path="faculty" id="facultyUpdate">
-										<option value="-">Facultades</option>
+									<c:forEach items="${faculties}" var="item">
+									<option value="${item.facultyId}">${item.name}</option>
+									</c:forEach>
 									</form:select>
 									<label id="facultyUpdateError" class="validation-error">
 									</label>
 								</fieldset>
-
 							</td>
 
 						</tr>

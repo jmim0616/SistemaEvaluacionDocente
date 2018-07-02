@@ -23,42 +23,26 @@ public class TeacherStatusDaoImpl implements TeacherStatusDaoInterface {
 	@Autowired
 	private EntityManager entityManager;
 
-	@Override
-	public void create(TeacherStatusEntity teacherStatusEntity) {
-
-		entityManager.persist(teacherStatusEntity);
-		
-	}
 
 	@Override
-	public void update(TeacherStatusEntity teacherStatusEntity) {
+	public TeacherStatusEntity findById(int id) {
 		
-		entityManager.merge(teacherStatusEntity);
+		TeacherStatusEntity teacherStatusEntity =  entityManager.find(TeacherStatusEntity.class, id);
 		
-	}
+		return teacherStatusEntity;
 
-	@Override
-	public List<TeacherStatusEntity> findById(String id) {
-		
-		TypedQuery<TeacherStatusEntity> query = entityManager.createQuery("select ts from TeacherStatusEntity ts where ts.id =: id", TeacherStatusEntity.class);
-		
-		query.setParameter("id", id);
-		
-		List<TeacherStatusEntity> teacherStatus = query.getResultList();
-		
-		return teacherStatus;
 	}
 	
 	@Override
-	public List<TeacherStatusEntity> findByStatus(String status) {
+	public TeacherStatusEntity findByStatus(String status) {
 		
 		TypedQuery<TeacherStatusEntity> query = entityManager.createQuery("select ts from TeacherStatusEntity ts where ts.status =: status", TeacherStatusEntity.class);
 		
 		query.setParameter("status", status);
 		
-		List<TeacherStatusEntity> teacherStatus = query.getResultList();
+		TeacherStatusEntity teacherStatu = query.getSingleResult();
 		
-		return teacherStatus;
+		return teacherStatu;
 	}
 	
 	@Override

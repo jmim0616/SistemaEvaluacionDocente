@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="teacher_status")
 public class TeacherStatusEntity {
@@ -25,6 +27,7 @@ public class TeacherStatusEntity {
 	private String status;
 	
 	@OneToMany(mappedBy="teacherStatus")
+	@JsonIgnore
 	private List<TeacherEntity> teachers;
 
 	public TeacherStatusEntity() {
@@ -35,15 +38,13 @@ public class TeacherStatusEntity {
 		this.teacherStatusId = teacherStatusId;
 	}
 	
-	public TeacherStatusEntity(String status, List<TeacherEntity> teachers) {
+	public TeacherStatusEntity(String status) {
 		this.status = status;
-		this.teachers = teachers;
 	}
 	
-	public TeacherStatusEntity(int teacherStatusId, String status, List<TeacherEntity> teachers) {
+	public TeacherStatusEntity(int teacherStatusId, String status) {
 		this.teacherStatusId = teacherStatusId;
 		this.status = status;
-		this.teachers = teachers;
 	}
 
 	public int getTeacherStatusId() {
@@ -62,19 +63,12 @@ public class TeacherStatusEntity {
 		this.status = status;
 	}
 
-	public List<TeacherEntity> getTeachers() {
-		return teachers;
-	}
-
-	public void setTeachers(List<TeacherEntity> teachers) {
-		this.teachers = teachers;
-	}
-
 	@Override
 	public String toString() {
-		return "TeacherStatusEntity [teacherStatusId=" + teacherStatusId + ", status=" + status + ", teachers="
-				+ teachers + "]";
+		return "TeacherStatusEntity [teacherStatusId=" + teacherStatusId + ", status=" + status + "]";
 	}
+
+
 
 	
 

@@ -7,14 +7,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import system.pack.boImplementation.TeacherBoImpl;
+import system.pack.bointerface.TeacherBoInterface;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.TeacherBean;
@@ -37,6 +42,8 @@ import system.pack.vo.TeacherBean;
 public class TeacherController {
 
 	
+	@Autowired
+	TeacherBoInterface teacherBoInterface;
 	
 	@GetMapping(value = "/")
 	public String showTeachersView(Model model) {
@@ -81,13 +88,12 @@ public class TeacherController {
 		
 	}
 	
-
 	@GetMapping(value = "/UpdateStatus")
-	public String showUpdateStatusTeacherView(Model model) {
+	public String showUpdateTeacherStatusView(@RequestParam(name="teacherId") String teacherId, Model model) {
 		
-		model.addAttribute("teacher", new TeacherBean());
+		model.addAttribute("teacher", new TeacherBean(teacherId));
 		
-		return "modal";
+		return "teacher-update-status";
 		
 	}
 	
@@ -100,16 +106,7 @@ public class TeacherController {
 		
 		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors()
-					.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-			
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		} 
+		jsonResponse = teacherBoInterface.create(teacherBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -131,25 +128,13 @@ public class TeacherController {
 	@ResponseBody
 	public JsonResponse searchTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + teacherBean);
+		System.out.println("00000" + teacherBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		}
+		jsonResponse = teacherBoInterface.search(teacherBean, bindingResult); 
 		
 		return jsonResponse;
-		
 	}
 	
 	
@@ -157,27 +142,31 @@ public class TeacherController {
 	@ResponseBody
 	public JsonResponse updateTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + teacherBean);
+		System.out.println("00000" + teacherBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		}
+		jsonResponse = teacherBoInterface.update(teacherBean, bindingResult); 
 		
 		return jsonResponse;
-		
+	
+
 	}
 	
 	
+	@PostMapping(value = "/UpdateStatus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse updateStatusTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + teacherBean);
+		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		jsonResponse = teacherBoInterface.updateStatus(teacherBean, bindingResult); 
+		
+		return jsonResponse;
+	
+
+	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="faculties")
 public class FacultyEntity {
@@ -24,7 +27,7 @@ public class FacultyEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int facultyId;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="departmentId")
 	private DepartmentEntity department;
 	
@@ -32,9 +35,11 @@ public class FacultyEntity {
 	private String name;
 	
 	@OneToMany(mappedBy="faculty")
+	@JsonIgnore
 	List<AcademicProgramEntity> academicPrograms;
 	
 	@OneToMany(mappedBy="faculty")
+	@JsonIgnore
 	List<DisciplinaryAreaEntity> disciplinaryAreas;
 	
 	public FacultyEntity() {
@@ -80,14 +85,15 @@ public class FacultyEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
 	@Override
 	public String toString() {
-		return "FacultyEntity [facultyId=" + facultyId + ", name=" + name + ", academicPrograms=" + academicPrograms
-				+ ", disciplinaryAreas=" + disciplinaryAreas + "]";
+		return "FacultyEntity [facultyId=" + facultyId + ", department=" + department + ", name=" + name + "]";
 	}
+	
+	
+
+
 
 
 	

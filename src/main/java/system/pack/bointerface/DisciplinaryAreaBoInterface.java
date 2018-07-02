@@ -2,6 +2,7 @@ package system.pack.bointerface;
 
 import org.springframework.validation.BindingResult;
 
+import system.pack.entity.FacultyEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
@@ -16,5 +17,7 @@ public interface DisciplinaryAreaBoInterface {
 	public JsonResponse update(DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult);
 	
 	public JsonResponse search();
+
+	JsonResponse getFaculty();
 	
 }

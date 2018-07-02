@@ -30,16 +30,27 @@ public class AcademicProgramConverter {
 		return academicProgramBean;
 	}
 
-	public static AcademicProgramEntity ConvertToEntity(AcademicProgramBean academicProgramBean) {
+	
+	public static AcademicProgramEntity ConvertToEntity1(AcademicProgramBean academicProgramBean) {
 		
-		AcademicProgramEntity academicProgramEntity = new AcademicProgramEntity();
-
-		academicProgramEntity.setAcademicProgramId(Integer.parseInt(academicProgramBean.getAcademicProgramId()));
-		academicProgramEntity.setFaculty(new FacultyEntity(Integer.parseInt(academicProgramBean.getFaculty())));
-		academicProgramEntity.setName(academicProgramBean.getName());
+		AcademicProgramEntity academicProgramEntity = new AcademicProgramEntity(
+				new FacultyEntity(Integer.parseInt(academicProgramBean.getFaculty())), 
+				academicProgramBean.getName());
 		
 		return academicProgramEntity;
 
 	}
+	
+	public static AcademicProgramEntity ConvertToEntity2(AcademicProgramBean academicProgramBean) {
+		
+		AcademicProgramEntity academicProgramEntity = new AcademicProgramEntity(
+				Integer.parseInt(academicProgramBean.getAcademicProgramId()),
+				new FacultyEntity(Integer.parseInt(academicProgramBean.getFaculty())), 
+				academicProgramBean.getName());
+		
+		return academicProgramEntity;
+
+	}
+	
 
 }

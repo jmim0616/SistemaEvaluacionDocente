@@ -27,7 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import system.pack.bointerface.DisciplinaryAreaBoInterface;
+import system.pack.daoInterface.DisciplinaryAreaDaoInterface;
+import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.DisciplinaryAreaEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
@@ -40,7 +43,8 @@ import system.pack.vo.TeacherBean;
 @RequestMapping(value="/DisciplinaryAreas")
 public class DisciplinaryAreaController {
 
-	
+	@Autowired
+	DisciplinaryAreaBoInterface disciplinaryAreaBoInterface;
 	
 	@GetMapping(value = "/")
 	public String showDisciplinaryAreasView(Model model) {
@@ -55,6 +59,8 @@ public class DisciplinaryAreaController {
 	public String showInsertDisciplinaryAreaView(Model model) {
 		
 		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
+		
+		model.addAttribute("faculties", disciplinaryAreaBoInterface.getFaculty().getObjectEntityList());
 		
 		return "disciplinaryArea-create";
 		
@@ -72,6 +78,8 @@ public class DisciplinaryAreaController {
 		
 		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
 		
+		model.addAttribute("faculties", disciplinaryAreaBoInterface.getFaculty().getObjectEntityList());
+		
 		return "disciplinaryArea-update";
 		
 	}
@@ -79,22 +87,13 @@ public class DisciplinaryAreaController {
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse createDisciplinaryArea(@Valid @RequestBody DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult) {
-		
+	public JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> createDisciplinaryArea(@Valid @RequestBody DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult) {
+	
 		System.out.println("00000" + disciplinaryAreaBean);
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> jsonResponse = new JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors()
-					.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-			
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-			
-		} 
+		jsonResponse = disciplinaryAreaBoInterface.create(disciplinaryAreaBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -102,10 +101,14 @@ public class DisciplinaryAreaController {
 	
 	@PostMapping(value = "/Search", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse searchDisciplinaryArea() {
+	public JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> searchDisciplinaryArea() {
 
-		JsonResponse jsonResponse = new JsonResponse();
-
+		System.out.println("00000");
+		
+		JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> jsonResponse = new JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity>();
+		
+		jsonResponse = disciplinaryAreaBoInterface.search(); 
+		
 		return jsonResponse;
 		
 	}
@@ -113,26 +116,13 @@ public class DisciplinaryAreaController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateDisciplinaryArea(@Valid @RequestBody DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult) {
+	public JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> updateDisciplinaryArea(@Valid @RequestBody DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult) {
 
-		System.out.println("11111" + disciplinaryAreaBean);
+		System.out.println("00000");
 		
-		JsonResponse jsonResponse = new JsonResponse();
+		JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> jsonResponse = new JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity>();
 		
-		if (bindingResult.hasErrors()) {
-			
-			System.out.println(bindingResult);
-			
-			Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-					.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-			jsonResponse.setErrorMessages(errorMessages);
-			
-			jsonResponse.setIsValid(false);
-
-			
-		}
-		
+		jsonResponse = disciplinaryAreaBoInterface.update(disciplinaryAreaBean, bindingResult); 
 		
 		return jsonResponse;
 		

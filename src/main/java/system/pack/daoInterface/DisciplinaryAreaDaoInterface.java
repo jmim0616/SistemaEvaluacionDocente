@@ -15,9 +15,11 @@ public interface DisciplinaryAreaDaoInterface {
 	
 	public void update(DisciplinaryAreaEntity disciplinaryAreaEntity);
 	
-	public List<DisciplinaryAreaEntity> findByName(String name);
+	public DisciplinaryAreaEntity findByName(String name);
 	
 	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty);
+
+	List<DisciplinaryAreaEntity> getAll();
 	
 
 }
