@@ -93,6 +93,7 @@ function ajaxUpdateTeacher() {
 			
 			if(jsonResponse.isValid) {
 			
+				$('#teacherIdSearch').val($('#teacherIdUpdate').val());
 				
 				$('#teacherIdUpdate').val('');
 				$('#nameUpdate').val('');
@@ -107,11 +108,20 @@ function ajaxUpdateTeacher() {
 				$('#cellNumberUpdate').val('');
 				$('#homeNumberUpdate').val('');
 				$('#experienceUpdate').val('');
-				
+			
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
-			
+				
+				$.get('./Teachers/Data', function(view){
+					
+					$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+					ajaxSearchTeacher();
+					
+					})
+					
+				
 			
 			} else {
 

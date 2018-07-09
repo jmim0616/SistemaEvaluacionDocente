@@ -1,15 +1,16 @@
 $(document).ready(function() {
 
+	$.get('./Departments/Data', function(view, status, xhr){
+		  $('.content').fadeOut(0).html(view).fadeIn('slow');
+		}).done(function() {
+			ajaxSearchDepartment();
+		  });
 
-	
-	
 	$('#linkCreateDepartment').click(function(event) {
 		
 		event.preventDefault();
 		
-		$('.content').fadeOut(0).load('./Departments/Create').fadeIn('slow');
-		
-		$('.modalContainer').show().fadeIn('slow');
+		$('.createDepartment .modalContainer').show().fadeIn('slow');
 		
 	});
 	
@@ -18,9 +19,11 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		
-		$('.content').fadeOut(0).load('./Departments/Data').fadeIn('slow');
-		
-		ajaxSearchDepartment();
+		$.get('./Departments/Data', function(view, status, xhr){
+			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+			}).done(function() {
+				ajaxSearchDepartment();
+			  });
 
 	});
 	
@@ -68,6 +71,13 @@ function ajaxSearchDepartment() {
 								"<tr>" +
 								"<td>"+ jsonResponse.objectEntityList[key].departmentId +"</td> " +
 								"<td>"+ jsonResponse.objectEntityList[key].name +"</td> " +
+								 "<td>"+
+								  '<div class="actions"> '+
+									 '<a class="button edit-button buttonUpdateDepartmentToolbar">' +
+									 '<ion-icon name="create"></ion-icon>' +
+									 '</a>'+ 
+									 '</div>'+ 
+									 "</td> "+
 								"</tr>" );
 						
 					})
@@ -77,7 +87,11 @@ function ajaxSearchDepartment() {
 				}
 		
 		},
-
+		complete: function() {
+			
+			initDepartmentData();
+			
+		},
 	    error: function() {
 
 	        console.log("No se ha podido obtener la información");

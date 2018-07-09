@@ -7,7 +7,7 @@ $(document)
 						$('#teachers').addClass('active-main-bar-navigation-li-a');
 						
 						$('.container').fadeOut(0).load('./Teachers/').fadeIn('slow');
-					
+						
 
 					};
 

@@ -34,16 +34,18 @@ import system.pack.vo.TeacherBean;
 public class FacultyBoImpl implements FacultyBoInterface {
 
 	@Autowired
-	DepartmentDaoJpaRepository departmentDaoJpaRepository;
-
-	@Autowired
 	DepartmentDaoInterface departmentDaoInterface;
+	
+	@Autowired
+	DepartmentDaoJpaRepository departmentDaoJpaRepository;
+	
+	@Autowired
+	FacultyDaoInterface facultyDaoInterface;
 	
 	@Autowired
 	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
-	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
+
 	
 	@Transactional
 	@Override
@@ -130,7 +132,7 @@ public class FacultyBoImpl implements FacultyBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				jsonResponse.setSuccessMessage("La facultad ha sido guardada con exito");
+				jsonResponse.setSuccessMessage("La facultad ha sido modificada con exito");
 
 			}
 

@@ -27,6 +27,16 @@ html {
     text-rendering: optimizeLegibility;
 }
 
+/* -------------------- */
+
+/* REUSABLE COMPONENTS */
+
+/* -------------------- */
+
+.row {
+    width: 100%;
+    margin: 0 auto 0 auto;
+}
 
 .clearfix {
     zoom: 1;
@@ -40,18 +50,6 @@ html {
     visibility: hidden;
 }
 
-
-/* -------------------- */
-
-/* REUSABLE COMPONENTS */
-
-/* -------------------- */
-
-.row {
-    width: 100%;
-    margin: 0 auto 0 auto;
-}
-
 /* -------------------- */
 
 /* HEADER */
@@ -59,31 +57,30 @@ html {
 /* -------------------- */
 
 header {
-
     background: #000;
     width: 100%;
-    height: 200px;
-    margin-bottom: 100px;
+    height: 100px;
 }
 
 .logo {
-
-    padding-top: 20px;
+	float: left;
+   	vertical-align: middle;
 }
 
+.logo img {
+	width: 200px;
+	height: auto;
+}
 
 
 
 .main-bar-navigation {
-
-    position: absolute;
-    background: #fff;
-    width: 100%;
-    height: 50px;
-    top: 200px;
+	float: right;
+    height: auto;
     list-style: none;
     text-align: center;
-
+	margin: 50px 80px 10px 20px;
+	font-size: 80%;
 }
 
 
@@ -107,8 +104,7 @@ header {
 
 .main-bar-navigation li a,
 .main-bar-navigation li a {
-
-    /*    color: #000;*/
+	color: #fff;
     padding: 15px 5px;
     text-decoration: none;
     font-weight: 300;
@@ -131,21 +127,6 @@ header {
 
 
 
-.main-bar-navigation:before {
-
-    display: inline-block;
-    height: 20px;
-    background: #fa2d2d;
-    content: " ";
-    width: 100%;
-
-
-}
-
-
-
-
-
 /* -------------------- */
 
 /* CONTAINER */
@@ -153,10 +134,10 @@ header {
 /* -------------------- */
 
 .container {
-
     background: #fff;
     width: 100%;
     height: 800px;
+
 
 }
 
@@ -172,7 +153,6 @@ header {
     width: 25%;
     height: 500px;
     float: left;
-    margin-top: 10px;
     margin-right: 5%;
 }
 
@@ -188,10 +168,7 @@ header {
     text-decoration: none;
     background: #ffffff;
     transition: background 0.2s, color 0.2s;
-/*
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-*/
+
 }
 
 
@@ -242,9 +219,8 @@ header {
     width: 70%;
     height: auto;
     float: left;
-    overflow-x: auto;
-    overflow-y: auto;
     white-space: nowrap;
+    overflow: auto;
 }
 
 /* -------------------- */
@@ -253,15 +229,14 @@ header {
 
 /* -------------------- */
 
-footer {
-
-    background: #000;
+/*footer {  
+	background: #000;
     height: 100px;
     width: 100%;
     content: " ";
 
 }
-
+*/
 
 /* -------------------- */
 

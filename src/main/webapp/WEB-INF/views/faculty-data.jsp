@@ -1,20 +1,19 @@
 <!--faculty-data-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-data.js"></script>
-	
-	
-<div class="facultyData">
+	<div class="scroll facultyData">
 
-	<div class="error">
-		<a href="#" class="close">X</a> <a class="icon"><ion-icon
-				name="warning"></ion-icon></a> <label class="message"></label>
-	</div>
+<!--faculty-create-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-create.js"></script>
+	
+	<!--faculty-update-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-update.js"></script>
 
 	<h2>FACULTADES</h2>
 
 	<h3>Resultado de Facultades</h3>
-
-	<%@include file="/includes/toolbars/toolbar-faculty-update.jsp"%>
 
 	<table id="tableFacultyData" class="table standard-table">
 
@@ -25,6 +24,7 @@
 				<th>Codigo</th>
 				<th>Departamento</th>
 				<th>Nombre</th>
+				<th>Acciones</th>
 
 			</tr>
 
@@ -33,6 +33,7 @@
 		
 	</table>
 
-
+	<%@include file="/WEB-INF/views/faculty-create.jsp"%>
+	<%@include file="/WEB-INF/views/faculty-update.jsp"%>
 
 </div>

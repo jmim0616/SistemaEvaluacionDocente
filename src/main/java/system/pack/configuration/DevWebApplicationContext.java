@@ -15,6 +15,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -61,7 +64,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 //Consider a basic scenario – we have a bean that should only be active during development, but not deployed in production.
 //We annotate that bean with a “dev” profile, and it will only be present in the container during development 
 //– in production, the dev simply won’t be active
-@Profile("DEV")
+@Profile(value="DEV")
 public class DevWebApplicationContext implements WebMvcConfigurer {
 
 	//Environment interface for read configurations from properties files
@@ -74,9 +77,11 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 	private static final String PROPERTY_NAME_DATABASE_USER = "db.user";
 	private static final String PROPERTY_NAME_DATA_BASE_PASSWORD = "db.password";
 	private static final String PROPERTY_NAME_DATABASE_URL = "db.url";
-
+	private static final String PROPERTY_NAME_H2_CONSOLE = "spring.h2.console.enabled";
+	private static final String PROPERTY_NAME_H2_CONSOLE_PATH = "spring.h2.console.path";
+	
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
-	private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL = "hibernate.hbm2ddl";
+	private static final String PROPERTY_NAME_HIBERNATE_HBM2DDL = "hibernate.hbm2ddl.auto";
 	private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 	private static final String PROPERTY_NAME_HIBERNATE_FORMAT_SQL = "hibernate.format_sql";
 	private static final String PROPERTY_NAME_HIBERNATE_GENERATE_STATISTICS = "hibernate.generate_statistics";
@@ -121,10 +126,7 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 
 	}
 	
-	   @Bean
-	   public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-	       return new PersistenceExceptionTranslationPostProcessor();
-	   }
+
 
 	//Setting the Hibernate properties that EntityManagerFactory and JPA will be use
 	public Properties hibernateProperties() {
@@ -141,6 +143,11 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 				environment.getProperty(PROPERTY_NAME_HIBERNATE_FORMAT_SQL));
 		jpaProperties.setProperty(PROPERTY_NAME_HIBERNATE_GENERATE_STATISTICS,
 				environment.getProperty(PROPERTY_NAME_HIBERNATE_GENERATE_STATISTICS));
+		jpaProperties.setProperty(PROPERTY_NAME_H2_CONSOLE,
+				environment.getProperty(PROPERTY_NAME_H2_CONSOLE));
+		jpaProperties.setProperty(PROPERTY_NAME_H2_CONSOLE_PATH,
+				environment.getProperty(PROPERTY_NAME_H2_CONSOLE_PATH));
+
 
 		return jpaProperties;
 
@@ -148,8 +155,10 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 
 	//Defining the  Transaction Manager of the project that provides access to create, open, close, commit, rollback
 	//transactions with ACID properties.
-	@Bean(name="transactionManager")
-	public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory emf) {
+//	@Bean
+//	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+	@Bean/*(name="transactionManager")*/
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 
@@ -158,6 +167,11 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 		return transactionManager;
 
 	}
+	
+	   @Bean
+	   public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+	       return new PersistenceExceptionTranslationPostProcessor();
+	   }
 
 	//definining where the statics resources (js, css, libraries, frameworks) of the web app will be locate
 	@Override

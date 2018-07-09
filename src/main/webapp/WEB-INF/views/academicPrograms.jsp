@@ -5,8 +5,8 @@
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
 <!--academicProgram -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/academicProgram/academicProgram.js"></script>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${pageContext.request.contextPath}/resources/project/js/academicProgram/academicProgram.js"></script> --%>
 
 <!--academicPrograms -->
 <script type="text/javascript"

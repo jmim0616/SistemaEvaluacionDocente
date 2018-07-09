@@ -339,6 +339,32 @@ input[type="checkbox"] {
 	color: #1d1202;
 }
 
+
+.actions {
+	
+	width: auto;
+	height: auto;
+	
+}
+
+.actions a {
+	
+	width: 10px;
+	height: 10px;
+	padding: 7px 2px 2px 2px;
+	margin: 2px;
+	
+}
+
+.actions a:hover {
+	
+	width: 10px;
+	height: 10px;
+	padding: 7px 2px 2px 2px;
+	margin: 2px;
+	
+}
+
 /* -------------------- */
 
 /* ICONS */
@@ -456,6 +482,9 @@ input[type="checkbox"] {
 .modalFooter #buttonAccept, #buttonCancel {
 	margin: auto 40px auto 40px;
 }
+
+
+
 
 /* -------------------- */
 

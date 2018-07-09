@@ -67,6 +67,10 @@ public class AcademicProgramController {
 	@GetMapping(value = "/Data")
 	public String showDataAcademicProgramView(Model model) {
 
+		model.addAttribute("academicProgram", new AcademicProgramBean());
+		
+		model.addAttribute("faculties", academicProgramBoInterface.getFaculty().getObjectEntityList());
+		
 		return "academicProgram-data";
 		
 	}

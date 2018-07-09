@@ -38,6 +38,8 @@ public class FacultyEntity {
 	@JsonIgnore
 	List<AcademicProgramEntity> academicPrograms;
 	
+	
+	
 	@OneToMany(mappedBy="faculty")
 	@JsonIgnore
 	List<DisciplinaryAreaEntity> disciplinaryAreas;
@@ -92,7 +94,7 @@ public class FacultyEntity {
 	}
 	
 	
-
+	
 
 
 

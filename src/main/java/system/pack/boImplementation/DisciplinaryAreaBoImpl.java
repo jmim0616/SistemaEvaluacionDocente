@@ -21,6 +21,7 @@ import system.pack.converter.DisciplinaryAreaConverter;
 import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.DisciplinaryAreaDaoInterface;
+import system.pack.daoInterface.DisciplinaryAreaDaoJpaRepository;
 import system.pack.daoInterface.FacultyDaoInterface;
 import system.pack.daoInterface.FacultyDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
@@ -42,6 +43,9 @@ public class DisciplinaryAreaBoImpl implements DisciplinaryAreaBoInterface {
 
 	@Autowired
 	DisciplinaryAreaDaoInterface disciplinaryAreaDaoInterface;
+	
+	@Autowired
+	DisciplinaryAreaDaoJpaRepository disciplinaryAreaDaoJpaRepository;
 
 	@Autowired
 	FacultyDaoJpaRepository facultyDaoJpaRepository;

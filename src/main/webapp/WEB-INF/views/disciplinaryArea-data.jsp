@@ -2,19 +2,22 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea-data.js"></script>
 	
+	<!--disciplinaryArea-create-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea-create.js"></script>
 	
-<div class="disciplinaryAreaData">
+	<!--disciplinaryArea-update-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea-update.js"></script>
 
-	<div class="error">
-		<a href="#" class="close">X</a> <a class="icon"><ion-icon
-				name="warning"></ion-icon></a> <label class="message"></label>
-	</div>
+	
+	
+<div class="scroll disciplinaryAreaData">
+
 
 	<h2>AREAS DISCIPLINARIAS</h2>
 
 	<h3>Resultado de Areas Disciplinarias</h3>
-
-	<%@include file="/includes/toolbars/toolbar-disciplinaryArea-update.jsp"%>
 
 	<table id="tableDisciplinaryAreaData" class="table standard-table">
 
@@ -25,6 +28,7 @@
 				<th>Codigo</th>
 				<th>Facultad</th>
 				<th>Nombre</th>
+				<th>Acciones</th>
 
 			</tr>
 
@@ -34,5 +38,7 @@
 	</table>
 
 
+	<%@include file="/WEB-INF/views/disciplinaryArea-create.jsp"%>
+	<%@include file="/WEB-INF/views/disciplinaryArea-update.jsp"%>
 
 </div>

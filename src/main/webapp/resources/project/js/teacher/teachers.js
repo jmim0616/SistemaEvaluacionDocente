@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	
 	$('.sub-menu-content').click(function(e) {
 
@@ -43,10 +43,21 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		
-		$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
+//		$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
 		
-		ajaxSearchTeacher();
+//		ajaxShow();
+		
 
+		$.get('./Teachers/Data', function(view){
+			
+			$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+			ajaxSearchTeacher();
+			
+			})
+			
+			
+		
 	});
 	
 
@@ -63,7 +74,8 @@ function ajaxSearchTeacher() {
 	
 	var json = {
 		"teacherId" : teacherId,
-		"name": "noaplica"
+		"name": "noaplica",
+		"lastName": "noaplica"
 	};
 	
 	$.ajax({
@@ -71,6 +83,11 @@ function ajaxSearchTeacher() {
 		data: JSON.stringify(json),
 		contentType : "application/json",
 		method: 'POST',
+			beforeSend: function () {
+				
+				
+				
+			}, 
 			done: function() {
 				
 
@@ -89,7 +106,7 @@ function ajaxSearchTeacher() {
 				
 				if (jsonResponse.isValid) {
 					
-					$('#teacherIdSearch').val('');
+//					$('#teacherIdSearch').val('');
 					
 					if (jsonResponse.errorMessage != null) {
 						
@@ -100,7 +117,7 @@ function ajaxSearchTeacher() {
 						$('.error').show().fadeIn('slow');
 						
 					} else {
-					
+						
 						var identificationType = null;
 						
 						if (jsonResponse.objectBean.identificationType == 1) {
@@ -124,6 +141,15 @@ function ajaxSearchTeacher() {
 								"<td>"+ jsonResponse.objectBean.homeNumber +"</td> " +
 								"<td>"+ jsonResponse.objectBean.experience +"</td> " +
 								"<td>"+ jsonResponse.objectBean.teacherStatus +"</td> " +
+								"<td>"+ '<div class="actions"> '+
+										 '<a class="button edit-button buttonUpdateTeacherToolbar">' +
+										 '<ion-icon name="create"></ion-icon>' +
+										 '</a>'+ 
+										  '<a class="button inactivate-button buttonUpdateStateTeacherToolbar">' +
+										  '<ion-icon name="remove-circle"></ion-icon>' +
+										  '</a>' +
+										  '</div>' +
+										  "</td> " +
 								"</tr>" );
 
 					
@@ -138,7 +164,11 @@ function ajaxSearchTeacher() {
 
 			
 		},
+		complete: function() {
 
+			initTeacherData();
+			
+		},
 	    error: function() {
 
 	        console.log("No se ha podido obtener la información");
@@ -153,5 +183,39 @@ function ajaxSearchTeacher() {
 
 
 
+function ajaxShow() {
+	
+	
+	$.ajax({ 
+//		url : "./Teachers/Data",
+		method : 'GET',
+        beforeSend: function(xhr) {
+        	
+        },
+        done: function(view){
+        	
+        },
+        success: function(view) {
+        	
+//			$('.content').fadeOut(0).html(view).fadeIn('slow');
+        	
+//        	$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
+			
+//			$('.content').html(view);
+        	
+			    
+//			ajaxSearchTeacher();
+			
+        	console.log("AAAAAAAAAAAA");
+        	
+		},
+		complete: function() {
+		      
+			
+			
+		},
+		
+	});
 
+}
 

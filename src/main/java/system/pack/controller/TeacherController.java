@@ -32,6 +32,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import system.pack.boImplementation.TeacherBoImpl;
 import system.pack.bointerface.TeacherBoInterface;
+import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.TeacherBean;
@@ -126,7 +127,7 @@ public class TeacherController {
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse searchTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> searchTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + teacherBean);
 		
@@ -140,7 +141,7 @@ public class TeacherController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> updateTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + teacherBean);
 		
@@ -156,7 +157,7 @@ public class TeacherController {
 	
 	@PostMapping(value = "/UpdateStatus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateStatusTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> updateStatusTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + teacherBean);
 		

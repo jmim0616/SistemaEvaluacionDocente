@@ -64,6 +64,8 @@ public class DepartmentController {
 	@GetMapping(value = "/Data")
 	public String showDataDepartmentView(Model model) {
 
+		model.addAttribute("department", new DepartmentBean());
+		
 		return "department-data";
 		
 	}
@@ -109,7 +111,7 @@ public class DepartmentController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateDepartment(@Valid @RequestBody DepartmentBean departmentBean, BindingResult bindingResult) {
+	public JsonResponse<DepartmentBean, DepartmentEntity> updateDepartment(@Valid @RequestBody DepartmentBean departmentBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + departmentBean);
 		

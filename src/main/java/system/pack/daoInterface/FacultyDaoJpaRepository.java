@@ -12,7 +12,7 @@ import system.pack.entity.TeacherEntity;
 public interface FacultyDaoJpaRepository extends JpaRepository<FacultyEntity, Integer> {
 
 
-	List<FacultyEntity> findByName(String name);
+	FacultyEntity findByName(String name);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

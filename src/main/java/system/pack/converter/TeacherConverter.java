@@ -10,7 +10,7 @@ import system.pack.vo.TeacherBean;
 
 public class TeacherConverter {
 	
-	private TeacherConverter() {
+	public TeacherConverter() {
 
 	}
 

@@ -16,6 +16,7 @@ import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.DepartmentConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.DepartmentDaoInterface;
+import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.DepartmentEntity;
@@ -30,6 +31,9 @@ public class DepartmentBoImpl implements DepartmentBoInterface {
 	
 	@Autowired
 	DepartmentDaoInterface departmentDaoInterface;
+	
+	@Autowired
+	DepartmentDaoJpaRepository departmentDaoJpaRepository;
 	
 	@Transactional
 	@Override
@@ -101,7 +105,7 @@ public class DepartmentBoImpl implements DepartmentBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				jsonResponse.setSuccessMessage("El docente ha sido modificado con exito");
+				jsonResponse.setSuccessMessage("El departamento ha sido modificado con exito");
 
 			}
 

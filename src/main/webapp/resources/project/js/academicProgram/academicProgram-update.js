@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateAcademicProgram #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateAcademicProgram .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.updateAcademicProgram #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateAcademicProgram .modalContainer').show().fadeOut('slow');
 
 	});
 	
@@ -81,7 +81,13 @@ function ajaxUpdateAcademicProgram() {
 
 				$('.success').show().fadeIn('slow');
 
-				$('.modalContainer').show().fadeOut('slow');
+				$('.updateAcademicProgram .modalContainer').show().fadeOut('slow');
+				
+				$.get('./AcademicPrograms/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						ajaxSearchAcademicProgram();
+					  });
 
 			} else {
 

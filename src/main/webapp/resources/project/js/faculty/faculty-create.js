@@ -1,19 +1,19 @@
 $(document).ready(function() {
 
 	
-	$('#buttonCancel').click(function(event) {
+	$('.createFaculty #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.createFaculty .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.createFaculty #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.createFaculty .modalContainer').show().fadeOut('slow');
 
 	});
 	
@@ -79,7 +79,13 @@ function ajaxCreateFaculty() {
 				
 				$('.success').show().fadeIn('slow');
 				
-				$('.modalContainer').show().fadeOut('slow');
+				$('.createFaculty .modalContainer').show().fadeOut('slow');
+				
+				$.get('./Faculties/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						  ajaxSearchFaculty();
+					  });
 				
 			} else {
 			

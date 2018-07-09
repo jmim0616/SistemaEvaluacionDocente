@@ -69,6 +69,10 @@ public class DisciplinaryAreaController {
 	@GetMapping(value = "/Data")
 	public String showDataDisciplinaryAreaView(Model model) {
 
+		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
+		
+		model.addAttribute("faculties", disciplinaryAreaBoInterface.getFaculty().getObjectEntityList());
+		
 		return "disciplinaryArea-data";
 		
 	}

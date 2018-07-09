@@ -11,7 +11,7 @@ import system.pack.entity.TeacherEntity;
 public interface DepartmentDaoJpaRepository extends JpaRepository<DepartmentEntity, Integer> {
 
 
-	List<DepartmentEntity> findByName(String name);
+	DepartmentEntity findByName(String name);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

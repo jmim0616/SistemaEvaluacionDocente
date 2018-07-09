@@ -14,7 +14,7 @@ import system.pack.entity.TeacherEntity;
 public interface DisciplinaryAreaDaoJpaRepository extends JpaRepository<DisciplinaryAreaEntity, Integer> {
 
 
-	List<DisciplinaryAreaEntity> findByName(String name);
+	DisciplinaryAreaEntity findByName(String name);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

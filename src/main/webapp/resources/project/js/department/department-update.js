@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateDepartment #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDepartment .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.updateDepartment #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDepartment .modalContainer').show().fadeOut('slow');
 
 	});
 
@@ -76,11 +76,17 @@ function ajaxUpdateDepartment() {
 
 				$('#nameUpdate').val('');
 
-				$('.modalContainer').show().fadeOut('slow');
+				$('.updateDepartment .modalContainer').show().fadeOut('slow');
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
+				
+				$.get('./Departments/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						ajaxSearchDepartment();
+					  });
 
 			} else {
 

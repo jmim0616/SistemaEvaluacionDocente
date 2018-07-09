@@ -66,6 +66,10 @@ public class FacultyController {
 	@GetMapping(value = "/Data")
 	public String showDataFacultyView(Model model) {
 
+		model.addAttribute("faculty", new FacultyBean());
+		
+		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
+		
 		return "faculty-data";
 		
 	}
@@ -113,7 +117,7 @@ public class FacultyController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse updateFaculty(@Valid @RequestBody FacultyBean facultyBean, BindingResult bindingResult) {
+	public JsonResponse<FacultyBean, FacultyEntity> updateFaculty(@Valid @RequestBody FacultyBean facultyBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + facultyBean);
 		

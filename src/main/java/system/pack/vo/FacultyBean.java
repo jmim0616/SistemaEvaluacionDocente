@@ -10,7 +10,7 @@ public class FacultyBean {
 
 	private String department;
 	
-	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
+	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
 	
 	
@@ -19,7 +19,6 @@ public class FacultyBean {
 	}
 
 	public FacultyBean(String facultyId, String department, String name) {
-		super();
 		this.facultyId = facultyId;
 		this.department = department;
 		this.name = name;

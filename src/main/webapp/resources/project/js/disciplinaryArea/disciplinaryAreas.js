@@ -1,13 +1,16 @@
 $(document).ready(function() {
 
+	$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
+		  $('.content').fadeOut(0).html(view).fadeIn('slow');
+		}).done(function() {
+			ajaxSearchDisciplinaryArea();
+		  });
 
 	$('#linkCreateDisciplinaryArea').click(function(event) {
 		
 		event.preventDefault();
 		
-		$('.content').fadeOut(0).load('./DisciplinaryAreas/Create').fadeIn('slow');
-		
-		$('.modalContainer').show().fadeIn('slow');
+		$('.createDisciplinaryArea .modalContainer').show().fadeIn('slow');
 		
 		
 	});
@@ -17,9 +20,11 @@ $(document).ready(function() {
 
 		event.preventDefault();
 		
-		$('.content').fadeOut(0).load('./DisciplinaryAreas/Data').fadeIn('slow');
-		
-		ajaxSearchDisciplinaryArea();
+		$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
+			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+			}).done(function() {
+				ajaxSearchDisciplinaryArea();
+			  });
 
 	});
 	
@@ -43,8 +48,7 @@ function ajaxSearchDisciplinaryArea() {
 			
 				if (typeof jsonResponse == "string") {
 
-					$('.content').fadeOut(0).html(jsonResponse).fadeIn(
-							'slow');
+					$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
 
 					$('.error').show().fadeIn('slow');
 				}
@@ -78,6 +82,13 @@ function ajaxSearchDisciplinaryArea() {
 																+ "<td>"
 																+ jsonResponse.objectEntityList[key].name
 																+ "</td> "
+																+ "<td>"
+																   + '<div class="actions"> '+
+																	 '<a class="button edit-button buttonUpdateDisciplinaryAreaToolbar">' +
+																	 '<ion-icon name="create"></ion-icon>' +
+																	 '</a>'+ 
+																	  '</div>' 
+																   + "</td> "
 																+ "</tr>");
 
 									})
@@ -85,7 +96,10 @@ function ajaxSearchDisciplinaryArea() {
 				}
 		
 		},
-
+		complete: function() {
+			
+			initDisciplinaryAreaData();
+		},
 	    error: function() {
 
 	        console.log("No se ha podido obtener la información");

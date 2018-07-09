@@ -80,6 +80,16 @@ function ajaxUpdateTeacherStatus() {
 			
 			$('.success').show().fadeIn('slow');
 			
+			$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
+			
+			$.get('./Teachers/Data', function(view){
+				
+				$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+				ajaxSearchTeacher();
+				
+				})
+			
 		},
 		error: function(){
 			

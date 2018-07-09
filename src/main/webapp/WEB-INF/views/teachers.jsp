@@ -5,8 +5,8 @@
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
 <!--teacher -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script> --%>
 
 <!--teachers -->
 <script type="text/javascript"
@@ -43,7 +43,7 @@
 						<form:form id="formSearchTeacher" modelAttribute="teacher">
 
 							<fieldset>
-								<form:label path="teacherId">Codigo del Docente</form:label>
+								<form:label path="teacherId">Cedula del Docente</form:label>
 								<form:input path="teacherId" type="text" id="teacherIdSearch" />
 								<label id="teacherIdSearchError" class="validation-error"> </label>
 							</fieldset>

@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateDisciplinaryArea #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDisciplinaryArea .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.updateDisciplinaryArea #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDisciplinaryArea .modalContainer').show().fadeOut('slow');
 
 	});
 	
@@ -81,7 +81,13 @@ function ajaxUpdateDisciplinaryArea() {
 
 				$('.success').show().fadeIn('slow');
 
-				$('.modalContainer').show().fadeOut('slow');
+				$('.updateDisciplinaryArea .modalContainer').show().fadeOut('slow');
+				
+				$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						ajaxSearchDisciplinaryArea();
+					  });
 
 			} else {
 

@@ -2,19 +2,19 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/academicProgram/academicProgram-data.js"></script>
 	
+	<!--academicProgram-create-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/academicProgram/academicProgram-create.js"></script>
 	
-<div class="academicProgramData">
-
-	<div class="error">
-		<a href="#" class="close">X</a> <a class="icon"><ion-icon
-				name="warning"></ion-icon></a> <label class="message"></label>
-	</div>
-
-	<h2>PROGRAMAS ACADEMICOS</h2>
+	<!--academicProgram-update-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/academicProgram/academicProgram-update.js"></script>
+	
+	
+	
+<div class="scroll academicProgramData">
 
 	<h3>Resultado de Programas Academicos</h3>
-
-	<%@include file="/includes/toolbars/toolbar-academicProgram-update.jsp"%>
 
 	<table id="tableAcademicProgramData" class="table standard-table">
 
@@ -25,6 +25,7 @@
 				<th>Codigo</th>
 				<th>Facultad</th>
 				<th>Nombre</th>
+				<th>Acciones</th>
 
 			</tr>
 
@@ -32,6 +33,7 @@
 
 	</table>
 
-
+	<%@include file="/WEB-INF/views/academicProgram-create.jsp"%>
+	<%@include file="/WEB-INF/views/academicProgram-update.jsp"%>
 
 </div>

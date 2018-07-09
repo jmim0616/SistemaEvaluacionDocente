@@ -15,6 +15,7 @@ import org.springframework.validation.FieldError;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.TeacherDaoInterface;
+import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.DepartmentEntity;
@@ -29,6 +30,9 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 	@Autowired
 	TeacherDaoInterface teacherDaoInterface;
+	
+	@Autowired
+	TeacherDaoJpaRepository teacherDaoJpaRepository;
 
 	@Autowired
 	TeacherStatusDaoJpaRepository teacherStatusDaoJpaRepository;
@@ -82,7 +86,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 	}
 
-	public JsonResponse createExcel(TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> createExcel(TeacherBean teacherBean, BindingResult bindingResult) {
 
 		return null;
 
@@ -164,7 +168,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 				teacherDaoInterface.update(teacherEntity);
 
-				jsonResponse.setSuccessMessage("El estado del docente se ha sido modificado con exito");
+				jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exito");
 
 
 			return jsonResponse;
@@ -203,7 +207,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 				jsonResponse.setIsValid(true);
 				
-				TeacherEntity teacherEntity = teacherDaoInterface.findById(Integer.parseInt(teacherBean.getTeacherId()));
+				TeacherEntity teacherEntity = teacherDaoJpaRepository.findById(Integer.parseInt(teacherBean.getTeacherId()));
 				
 				if (teacherEntity == null) {
 					
@@ -212,6 +216,8 @@ public class TeacherBoImpl implements TeacherBoInterface {
 				} else {
 					
 					TeacherBean TeacherBean1 = TeacherConverter.ConverToVO(teacherEntity);
+					
+					System.out.println("AAAA" + TeacherBean1);
 					
 					jsonResponse.setObjectBean(TeacherBean1);;
 					
