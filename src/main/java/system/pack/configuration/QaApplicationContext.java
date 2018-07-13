@@ -20,6 +20,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -144,7 +145,7 @@ public class QaApplicationContext {
 
 	//Defining the  Transaction Manager of the project that provides access to create, open, close, commit, rollback
 	//transactions with ACID properties.
-	@Bean/*(name="transactionManager")*/
+	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 
 		JpaTransactionManager transactionManager = new JpaTransactionManager();

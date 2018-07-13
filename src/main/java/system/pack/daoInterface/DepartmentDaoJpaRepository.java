@@ -12,6 +12,8 @@ public interface DepartmentDaoJpaRepository extends JpaRepository<DepartmentEnti
 
 
 	DepartmentEntity findByName(String name);
+	
+	DepartmentEntity findById(int id);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

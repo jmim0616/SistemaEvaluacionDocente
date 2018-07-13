@@ -20,7 +20,7 @@
 				<td>
 					<fieldset class="row">
 						<form:label path="teacherId">Documento de Identificacion</form:label>
-						<form:input path="teacherId" type="text" id="teacherIdUpdate" />
+						<form:input path="teacherId" type="text" id="teacherIdUpdate" disabled="true" />
 						<label id="teacherIdUpdateError" class="validation-error">
 						</label>
 					</fieldset>

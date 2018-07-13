@@ -137,7 +137,7 @@ function ajaxSearchTeacher() {
 								"<td>"+ jsonResponse.objectBean.doctorDegree +"</td> " +
 								"<td>"+ jsonResponse.objectBean.institutionalMail +"</td> " +
 								"<td>"+ jsonResponse.objectBean.personalMail +"</td> " +
-								"<td>"+ jsonResponse.objectBean.homeNumber +"</td>" +
+								"<td>"+ jsonResponse.objectBean.cellNumber +"</td>" +
 								"<td>"+ jsonResponse.objectBean.homeNumber +"</td> " +
 								"<td>"+ jsonResponse.objectBean.experience +"</td> " +
 								"<td>"+ jsonResponse.objectBean.teacherStatus +"</td> " +

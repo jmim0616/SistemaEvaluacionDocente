@@ -121,8 +121,6 @@ function ajaxShowUpdateStatusTeacher() {
         	
         },
         success: function(view) {
-			
-			$('.tool-container').hide();
 		
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 			

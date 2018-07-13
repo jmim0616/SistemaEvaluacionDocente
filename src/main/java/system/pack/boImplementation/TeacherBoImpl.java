@@ -43,7 +43,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 	@Transactional
 	@Override
 	public JsonResponse<TeacherBean, TeacherEntity> create(TeacherBean teacherBean, BindingResult bindingResult) {
-
+		
 		try {
 
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
@@ -70,7 +70,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 				jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
 
 			}
-
+			
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -216,8 +216,6 @@ public class TeacherBoImpl implements TeacherBoInterface {
 				} else {
 					
 					TeacherBean TeacherBean1 = TeacherConverter.ConverToVO(teacherEntity);
-					
-					System.out.println("AAAA" + TeacherBean1);
 					
 					jsonResponse.setObjectBean(TeacherBean1);;
 					

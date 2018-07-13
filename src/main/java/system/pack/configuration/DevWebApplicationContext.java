@@ -155,9 +155,7 @@ public class DevWebApplicationContext implements WebMvcConfigurer {
 
 	//Defining the  Transaction Manager of the project that provides access to create, open, close, commit, rollback
 	//transactions with ACID properties.
-//	@Bean
-//	public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-	@Bean/*(name="transactionManager")*/
+	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 
 		JpaTransactionManager transactionManager = new JpaTransactionManager();

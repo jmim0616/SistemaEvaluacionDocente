@@ -15,6 +15,8 @@ public interface DisciplinaryAreaDaoJpaRepository extends JpaRepository<Discipli
 
 
 	DisciplinaryAreaEntity findByName(String name);
+	
+	DisciplinaryAreaEntity findById(int id);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

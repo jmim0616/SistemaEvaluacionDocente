@@ -14,6 +14,8 @@ public interface AcademicProgramDaoJpaRepository extends JpaRepository<AcademicP
 
 
 	AcademicProgramEntity findByName(String name);
+	
+	AcademicProgramEntity findById(int id);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();
