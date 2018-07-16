@@ -33,11 +33,6 @@ import system.pack.vo.TeacherBean;
 @Service
 public class FacultyBoImpl implements FacultyBoInterface {
 
-	@Autowired
-	DepartmentDaoInterface departmentDaoInterface;
-	
-	@Autowired
-	DepartmentDaoJpaRepository departmentDaoJpaRepository;
 	
 	@Autowired
 	FacultyDaoInterface facultyDaoInterface;
@@ -46,20 +41,6 @@ public class FacultyBoImpl implements FacultyBoInterface {
 	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
 
-	
-	@Transactional
-	@Override
-	public JsonResponse<DepartmentBean, DepartmentEntity> getDepartment() {
-		
-		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
-		
-		List<DepartmentEntity> departments = departmentDaoInterface.getAll();
-		
-		jsonResponse.setObjectEntityList(departments);
-		
-		return jsonResponse;
-		
-	}
 	
 	@Transactional
 	@Override
@@ -121,10 +102,6 @@ public class FacultyBoImpl implements FacultyBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
-
-				DepartmentEntity departmentEntity = departmentDaoInterface.findByName(facultyBean.getDepartment());
-				
-				facultyBean.setDepartment(Integer.toString(departmentEntity.getDepartmentId()));
 				
 				FacultyEntity facultyEntity = FacultyConverter.ConvertToEntity2(facultyBean);
 

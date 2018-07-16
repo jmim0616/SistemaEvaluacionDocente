@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateFaculty" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchFaculty" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchFaculty" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

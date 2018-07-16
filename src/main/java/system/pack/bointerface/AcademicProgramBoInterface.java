@@ -11,12 +11,13 @@ import system.pack.vo.TeacherBean;
 
 public interface AcademicProgramBoInterface {
 
+	JsonResponse getAllFaculties();
+	
 	public JsonResponse create(AcademicProgramBean academicProgramBean, BindingResult bindingResult);
 	
 	public JsonResponse update(AcademicProgramBean academicProgramBean, BindingResult bindingResult);
 	
 	public JsonResponse search();
 
-	JsonResponse getFaculty();
-	
+
 }

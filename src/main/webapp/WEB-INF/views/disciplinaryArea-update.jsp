@@ -25,18 +25,20 @@
 
 						<tr>
 
-							<td>
-								<fieldset>
-									<form:label path="faculty">Facultad</form:label>
-									<form:select path="faculty" id="facultyUpdate">
-									<c:forEach items="${faculties}" var="item">
-									<option value="${item.facultyId}">${item.name}</option>
-									</c:forEach>
-									</form:select>
-									<label id="facultyUpdateError" class="validation-error">
-									</label>
-								</fieldset>
-							</td>
+								<td>
+									<fieldset>
+										<form:label path="department">Departamento</form:label>
+										<form:select path="department" id="departmentUpdate">
+										<option class="actualValue" hidden></option>
+											<c:forEach items="${departments}" var="item">
+												<option value="${item.departmentId}">${item.name}</option>
+											</c:forEach>
+										</form:select>
+										<label id="departmentUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+
+								</td>
 
 						</tr>
 

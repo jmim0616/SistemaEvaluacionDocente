@@ -28,7 +28,7 @@ $('.buttonUpdateAcademicProgramToolbar').click(function(event) {
 	$('.updateAcademicProgram .modalContainer').show().fadeIn('slow');
 	
 	$('#academicProgramIdUpdate').val(arrayItemsStandardTable[0]);
-	$('#facultyUpdate option:selected').text(arrayItemsStandardTable[1]);
+	$('#facultyUpdate .actualValue').text(arrayItemsStandardTable[1]);
 	$('#nameUpdate').val(arrayItemsStandardTable[2]);
 
 });

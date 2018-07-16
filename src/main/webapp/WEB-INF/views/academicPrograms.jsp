@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateAcademicProgram" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchAcademicProgram" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchAcademicProgram" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

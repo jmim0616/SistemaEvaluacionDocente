@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateDisciplinaryArea" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchDisciplinaryArea" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchDisciplinaryArea" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

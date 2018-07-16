@@ -16,17 +16,17 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#linkSearchDisciplinaryArea').click(function(event) {
-
-		event.preventDefault();
-		
-		$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
-			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-			}).done(function() {
-				ajaxSearchDisciplinaryArea();
-			  });
-
-	});
+//	$('#linkSearchDisciplinaryArea').click(function(event) {
+//
+//		event.preventDefault();
+//		
+//		$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
+//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//			}).done(function() {
+//				ajaxSearchDisciplinaryArea();
+//			  });
+//
+//	});
 	
 
 	
@@ -77,7 +77,7 @@ function ajaxSearchDisciplinaryArea() {
 																+ jsonResponse.objectEntityList[key].disciplinaryAreaId
 																+ "</td> "
 																+ "<td>"
-																+ jsonResponse.objectEntityList[key].faculty.name
+																+ jsonResponse.objectEntityList[key].department.name
 																+ "</td> "
 																+ "<td>"
 																+ jsonResponse.objectEntityList[key].name

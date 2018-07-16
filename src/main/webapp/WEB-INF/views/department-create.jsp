@@ -17,11 +17,22 @@
 					<h2 id="tittleModal">Registrar Departamento</h2>
 					<div id="dialogModal">
 
-
-
 						<table>
 
 							<tr>
+								<td>
+									<fieldset>
+										<form:label path="faculty">Facultad</form:label>
+										<form:select path="faculty" id="facultyCreate">
+											<c:forEach items="${faculties}" var="item">
+												<option value="${item.facultyId}">${item.name}</option>
+											</c:forEach>
+										</form:select>
+										<label id="facultyCreateError" class="validation-error">
+										</label>
+									</fieldset>
+
+								</td>
 
 								<td>
 									<fieldset>

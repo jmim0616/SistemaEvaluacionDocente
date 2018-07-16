@@ -42,12 +42,12 @@ function ajaxUpdateDisciplinaryArea() {
 	$('#nameUpdateError').text('');
 	
 	var disciplinaryAreaId = $('#disciplinaryAreaIdUpdate').val();
-	var faculty = $('#facultyUpdate option:selected').text();
+	var department = $('#departmentUpdate option:selected').text();
 	var name = $('#nameUpdate').val();
 	
 	var json = {
 			"disciplinaryAreaId": disciplinaryAreaId,
-			"faculty": faculty,
+			"department": department,
 			"name": name
 			}
 	

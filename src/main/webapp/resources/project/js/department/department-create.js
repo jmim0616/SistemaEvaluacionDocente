@@ -40,9 +40,11 @@ function ajaxCreateDepartment() {
 
 	$('#nameCreateError').text('');
 
+	var faculty = $('#facultyCreate option:selected').val();
 	var name = $('#nameCreate').val();
 
 	var json = {
+	    "faculty": faculty,
 		"name" : name
 	}
 
@@ -68,7 +70,7 @@ function ajaxCreateDepartment() {
 			console.log(jsonResponse);
 
 			if (jsonResponse.isValid) {
-
+				
 				$('#nameCreate').val('');
 
 				$('.createDepartment .modalContainer').show().fadeOut('slow');

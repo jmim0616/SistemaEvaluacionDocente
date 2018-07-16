@@ -57,8 +57,6 @@ public class FacultyController {
 		
 		model.addAttribute("faculty", new FacultyBean());
 		
-		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
-		
 		return "faculty-create";
 		
 	}
@@ -68,8 +66,6 @@ public class FacultyController {
 
 		model.addAttribute("faculty", new FacultyBean());
 		
-		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
-		
 		return "faculty-data";
 		
 	}
@@ -78,8 +74,6 @@ public class FacultyController {
 	public String showUpdateFacultyView(Model model) {
 		
 		model.addAttribute("faculty", new FacultyBean());
-		
-		model.addAttribute("departments", facultyBoInterface.getDepartment().getObjectEntityList());
 		
 		return "faculty-update";
 		

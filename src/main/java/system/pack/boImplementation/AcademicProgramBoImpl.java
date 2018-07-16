@@ -53,7 +53,7 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	
 	@Transactional
 	@Override
-	public JsonResponse<FacultyBean, FacultyEntity> getFaculty() {
+	public JsonResponse<FacultyBean, FacultyEntity> getAllFaculties() {
 		
 		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
 		

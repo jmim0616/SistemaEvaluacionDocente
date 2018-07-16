@@ -28,9 +28,7 @@ function initFacultyData() {
 		$('.updateFaculty .modalContainer').show().fadeIn('slow');
 
 		$('#facultyIdUpdate').val(arrayItemsStandardTable[0]);
-		$('#departmentUpdate option:selected').text(
-				arrayItemsStandardTable[1]);
-		$('#nameUpdate').val(arrayItemsStandardTable[2]);
+		$('#nameUpdate').val(arrayItemsStandardTable[1]);
 		
 
 	});

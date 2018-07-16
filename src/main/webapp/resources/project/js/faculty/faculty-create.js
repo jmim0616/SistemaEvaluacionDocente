@@ -41,11 +41,9 @@ function ajaxCreateFaculty() {
 	
 	$('#nameCreateError').text('');
 	
-	var department = $('#departmentCreate option:selected').val();
 	var name = $('#nameCreate').val();
 	
 	var json = {
-			"department": department,
 			"name": name
 			}
 	

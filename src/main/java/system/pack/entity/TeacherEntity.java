@@ -49,10 +49,10 @@ public class TeacherEntity {
 	private String personalMail;
 	
 	@Column
-	private long cellNumber;
+	private String cellNumber;
 	
 	@Column
-	private long homeNumber;
+	private String homeNumber;
 	
 	@Column
 	private String experience;
@@ -68,7 +68,7 @@ public class TeacherEntity {
 
 	public TeacherEntity(int teacherId, TeacherStatusEntity teacherStatus, String name, String lastName,
 			int identificationType, String underDegree, String masterDegree, String doctorDegree,
-			String institutionalMail, String personalMail, long cellNumber, long homeNumber, String experience) {
+			String institutionalMail, String personalMail, String cellNumber, String homeNumber, String experience) {
 		this.teacherId = teacherId;
 		this.teacherStatus = teacherStatus;
 		this.name = name;
@@ -164,19 +164,19 @@ public class TeacherEntity {
 		this.personalMail = personalMail;
 	}
 
-	public long getCellNumber() {
+	public String getCellNumber() {
 		return cellNumber;
 	}
 
-	public void setCellNumber(long cellNumber) {
+	public void setCellNumber(String cellNumber) {
 		this.cellNumber = cellNumber;
 	}
 
-	public long getHomeNumber() {
+	public String getHomeNumber() {
 		return homeNumber;
 	}
 
-	public void setHomeNumber(long homeNumber) {
+	public void setHomeNumber(String homeNumber) {
 		this.homeNumber = homeNumber;
 	}
 

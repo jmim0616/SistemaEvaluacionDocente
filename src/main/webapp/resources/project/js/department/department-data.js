@@ -28,7 +28,8 @@ $('.buttonUpdateDepartmentToolbar').click(function(event) {
 	$('.updateDepartment .modalContainer').show().fadeIn('slow');
 	
 	$('#departmentIdUpdate').val(arrayItemsStandardTable[0]);
-	$('#nameUpdate').val(arrayItemsStandardTable[1]);
+	$('#facultyUpdate .actualValue').text(arrayItemsStandardTable[1]);
+	$('#nameUpdate').val(arrayItemsStandardTable[2]);
 
 });
 

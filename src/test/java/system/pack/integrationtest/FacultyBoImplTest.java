@@ -43,12 +43,6 @@ public class FacultyBoImplTest extends Mockito{
 	FacultyBoInterface facultyBoInterface;
 
 	@Autowired
-	DepartmentDaoInterface departmentDaoInterface;
-
-	@Autowired
-	DepartmentDaoJpaRepository departmentDaoJpaRepository;
-	
-	@Autowired
 	FacultyDaoInterface facultyDaoInterface;
 
 	@Autowired
@@ -57,13 +51,7 @@ public class FacultyBoImplTest extends Mockito{
 	@Before
 	public void setUp() {
 
-		MockitoAnnotations.initMocks(this);
-
-		DepartmentBean departmentBeanInitial1 = new DepartmentBean();
-		departmentBeanInitial1.setName("Operaciones y sistemas");
-
-		departmentDaoJpaRepository.save(DepartmentConverter.ConvertToEntity1(departmentBeanInitial1));
-		
+		MockitoAnnotations.initMocks(this);		
 		
 	}
 
@@ -82,10 +70,6 @@ public class FacultyBoImplTest extends Mockito{
 
 		FacultyBean facultyBean = new FacultyBean();
 		facultyBean.setName("Ingenieria");
-		
-		int departmentId = departmentDaoJpaRepository.findByName("Operaciones y sistemas").getDepartmentId();
-		facultyBean.setDepartment(String.valueOf(departmentId));
-		
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -111,11 +95,6 @@ public class FacultyBoImplTest extends Mockito{
 		FacultyBean facultyBean = new FacultyBean();
 		facultyBean.setName("Ingenieria");
 		
-		int departmentId = departmentDaoJpaRepository.findByName("Operaciones y sistemas").getDepartmentId();
-
-		facultyBean.setDepartment(String.valueOf(departmentId));
-		
-
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(true);
 
@@ -149,15 +128,11 @@ public class FacultyBoImplTest extends Mockito{
 		FacultyBean facultyBeanInitial = new FacultyBean();
 		facultyBeanInitial.setName("Ingenieria");
 		
-		DepartmentEntity department = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
-		facultyBeanInitial.setDepartment(String.valueOf(department.getDepartmentId()));
-		
-		
 		facultyDaoJpaRepository.save(FacultyConverter.ConvertToEntity1(facultyBeanInitial));
 
 		int facultyId = facultyDaoJpaRepository.findByName("Ingenieria").getFacultyId();
 
-		FacultyBean facultyBeanUpdated = new FacultyBean(String.valueOf(facultyId), String.valueOf(department.getName()), "Administracion");
+		FacultyBean facultyBeanUpdated = new FacultyBean(String.valueOf(facultyId), "Administracion");
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -184,15 +159,11 @@ public class FacultyBoImplTest extends Mockito{
 		FacultyBean facultyBeanInitial = new FacultyBean();
 		facultyBeanInitial.setName("Ingenieria");
 		
-		DepartmentEntity department = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
-		facultyBeanInitial.setDepartment(String.valueOf(department.getDepartmentId()));
-		
-		
 		facultyDaoJpaRepository.save(FacultyConverter.ConvertToEntity1(facultyBeanInitial));
 
 		int facultyId = facultyDaoJpaRepository.findByName("Ingenieria").getFacultyId();
 
-		FacultyBean facultyBeanUpdated = new FacultyBean(String.valueOf(facultyId), String.valueOf(department.getName()), "Administracion");
+		FacultyBean facultyBeanUpdated = new FacultyBean(String.valueOf(facultyId),  "Administracion");
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -217,10 +188,6 @@ public class FacultyBoImplTest extends Mockito{
 
 		FacultyBean facultyBeanInitial = new FacultyBean();
 		facultyBeanInitial.setName("Ingenieria");
-		
-		DepartmentEntity department = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
-		facultyBeanInitial.setDepartment(String.valueOf(department.getDepartmentId()));
-		
 		
 		facultyDaoJpaRepository.save(FacultyConverter.ConvertToEntity1(facultyBeanInitial));
 

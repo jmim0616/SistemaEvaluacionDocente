@@ -43,7 +43,7 @@
 						<form:form id="formSearchTeacher" modelAttribute="teacher">
 
 							<fieldset>
-								<form:label path="teacherId">Cedula del Docente</form:label>
+								<form:label path="teacherId">Identificacion del Docente</form:label>
 								<form:input path="teacherId" type="text" id="teacherIdSearch" />
 								<label id="teacherIdSearchError" class="validation-error"> </label>
 							</fieldset>

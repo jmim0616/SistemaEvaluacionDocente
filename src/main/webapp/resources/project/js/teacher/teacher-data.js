@@ -84,7 +84,8 @@ function ajaxShowUpdateTeacher() {
 			$('#teacherIdUpdate').val(arrayItemsStandardTable[0]);
 			$('#nameUpdate').val(arrayItemsStandardTable[1]);
 			$('#lastNameUpdate').val(arrayItemsStandardTable[2]);
-			$('#identificationTypeUpdate option:selected').text(arrayItemsStandardTable[3]);
+//			$('#identificationTypeUpdate option:selected').text(arrayItemsStandardTable[3]);
+			$('#identificationTypeUpdate .actualValue').text(arrayItemsStandardTable[3]);
 			$('#underDegreeUpdate').val(arrayItemsStandardTable[4]);
 			$('#masterDegreeUpdate').val(arrayItemsStandardTable[5]);
 			$('#doctorDegreeUpdate').val(arrayItemsStandardTable[6]);
@@ -126,6 +127,7 @@ function ajaxShowUpdateStatusTeacher() {
 			
 			$('#dialogModal .status').text(arrayItemsStandardTable[12]);
 
+			$('.updateTeacherStatus .modalContainer').show().fadeIn('slow');
 			
 		}
 		

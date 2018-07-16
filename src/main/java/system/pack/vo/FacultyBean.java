@@ -7,20 +7,16 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class FacultyBean {
 	
 	private String facultyId;
-
-	private String department;
 	
 	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
-	
 	
 	public FacultyBean() {
 		
 	}
 
-	public FacultyBean(String facultyId, String department, String name) {
+	public FacultyBean(String facultyId, String name) {
 		this.facultyId = facultyId;
-		this.department = department;
 		this.name = name;
 	}
 
@@ -31,15 +27,6 @@ public class FacultyBean {
 	public void setFacultyId(String facultyId) {
 		this.facultyId = facultyId;
 	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -50,8 +37,10 @@ public class FacultyBean {
 
 	@Override
 	public String toString() {
-		return "FacultyBean [facultyId=" + facultyId + ", department=" + department + ", name=" + name + "]";
+		return "FacultyBean [facultyId=" + facultyId + ", name=" + name + "]";
 	}
+
+
 	
 	
 	

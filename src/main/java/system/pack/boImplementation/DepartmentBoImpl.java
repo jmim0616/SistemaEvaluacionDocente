@@ -17,6 +17,8 @@ import system.pack.converter.DepartmentConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
+import system.pack.daoInterface.FacultyDaoInterface;
+import system.pack.daoInterface.FacultyDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.DepartmentEntity;
@@ -24,16 +26,38 @@ import system.pack.entity.FacultyEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.DepartmentBean;
+import system.pack.vo.FacultyBean;
 import system.pack.vo.TeacherBean;
 
 @Service
 public class DepartmentBoImpl implements DepartmentBoInterface {
 	
 	@Autowired
+	FacultyDaoInterface facultyDaoInterface;
+	
+	@Autowired
+	FacultyDaoJpaRepository facultyDaoJpaRepository;
+	
+	@Autowired
 	DepartmentDaoInterface departmentDaoInterface;
 	
 	@Autowired
 	DepartmentDaoJpaRepository departmentDaoJpaRepository;
+	
+	
+	@Transactional
+	@Override
+	public JsonResponse<FacultyBean, FacultyEntity> getAllFaculties() {
+		
+		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
+		
+		List<FacultyEntity> faculties = facultyDaoInterface.getAll();
+		
+		jsonResponse.setObjectEntityList(faculties);
+		
+		return jsonResponse;
+		
+	}
 	
 	@Transactional
 	@Override
@@ -98,6 +122,10 @@ public class DepartmentBoImpl implements DepartmentBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
+				
+				FacultyEntity facultyEntity = facultyDaoInterface.findByName(departmentBean.getFaculty());
+
+				departmentBean.setFaculty(Integer.toString(facultyEntity.getFacultyId()));
 				
 				DepartmentEntity departmentEntity = DepartmentConverter.ConvertToEntity2(departmentBean);
 

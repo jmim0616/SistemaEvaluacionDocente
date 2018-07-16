@@ -24,6 +24,7 @@
 			<tr class="not">
 
 				<th>Codigo</th>
+				<th>Facultad</th>
 				<th>Nombre</th>
 				<th>Acciones</th>
 

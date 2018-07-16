@@ -26,7 +26,7 @@ public class DisciplinaryAreaConverter {
 		DisciplinaryAreaBean disciplinaryAreaBean = new DisciplinaryAreaBean();
 		
 		disciplinaryAreaBean.setDisciplinaryAreaId(Integer.toString(disciplinaryAreaEntity.getDisciplinaryAreaId()));
-		disciplinaryAreaBean.setFaculty(Integer.toString(disciplinaryAreaEntity.getFaculty().getFacultyId()));
+		disciplinaryAreaBean.setDepartment(Integer.toString(disciplinaryAreaEntity.getDepartment().getDepartmentId()));
 		disciplinaryAreaBean.setName(disciplinaryAreaEntity.getName());
 		
 		return disciplinaryAreaBean;
@@ -36,7 +36,7 @@ public class DisciplinaryAreaConverter {
 		
 		DisciplinaryAreaEntity disciplinaryAreaEntity = new DisciplinaryAreaEntity();
 
-		disciplinaryAreaEntity.setFaculty(new FacultyEntity(Integer.parseInt(disciplinaryAreaBean.getFaculty())));
+		disciplinaryAreaEntity.setDepartment(new DepartmentEntity(Integer.parseInt(disciplinaryAreaBean.getDepartment())));
 		disciplinaryAreaEntity.setName(disciplinaryAreaBean.getName());
 		
 		return disciplinaryAreaEntity;
@@ -48,7 +48,7 @@ public class DisciplinaryAreaConverter {
 		DisciplinaryAreaEntity disciplinaryAreaEntity = new DisciplinaryAreaEntity();
 
 		disciplinaryAreaEntity.setDisciplinaryAreaId(Integer.parseInt(disciplinaryAreaBean.getDisciplinaryAreaId()));
-		disciplinaryAreaEntity.setFaculty(new FacultyEntity(Integer.parseInt(disciplinaryAreaBean.getFaculty())));
+		disciplinaryAreaEntity.setDepartment(new DepartmentEntity(Integer.parseInt(disciplinaryAreaBean.getDepartment())));
 		disciplinaryAreaEntity.setName(disciplinaryAreaBean.getName());
 		
 		return disciplinaryAreaEntity;

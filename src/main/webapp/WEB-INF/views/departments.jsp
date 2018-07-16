@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateDepartment" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchDepartment" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchDepartment" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

@@ -28,6 +28,7 @@
 									<fieldset>
 										<form:label path="faculty">Facultad</form:label>
 										<form:select path="faculty" id="facultyUpdate">
+										<option class="actualValue" hidden></option>
 											<c:forEach items="${faculties}" var="item">
 												<option value="${item.facultyId}">${item.name}</option>
 											</c:forEach>

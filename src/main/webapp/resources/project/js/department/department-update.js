@@ -43,10 +43,12 @@ function ajaxUpdateDepartment() {
 	$('#nameUpdateError').text('');
 	
 	var departmentId = $('#departmentIdUpdate').val();
+	var faculty = $('#facultyUpdate option:selected').text();
 	var name = $('#nameUpdate').val();
 	
 	var json = {
 			"departmentId": departmentId,
+			"faculty": faculty,
 			"name": name
 			}
 	
@@ -73,7 +75,7 @@ function ajaxUpdateDepartment() {
 			console.log(jsonResponse);
 
 			if (jsonResponse.isValid) {
-
+				
 				$('#nameUpdate').val('');
 
 				$('.updateDepartment .modalContainer').show().fadeOut('slow');

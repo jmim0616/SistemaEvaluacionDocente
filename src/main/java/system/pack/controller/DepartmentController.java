@@ -57,6 +57,8 @@ public class DepartmentController {
 		
 		model.addAttribute("department", new DepartmentBean());
 		
+		model.addAttribute("faculties", departmentBoInterface.getAllFaculties().getObjectEntityList());
+		
 		return "department-create";
 		
 	}
@@ -66,6 +68,8 @@ public class DepartmentController {
 
 		model.addAttribute("department", new DepartmentBean());
 		
+		model.addAttribute("faculties", departmentBoInterface.getAllFaculties().getObjectEntityList());
+		
 		return "department-data";
 		
 	}
@@ -74,6 +78,8 @@ public class DepartmentController {
 	public String showUpdateDepartmentView(Model model) {
 		
 		model.addAttribute("department", new DepartmentBean());
+		
+		model.addAttribute("faculties", departmentBoInterface.getAllFaculties().getObjectEntityList());
 		
 		return "department-update";
 		

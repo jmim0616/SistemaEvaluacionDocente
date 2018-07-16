@@ -49,18 +49,18 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 
 	@Autowired
 	DisciplinaryAreaBoInterface disciplinaryAreaBoInterface;
+	
+	@Autowired
+	FacultyDaoInterface facultyDaoInterface;
+
+	@Autowired
+	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
 	@Autowired
 	DepartmentDaoInterface departmentDaoInterface;
 
 	@Autowired
 	DepartmentDaoJpaRepository departmentDaoJpaRepository;
-
-	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
-
-	@Autowired
-	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
 	@Autowired
 	DisciplinaryAreaDaoInterface disciplinaryAreaDaoInterface;
@@ -73,18 +73,20 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 
 		MockitoAnnotations.initMocks(this);
 
-		DepartmentBean departmentBeanInitial1 = new DepartmentBean();
-		departmentBeanInitial1.setName("Operaciones y sistemas");
-
-		departmentDaoJpaRepository.save(DepartmentConverter.ConvertToEntity1(departmentBeanInitial1));
-
 		FacultyBean facultyBeanInitial = new FacultyBean();
 		facultyBeanInitial.setName("Ingenieria");
-
-		DepartmentEntity department = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
-		facultyBeanInitial.setDepartment(String.valueOf(department.getDepartmentId()));
-
+		
 		facultyDaoJpaRepository.save(FacultyConverter.ConvertToEntity1(facultyBeanInitial));
+
+		DepartmentBean departmentBeanInitial = new DepartmentBean();
+		departmentBeanInitial.setName("Operaciones y sistemas");
+		
+		FacultyEntity facultyEntity = facultyDaoJpaRepository.findByName("Ingenieria");
+		departmentBeanInitial.setFaculty(String.valueOf(facultyEntity.getFacultyId()));
+
+		departmentDaoJpaRepository.save(DepartmentConverter.ConvertToEntity1(departmentBeanInitial));
+
+		
 
 	}
 
@@ -103,8 +105,8 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 		DisciplinaryAreaBean disciplinaryAreaBean = new DisciplinaryAreaBean();
 		disciplinaryAreaBean.setName("Area Discipolinaria Uno");
 
-		int facultyId = facultyDaoJpaRepository.findByName("Ingenieria").getFacultyId();
-		disciplinaryAreaBean.setFaculty(String.valueOf(facultyId));
+		DepartmentEntity departmentEntity = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
+		disciplinaryAreaBean.setDepartment(String.valueOf(departmentEntity.getDepartmentId()));
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -129,8 +131,8 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 		DisciplinaryAreaBean disciplinaryAreaBean = new DisciplinaryAreaBean();
 		disciplinaryAreaBean.setName("Area Discipolinaria Uno");
 
-		int facultyId = facultyDaoJpaRepository.findByName("Ingenieria").getFacultyId();
-		disciplinaryAreaBean.setFaculty(String.valueOf(facultyId));
+		DepartmentEntity departmentEntity = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
+		disciplinaryAreaBean.setDepartment(String.valueOf(departmentEntity.getDepartmentId()));
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -164,8 +166,8 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 		DisciplinaryAreaBean disciplinaryAreaInitial = new DisciplinaryAreaBean();
 		disciplinaryAreaInitial.setName("Area Discipolinaria Uno");
 
-		FacultyEntity facultyEntity = facultyDaoJpaRepository.findByName("Ingenieria");
-		disciplinaryAreaInitial.setFaculty(String.valueOf(facultyEntity.getFacultyId()));
+		DepartmentEntity departmentEntity = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
+		disciplinaryAreaInitial.setDepartment(String.valueOf(departmentEntity.getDepartmentId()));
 
 		disciplinaryAreaDaoJpaRepository.save(DisciplinaryAreaConverter.ConvertToEntity1(disciplinaryAreaInitial));
 
@@ -173,7 +175,7 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 				.getDisciplinaryAreaId();
 
 		DisciplinaryAreaBean disciplinaryAreaUpdated = new DisciplinaryAreaBean(String.valueOf(disciplinaryAreaId),
-				String.valueOf(facultyEntity.getName()), "Area Discipolinaria Dos");
+				String.valueOf(departmentEntity.getName()), "Area Discipolinaria Dos");
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(false);
@@ -199,8 +201,8 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 		DisciplinaryAreaBean disciplinaryAreaInitial = new DisciplinaryAreaBean();
 		disciplinaryAreaInitial.setName("Area Discipolinaria Uno");
 
-		FacultyEntity facultyEntity = facultyDaoJpaRepository.findByName("Ingenieria");
-		disciplinaryAreaInitial.setFaculty(String.valueOf(facultyEntity.getFacultyId()));
+		DepartmentEntity departmentEntity = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
+		disciplinaryAreaInitial.setDepartment(String.valueOf(departmentEntity.getDepartmentId()));
 
 		disciplinaryAreaDaoJpaRepository.save(DisciplinaryAreaConverter.ConvertToEntity1(disciplinaryAreaInitial));
 
@@ -208,7 +210,7 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 				.getDisciplinaryAreaId();
 
 		DisciplinaryAreaBean disciplinaryAreaUpdated = new DisciplinaryAreaBean(String.valueOf(disciplinaryAreaId),
-				String.valueOf(facultyEntity.getName()), "Area Discipolinaria Dos");
+				String.valueOf(departmentEntity.getName()), "Area Discipolinaria Dos");
 
 		BindingResult bindingResult = mock(BindingResult.class);
 		when(bindingResult.hasErrors()).thenReturn(true);
@@ -234,8 +236,8 @@ public class DisciplinaryAreaBoImplTest extends Mockito {
 		DisciplinaryAreaBean disciplinaryAreaInitial = new DisciplinaryAreaBean();
 		disciplinaryAreaInitial.setName("Area Discipolinaria Uno");
 
-		FacultyEntity facultyEntity = facultyDaoJpaRepository.findByName("Ingenieria");
-		disciplinaryAreaInitial.setFaculty(String.valueOf(facultyEntity.getFacultyId()));
+		DepartmentEntity departmentEntity = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
+		disciplinaryAreaInitial.setDepartment(String.valueOf(departmentEntity.getDepartmentId()));
 
 		disciplinaryAreaDaoJpaRepository.save(DisciplinaryAreaConverter.ConvertToEntity1(disciplinaryAreaInitial));
 

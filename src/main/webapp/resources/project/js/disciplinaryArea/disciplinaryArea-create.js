@@ -42,11 +42,11 @@ function ajaxCreateDisciplinaryArea() {
 	
 	$('#nameCreateError').text('');
 	
-	var faculty = $('#facultyCreate option:selected').val();
+	var department = $('#departmentCreate option:selected').val();
 	var name = $('#nameCreate').val();
 	
 	var json = {
-			"faculty": faculty,
+			"department": department,
 			"name": name
 			}
 	

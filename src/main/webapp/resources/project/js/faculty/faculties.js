@@ -15,17 +15,17 @@ $(document).ready(function() {
 
 	});
 
-	$('#linkSearchFaculty').click(function(event) {
-
-		event.preventDefault();
-
-		$.get('./Faculties/Data', function(view, status, xhr){
-			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-			}).done(function() {
-				  ajaxSearchFaculty();
-			  });
-
-	});
+//	$('#linkSearchFaculty').click(function(event) {
+//
+//		event.preventDefault();
+//
+//		$.get('./Faculties/Data', function(view, status, xhr){
+//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//			}).done(function() {
+//				  ajaxSearchFaculty();
+//			  });
+//
+//	});
 
 });
 
@@ -67,9 +67,6 @@ function ajaxSearchFaculty() {
 												"<tr>"
 													+ "<td>"
 													   + jsonResponse.objectEntityList[key].facultyId
-													   + "</td> "
-													   + "<td>"
-													   + jsonResponse.objectEntityList[key].department.name
 													   + "</td> "
 													   + "<td>"
 													   + jsonResponse.objectEntityList[key].name

@@ -42,12 +42,10 @@ function ajaxUpdateFaculty() {
 	$('#nameUpdateError').text('');
 	
 	var facultyId = $('#facultyIdUpdate').val();
-	var department = $('#departmentUpdate option:selected').text();
 	var name = $('#nameUpdate').val();
 	
 	var json = {
 			"facultyId": facultyId,
-			"department": department,
 			"name": name
 			}
 	

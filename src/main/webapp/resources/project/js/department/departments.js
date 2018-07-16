@@ -15,17 +15,17 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#linkSearchDepartment').click(function(event) {
-
-		event.preventDefault();
-		
-		$.get('./Departments/Data', function(view, status, xhr){
-			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-			}).done(function() {
-				ajaxSearchDepartment();
-			  });
-
-	});
+//	$('#linkSearchDepartment').click(function(event) {
+//
+//		event.preventDefault();
+//		
+//		$.get('./Departments/Data', function(view, status, xhr){
+//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//			}).done(function() {
+//				ajaxSearchDepartment();
+//			  });
+//
+//	});
 	
 
 	
@@ -70,6 +70,7 @@ function ajaxSearchDepartment() {
 						$("#tableDepartmentData").append(
 								"<tr>" +
 								"<td>"+ jsonResponse.objectEntityList[key].departmentId +"</td> " +
+							    "<td>" + jsonResponse.objectEntityList[key].faculty.name + "</td> " +
 								"<td>"+ jsonResponse.objectEntityList[key].name +"</td> " +
 								 "<td>"+
 								  '<div class="actions"> '+

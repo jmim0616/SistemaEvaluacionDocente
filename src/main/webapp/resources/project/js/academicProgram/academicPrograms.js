@@ -14,17 +14,17 @@ $(document).ready(function() {
 
 					});
 
-			$('#linkSearchAcademicProgram').click(function(event) {
-
-								event.preventDefault();
-
-								$.get('./AcademicPrograms/Data', function(view, status, xhr){
-									  $('.content').fadeOut(0).html(view).fadeIn('slow');
-									}).done(function() {
-										ajaxSearchAcademicProgram();
-									  });
-								
-							});
+//			$('#linkSearchAcademicProgram').click(function(event) {
+//
+//								event.preventDefault();
+//
+//								$.get('./AcademicPrograms/Data', function(view, status, xhr){
+//									  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//									}).done(function() {
+//										ajaxSearchAcademicProgram();
+//									  });
+//								
+//							});
 
 			});
 

@@ -67,7 +67,7 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 	@Override
 	public List<FacultyEntity> getAll() {
 		
-		TypedQuery<FacultyEntity> query = entityManager.createQuery("select new FacultyEntity(f.facultyId, f.department, f.name) from FacultyEntity f", FacultyEntity.class);
+		TypedQuery<FacultyEntity> query = entityManager.createQuery("select new FacultyEntity(f.facultyId, f.name) from FacultyEntity f", FacultyEntity.class);
 		
 		List<FacultyEntity> faculties = query.getResultList();
 		

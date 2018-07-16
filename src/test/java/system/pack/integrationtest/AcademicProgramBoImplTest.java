@@ -69,18 +69,20 @@ public class AcademicProgramBoImplTest extends Mockito {
 
 		MockitoAnnotations.initMocks(this);
 
-		DepartmentBean departmentBeanInitial1 = new DepartmentBean();
-		departmentBeanInitial1.setName("Operaciones y sistemas");
-
-		departmentDaoJpaRepository.save(DepartmentConverter.ConvertToEntity1(departmentBeanInitial1));
-
 		FacultyBean facultyBeanInitial = new FacultyBean();
 		facultyBeanInitial.setName("Ingenieria");
-
-		DepartmentEntity department = departmentDaoJpaRepository.findByName("Operaciones y sistemas");
-		facultyBeanInitial.setDepartment(String.valueOf(department.getDepartmentId()));
-
+		
 		facultyDaoJpaRepository.save(FacultyConverter.ConvertToEntity1(facultyBeanInitial));
+
+		DepartmentBean departmentBeanInitial = new DepartmentBean();
+		departmentBeanInitial.setName("Operaciones y sistemas");
+		
+		FacultyEntity facultyEntity = facultyDaoJpaRepository.findByName("Ingenieria");
+		departmentBeanInitial.setFaculty(String.valueOf(facultyEntity.getFacultyId()));
+
+		departmentDaoJpaRepository.save(DepartmentConverter.ConvertToEntity1(departmentBeanInitial));
+
+
 
 	}
 

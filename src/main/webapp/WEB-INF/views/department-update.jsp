@@ -13,17 +13,31 @@
 			</section>
 
 			<form:form id="formCreateDepartment" modelAttribute="department">
-
+				<form:hidden path="departmentId" id="departmentIdUpdate" />
+				
 				<section class="modalBody">
 
 					<h2 id="tittleModal">Modificar Departamento</h2>
 					<div id="dialogModal">
-
-
-						<form:hidden path="departmentId" id="departmentIdUpdate" />
+						
 						<table>
 
 							<tr>
+							
+								<td>
+									<fieldset>
+										<form:label path="faculty">Facultad</form:label>
+										<form:select path="faculty" id="facultyUpdate">
+										<option class="actualValue" hidden></option>
+											<c:forEach items="${faculties}" var="item">
+												<option value="${item.facultyId}">${item.name}</option>
+											</c:forEach>
+										</form:select>
+										<label id="facultyUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+
+								</td>
 
 								<td>
 									<fieldset>
@@ -33,6 +47,7 @@
 										</label>
 									</fieldset>
 								</td>
+						
 
 							</tr>
 

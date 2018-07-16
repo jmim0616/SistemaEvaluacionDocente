@@ -28,7 +28,7 @@ $('.buttonUpdateDisciplinaryAreaToolbar').click(function(event) {
 	$('.updateDisciplinaryArea .modalContainer').show().fadeIn('slow');
 	
 	$('#disciplinaryAreaIdUpdate').val(arrayItemsStandardTable[0]);
-	$('#facultyUpdate option:selected').text(arrayItemsStandardTable[1]);
+	$('#departmentUpdate .actualValue').text(arrayItemsStandardTable[1]);
 	$('#nameUpdate').val(arrayItemsStandardTable[2]);
 
 });

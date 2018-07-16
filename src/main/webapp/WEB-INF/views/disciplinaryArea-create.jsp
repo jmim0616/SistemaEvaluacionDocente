@@ -27,13 +27,13 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="faculty">Facultad</form:label>
-										<form:select path="faculty" id="facultyCreate">
-											<c:forEach items="${faculties}" var="item">
-												<option value="${item.facultyId}">${item.name}</option>
+										<form:label path="department">Departamento</form:label>
+										<form:select path="department" id="departmentCreate">
+											<c:forEach items="${departments}" var="item">
+												<option value="${item.departmentId}">${item.name}</option>
 											</c:forEach>
 										</form:select>
-										<label id="facultyCreateError" class="validation-error">
+										<label id="departmentCreateError" class="validation-error">
 										</label>
 									</fieldset>
 

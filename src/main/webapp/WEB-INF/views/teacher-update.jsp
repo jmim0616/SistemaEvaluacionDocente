@@ -32,6 +32,7 @@
 						<form:label path="identificationType">Tipo de identificacion</form:label>
 						<form:select path="identificationType"
 							id="identificationTypeUpdate">
+							<option class="actualValue" hidden></option>
 							<option value="1">Cedula de Ciudadania</option>
 							<option value="2">Cedula de Extranjeria</option>
 						</form:select>

@@ -31,23 +31,7 @@
 										</label>
 									</fieldset>
 								</td>
-							<tr>
-								<td>
-									<fieldset>
-										<form:label path="department">Departamento</form:label>
-										<form:select path="department" id="departmentUpdate">
-											<c:forEach items="${departments}" var="item">
-												<option value="${item.departmentId}">${item.name}</option>
-											</c:forEach>
-										</form:select>
-										<label id="departmentUpdateError" class="validation-error">
-										</label>
-									</fieldset>
-
-								</td>
-							</tr>
-
-
+		
 						</table>
 
 
