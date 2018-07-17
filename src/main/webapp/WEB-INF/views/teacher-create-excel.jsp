@@ -1,19 +1,25 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
 <!--teacher-create-excel-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-create-excel.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/project/js/teacher/
+teacher-create-excel.js"></script>  
 
-
-<div class="createTeacher">
 
 	<h2>DOCENTES</h2>
+					
+	<form action="./Teachers/CreateExcel" method="POST"
+		enctype="multipart/form-data">
+		Seleccionar archivo	
+		<input  type="file"  name="file" accept= ".xls, .xlsx" />
 
+	<br> 
+	<br>
+	
 	<h3>Registrar Docente</h3>
 
+	<input id="buttonCreateTeacherExcel" class="button add-button"
+	type="submit" value="Registrar Docente" />
+	
+	</form>
 
-				<input id="buttonCreateTeacherExcel" class="button add-button"
-					type="submit" value="Registrar Docente" />
 
-
-</div>

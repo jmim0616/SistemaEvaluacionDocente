@@ -15,8 +15,7 @@ $(document).ready(function() {
 
 		e.preventDefault();
 
-		$('.sub-menu-content').removeClass('true');
-		
+		$('.sub-menu-content').removeClass('true');		
 
 	});
 
@@ -29,14 +28,7 @@ $(document).ready(function() {
 		
 	});
 	
-	
-	$('#linkCreateExcelTeacher').click(function(event) {
-		
-		event.preventDefault();
 
-		$('.content').fadeOut(0).load('./Teachers/CreateExcel').fadeIn('slow');
-		
-	});
 	
 
 	$('#buttonSearchTeacher').click(function(event) {
@@ -53,7 +45,13 @@ $(document).ready(function() {
 	
 });
 
-
+$('#linkCreateExcelTeacher').click(function(event) {
+	
+	//event.preventDefault();
+	
+	$('.content').load('./Teachers/CreateExcel');
+	
+});
 
 function ajaxSearchTeacher() {
 	

@@ -8,7 +8,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script>
 
-<!--teachers -->
+<!--teachers --> 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teachers.js"></script>
 
@@ -29,7 +29,7 @@
 			<ul class="sub-menu-content">
 			
 				<li><a id="linkCreateTeacher" href="#"> Registrar Con Formulario </a></li>
-				<li><a id="linkCreateExcelTeacher" href="#"> Registrar Mediante Excel</a></li>
+				<li><a id="linkCreateExcelTeacher" href="#">Registrar con excel</a></li>
 				
 			</ul></li>
 
