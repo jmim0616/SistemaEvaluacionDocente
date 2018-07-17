@@ -10,7 +10,7 @@ import system.pack.vo.TeacherBean;
 
 public class TeacherConverter {
 	
-	private TeacherConverter() {
+	public TeacherConverter() {
 
 	}
 
@@ -28,8 +28,8 @@ public class TeacherConverter {
 		teacherBean.setDoctorDegree(teacherEntity.getDoctorDegree());
 		teacherBean.setInstitutionalMail(teacherEntity.getInstitutionalMail());
 		teacherBean.setPersonalMail(teacherEntity.getPersonalMail());
-		teacherBean.setCellNumber(Integer.toString(teacherEntity.getCellNumber()));
-		teacherBean.setHomeNumber(Integer.toString(teacherEntity.getHomeNumber()));
+		teacherBean.setCellNumber(teacherEntity.getCellNumber());
+		teacherBean.setHomeNumber(teacherEntity.getHomeNumber());
 		teacherBean.setExperience(teacherEntity.getExperience());
 
 		
@@ -50,8 +50,8 @@ public class TeacherConverter {
 		teacherEntity.setDoctorDegree(teacherBean.getDoctorDegree());
 		teacherEntity.setInstitutionalMail(teacherBean.getInstitutionalMail());
 		teacherEntity.setPersonalMail(teacherBean.getPersonalMail());
-		teacherEntity.setCellNumber(teacherBean.getCellNumber().equals("") ?  0 : Integer.parseInt(teacherBean.getCellNumber()));
-		teacherEntity.setHomeNumber(teacherBean.getCellNumber().equals("") ?  0 : Integer.parseInt(teacherBean.getHomeNumber()));
+		teacherEntity.setCellNumber(teacherBean.getCellNumber());
+		teacherEntity.setHomeNumber(teacherBean.getCellNumber());
 		teacherEntity.setExperience(teacherBean.getExperience());
 		
 		return teacherEntity;

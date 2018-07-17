@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.TeacherDaoInterface;
+import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.DepartmentEntity;
@@ -44,6 +45,9 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 	@Autowired
 	TeacherDaoInterface teacherDaoInterface;
+	
+	@Autowired
+	TeacherDaoJpaRepository teacherDaoJpaRepository;
 
 	@Autowired
 	TeacherStatusDaoJpaRepository teacherStatusDaoJpaRepository;
@@ -56,7 +60,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 	@Transactional
 	@Override
 	public JsonResponse<TeacherBean, TeacherEntity> create(TeacherBean teacherBean, BindingResult bindingResult) {
-
+		
 		try {
 
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
@@ -83,7 +87,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 				jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
 
 			}
-
+			
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -99,7 +103,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 	}
 
-	public JsonResponse createExcel(TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> createExcel(TeacherBean teacherBean, BindingResult bindingResult) {
 
 		return null;
 
@@ -173,9 +177,12 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 			} else if (teacherBean.getTeacherStatus().equals("Inactivo")) {
 
+
 				teacherEntity.setTeacherStatus(new TeacherStatusEntity(1));
+jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exito");
 
 			}
+
 
 			teacherDaoInterface.update(teacherEntity);
 
@@ -217,8 +224,10 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 				jsonResponse.setIsValid(true);
 
+
 				TeacherEntity teacherEntity = teacherDaoInterface
 						.findById(Integer.parseInt(teacherBean.getTeacherId()));
+
 
 				if (teacherEntity == null) {
 
@@ -289,6 +298,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 		TeacherEntity teacherEntity = new TeacherEntity();
 
+		
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
 
 		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
@@ -426,7 +436,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						System.out.println(cell.getNumericCellValue());
-						teacherEntity.setCellNumber(((int) cell.getNumericCellValue()));
+						teacherEntity.setCellNumber(String.valueOf(cell.getNumericCellValue()));
 					}
 				}
 				// fijo
@@ -437,7 +447,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						teacherEntity.setHomeNumber(((int) cell.getNumericCellValue()));
+						teacherEntity.setHomeNumber(String.valueOf(cell.getNumericCellValue()));
 					}
 				}
 				// fijo

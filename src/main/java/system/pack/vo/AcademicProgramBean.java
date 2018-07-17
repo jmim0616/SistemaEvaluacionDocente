@@ -11,7 +11,7 @@ public class AcademicProgramBean {
 
 	private String faculty;
 	
-	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
+	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
 	
 	

@@ -8,9 +8,9 @@ public class DisciplinaryAreaBean {
 	
 	private String disciplinaryAreaId;
 
-	private String faculty;
+	private String department;
 	
-	@Pattern(regexp="^[a-zA-Z]*$", message="En este campo solo se permiten letras")
+	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
 	
 	
@@ -19,9 +19,9 @@ public class DisciplinaryAreaBean {
 	}
 
 
-	public DisciplinaryAreaBean(String disciplinaryAreaId, String faculty, String name) {
+	public DisciplinaryAreaBean(String disciplinaryAreaId, String department, String name) {
 		this.disciplinaryAreaId = disciplinaryAreaId;
-		this.faculty = faculty;
+		this.department = department;
 		this.name = name;
 	}
 
@@ -35,14 +35,13 @@ public class DisciplinaryAreaBean {
 		this.disciplinaryAreaId = disciplinaryAreaId;
 	}
 
-
-	public String getFaculty() {
-		return faculty;
+	public String getDepartment() {
+		return department;
 	}
 
 
-	public void setFaculty(String faculty) {
-		this.faculty = faculty;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 
@@ -58,7 +57,7 @@ public class DisciplinaryAreaBean {
 
 	@Override
 	public String toString() {
-		return "DisciplinaryAreaBean [disciplinaryAreaId=" + disciplinaryAreaId + ", faculty=" + faculty + ", name="
+		return "DisciplinaryAreaBean [disciplinaryAreaId=" + disciplinaryAreaId + ", department=" + department + ", name="
 				+ name + "]";
 	}
 

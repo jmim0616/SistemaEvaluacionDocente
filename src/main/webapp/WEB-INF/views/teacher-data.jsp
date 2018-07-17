@@ -3,19 +3,12 @@
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-data.js"></script>
 	
 	
-<div class="teacherData" >
+<div class="scroll teacherData" >
 
-    <div class="error">
-    <a href="#" class="close">X</a>
-	 <a class="icon" ><ion-icon name="warning"></ion-icon></a>
-	<label class="message"></label>
-    </div>
 
 	<h2>DOCENTES</h2>
 
 	<h3>Resultado de Profesores</h3>
-
-	<%@include file="/includes/toolbars/toolbar-teacher-update.jsp"%>
 
 	<table id="tableTeacherData" class="table standard-table">
 
@@ -36,6 +29,7 @@
 				<th>Telefono Celular</th>
 				<th>Experiencia</th>
 				<th>Estado</th>
+				<th>Acciones</th>
 			</tr>
 
 		</thead>
@@ -48,3 +42,4 @@
 
 
 </div>
+

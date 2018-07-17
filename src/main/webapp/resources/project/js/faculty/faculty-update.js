@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateFaculty #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateFaculty .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.updateFaculty #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateFaculty .modalContainer').show().fadeOut('slow');
 
 	});
 	
@@ -42,12 +42,10 @@ function ajaxUpdateFaculty() {
 	$('#nameUpdateError').text('');
 	
 	var facultyId = $('#facultyIdUpdate').val();
-	var department = $('#departmentUpdate option:selected').text();
 	var name = $('#nameUpdate').val();
 	
 	var json = {
 			"facultyId": facultyId,
-			"department": department,
 			"name": name
 			}
 	
@@ -81,7 +79,13 @@ function ajaxUpdateFaculty() {
 				
 				$('.success').show().fadeIn('slow');
 				
-				$('.modalContainer').show().fadeOut('slow');
+				$('.updateFaculty .modalContainer').show().fadeOut('slow');
+				
+				$.get('./Faculties/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						  ajaxSearchFaculty();
+					  });
 				
 			} else {
 			

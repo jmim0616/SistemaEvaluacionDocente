@@ -17,6 +17,8 @@ $(document).ready(function() {
 
 	});
 
+
+
 	
 });
 
@@ -91,6 +93,8 @@ function ajaxCreateTeacher() {
 			
 			if (jsonResponse.isValid) {
 				
+				$('#teacherIdSearch').val($('#teacherIdCreate').val());
+				
 				$('#teacherIdCreate').val('');
 				$('#nameCreate').val('');
 				$('#lastNameCreate').val('');
@@ -110,6 +114,14 @@ function ajaxCreateTeacher() {
 				
 				$('.success').show().fadeIn('slow');
 				
+				
+				$.get('./Teachers/Data', function(view){
+					
+					$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+					ajaxSearchTeacher();
+					
+					})
 				
 				
 			} else {

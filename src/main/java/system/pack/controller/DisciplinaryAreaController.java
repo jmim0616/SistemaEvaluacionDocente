@@ -60,7 +60,7 @@ public class DisciplinaryAreaController {
 		
 		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
 		
-		model.addAttribute("faculties", disciplinaryAreaBoInterface.getFaculty().getObjectEntityList());
+		model.addAttribute("departments", disciplinaryAreaBoInterface.getAllDepartments().getObjectEntityList());
 		
 		return "disciplinaryArea-create";
 		
@@ -69,6 +69,10 @@ public class DisciplinaryAreaController {
 	@GetMapping(value = "/Data")
 	public String showDataDisciplinaryAreaView(Model model) {
 
+		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
+		
+		model.addAttribute("departments", disciplinaryAreaBoInterface.getAllDepartments().getObjectEntityList());
+		
 		return "disciplinaryArea-data";
 		
 	}
@@ -78,7 +82,7 @@ public class DisciplinaryAreaController {
 		
 		model.addAttribute("disciplinaryArea", new DisciplinaryAreaBean());
 		
-		model.addAttribute("faculties", disciplinaryAreaBoInterface.getFaculty().getObjectEntityList());
+		model.addAttribute("departments", disciplinaryAreaBoInterface.getAllDepartments().getObjectEntityList());
 		
 		return "disciplinaryArea-update";
 		

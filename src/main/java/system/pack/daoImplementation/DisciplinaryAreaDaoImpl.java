@@ -33,7 +33,7 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	@Override
 	public void create(DisciplinaryAreaEntity disciplinaryAreaEntity){
 
-		entityManager.persist(disciplinaryAreaEntity);
+		entityManager.merge(disciplinaryAreaEntity);
 		
 	}
 
@@ -47,7 +47,7 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	@Override
 	public DisciplinaryAreaEntity findByName(String name) {
 		
-		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where ap.name =:name", DisciplinaryAreaEntity.class);
+		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.name =:name", DisciplinaryAreaEntity.class);
 		
 		query.setParameter("name", name);
 		

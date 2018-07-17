@@ -1,22 +1,79 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--disciplinaryArea-update-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea-update.js"></script>
+
+<div class="updateDisciplinaryArea">
 
 
-<div class="updateAcademicProgram">
+<div class="modalContainer">
 
-    <div class="success">
-     <a href="#" class="close">X</a>
-	 <a class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></a> 
-	<label class="message"></label>
-    </div>
+	<div class="modalDialog">
+
+		<section class="modalHeader">
+			<a href="#" id="closeModal">X</a>
+		</section>
+
+				<form:form id="formUpdateDisciplinaryArea" modelAttribute="disciplinaryArea">
+				<form:hidden path="disciplinaryAreaId" id="disciplinaryAreaIdUpdate"/>
+				
+		<section class="modalBody">
+
+			<h2 id="tittleModal">Modificar Area Disciplinaria</h2>
+			<div id="dialogModal">
 
 
-	<h2>AREAS DISCIPLINARIAS</h2>
+					<table>
 
-	<%@include file="/includes/modals/disciplinaryArea-modal-update.jsp"%>
+						<tr>
+
+								<td>
+									<fieldset>
+										<form:label path="department">Departamento</form:label>
+										<form:select path="department" id="departmentUpdate">
+										<option class="actualValue" hidden></option>
+											<c:forEach items="${departments}" var="item">
+												<option value="${item.departmentId}">${item.name}</option>
+											</c:forEach>
+										</form:select>
+										<label id="departmentUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+
+								</td>
+
+						</tr>
+
+						<tr>
+
+							<td>
+								<fieldset>
+									<form:label path="name">Nombre</form:label>
+									<form:input path="name" type="text" id="nameUpdate" />
+									<label id="nameUpdateError" class="validation-error"> </label>
+								</fieldset>
+							</td>
+						</tr>
+
+					</table>
+
+				
+
+			</div>
+
+		</section>
+
+		<section class="modalFooter">
+			<input id="buttonUpdateDisciplinaryArea" class="button edit-button"
+				type="submit" value="Modificar Area Disciplinaria" /> <input
+				id="buttonCancel" class="button delete-button" type="submit"
+				value="Cancelar" />
+		</section>
+
+</form:form>
+
+	</div>
+
+</div>
+
 	
 
 </div>

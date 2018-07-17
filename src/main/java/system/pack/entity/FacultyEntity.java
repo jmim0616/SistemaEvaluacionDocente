@@ -27,20 +27,16 @@ public class FacultyEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int facultyId;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="departmentId")
-	private DepartmentEntity department;
-	
 	@Column
 	private String name;
 	
 	@OneToMany(mappedBy="faculty")
 	@JsonIgnore
-	List<AcademicProgramEntity> academicPrograms;
+	List<DepartmentEntity> departments;
 	
 	@OneToMany(mappedBy="faculty")
 	@JsonIgnore
-	List<DisciplinaryAreaEntity> disciplinaryAreas;
+	List<AcademicProgramEntity> academicPrograms;
 	
 	public FacultyEntity() {
 	
@@ -51,14 +47,12 @@ public class FacultyEntity {
 
 	}
 	
-	public FacultyEntity(DepartmentEntity department, String name) {
-		this.department = department;
+	public FacultyEntity(String name) {
 		this.name = name;
 	}
 
-	public FacultyEntity(int facultyId, DepartmentEntity department, String name) {
+	public FacultyEntity(int facultyId, String name) {
 		this.facultyId = facultyId;
-		this.department = department;
 		this.name = name;
 	}
 
@@ -70,14 +64,6 @@ public class FacultyEntity {
 		this.facultyId = facultyId;
 	}
 
-	public DepartmentEntity getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(DepartmentEntity department) {
-		this.department = department;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -86,14 +72,11 @@ public class FacultyEntity {
 		this.name = name;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "FacultyEntity [facultyId=" + facultyId + ", department=" + department + ", name=" + name + "]";
+		return "FacultyEntity [facultyId=" + facultyId + ", name=" + name + "]";
 	}
-	
-	
-
-
 
 
 	

@@ -1,37 +1,37 @@
-$(document).ready(
-		function() {
+$(document).ready(function() {
+	
+	$.get('./AcademicPrograms/Data', function(view, status, xhr){
+		  $('.content').fadeOut(0).html(view).fadeIn('slow');
+		}).done(function() {
+			ajaxSearchAcademicProgram();
+		  });
 
-			$('#linkCreateAcademicProgram').click(
-					function(event) {
+			$('#linkCreateAcademicProgram').click(function(event) {
 
 						event.preventDefault();
 
-						$('.content').fadeOut(0).load('./AcademicPrograms/Create').fadeIn('slow');
-
-						$('.modalContainer').show().fadeIn('slow');
+						$('.createAcademicProgram .modalContainer').show().fadeIn('slow');
 
 					});
 
-			$('#linkSearchAcademicProgram')
-					.click(
-							function(event) {
+//			$('#linkSearchAcademicProgram').click(function(event) {
+//
+//								event.preventDefault();
+//
+//								$.get('./AcademicPrograms/Data', function(view, status, xhr){
+//									  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//									}).done(function() {
+//										ajaxSearchAcademicProgram();
+//									  });
+//								
+//							});
 
-								event.preventDefault();
+			});
 
-								$('.content').fadeOut(0).load(
-										'./AcademicPrograms/Data').fadeIn(
-										'slow');
-
-								ajaxSearchAcademicProgram();
-
-							});
-
-		});
 
 function ajaxSearchAcademicProgram() {
 
-	$
-			.ajax({
+			$.ajax({
 				url : './AcademicPrograms/Search',
 				contentType : 'application/json',
 				method : 'POST',
@@ -77,6 +77,13 @@ function ajaxSearchAcademicProgram() {
 																	+ "<td>"
 																	+ jsonResponse.objectEntityList[key].name
 																	+ "</td> "
+																	+ "<td>"
+																	+ '<div class="actions"> '+
+																	  '<a class="button edit-button buttonUpdateAcademicProgramToolbar">' +
+																	  '<ion-icon name="create"></ion-icon>' +
+																	  '</a>'+ 
+																	  '</div>'+
+																	   "</td> " +
 																	+ "</tr>");
 
 										})
@@ -84,7 +91,11 @@ function ajaxSearchAcademicProgram() {
 					}
 
 				},
-
+				complete: function() {
+					
+					initAcademicProgramData();
+					
+				},
 				error : function() {
 
 					console.log("No se ha podido obtener la información");

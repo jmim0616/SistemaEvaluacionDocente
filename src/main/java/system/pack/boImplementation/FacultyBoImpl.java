@@ -33,31 +33,14 @@ import system.pack.vo.TeacherBean;
 @Service
 public class FacultyBoImpl implements FacultyBoInterface {
 
+	
 	@Autowired
-	DepartmentDaoJpaRepository departmentDaoJpaRepository;
-
-	@Autowired
-	DepartmentDaoInterface departmentDaoInterface;
+	FacultyDaoInterface facultyDaoInterface;
 	
 	@Autowired
 	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
-	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
-	
-	@Transactional
-	@Override
-	public JsonResponse<DepartmentBean, DepartmentEntity> getDepartment() {
-		
-		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
-		
-		List<DepartmentEntity> departments = departmentDaoInterface.getAll();
-		
-		jsonResponse.setObjectEntityList(departments);
-		
-		return jsonResponse;
-		
-	}
+
 	
 	@Transactional
 	@Override
@@ -119,10 +102,6 @@ public class FacultyBoImpl implements FacultyBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
-
-				DepartmentEntity departmentEntity = departmentDaoInterface.findByName(facultyBean.getDepartment());
-				
-				facultyBean.setDepartment(Integer.toString(departmentEntity.getDepartmentId()));
 				
 				FacultyEntity facultyEntity = FacultyConverter.ConvertToEntity2(facultyBean);
 
@@ -130,7 +109,7 @@ public class FacultyBoImpl implements FacultyBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				jsonResponse.setSuccessMessage("La facultad ha sido guardada con exito");
+				jsonResponse.setSuccessMessage("La facultad ha sido modificada con exito");
 
 			}
 

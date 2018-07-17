@@ -4,9 +4,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
@@ -23,13 +26,17 @@ public class DepartmentEntity {
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int departmentId;
+	
+	@ManyToOne
+	@JoinColumn(name="facultyId")
+	private FacultyEntity faculty;
 
 	@Column
 	private String name;
 	
 	@OneToMany(mappedBy="department")
 	@JsonIgnore
-	List<FacultyEntity> faculties;
+	List<DisciplinaryAreaEntity> disciplinaryAreas;
 	
 	public DepartmentEntity() {
 		
@@ -39,13 +46,14 @@ public class DepartmentEntity {
 		this.departmentId = departmentId;
 
 	}
-	
-	public DepartmentEntity(String name) {
+
+	public DepartmentEntity(FacultyEntity faculty, String name) {
+		this.faculty = faculty;
 		this.name = name;
 	}
 
-
-	public DepartmentEntity(int departmentId, String name) {
+	public DepartmentEntity(int departmentId, FacultyEntity faculty, String name) {
+		this.faculty = faculty;
 		this.departmentId = departmentId;
 		this.name = name;
 	}
@@ -57,6 +65,16 @@ public class DepartmentEntity {
 	public void setDepartmentId(int departmentId) {
 		this.departmentId = departmentId;
 	}
+	
+	
+
+	public FacultyEntity getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(FacultyEntity faculty) {
+		this.faculty = faculty;
+	}
 
 	public String getName() {
 		return name;
@@ -66,19 +84,12 @@ public class DepartmentEntity {
 		this.name = name;
 	}
 
-	public List<FacultyEntity> getFaculties() {
-		return faculties;
-	}
-
-	public void setFaculties(List<FacultyEntity> faculties) {
-		this.faculties = faculties;
-	}
-
 	@Override
 	public String toString() {
-		return "DepartmentEntity [departmentId=" + departmentId + ", name=" + name +  "]";
+		return "DepartmentEntity [departmentId=" + departmentId + ", faculty=" + faculty + ", name=" + name + "]";
 	}
-	
+
+
 	
 	
 

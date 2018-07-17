@@ -1,18 +1,18 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateDepartment #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDepartment .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('#closeModal').click(function(event) {
+	$('.updateDepartment #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateDepartment .modalContainer').show().fadeOut('slow');
 
 	});
 
@@ -43,10 +43,12 @@ function ajaxUpdateDepartment() {
 	$('#nameUpdateError').text('');
 	
 	var departmentId = $('#departmentIdUpdate').val();
+	var faculty = $('#facultyUpdate option:selected').text();
 	var name = $('#nameUpdate').val();
 	
 	var json = {
 			"departmentId": departmentId,
+			"faculty": faculty,
 			"name": name
 			}
 	
@@ -73,14 +75,20 @@ function ajaxUpdateDepartment() {
 			console.log(jsonResponse);
 
 			if (jsonResponse.isValid) {
-
+				
 				$('#nameUpdate').val('');
 
-				$('.modalContainer').show().fadeOut('slow');
+				$('.updateDepartment .modalContainer').show().fadeOut('slow');
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
+				
+				$.get('./Departments/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						ajaxSearchDepartment();
+					  });
 
 			} else {
 

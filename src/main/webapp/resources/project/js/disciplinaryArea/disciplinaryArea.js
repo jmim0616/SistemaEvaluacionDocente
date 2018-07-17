@@ -3,14 +3,14 @@ class DisciplinaryArea {
     constructor() {
     	
     	this.disciplinaryAreaId="asdqwe";
-    	this.facultyId="asdqwe";
+    	this.department="asdqwe";
     	this.name="asdqwe";
     }
 
-    DisciplinaryArea(disciplinaryAreaId, facultyId, name) {
+    DisciplinaryArea(disciplinaryAreaId, department, name) {
 
     	this.disciplinaryAreaId=disciplinaryAreaId;
-    	this.facultyId=facultyId;
+    	this.department=department;
     	this.name=name;
 
     }

@@ -1,31 +1,37 @@
 $(document).ready(function() {
-
+	
+	$.get('./Faculties/Data', function(view, status, xhr){
+		  $('.content').fadeOut(0).html(view).fadeIn('slow');
+		}).done(function() {
+			  ajaxSearchFaculty();
+		  });
+	
+	
 	$('#linkCreateFaculty').click(function(event) {
 
 		event.preventDefault();
 
-		$('.content').fadeOut(0).load('./Faculties/Create').fadeIn('slow');
-
-		$('.modalContainer').show().fadeIn('slow');
+		$('.createFaculty .modalContainer').show().fadeIn('slow');
 
 	});
 
-	$('#linkSearchFaculty').click(function(event) {
-
-		event.preventDefault();
-
-		$('.content').fadeOut(0).load('./Faculties/Data').fadeIn('slow');
-
-		ajaxSearchFaculty();
-
-	});
+//	$('#linkSearchFaculty').click(function(event) {
+//
+//		event.preventDefault();
+//
+//		$.get('./Faculties/Data', function(view, status, xhr){
+//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//			}).done(function() {
+//				  ajaxSearchFaculty();
+//			  });
+//
+//	});
 
 });
 
 function ajaxSearchFaculty() {
 
-	$
-			.ajax({
+				$.ajax({
 				url : './Faculties/Search',
 				contentType : 'application/json',
 				method : 'POST',
@@ -54,31 +60,35 @@ function ajaxSearchFaculty() {
 
 					} else {
 
-						$
-								.each(
-										jsonResponse.objectEntityList,
-										function(key, value) {
+						$.each(jsonResponse.objectEntityList, function(key, value) {
 
 											$("#tableFacultyData")
 													.append(
-															"<tr>"
-																	+ "<td>"
-																	+ jsonResponse.objectEntityList[key].facultyId
-																	+ "</td> "
-																	+ "<td>"
-																	+ jsonResponse.objectEntityList[key].department.name
-																	+ "</td> "
-																	+ "<td>"
-																	+ jsonResponse.objectEntityList[key].name
-																	+ "</td> "
-																	+ "</tr>");
+												"<tr>"
+													+ "<td>"
+													   + jsonResponse.objectEntityList[key].facultyId
+													   + "</td> "
+													   + "<td>"
+													   + jsonResponse.objectEntityList[key].name
+													   + "</td> "
+													   + "<td>"
+													   + '<div class="actions"> '+
+														 '<a class="button edit-button buttonUpdateFacultyToolbar">' +
+														 '<ion-icon name="create"></ion-icon>' +
+														 '</a>'+ 
+														  '</div>' 
+													   + "</td> "
+													   + "</tr>");
 
 										})
 
 					}
 
 				},
-
+				complete: function() {
+					
+					initFacultyData();
+				},
 				error : function() {
 
 					console.log("No se ha podido obtener la información");
@@ -88,3 +98,6 @@ function ajaxSearchFaculty() {
 			});
 
 }
+
+
+

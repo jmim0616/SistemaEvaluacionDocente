@@ -8,6 +8,8 @@ import system.pack.vo.TeacherBean;
 
 public interface DepartmentBoInterface {
 
+	JsonResponse getAllFaculties();
+	
 	public JsonResponse create(DepartmentBean departmentBean, BindingResult bindingResult);
 	
 	public JsonResponse update(DepartmentBean departmentBean, BindingResult bindingResult);

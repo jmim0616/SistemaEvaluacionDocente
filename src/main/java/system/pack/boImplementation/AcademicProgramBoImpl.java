@@ -18,6 +18,7 @@ import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.AcademicProgramConverter;
 import system.pack.converter.FacultyConverter;
 import system.pack.daoInterface.AcademicProgramDaoInterface;
+import system.pack.daoInterface.AcademicProgramDaoJpaRepository;
 import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.FacultyDaoInterface;
@@ -41,6 +42,9 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	AcademicProgramDaoInterface academicProgramDaoInterface;
 	
 	@Autowired
+	AcademicProgramDaoJpaRepository academicProgramDaoJpaRepository;
+	
+	@Autowired
 	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
 	@Autowired
@@ -49,7 +53,7 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	
 	@Transactional
 	@Override
-	public JsonResponse<FacultyBean, FacultyEntity> getFaculty() {
+	public JsonResponse<FacultyBean, FacultyEntity> getAllFaculties() {
 		
 		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
 		
@@ -168,7 +172,7 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 					
 				} else {
 					
-					jsonResponse.setObjectEntityList(academicPrograms);;
+					jsonResponse.setObjectEntityList(academicPrograms);
 					
 				}
 

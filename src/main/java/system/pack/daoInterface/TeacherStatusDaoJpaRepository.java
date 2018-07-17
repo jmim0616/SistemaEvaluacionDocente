@@ -11,7 +11,7 @@ import system.pack.entity.TeacherStatusEntity;
 public interface TeacherStatusDaoJpaRepository extends JpaRepository<TeacherStatusEntity, Integer> {
 
 
-	List<TeacherStatusEntity> findByStatus(String status);
+	TeacherStatusEntity findByStatus(String status);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

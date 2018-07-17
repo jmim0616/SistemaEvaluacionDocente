@@ -35,6 +35,8 @@ html {
 	text-rendering: optimizeLegibility;
 }
 
+
+
 /* -------------------- */
 
 /* REUSABLE COMPONENTS */
@@ -119,7 +121,7 @@ label {
 	font-weight: bold;
 	position: absolute;
 	text-decoration: none;
-	right: 50px;
+	right: 60px;
 }
 
 .success .icon {
@@ -218,7 +220,7 @@ input[type="text"], input[type="email"] {
 
 select {
 	font-size: 70%;
-	padding: 2px 40px;
+	padding: 5px 20px;
 	border-radius: 10px;
 	border: 1px solid #000000;
 }
@@ -341,6 +343,32 @@ input[type="checkbox"] {
 	color: #1d1202;
 }
 
+
+.actions {
+	
+	width: auto;
+	height: auto;
+	
+}
+
+.actions a {
+	
+	width: 10px;
+	height: 10px;
+	padding: 7px 2px 2px 2px;
+	margin: 3px;
+	
+}
+
+.actions a:hover {
+	
+	width: 10px;
+	height: 10px;
+	padding: 7px 2px 2px 2px;
+	margin: 2px;
+	
+}
+
 /* -------------------- */
 
 /* ICONS */
@@ -362,16 +390,18 @@ input[type="checkbox"] {
 	text-rendering: optimizeLegibility;
 	border-collapse: collapse;
 	margin: 10px;
+	
 }
 
 .standard-table {
 	font-size: 80%;
 	width: 90%;
 	background-color: #fff;
-	text-align: left;
+	text-align: center;
 }
 
 .standard-table thead {
+	text-align: center;
 	color: #fff;
 	background-color: #fa2d2d;
 	border-bottom: solid 5px #000;
@@ -386,8 +416,12 @@ input[type="checkbox"] {
 	background-color: #424242;
 }
 
-.standard-table th, .standard-table td {
+.standard-table th {
 	padding: 10px;
+}
+
+.standard-table td {
+	padding: 2px;
 }
 
 /* -------------------- */
@@ -403,7 +437,7 @@ input[type="checkbox"] {
 	left: 0;
 	right: 0;
 	position: fixed;
-	display: block;
+	display: none;
 }
 
 .modalDialog {
@@ -467,4 +501,15 @@ input[type="checkbox"] {
 .active-tr {
 	color: #fff;
 	background-color: #000000;
+}
+
+/* -------------------- */
+
+/* AFTER LOAD DOM */
+
+/* -------------------- */
+
+.scroll {
+	height: auto;
+	overflow: auto;
 }

@@ -22,8 +22,8 @@ public class DisciplinaryAreaEntity {
 	private int disciplinaryAreaId;
 
 	@ManyToOne
-	@JoinColumn(name="facultyId")
-	private FacultyEntity faculty;
+	@JoinColumn(name="departmentId")
+	private DepartmentEntity department;
 	
 	@Column
 	private String name;
@@ -37,14 +37,14 @@ public class DisciplinaryAreaEntity {
 		this.disciplinaryAreaId = disciplinaryAreaId;
 	}
 	
-	public DisciplinaryAreaEntity(FacultyEntity faculty, String name) {
-		this.faculty = faculty;
+	public DisciplinaryAreaEntity(DepartmentEntity department, String name) {
+		this.department = department;
 		this.name = name;
 	}
 
-	public DisciplinaryAreaEntity(int disciplinaryAreaId, FacultyEntity faculty, String name) {
+	public DisciplinaryAreaEntity(int disciplinaryAreaId, DepartmentEntity department, String name) {
 		this.disciplinaryAreaId = disciplinaryAreaId;
-		this.faculty = faculty;
+		this.department = department;
 		this.name = name;
 	}
 
@@ -56,13 +56,15 @@ public class DisciplinaryAreaEntity {
 		this.disciplinaryAreaId = disciplinaryAreaId;
 	}
 
-	public FacultyEntity getFaculty() {
-		return faculty;
+	public DepartmentEntity getDepartment() {
+		return department;
 	}
 
-	public void setFaculty(FacultyEntity faculty) {
-		this.faculty = faculty;
+
+	public void setDepartment(DepartmentEntity department) {
+		this.department = department;
 	}
+
 
 	public String getName() {
 		return name;
@@ -75,9 +77,11 @@ public class DisciplinaryAreaEntity {
 
 	@Override
 	public String toString() {
-		return "DisciplinaryAreaEntity [disciplinaryAreaId=" + disciplinaryAreaId + ", faculty=" + faculty + ", name="
-				+ name + "]";
+		return "DisciplinaryAreaEntity [disciplinaryAreaId=" + disciplinaryAreaId + ", department=" + department
+				+ ", name=" + name + "]";
 	}
+
+
 
 
 

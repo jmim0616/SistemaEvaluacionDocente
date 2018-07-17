@@ -2,13 +2,16 @@ package system.pack.initializer;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import system.pack.configuration.DevWebApplicationContext;
+
 
 /*
   	this class is responsible for charge the main configuration of the project.
@@ -20,8 +23,8 @@ import system.pack.configuration.DevWebApplicationContext;
 
 public class Initializer implements WebApplicationInitializer {
 
-	@Override
-	public void onStartup(ServletContext servletContext) {
+
+	public void onStartup(ServletContext servletContext) throws ServletException {
 
 		// defining the type of the configuration archive of the project, in
 		// this case a configuration based on annotations
@@ -30,9 +33,15 @@ public class Initializer implements WebApplicationInitializer {
 		// defining the configuration archive of the project for development
 		// environment
 		applicationContext.register(DevWebApplicationContext.class);
+		
+		//
+		servletContext.addListener(new ContextLoaderListener(applicationContext));
 
 		// defining the active profile for development environment
 		applicationContext.getEnvironment().setActiveProfiles("DEV");
+		
+		//
+		applicationContext.setServletContext(servletContext);
 
 		// defining the dispatcher servlet and what urls spring mvc will mapping
 		// for the project

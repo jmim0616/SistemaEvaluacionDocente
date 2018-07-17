@@ -3,14 +3,12 @@ class Faculty {
     constructor() {
     	
     	this.facultyId="asdqwe";
-    	this.department="asdqwe";
     	this.name="asdqwe";
     }
 
-    Faculty(facultyId, department, name) {
+    Faculty(facultyId, name) {
 
     	this.facultyId=facultyId;
-    	this.department=department;
     	this.name=name;
 
     }

@@ -1,18 +1,55 @@
-<!--faculty-create-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-create.js"></script>
+<%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
 
 <div class="createFaculty">
 
-    <div class="success">
-     <a href="#" class="close">X</a>
-	 <a class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></a> 
-	<label class="message"></label>
-    </div>
+	<div class="modalContainer">
 
-	<h2>FACULTADES</h2>
-	
-	<%@include file="/includes/modals/faculty-modal-create.jsp"%>
+		<div class="modalDialog">
+
+			<section class="modalHeader">
+				<a href="#" id="closeModal">X</a>
+			</section>
+			
+			<form:form id="formCreateFaculty" modelAttribute="faculty">
+			
+				<section class="modalBody">
+					<h2 id="tittleModal">Registrar Facultad</h2>
+					<div id="dialogModal">
+
+
+
+						<table>
+
+							<tr>
+
+								<td>
+									<fieldset>
+										<form:label path="name">Nombre</form:label>
+										<form:input path="name" type="text" id="nameCreate" />
+										<label id="nameCreateError" class="validation-error">
+										</label>
+									</fieldset>
+								</td>
+
+							</tr>
+						</table>
+
+					</div>
+
+				</section>
+
+				<section class="modalFooter">
+					<input id="buttonCreateFaculty" class="button add-button"
+						type="submit" value="Registrar Facultad" /> <input
+						id="buttonCancel" class="button delete-button" type="submit"
+						value="Cancelar" />
+				</section>
+
+			</form:form>
+
+		</div>
+
+	</div>
 
 </div>

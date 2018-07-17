@@ -2,19 +2,19 @@ $(document).ready(function() {
 	
 	
 
-	$('#buttonCancel').click(function(event) {
+	$('.createDepartment  #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 
-		$('.modalContainer').show().fadeOut('slow');
+		$('.createDepartment  .modalContainer').show().fadeOut('slow');
 
 	});
 
-	$('#closeModal').click(function(event) {
+	$('.createDepartment  #closeModal').click(function(event) {
 
 		event.preventDefault();
 
-		$('.modalContainer').show().fadeOut('slow');
+		$('.createDepartment  .modalContainer').show().fadeOut('slow');
 
 	});
 
@@ -40,9 +40,11 @@ function ajaxCreateDepartment() {
 
 	$('#nameCreateError').text('');
 
+	var faculty = $('#facultyCreate option:selected').val();
 	var name = $('#nameCreate').val();
 
 	var json = {
+	    "faculty": faculty,
 		"name" : name
 	}
 
@@ -68,14 +70,20 @@ function ajaxCreateDepartment() {
 			console.log(jsonResponse);
 
 			if (jsonResponse.isValid) {
-
+				
 				$('#nameCreate').val('');
 
-				$('.modalContainer').show().fadeOut('slow');
+				$('.createDepartment .modalContainer').show().fadeOut('slow');
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
+				
+				$.get('./Departments/Data', function(view, status, xhr){
+					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+					}).done(function() {
+						ajaxSearchDepartment();
+					  });
 
 			} else {
 

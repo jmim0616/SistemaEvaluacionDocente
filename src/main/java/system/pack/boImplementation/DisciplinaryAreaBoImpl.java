@@ -21,6 +21,7 @@ import system.pack.converter.DisciplinaryAreaConverter;
 import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.DisciplinaryAreaDaoInterface;
+import system.pack.daoInterface.DisciplinaryAreaDaoJpaRepository;
 import system.pack.daoInterface.FacultyDaoInterface;
 import system.pack.daoInterface.FacultyDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
@@ -42,23 +43,26 @@ public class DisciplinaryAreaBoImpl implements DisciplinaryAreaBoInterface {
 
 	@Autowired
 	DisciplinaryAreaDaoInterface disciplinaryAreaDaoInterface;
+	
+	@Autowired
+	DisciplinaryAreaDaoJpaRepository disciplinaryAreaDaoJpaRepository;
 
 	@Autowired
-	FacultyDaoJpaRepository facultyDaoJpaRepository;
-
+	private DepartmentDaoInterface departmentDaoInterface;
+	
 	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
+	private DepartmentDaoJpaRepository departmentDaoJpaRepository;
 	
 	
 	@Transactional
 	@Override
-	public JsonResponse<FacultyBean, FacultyEntity> getFaculty() {
+	public JsonResponse<DepartmentBean, DepartmentEntity> getAllDepartments() {
 		
-		JsonResponse<FacultyBean, FacultyEntity> jsonResponse = new JsonResponse<FacultyBean, FacultyEntity>();
+		JsonResponse<DepartmentBean, DepartmentEntity> jsonResponse = new JsonResponse<DepartmentBean, DepartmentEntity>();
 		
-		List<FacultyEntity> faculties = facultyDaoInterface.getAll();
+		List<DepartmentEntity> departments = departmentDaoInterface.getAll();
 		
-		jsonResponse.setObjectEntityList(faculties);
+		jsonResponse.setObjectEntityList(departments);
 		
 		return jsonResponse;
 		
@@ -126,9 +130,9 @@ public class DisciplinaryAreaBoImpl implements DisciplinaryAreaBoInterface {
 
 			} else {
 				
-				FacultyEntity facultyEntity = facultyDaoInterface.findByName(disciplinaryAreaBean.getFaculty());
+				DepartmentEntity departmentEntity = departmentDaoInterface.findByName(disciplinaryAreaBean.getDepartment());
 
-				disciplinaryAreaBean.setFaculty(Integer.toString(facultyEntity.getFacultyId()));
+				disciplinaryAreaBean.setDepartment(Integer.toString(departmentEntity.getDepartmentId()));
 				
 				DisciplinaryAreaEntity disciplinaryAreaEntity = DisciplinaryAreaConverter.ConvertToEntity2(disciplinaryAreaBean);
 

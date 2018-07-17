@@ -15,7 +15,7 @@ public interface FacultyBoInterface {
 	
 	public JsonResponse search();
 
-	public JsonResponse getDepartment();
+
 
 	
 }

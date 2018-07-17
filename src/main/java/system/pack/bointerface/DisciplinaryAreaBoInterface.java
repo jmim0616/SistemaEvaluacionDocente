@@ -12,12 +12,13 @@ import system.pack.vo.TeacherBean;
 
 public interface DisciplinaryAreaBoInterface {
 
+	public JsonResponse getAllDepartments();
+	
 	public JsonResponse create(DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult);
 	
 	public JsonResponse update(DisciplinaryAreaBean disciplinaryAreaBean, BindingResult bindingResult);
 	
 	public JsonResponse search();
 
-	JsonResponse getFaculty();
 	
 }

@@ -5,8 +5,8 @@
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
 <!--department -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/department/department.js"></script>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${pageContext.request.contextPath}/resources/project/js/department/department.js"></script> --%>
 
 <!--departments -->
 <script type="text/javascript"
@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateDepartment" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchDepartment" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchDepartment" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

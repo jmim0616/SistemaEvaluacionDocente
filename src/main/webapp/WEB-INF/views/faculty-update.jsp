@@ -1,21 +1,58 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--faculty-update-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty-update.js"></script>
-
 
 <div class="updateFaculty">
 
-    <div class="success">
-     <a href="#" class="close">X</a>
-	 <a class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></a> 
-	<label class="message"></label>
-    </div>
 
-	<h2>FACULTADES</h2>
+	<div class="modalContainer">
 
-	<%@include file="/includes/modals/faculty-modal-update.jsp"%>
-	
+		<div class="modalDialog">
+
+			<section class="modalHeader">
+				<a href="#" id="closeModal">X</a>
+			</section>
+
+			<form:form id="formUpdateFaculty" modelAttribute="faculty">
+				<form:hidden path="facultyId" id="facultyIdUpdate" />
+
+				<section class="modalBody">
+
+					<h2 id="tittleModal">Modificar Facultad</h2>
+					<div id="dialogModal">
+
+						<table>
+
+							<tr>
+								<td>
+									<fieldset>
+										<form:label path="name">Nombre</form:label>
+										<form:input path="name" type="text" id="nameUpdate" />
+										<label id="nameUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+								</td>
+		
+						</table>
+
+
+
+					</div>
+
+				</section>
+
+				<section class="modalFooter">
+					<input id="buttonUpdateFaculty" class="button edit-button"
+						type="submit" value="Modificar Facultad" /> <input
+						id="buttonCancel" class="button delete-button" type="submit"
+						value="Cancelar" />
+				</section>
+
+			</form:form>
+
+		</div>
+
+	</div>
+
+
 
 </div>

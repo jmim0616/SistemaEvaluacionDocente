@@ -5,8 +5,8 @@
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
 <!--faculty -->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty.js"></script>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${pageContext.request.contextPath}/resources/project/js/faculty/faculty.js"></script> --%>
 
 <!--faculties -->
 <script type="text/javascript"
@@ -25,7 +25,7 @@
 
 				<li><a id="linkCreateFaculty" href="#"> Registrar </a></li>
 
-				<li><a id="linkSearchFaculty" href="#"> Modificar </a></li>
+<!-- 				<li><a id="linkSearchFaculty" href="#"> Modificar </a></li> -->
 
 			</ul>
 			

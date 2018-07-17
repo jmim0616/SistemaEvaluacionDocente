@@ -36,15 +36,8 @@
             <div class="logo">
                 <img src="resources/project/img/logo-uao.png" />
             </div>
-
-
-        </div>
-
-
-
-        <div class="row">
-
-            <nav class="main-bar-navigation">
+            
+			   <nav class="main-bar-navigation">
 
                 <ul>
                     <li><a id="teachers" href="#">Docentes</a></li>
@@ -58,13 +51,25 @@
 <!--                     <li><a href="#">Periodos Academicos</a></li> -->
                 </ul>
             </nav>
-
+            
         </div>
+        
 
 
     </header>
 
-
+<div class="clearfix">
+    <div class="success">
+     <a href="#" class="close">X</a>
+	 <a class="icon"><ion-icon name="checkmark-circle-outline"></ion-icon></a> 
+	<label class="message"></label>
+    </div>
+    <div class="error">
+    <a href="#" class="close">X</a>
+	 <a class="icon" ><ion-icon name="warning"></ion-icon></a>
+	<label class="message"></label>
+    </div>
+</div>
 
     <section class="container">
 
