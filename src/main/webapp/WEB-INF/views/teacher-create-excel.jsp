@@ -10,15 +10,14 @@ teacher-create-excel.js"></script>
 	<form action="./Teachers/CreateExcel" method="POST"
 		enctype="multipart/form-data">
 		Seleccionar archivo	
+		<br> 
 		<input  type="file"  name="file" accept= ".xls, .xlsx" />
 
 	<br> 
 	<br>
-	
-	<h3>Registrar Docente</h3>
 
 	<input id="buttonCreateTeacherExcel" class="button add-button"
-	type="submit" value="Registrar Docente" />
+	type="submit" value="Procesar archivo" />
 	
 	</form>
 
