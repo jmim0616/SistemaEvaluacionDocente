@@ -1,5 +1,7 @@
 package system.pack.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="disciplinary_areas")
@@ -27,6 +32,10 @@ public class DisciplinaryAreaEntity {
 	
 	@Column
 	private String name;
+	
+//	@OneToMany(mappedBy="disciplinaryArea")
+//	@JsonIgnore
+//	List<SubjectEntity> subjects;
 	
 	public DisciplinaryAreaEntity() {
 
@@ -73,6 +82,15 @@ public class DisciplinaryAreaEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+//	public List<SubjectEntity> getSubjects() {
+//		return subjects;
+//	}
+//
+//
+//	public void setSubjects(List<SubjectEntity> subjects) {
+//		this.subjects = subjects;
+//	}
 
 
 	@Override
