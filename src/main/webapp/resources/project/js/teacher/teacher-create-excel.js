@@ -1,8 +1,14 @@
 $(document).ready(function() {
 
+	$('#buttonExcelFile').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxCreateTeacherExcel();
+
+	});
 	
 	$('#buttonCreateTeacherExcel').click(function(event) {
-
 		event.preventDefault();
 		
 		ajaxCreateTeacherExcel();

@@ -12,6 +12,23 @@
 
 <body>
 
+
+	<form action="./Teachers/CreateExcel" method="POST"
+		enctype="multipart/form-data">
+		Excel upload	
+		<input  type="file"  name="file" accept= ".xls, .xlsx" /> <input
+			type="submit" value= "upload"/>
+
+	<br> 
+	<br>
+	
+	<h3>Registrar Docente</h3>
+
+	<input id="buttonCreateTeacherExcel" class="button add-button"
+	type="submit" value="Registrar Docente" />
+	
+	</form>
+
     <header>
 
         <div class="row">
@@ -71,6 +88,7 @@
 
 
 </body>
+
 
 
 </html>

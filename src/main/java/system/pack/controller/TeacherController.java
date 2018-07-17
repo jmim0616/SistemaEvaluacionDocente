@@ -1,5 +1,10 @@
 package system.pack.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import system.pack.boImplementation.TeacherBoImpl;
@@ -45,6 +53,9 @@ public class TeacherController {
 	
 	@Autowired
 	TeacherBoInterface teacherBoInterface;
+	
+	@Autowired
+	CommonsMultipartResolver multipartResolver;
 	
 	@GetMapping(value = "/")
 	public String showTeachersView(Model model) {
@@ -68,6 +79,8 @@ public class TeacherController {
 	public String showInsertTeacherExcelView(Model model) {
 		
 		model.addAttribute("teacher", new TeacherBean());
+		
+		//System.out.println(excelfile.toString());
 		
 		return "teacher-create-excel";
 		
@@ -112,16 +125,17 @@ public class TeacherController {
 		return jsonResponse;
 	}
 	
-	
-	@PostMapping(value = "/CreateExcel", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public JsonResponse<TeacherBean, TeacherEntity> createTeacherExcel(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
-
-		System.out.println("00000" + teacherBean);
+	@PostMapping("/CreateExcel")
+	public String createTeacherExcel( 
+			MultipartFile file) throws IOException {
+	    
+	    teacherBoInterface.createExcel(file);
+		
+		System.out.println("00000  Holi" + "");//teacherBean);
 
 		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 		
-		return jsonResponse;
+		return "teacher-create-excel";
 	}
 	
 	
