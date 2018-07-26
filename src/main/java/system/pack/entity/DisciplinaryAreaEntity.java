@@ -33,9 +33,9 @@ public class DisciplinaryAreaEntity {
 	@Column
 	private String name;
 	
-//	@OneToMany(mappedBy="disciplinaryArea")
-//	@JsonIgnore
-//	List<SubjectEntity> subjects;
+	@OneToMany(mappedBy="disciplinaryArea")
+	@JsonIgnore
+	private List<SubjectEntity> subjects;
 	
 	public DisciplinaryAreaEntity() {
 
@@ -83,14 +83,14 @@ public class DisciplinaryAreaEntity {
 		this.name = name;
 	}
 
-//	public List<SubjectEntity> getSubjects() {
-//		return subjects;
-//	}
-//
-//
-//	public void setSubjects(List<SubjectEntity> subjects) {
-//		this.subjects = subjects;
-//	}
+	public List<SubjectEntity> getSubjects() {
+		return subjects;
+	}
+
+
+	public void setSubjects(List<SubjectEntity> subjects) {
+		this.subjects = subjects;
+	}
 
 
 	@Override

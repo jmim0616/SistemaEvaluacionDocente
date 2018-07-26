@@ -36,7 +36,7 @@ public class DepartmentEntity {
 	
 	@OneToMany(mappedBy="department")
 	@JsonIgnore
-	List<DisciplinaryAreaEntity> disciplinaryAreas;
+	private List<DisciplinaryAreaEntity> disciplinaryAreas;
 	
 	public DepartmentEntity() {
 		

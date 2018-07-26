@@ -32,11 +32,11 @@ public class FacultyEntity {
 	
 	@OneToMany(mappedBy="faculty")
 	@JsonIgnore
-	List<DepartmentEntity> departments;
+	private List<DepartmentEntity> departments;
 	
 	@OneToMany(mappedBy="faculty")
 	@JsonIgnore
-	List<AcademicProgramEntity> academicPrograms;
+	private List<AcademicProgramEntity> academicPrograms;
 	
 	public FacultyEntity() {
 	

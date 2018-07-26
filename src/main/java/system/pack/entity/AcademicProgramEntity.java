@@ -1,5 +1,7 @@
 package system.pack.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,10 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="academic_programs")
@@ -27,6 +32,10 @@ public class AcademicProgramEntity {
 	
 	@Column
 	private String name;
+	
+	@OneToMany(mappedBy="academicProgram")
+	@JsonIgnore
+	private List<SubjectByProgramEntity> subjects;
 	
 	public AcademicProgramEntity() {
 		
@@ -70,6 +79,14 @@ public class AcademicProgramEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<SubjectByProgramEntity> getSubjects() {
+		return subjects;
+	}
+
+	public void setSubjects(List<SubjectByProgramEntity> subjects) {
+		this.subjects = subjects;
 	}
 
 	@Override
