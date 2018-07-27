@@ -51,18 +51,6 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 		
 		return faculty;
 	}
-	
-	@Override
-	public List<FacultyEntity> findByDepartmentId(String department) {
-		
-		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.department =:department", FacultyEntity.class);
-		
-		query.setParameter("department", department);
-		
-		List<FacultyEntity> faculties = query.getResultList();
-		
-		return faculties;
-	}
 
 	@Override
 	public List<FacultyEntity> getAll() {

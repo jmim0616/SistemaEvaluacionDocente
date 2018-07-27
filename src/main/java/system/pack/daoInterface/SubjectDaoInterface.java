@@ -18,9 +18,9 @@ public interface SubjectDaoInterface {
 	
 	public SubjectEntity findByName(String name);
 	
-	public SubjectEntity findByDisciplinaryAreaId(String disciplinaryAreaId);
+	public SubjectEntity findByDisciplinaryAreaId(String disciplinaryArea);
 	
-	public SubjectEntity findBySubjectStatusId(String subjectStatusId);
+	public SubjectEntity findBySubjectStatusId(String subjectStatus);
 	
 
 }

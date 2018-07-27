@@ -57,7 +57,7 @@ public class AcademicProgramDaoImpl implements AcademicProgramDaoInterface {
 	@Override
 	public List<AcademicProgramEntity> findByFacultyId(String faculty) {
 		
-		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty =:faculty", AcademicProgramEntity.class);
+		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty.getFacultyId() =:faculty", AcademicProgramEntity.class);
 		
 		query.setParameter("faculty", faculty);
 		

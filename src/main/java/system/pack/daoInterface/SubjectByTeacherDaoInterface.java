@@ -3,6 +3,9 @@ package system.pack.daoInterface;
 import java.util.List;
 
 import system.pack.entity.SubjectByTeacherEntity;
+import system.pack.entity.SubjectEntity;
+import system.pack.entity.TeacherEntity;
+import system.pack.vo.TeacherBean;
 
 
 public interface SubjectByTeacherDaoInterface {
@@ -13,8 +16,10 @@ public interface SubjectByTeacherDaoInterface {
 	
 	public SubjectByTeacherEntity findById(int id);
 	
-	public List<SubjectByTeacherEntity> findBySubjectId(String subjectId);
+	public List<SubjectByTeacherEntity> findBySubjectId(String subject);
 	
-	public List<SubjectByTeacherEntity> findByTeacherId(String teacherId);
+	public List<SubjectByTeacherEntity> findByTeacherId(String teacher);
+	
+	public List<SubjectEntity> searchSubjecstByTeacher(TeacherBean teacherBean);
 	
 }

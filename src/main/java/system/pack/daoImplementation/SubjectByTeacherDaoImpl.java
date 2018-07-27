@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import system.pack.daoInterface.SubjectByTeacherDaoInterface;
 import system.pack.entity.SubjectByTeacherEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.vo.TeacherBean;
 
 @Repository
 @Transactional
@@ -43,11 +45,11 @@ public class SubjectByTeacherDaoImpl implements SubjectByTeacherDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByTeacherEntity> findBySubjectId(String subjectId) {
+	public List<SubjectByTeacherEntity> findBySubjectId(String subject) {
 
-		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.getSubjectId() =:subjectId", SubjectByTeacherEntity.class);
+		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.getSubjectId() =:subject", SubjectByTeacherEntity.class);
 		
-		query.setParameter("subjectId", subjectId);
+		query.setParameter("subject", subject);
 		
 		List<SubjectByTeacherEntity> subjectsByTeacher = query.getResultList();
 		
@@ -56,16 +58,22 @@ public class SubjectByTeacherDaoImpl implements SubjectByTeacherDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByTeacherEntity> findByTeacherId(String teacherId) {
+	public List<SubjectByTeacherEntity> findByTeacherId(String teacher) {
 		
-		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.teacher.getTeacherId() =:teacherId", SubjectByTeacherEntity.class);
+		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.teacher.getTeacherId() =:teacher", SubjectByTeacherEntity.class);
 		
-		query.setParameter("teacherId", teacherId);
+		query.setParameter("teacher", teacher);
 		
 		List<SubjectByTeacherEntity> subjectsByTeacher = query.getResultList();
 		
 		return subjectsByTeacher;
 		
+	}
+
+	@Override
+	public List<SubjectEntity> searchSubjecstByTeacher(TeacherBean teacherBean) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

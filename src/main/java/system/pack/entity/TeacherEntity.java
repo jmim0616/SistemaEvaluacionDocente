@@ -66,6 +66,10 @@ public class TeacherEntity {
 	@JsonIgnore
 	private List<SubjectByTeacherEntity> subjects;
 	
+	@OneToMany(mappedBy="teacher")
+	@JsonIgnore
+	private List<CourseEntity> courses;
+	
 	public TeacherEntity() {
 		
 	}
@@ -202,6 +206,14 @@ public class TeacherEntity {
 
 	public void setSubjects(List<SubjectByTeacherEntity> subjects) {
 		this.subjects = subjects;
+	}
+
+	public List<CourseEntity> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<CourseEntity> courses) {
+		this.courses = courses;
 	}
 
 	@Override

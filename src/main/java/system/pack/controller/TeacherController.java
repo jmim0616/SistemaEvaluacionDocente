@@ -35,6 +35,7 @@ import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 
@@ -98,6 +99,21 @@ public class TeacherController {
 		
 	}
 	
+	@GetMapping(value = "/addSubjects")
+	public String showAddSubjectsTeacherView(Model model) {
+		
+		model.addAttribute("teacher", new TeacherBean());
+		
+		return "teacher-add-subject";
+		
+	}
+	
+	@GetMapping(value = "/Search")
+	public String showSearchTeacherView(Model model) {
+
+		return "teacher-search";
+		
+	}
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -168,6 +184,33 @@ public class TeacherController {
 		return jsonResponse;
 	
 
+	}
+	
+	@PostMapping(value = "/AddSubjects", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public JsonResponse<TeacherBean, TeacherEntity> addSubjectsTeacher(@RequestBody SubjectByTeacherBean subjectByTeacherBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + subjectByTeacherBean);
+		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		jsonResponse = teacherBoInterface.addSubjects(subjectByTeacherBean, bindingResult); 
+		
+		return jsonResponse;
+	}
+	
+	
+	@PostMapping(value = "/SearchSubjectsByTeacher", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public JsonResponse<TeacherBean, TeacherEntity> searchSubjecstByTeacher(@RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + teacherBean);
+		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		jsonResponse = teacherBoInterface.searchSubjecstByTeacher(teacherBean, bindingResult); 
+		
+		return jsonResponse;
 	}
 	
 }

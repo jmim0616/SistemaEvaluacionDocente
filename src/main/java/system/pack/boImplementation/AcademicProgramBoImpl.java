@@ -23,6 +23,10 @@ import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.FacultyDaoInterface;
 import system.pack.daoInterface.FacultyDaoJpaRepository;
+import system.pack.daoInterface.SubjectByProgramDaoInterface;
+import system.pack.daoInterface.SubjectByProgramDaoJpaRepository;
+import system.pack.daoInterface.SubjectByTeacherDaoInterface;
+import system.pack.daoInterface.SubjectByTeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
@@ -33,22 +37,32 @@ import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.FacultyBean;
+import system.pack.vo.SubjectByProgramBean;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 @Service
 public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 
 	@Autowired
+	FacultyDaoJpaRepository facultyDaoJpaRepository;
+
+	@Autowired
+	FacultyDaoInterface facultyDaoInterface;
+	
+	@Autowired
+	SubjectByProgramDaoInterface subjectByProgramDaoInterface;
+	
+	@Autowired
+	SubjectByProgramDaoJpaRepository subjectByProgramDaoJpaRepository;
+	
+	@Autowired
 	AcademicProgramDaoInterface academicProgramDaoInterface;
 	
 	@Autowired
 	AcademicProgramDaoJpaRepository academicProgramDaoJpaRepository;
 	
-	@Autowired
-	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
-	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
 	
 	
 	@Transactional
@@ -191,7 +205,51 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	}
 	
 
-	
+	@Transactional
+	@Override
+	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> addSubjects(SubjectByProgramBean subjectByProgramBean, BindingResult bindingResult) {
+		
+		try {
+
+			JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
+//
+//			if (bindingResult.hasErrors()) {
+//
+//				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+//						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+//
+//				jsonResponse.setErrorMessages(errorMessages);
+//
+//				jsonResponse.setIsValid(false);
+//
+//			} else {
+//
+//				teacherBean.setTeacherStatus("1");
+//
+//				TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
+//
+//				teacherDaoInterface.create(teacherEntity);
+//
+//				jsonResponse.setIsValid(true);
+//
+//				jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
+//
+//			}
+//			
+			return jsonResponse;
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+
+//			throw new RuntimeException("");
+
+			return null;
+			
+		}
+
+	}
 	
 	
 }

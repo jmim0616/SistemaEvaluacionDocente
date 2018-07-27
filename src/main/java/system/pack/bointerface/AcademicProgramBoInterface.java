@@ -7,6 +7,8 @@ import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.FacultyBean;
+import system.pack.vo.SubjectByProgramBean;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 public interface AcademicProgramBoInterface {
@@ -19,5 +21,6 @@ public interface AcademicProgramBoInterface {
 	
 	public JsonResponse search();
 
+	public JsonResponse addSubjects(SubjectByProgramBean subjectByProgramBean, BindingResult bindingResult);
 
 }

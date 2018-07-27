@@ -1,13 +1,17 @@
 package system.pack.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="academic_periods")
@@ -26,6 +30,15 @@ public class AcademicPeriodEntity {
 	
 	@Column
 	private Date endDate; 
+	
+	@OneToMany(mappedBy="academicPeriod")
+	@JsonIgnore
+	private List<QuestionByPeriodEntity> questions;
+	
+	@OneToMany(mappedBy="academicPeriod")
+	@JsonIgnore
+	private List<CourseEntity> courses;
+	
 	
 	public AcademicPeriodEntity() {
 		
@@ -78,6 +91,22 @@ public class AcademicPeriodEntity {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	
+	public List<QuestionByPeriodEntity> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<QuestionByPeriodEntity> questions) {
+		this.questions = questions;
+	}
+
+	public List<CourseEntity> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<CourseEntity> courses) {
+		this.courses = courses;
 	}
 
 	

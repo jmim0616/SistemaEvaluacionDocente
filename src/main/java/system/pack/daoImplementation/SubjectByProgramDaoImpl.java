@@ -45,11 +45,11 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByProgramEntity> findBySubjectId(String subjectId) {
+	public List<SubjectByProgramEntity> findBySubjectId(String subject) {
 
-		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.getSubjectId() =:subjectId", SubjectByProgramEntity.class);
+		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.getSubjectId() =:subject", SubjectByProgramEntity.class);
 		
-		query.setParameter("subjectId", subjectId);
+		query.setParameter("subject", subject);
 		
 		List<SubjectByProgramEntity> subjectsByProgram = query.getResultList();
 		
@@ -58,11 +58,11 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByProgramEntity> findByAcademicProgramId(String academicProgramId) {
+	public List<SubjectByProgramEntity> findByAcademicProgramId(String academicProgram) {
 		
-		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.academicProgram.getAcademicProgramId() =:academicProgramId", SubjectByProgramEntity.class);
+		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.academicProgram.getAcademicProgramId() =:academicProgram", SubjectByProgramEntity.class);
 		
-		query.setParameter("academicProgramId", academicProgramId);
+		query.setParameter("academicProgram", academicProgram);
 		
 		List<SubjectByProgramEntity> subjectsByProgram = query.getResultList();
 		

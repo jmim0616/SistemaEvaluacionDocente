@@ -139,7 +139,7 @@ public class SubjectController {
 	
 	@PostMapping(value = "/UpdateStatus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<SubjectBean, SubjectEntity> updateStatusTeacher(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
+	public JsonResponse<SubjectBean, SubjectEntity> updateStatusSubject(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + subjectBean);
 		

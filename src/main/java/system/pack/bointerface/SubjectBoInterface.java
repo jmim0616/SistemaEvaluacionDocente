@@ -16,4 +16,5 @@ public interface SubjectBoInterface {
 	
 	public JsonResponse search(SubjectBean subjectBean, BindingResult bindingResult);
 	
+	
 }
