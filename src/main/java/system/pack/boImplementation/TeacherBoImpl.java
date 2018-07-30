@@ -314,7 +314,6 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 			position = 0;
 			teacherEntity = new TeacherEntity();
 			boolean isValidRow = true;
-			errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error o los siguientes errores:";
 			Iterator<Cell> cellIterator = row.cellIterator();
 			
 			inner_loop: while (cellIterator.hasNext()) {
@@ -323,11 +322,13 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				// Tipo de ID
 				if (position == 0) {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "El tipo de identificación no puede estar vacio";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ " El tipo de identificación no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "El tipo de identificación no es válido";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El tipo de identificación no es válido";
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						teacherEntity.setIdentificationType((int) cell.getNumericCellValue());
 					}
@@ -336,11 +337,13 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 1) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "El número de identificación no puede estar vacio";
+						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
+								+ "El número de identificación no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "El número de identificación no es válido";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+"El número de identificación no es válido";
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
@@ -351,14 +354,17 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 2) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "El nombre no puede estar vacio";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "La fila " + rows + " tiene el siguiente error: "
+								+ "El nombre no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setName(cell.getStringCellValue());
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						isValidRow = false;
-						errorMessage += "\n" + "El nombre debe contener letras";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El nombre debe contener letras";
 						break inner_loop;
 					}
 				}
@@ -366,13 +372,15 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 3) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "El apellido no puede estar vacio";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El apellido no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setLastName((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El apellido debe contener letras";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El apellido debe contener letras";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -383,7 +391,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setUnderDegree((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El título de pregado no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El título de pregado no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -394,7 +403,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setMasterDegree((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El título de maestria no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El título de maestria no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -405,7 +415,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setDoctorDegree((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El título de doctorado no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El título de doctorado no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -416,7 +427,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setInstitutionalMail((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El correo no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El correo no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -427,7 +439,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setPersonalMail((cell.getStringCellValue()));
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "El correo no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El correo no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}
@@ -436,7 +449,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 9) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "El número del celular no puede tener letras";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El número del celular no puede tener letras";
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
@@ -448,7 +462,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 10) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "El número de teléfono fijo no puede tener letras";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El número de teléfono fijo no puede tener letras";
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
@@ -461,7 +476,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						teacherEntity.setExperience(cell.getStringCellValue());
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La experiencia no puede ser un valor númerico";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "La experiencia no puede ser un valor númerico";
 						isValidRow = false;
 						break inner_loop;
 					}

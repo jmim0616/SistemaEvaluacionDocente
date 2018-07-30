@@ -513,3 +513,8 @@ input[type="checkbox"] {
 	height: auto;
 	overflow: auto;
 }
+
+iframe {
+	border: none !important;
+}
+

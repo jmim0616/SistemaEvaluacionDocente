@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
 <!--Menu -->
@@ -11,7 +14,10 @@
 <!--teachers --> 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teachers.js"></script>
+	
 
+
+<body>
 
 <div class="menu">
 
@@ -30,7 +36,6 @@
 			
 				<li><a id="linkCreateTeacher" href="#"> Registrar Con Formulario </a></li>
 				<li><a id="linkCreateExcelTeacher" href="#">Registrar con excel</a></li>
-				
 			</ul></li>
 
 				
@@ -56,9 +61,6 @@
 					</ul>
 					
 					</li>
-
-
-		
 		
 		
 		
@@ -67,12 +69,17 @@
 
 </div>
 
-
-
 <div class="content">
 
 	<h2>DOCENTES</h2>
 
 
 </div>
+
+</body>
+
+
+
+
+
 

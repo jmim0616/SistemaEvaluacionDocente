@@ -19,7 +19,4 @@ public interface TeacherBoInterface {
 	public JsonResponse search(TeacherBean teacherBean, BindingResult bindingResult);
 
 	public String createExcel(MultipartFile file);
-	
-
-	
 }

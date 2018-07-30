@@ -6,7 +6,7 @@ $(document)
 
 						$('#teachers').addClass('active-main-bar-navigation-li-a');
 						
-						$('.container').fadeOut(0).load('./Teachers/').fadeIn('slow');
+						$('.container').fadeOut(0).load('/SistemaEvaluacionDocente/Teachers/').fadeIn('slow');
 						
 
 					};
@@ -17,7 +17,7 @@ $(document)
 
 								event.preventDefault();
 
-								$('.container').fadeOut(0).load('./Teachers/').fadeIn('slow');
+								$('.container').fadeOut(0).load('/SistemaEvaluacionDocente/Teachers/').fadeIn('slow');
 
 							});
 
@@ -59,6 +59,17 @@ $(document)
 							});
 					
 					
+					$('#users').click(
+							function(event) {
+
+								event.preventDefault();
+								
+								console.log("AAAAAAAAAAA");
+
+								$('.container').fadeOut(0).load('./Users/').fadeIn('slow');
+
+							});
+
 
 					
 					

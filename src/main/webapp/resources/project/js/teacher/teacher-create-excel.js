@@ -1,11 +1,19 @@
 $(document).ready(function() {
 
-	$('#buttonExcelFile').click(function(event) {
+	$('.success .close', window.parent.document).click(function(event) {
 
 		event.preventDefault();
 		
-		ajaxCreateTeacherExcel();
+		$('.success', window.parent.document).show().fadeOut('slow');
+		
+	});
+	
+	$('.error .close', window.parent.document).click(function(event) {
 
+		event.preventDefault();
+		
+		$('.error .close', window.parent.document).show().fadeOut('slow');
+		
 	});
 	
 	$('#buttonCreateTeacherExcel').click(function(event) {
@@ -21,35 +29,52 @@ $(document).ready(function() {
 
 
 function ajaxCreateTeacherExcel() {
-	
-	var json = {
-			"teacherId": "asdqwe"
-			}
-	
-	console.log(json);
-	
-	$.ajax({
-		url: "./Teachers/CreateExcel",
-		data: JSON.stringify(json),
-		contentType : "application/json",
-		method: "POST",
-		done: function(){
 
-			
-		},
-		success: function(jsonResponse){
-			
-			console.log(jsonResponse);
-		
-		},
-		error: function(){
-			
-			
-		}
-		
-	});
+    
+	var form = $('#Fileuploader')[0];
+
+	// Create an FormData object 
+    var data = new FormData(form);
 	
-	
+    
+	// disabled the submit button
+    $("#buttonCreateTeacherExcel").prop("disabled", true);
+    
+    
+    $.ajax({
+        method: "POST",
+        enctype: 'multipart/form-data',
+        url: "./CreateExcel",
+        data: data,
+        processData: false,
+        contentType: false,
+        cache: false,
+        timeout: 600000,
+        success: function (jsonResponse) {
+
+            console.log("SUCCESS : ", data);
+            console.log(jsonResponse);
+            $("#buttonCreateTeacherExcel").prop("disabled", false);
+            
+           if (jsonResponse.successMessage != null){
+            	$('.success .message', window.parent.document).text(jsonResponse.successMessage);
+            	$('.success', window.parent.document).show().fadeIn('slow');
+            }
+            else{
+                $('.error .message', window.parent.document).text(jsonResponse.errorMessage);
+            	$('.error', window.parent.document).show().fadeIn('slow');
+           }
+            
+           $('#excelfile').val("");
+
+        },
+        error: function (jsonResponse) {
+
+            $("#buttonCreateTeacherExcel").prop("disabled", false);
+
+        }
+        
+    });
 	
 }
 

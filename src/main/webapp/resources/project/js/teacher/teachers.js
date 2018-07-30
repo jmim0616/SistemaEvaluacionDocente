@@ -51,16 +51,15 @@ $(document).ready(function() {
 			
 		
 	});
-	
 
 	
 });
 
 $('#linkCreateExcelTeacher').click(function(event) {
 	
-	//event.preventDefault();
+	event.preventDefault();
 	
-	$('.content').load('./Teachers/CreateExcel');
+	$('.content').html('<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
 	
 });
 
@@ -216,4 +215,3 @@ function ajaxShow() {
 	});
 
 }
-

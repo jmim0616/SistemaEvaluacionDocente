@@ -12,45 +12,39 @@
 
 <body>
 
-
-	<form action="./Teachers/CreateExcel" method="POST"
-		enctype="multipart/form-data">
-		Excel upload	
-		<input  type="file"  name="file" accept= ".xls, .xlsx" /> <input
-			type="submit" value= "upload"/>
-
-	<br> 
-	<br>
-	
-	<h3>Registrar Docente</h3>
-
-	<input id="buttonCreateTeacherExcel" class="button add-button"
-	type="submit" value="Registrar Docente" />
-	
-	</form>
-
     <header>
 
         <div class="row">
 
             <div class="logo">
-                <img src="resources/project/img/logo-uao.png" />
+                <img src="/SistemaEvaluacionDocente/resources/project/img/logo-uao.png" />
             </div>
             
 			   <nav class="main-bar-navigation">
 
                 <ul>
-                    <li><a id="teachers" href="#">Docentes</a></li>
+                    <li><a id="teachers" href="./Teachers">Docentes</a></li>
 <!--                     <li><a id="subjects" href="#">Asignaturas</a></li> -->
 <!--                     <li><a href="#">Cursos</a></li> -->
-                    <li><a id="faculties" href="#">Facultades</a></li>
-                    <li><a id="disciplinaryAreas" href="#">Areas Disciplinarias</a></li>
-                    <li><a id="academicPrograms" href="#">Programas Academicos</a></li>
+                    <li><a id="faculties" href="./Faculties">Facultades</a></li>
+                    <li><a id="disciplinaryAreas" href="./DisciplinaryAreas">Areas Disciplinarias</a></li>
+                    <li><a id="academicPrograms" href="./AcademicPrograms">Programas Academicos</a></li>
                     <li><a id="departments" href="#">Departamentos</a></li>
 <!--                     <li><a href="#">Personas</a></li> -->
 <!--                     <li><a href="#">Periodos Academicos</a></li> -->
+					<li><a id="users" href="#">Usuarios</a></li>
                 </ul>
             </nav>
+
+            <div class="user">
+            	<h5>${SessionId}</h5>
+            	<form action="./Login/logOut">
+  				<input type="image" 
+  				src="/SistemaEvaluacionDocente/resources/project/img/exit-icons-20.png" 
+  				alt="Submit" width="48" height="48">
+				</form>
+            
+            </div>
             
         </div>
         
