@@ -369,6 +369,27 @@ input[type="checkbox"] {
 	
 }
 
+.user{
+	float: right;
+	margin: 10px 20px 0 0;
+}
+
+.imgLogOut {
+	background: #fff;
+	height: 25px;
+	width: auto;
+	vertical-align: middle;
+	/*display: inline-block;*/
+}
+
+.userName{
+	color: #ffffff;
+    font-weight: 300;
+    text-transform: uppercase;
+    display: inline;
+    padding-right: 10px;
+}
+
 /* -------------------- */
 
 /* ICONS */

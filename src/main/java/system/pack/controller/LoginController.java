@@ -27,6 +27,7 @@ public class LoginController {
 
 		if (user != null) {
 			session.setAttribute("SessionId", user.getMask());
+			session.setAttribute("UserType", String.valueOf(user.getUserType()));
 		}
 		
 		return "redirect:/";

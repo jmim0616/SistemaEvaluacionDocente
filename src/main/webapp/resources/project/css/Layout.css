@@ -67,20 +67,7 @@ header {
    	vertical-align: middle;
 }
 
-.user {
-	float: inherit	;
-   	vertical-align: middle;   	
-}
 
-.user h5 {
-    color: #ffffff;
-    visibility: visible;
-    padding: 15px 5px;
-    text-decoration: none;
-    font-weight: 300;
-    text-transform: uppercase;
-    transition: background 0.4s, color 0.4s;
-}
 
 .logo img {
 	width: 200px;

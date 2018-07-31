@@ -17,7 +17,12 @@ public class HomeController {
 	public String showHomePage(Model model, HttpSession session) {
 		if (session.getAttribute("SessionId") != null){
 			
-			return "index";
+			if (session.getAttribute("UserType").equals("0")){
+				return "index-admin";
+			}
+			else{
+				return "index";
+			}			
 		}
 		else
 		{
