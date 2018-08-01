@@ -37,8 +37,7 @@ import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.CourseEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
-import system.pack.vo.ClassVisitBean;
-import system.pack.vo.CoevaluationBean;
+import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByTeacherBean;
@@ -156,28 +155,15 @@ public class CourseController {
 	}
 	
 	
-	@PostMapping(value = "/AddCoevaluation", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value = "/CourseFeedbacks", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@RequestBody CoevaluationBean coevaluationBean, BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
 
-		System.out.println("00000" + coevaluationBean);
+		System.out.println("00000" + courseFeedbackBean);
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.addCoevaluation(coevaluationBean, bindingResult); 
-		
-		return jsonResponse;
-	}
-	
-	@PostMapping(value = "/AddClassVisits", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@RequestBody ClassVisitBean classVisitBean, BindingResult bindingResult) {
-
-		System.out.println("00000" + classVisitBean);
-		
-		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
-		
-		jsonResponse = CourseBoInterface.addClassVisits(classVisitBean, bindingResult); 
+		jsonResponse = CourseBoInterface.addCourseFeedbacks(courseFeedbackBean, bindingResult); 
 		
 		return jsonResponse;
 	}

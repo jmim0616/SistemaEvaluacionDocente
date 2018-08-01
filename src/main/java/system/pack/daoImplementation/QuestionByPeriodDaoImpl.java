@@ -29,7 +29,7 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 		
 	}
 
-	public List<QuestionByPeriodEntity> findByDepartmentId(int department) {
+	public List<QuestionByPeriodEntity> findByDepartmentId(String department) {
 		
 		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.department.getDepartmentId() =:department", QuestionByPeriodEntity.class);
 		
@@ -41,7 +41,7 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 	}
 	
 	
-	public List<QuestionByPeriodEntity> findByCourseId(int course) {
+	public List<QuestionByPeriodEntity> findByCourseId(String course) {
 		
 		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.course.getCourseId() =:course", QuestionByPeriodEntity.class);
 		

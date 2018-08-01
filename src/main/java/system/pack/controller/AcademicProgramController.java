@@ -142,17 +142,6 @@ public class AcademicProgramController {
 		
 	}
 	
-	@PostMapping(value = "/addSubjects", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> addSubjectsAcademicProgram(@RequestBody SubjectByProgramBean subjectByProgramBean, BindingResult bindingResult) {
 
-		System.out.println("00000" + subjectByProgramBean);
-		
-		JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
-		
-		jsonResponse = academicProgramBoInterface.addSubjects(subjectByProgramBean, bindingResult); 
-		
-		return jsonResponse;
-	}
 	
 }

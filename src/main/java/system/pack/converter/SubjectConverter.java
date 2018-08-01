@@ -29,7 +29,7 @@ public class SubjectConverter {
 		SubjectBean subjectBean = new SubjectBean();
 		
 		subjectBean.setSubjectId(Integer.toString(subjectEntity.getSubjectId()));
-		subjectBean.setSubjectStatus(Integer.toString(subjectEntity.getSubjectStatus().getSubjectStatusId()));
+		subjectBean.setSubjectStatus((subjectEntity.getSubjectStatus().getStatus()));
 		subjectBean.setDisciplinaryArea(Integer.toString(subjectEntity.getDisciplinaryArea().getDisciplinaryAreaId()));
 		subjectBean.setName(subjectEntity.getName());
 		subjectBean.setNumberOfCredits(Integer.toString(subjectEntity.getNumberOfCredits()));
@@ -41,7 +41,6 @@ public class SubjectConverter {
 		
 		SubjectEntity subjectEntity = new SubjectEntity();
 		
-		subjectEntity.setSubjectStatus(new SubjectStatusEntity(Integer.parseInt(subjectBean.getSubjectStatus())));
 		subjectEntity.setDisciplinaryArea(new DisciplinaryAreaEntity(Integer.parseInt(subjectBean.getDisciplinaryArea())));
 		subjectEntity.setName(subjectBean.getName());
 		subjectEntity.setNumberOfCredits(Integer.parseInt(subjectBean.getNumberOfCredits()));
@@ -55,7 +54,6 @@ public class SubjectConverter {
 		SubjectEntity subjectEntity = new SubjectEntity();
 		
 		subjectEntity.setSubjectId(Integer.parseInt(subjectBean.getSubjectId()));
-		subjectEntity.setSubjectStatus(new SubjectStatusEntity(Integer.parseInt(subjectBean.getSubjectStatus())));
 		subjectEntity.setDisciplinaryArea(new DisciplinaryAreaEntity(Integer.parseInt(subjectBean.getDisciplinaryArea())));
 		subjectEntity.setName(subjectBean.getName());
 		subjectEntity.setNumberOfCredits(Integer.parseInt(subjectBean.getNumberOfCredits()));

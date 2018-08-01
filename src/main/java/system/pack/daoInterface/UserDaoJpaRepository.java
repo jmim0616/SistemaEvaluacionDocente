@@ -5,15 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import system.pack.entity.ClassVisitEntity;
-import system.pack.entity.CoevaluationEntity;
-import system.pack.entity.QuestionByPeriodEntity;
-import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.UserEntity;
 
-public interface CoevaluationDaoJpaRepository extends JpaRepository<CoevaluationEntity, Integer> {
+public interface UserDaoJpaRepository extends JpaRepository<UserEntity, Integer> {
 
-	CoevaluationEntity findById(int id);
+	UserEntity findByName(String name);
+	
+	UserEntity findById(int id);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

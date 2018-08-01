@@ -18,6 +18,8 @@ import system.pack.converter.SubjectConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.DisciplinaryAreaDaoInterface;
 import system.pack.daoInterface.DisciplinaryAreaDaoJpaRepository;
+import system.pack.daoInterface.SubjectByProgramDaoInterface;
+import system.pack.daoInterface.SubjectByProgramDaoJpaRepository;
 import system.pack.daoInterface.SubjectDaoInterface;
 import system.pack.daoInterface.SubjectDaoJpaRepository;
 import system.pack.daoInterface.SubjectStatusDaoInterface;
@@ -50,6 +52,12 @@ public class SubjectBoImpl implements SubjectBoInterface {
 	
 	@Autowired
 	DisciplinaryAreaDaoJpaRepository DisciplinaryAreaDaoJpaRepository;
+	
+	@Autowired
+	SubjectByProgramDaoInterface subjectByProgramDaoInterface;
+	
+	@Autowired
+	SubjectByProgramDaoJpaRepository subjectByProgramDaoJpaRepository;
 	
 	@Autowired
 	SubjectDaoInterface subjectDaoInterface;

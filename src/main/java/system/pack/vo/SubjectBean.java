@@ -24,7 +24,8 @@ public class SubjectBean {
 	private String name;
 	
 	private String numberOfCredits;
-
+	
+	private String academicProgram;
 	
 	public SubjectBean() {
 
@@ -94,7 +95,15 @@ public class SubjectBean {
 		this.numberOfCredits = numberOfCredits;
 	}
 
+	public String getAcademicProgram() {
+		return academicProgram;
+	}
 
+	public void setAcademicProgram(String academicProgram) {
+		this.academicProgram = academicProgram;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "SubjectBean [subjectId=" + subjectId + ", subjectStatus=" + subjectStatus + ", disciplinaryArea="

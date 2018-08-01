@@ -13,14 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
 import system.pack.bointerface.CourseBoInterface;
+
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.daoInterface.AcademicPeriodDaoJpaRepository;
-import system.pack.daoInterface.ClassVisitDaoInterface;
-import system.pack.daoInterface.ClassVisitDaoJpaRepository;
-import system.pack.daoInterface.CoevaluationDaoInterface;
-import system.pack.daoInterface.CoevaluationDaoJpaRepository;
+import system.pack.daoInterface.CourseFeedbackDaoInterface;
+import system.pack.daoInterface.CourseFeedbackDaoJpaRepository;
 import system.pack.daoInterface.CourseDaoInterface;
 import system.pack.daoInterface.CourseDaoJpaRepository;
 import system.pack.daoInterface.SubjectByTeacherDaoInterface;
@@ -37,8 +36,7 @@ import system.pack.entity.FacultyEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
 import system.pack.helper.JsonResponse;
-import system.pack.vo.ClassVisitBean;
-import system.pack.vo.CoevaluationBean;
+import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
@@ -49,16 +47,10 @@ import system.pack.vo.TeacherBean;
 public class CourseBoImpl implements CourseBoInterface {
 
 	@Autowired
-	CoevaluationDaoInterface coevaluationDaoInterface;
+	CourseFeedbackDaoInterface courseFeedbackDaoInterface;
 	
 	@Autowired
-	CoevaluationDaoJpaRepository coevaluationDaoJpaRepository;
-	
-	@Autowired
-	ClassVisitDaoInterface classVisitDaoInterface;
-	
-	@Autowired
-	ClassVisitDaoJpaRepository classVisitDaoJpaRepository;
+	CourseFeedbackDaoJpaRepository courseFeedbackDaoJpaRepository;
 	
 	@Autowired
 	AcademicPeriodDaoInterface academicPeriodDaoInterface;
@@ -289,7 +281,7 @@ public class CourseBoImpl implements CourseBoInterface {
 	
 	@Transactional
 	@Override
-	public JsonResponse<CourseBean, CourseEntity> addCoevaluation(CoevaluationBean coevaluationBean, BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> addCourseFeedbacks(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
 		
 		try {
 
@@ -333,13 +325,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	}
 
-	@Override
-	public JsonResponse<CourseBean, CourseEntity> addClassVisits(ClassVisitBean classVisitBean, BindingResult bindingResult) {
-		
-		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
-		
-		return jsonResponse;
-	}
 	
 	
 	@Transactional

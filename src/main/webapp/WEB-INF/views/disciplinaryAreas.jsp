@@ -4,10 +4,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
-<!--disciplinaryArea -->
-<!-- <script type="text/javascript" -->
-<%-- 	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryArea.js"></script> --%>
-
 <!--disciplinaryAreas -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/disciplinaryArea/disciplinaryAreas.js"></script>

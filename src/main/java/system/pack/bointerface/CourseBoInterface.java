@@ -4,8 +4,7 @@ import org.springframework.validation.BindingResult;
 
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
-import system.pack.vo.ClassVisitBean;
-import system.pack.vo.CoevaluationBean;
+import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
@@ -22,9 +21,7 @@ public interface CourseBoInterface {
 	
 	public JsonResponse search(CourseBean courseBean, BindingResult bindingResult);
 	
-	public JsonResponse addCoevaluation(CoevaluationBean coevaluationBean, BindingResult bindingResult);
-	
-	public JsonResponse addClassVisits(ClassVisitBean classVisitBean, BindingResult bindingResult);
+	public JsonResponse addCourseFeedbacks(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult);
 	
 	public JsonResponse searchAcademicPeriodsBySubjectOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
 	

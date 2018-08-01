@@ -5,14 +5,15 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import system.pack.entity.ClassVisitEntity;
-import system.pack.entity.QuestionByPeriodEntity;
-import system.pack.entity.SubjectByTeacherEntity;
+import system.pack.entity.FeedbackTypeEntity;
+import system.pack.entity.SubjectStatusEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.TeacherStatusEntity;
 
-public interface ClassVisitDaoJpaRepository extends JpaRepository<ClassVisitEntity, Integer> {
+public interface FeedbackTypeDaoJpaRepository extends JpaRepository<FeedbackTypeEntity, Integer> {
 
-	ClassVisitEntity findById(int id);
+
+	FeedbackTypeEntity findByDescription(String description);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

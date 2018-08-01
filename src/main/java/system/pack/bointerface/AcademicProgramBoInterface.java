@@ -21,6 +21,4 @@ public interface AcademicProgramBoInterface {
 	
 	public JsonResponse search();
 
-	public JsonResponse addSubjects(SubjectByProgramBean subjectByProgramBean, BindingResult bindingResult);
-
 }

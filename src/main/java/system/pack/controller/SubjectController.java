@@ -34,10 +34,13 @@ import system.pack.boImplementation.TeacherBoImpl;
 import system.pack.bointerface.SubjectBoInterface;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
+import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
+import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.SubjectBean;
+import system.pack.vo.SubjectByProgramBean;
 import system.pack.vo.TeacherBean;
 
 
@@ -64,6 +67,15 @@ public class SubjectController {
 		model.addAttribute("subject", new SubjectBean());
 		
 		return "subject-create";
+		
+	}
+	
+	@GetMapping(value = "/CreateExcel")
+	public String showInsertTeacherExcelView(Model model) {
+		
+		model.addAttribute("subject", new SubjectBean());
+		
+		return "subject-create-excel";
 		
 	}
 	
@@ -106,6 +118,16 @@ public class SubjectController {
 		return jsonResponse;
 	}
 	
+	@PostMapping(value = "/CreateExcel", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public JsonResponse<SubjectBean, SubjectEntity> createTeacherExcel(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + subjectBean);
+
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+		
+		return jsonResponse;
+	}
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
@@ -151,5 +173,6 @@ public class SubjectController {
 	
 
 	}
+	
 	
 }

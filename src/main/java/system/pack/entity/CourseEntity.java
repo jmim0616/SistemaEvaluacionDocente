@@ -45,15 +45,11 @@ public class CourseEntity {
 	
 	@OneToMany(mappedBy="course")
 	@JsonIgnore
-	private List<ClassVisitEntity> classVisits;
-	
-	@OneToMany(mappedBy="course")
-	@JsonIgnore
-	private List<CoevaluationEntity> coevaluations;
-	
-	@OneToMany(mappedBy="course")
-	@JsonIgnore
 	private List<QuestionByPeriodEntity> questionsByPeriod;
+	
+	@OneToMany(mappedBy="course")
+	@JsonIgnore
+	private List<CourseFeedbackEntity> courseFeedbacks;
 
 	
 	public CourseEntity() {
@@ -133,22 +129,6 @@ public class CourseEntity {
 		this.isVirtual = isVirtual;
 	}
 
-	public List<ClassVisitEntity> getClassVisits() {
-		return classVisits;
-	}
-
-	public void setClassVisits(List<ClassVisitEntity> classVisits) {
-		this.classVisits = classVisits;
-	}
-
-	public List<CoevaluationEntity> getCoevaluations() {
-		return coevaluations;
-	}
-
-	public void setCoevaluations(List<CoevaluationEntity> coevaluations) {
-		this.coevaluations = coevaluations;
-	}
-
 	public List<QuestionByPeriodEntity> getQuestionsByPeriod() {
 		return questionsByPeriod;
 	}
@@ -158,6 +138,14 @@ public class CourseEntity {
 	}
 
 	
+	public List<CourseFeedbackEntity> getCourseFeedbacks() {
+		return courseFeedbacks;
+	}
+
+	public void setCourseFeedbacks(List<CourseFeedbackEntity> courseFeedbacks) {
+		this.courseFeedbacks = courseFeedbacks;
+	}
+
 	@Override
 	public String toString() {
 		return "CourseEntity [courseId=" + courseId + ", academicPeriod=" + academicPeriod + ", teacher=" + teacher

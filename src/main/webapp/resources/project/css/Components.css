@@ -20,6 +20,7 @@ orange 2 -> #1d1202
 /* BASIC SETUP */
 
 /* -------------------- */
+
 * {
 	margin: 0;
 	padding: 0;
@@ -204,12 +205,14 @@ fieldset {
 - CHECKBOX - RADIO BUTTONS */
 
 /* -------------------- */
+
 input[type="date"], input[type="password"] {
 	font-size: 80%;
 	padding: 7px;
 	border-radius: 10px;
 	border: 1px solid #000000;
 }
+
 
 input[type="text"], input[type="email"] {
 	font-size: 80%;

@@ -24,14 +24,14 @@
 
                 <ul>
                     <li><a id="teachers" href="#">Docentes</a></li>
-<!--                     <li><a id="subjects" href="#">Asignaturas</a></li> -->
+                    <li><a id="subjects" href="#">Asignaturas</a></li>
 <!--                     <li><a href="#">Cursos</a></li> -->
                     <li><a id="faculties" href="#">Facultades</a></li>
                     <li><a id="disciplinaryAreas" href="#">Areas Disciplinarias</a></li>
                     <li><a id="academicPrograms" href="#">Programas Academicos</a></li>
                     <li><a id="departments" href="#">Departamentos</a></li>
 <!--                     <li><a href="#">Personas</a></li> -->
-<!--                     <li><a href="#">Periodos Academicos</a></li> -->
+                    <li><a id="academicPeriods" href="#">Periodos Academicos</a></li>
                 </ul>
             </nav>
             
@@ -40,7 +40,7 @@
 
 
     </header>
-
+    
 <div class="clearfix">
     <div class="success">
      <a href="#" class="close">X</a>
