@@ -2,7 +2,10 @@ package system.pack.daoInterface;
 
 import java.util.List;
 
+import org.springframework.validation.BindingResult;
+
 import system.pack.entity.TeacherEntity;
+import system.pack.helper.JsonResponse;
 import system.pack.vo.TeacherBean;
 
 public interface TeacherDaoInterface {
@@ -22,5 +25,6 @@ public interface TeacherDaoInterface {
 	public TeacherEntity findByIdentificationType(String identificationType);
 	
 	public TeacherEntity findByTeacherStatusId(String teacherStatus);
+	
 
 }

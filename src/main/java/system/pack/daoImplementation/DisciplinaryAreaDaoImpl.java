@@ -59,7 +59,7 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	@Override
 	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty) {
 		
-		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty =:faculty", DisciplinaryAreaEntity.class);
+		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty.getFacultyId() =:faculty", DisciplinaryAreaEntity.class);
 		
 		query.setParameter("faculty", faculty);
 		

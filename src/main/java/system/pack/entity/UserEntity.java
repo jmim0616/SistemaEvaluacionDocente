@@ -1,9 +1,17 @@
 package system.pack.entity;
 
+
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Users")
@@ -11,6 +19,7 @@ public class UserEntity {
 		
 		@Id
 		@Column
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private int userId;
 		
 		@Column
@@ -37,11 +46,23 @@ public class UserEntity {
 		@Column
 		private String jobPosition;   
 		
+		@OneToMany(mappedBy="user")
+		@JsonIgnore
+		private List<CourseFeedbackEntity> courseFeedbacks;
+		
 		public UserEntity() {
 			
 		}
 		
 		
+		
+
+		public UserEntity(int userId) {
+			this.userId = userId;
+		}
+
+
+
 
 		public UserEntity(int userId, String mask,  String name, String jobPosition, String institutionalMail, String personalMail
 				) {
@@ -111,6 +132,13 @@ public class UserEntity {
 			this.jobPosition = jobPosition;
 		}
 
+		public List<CourseFeedbackEntity> getCourseFeedbacks() {
+			return courseFeedbacks;
+		}
+
+		public void setCourseFeedbacks(List<CourseFeedbackEntity> courseFeedbacks) {
+			this.courseFeedbacks = courseFeedbacks;
+		}
 
 
 		public int getUserType() {
@@ -134,7 +162,7 @@ public class UserEntity {
 		public void setStatus(int status) {
 			this.status = status;
 		}
-	
 		
 		
 }
+

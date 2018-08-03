@@ -11,7 +11,7 @@
 <!-- <script type="text/javascript" -->
 <%-- 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script> --%>
 
-<!--teachers --> 
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teachers.js"></script>
 	

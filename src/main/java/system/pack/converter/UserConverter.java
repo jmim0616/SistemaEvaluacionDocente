@@ -1,6 +1,8 @@
 package system.pack.converter;
 
+
 import system.pack.entity.UserEntity;
+
 import system.pack.vo.UserBean;
 
 
@@ -14,6 +16,7 @@ public class UserConverter {
 		
 		UserBean userBean = new UserBean();
 		
+
 		userBean.setUserId(userEntity.getUserId());
 		userBean.setName(userEntity.getName());
 		userBean.setMask(userEntity.getMask());
@@ -22,9 +25,11 @@ public class UserConverter {
 		userBean.setInstitutionalMail(userEntity.getInstitutionalMail());
 		userBean.setPersonalMail(userEntity.getPersonalMail());
 		userBean.setStatus(userEntity.getStatus());
+
 		
 		return userBean;
 	}
+
 
 	public static UserEntity ConvertToEntity(UserBean userBean) {
 		
@@ -38,7 +43,7 @@ public class UserConverter {
 		userEntity.setInstitutionalMail(userBean.getInstitutionalMail());
 		userEntity.setPersonalMail(userBean.getPersonalMail());
 		userEntity.setStatus(userBean.getStatus());
-		
+
 		return userEntity;
 
 	}

@@ -23,6 +23,10 @@ import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.DepartmentDaoJpaRepository;
 import system.pack.daoInterface.FacultyDaoInterface;
 import system.pack.daoInterface.FacultyDaoJpaRepository;
+import system.pack.daoInterface.SubjectByProgramDaoInterface;
+import system.pack.daoInterface.SubjectByProgramDaoJpaRepository;
+import system.pack.daoInterface.SubjectByTeacherDaoInterface;
+import system.pack.daoInterface.SubjectByTeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
@@ -33,22 +37,26 @@ import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.FacultyBean;
+import system.pack.vo.SubjectByProgramBean;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 @Service
 public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 
 	@Autowired
+	FacultyDaoJpaRepository facultyDaoJpaRepository;
+
+	@Autowired
+	FacultyDaoInterface facultyDaoInterface;
+	
+	@Autowired
 	AcademicProgramDaoInterface academicProgramDaoInterface;
 	
 	@Autowired
 	AcademicProgramDaoJpaRepository academicProgramDaoJpaRepository;
 	
-	@Autowired
-	FacultyDaoJpaRepository facultyDaoJpaRepository;
 
-	@Autowired
-	FacultyDaoInterface facultyDaoInterface;
 	
 	
 	@Transactional
@@ -191,7 +199,5 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	}
 	
 
-	
-	
 	
 }

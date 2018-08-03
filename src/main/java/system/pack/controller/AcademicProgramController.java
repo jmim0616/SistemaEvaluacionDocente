@@ -30,10 +30,13 @@ import org.springframework.web.servlet.ModelAndView;
 import system.pack.bointerface.AcademicProgramBoInterface;
 import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.FacultyEntity;
+import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.DepartmentBean;
 import system.pack.vo.FacultyBean;
+import system.pack.vo.SubjectByProgramBean;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 
@@ -85,6 +88,15 @@ public class AcademicProgramController {
 		return "academicProgram-update";
 		
 	}
+	
+	@GetMapping(value = "/addSubjects")
+	public String showAddSubjectsAcademicProgramView(Model model) {
+		
+		model.addAttribute("academicProgram", new AcademicProgramBean());
+		
+		return "academicProgram-add-subject";
+		
+	}
 
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
@@ -130,6 +142,6 @@ public class AcademicProgramController {
 		
 	}
 	
-	
+
 	
 }

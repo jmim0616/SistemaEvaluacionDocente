@@ -1,13 +1,29 @@
 package system.pack.controller;
 
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletRequest;
+
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,7 +53,7 @@ public class UserController {
 		
 		return "users";
 	}
-	
+
 	@GetMapping(value = "/Create")
 	public String showCreateUserView(Model model,  HttpSession session) {
 
@@ -55,6 +71,7 @@ public class UserController {
 		
 	}
 	
+
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public JsonResponse<UserBean, UserEntity> createUser(@Valid @RequestBody UserBean userBean, BindingResult bindingResult) {
@@ -62,8 +79,9 @@ public class UserController {
 		System.out.println("00000" + userBean);
 		
 		JsonResponse<UserBean, UserEntity> jsonResponse = new JsonResponse<UserBean, UserEntity>();
-		
+
 		jsonResponse = UserBoInterface.createUser(userBean, bindingResult); 
+
 		
 		return jsonResponse;
 	}
@@ -96,6 +114,7 @@ public class UserController {
 		
 		JsonResponse<UserBean, UserEntity> jsonResponse = new JsonResponse<UserBean, UserEntity>();
 		
+
 		jsonResponse = UserBoInterface.update(userBean, bindingResult); 
 		
 		return jsonResponse;	
@@ -109,8 +128,9 @@ public class UserController {
 		System.out.println("00000" + userBean);
 		
 		JsonResponse<UserBean, UserEntity> jsonResponse = new JsonResponse<UserBean, UserEntity>();
-		
+
 		jsonResponse = UserBoInterface.updateStatus(userBean, bindingResult); 
+
 		
 		return jsonResponse;
 	

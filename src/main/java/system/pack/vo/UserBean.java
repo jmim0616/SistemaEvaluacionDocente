@@ -1,5 +1,6 @@
 package system.pack.vo;
 
+
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -43,6 +44,7 @@ public class UserBean {
 
 	public UserBean(int userId, String mask, String password, String institutionalMail, String personalMail,
 			String name, String jobPosition) {
+
 		this.userId = userId;
 		this.mask = mask;
 		this.password = password;
@@ -64,13 +66,16 @@ public class UserBean {
 		this.userId = userId;
 	}
 
+
 	public String getMask() {
 		return mask;
 	}
 
+
 	public void setMask(String mask) {
 		this.mask = mask;
 	}
+
 
 	public String getPassword() {
 		return password;
@@ -80,17 +85,21 @@ public class UserBean {
 		this.password = password;
 	}
 
+
 	public String getInstitutionalMail() {
 		return institutionalMail;
 	}
+
 
 	public void setInstitutionalMail(String institutionalMail) {
 		this.institutionalMail = institutionalMail;
 	}
 
+
 	public String getPersonalMail() {
 		return personalMail;
 	}
+
 
 	public void setPersonalMail(String personalMail) {
 		this.personalMail = personalMail;
@@ -99,6 +108,7 @@ public class UserBean {
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
@@ -138,3 +148,4 @@ public class UserBean {
 	}
 	
 }
+

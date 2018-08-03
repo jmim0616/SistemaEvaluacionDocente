@@ -36,7 +36,11 @@ public class DepartmentEntity {
 	
 	@OneToMany(mappedBy="department")
 	@JsonIgnore
-	List<DisciplinaryAreaEntity> disciplinaryAreas;
+	private List<DisciplinaryAreaEntity> disciplinaryAreas;
+	
+	@OneToMany(mappedBy="department")
+	@JsonIgnore
+	private List<QuestionByPeriodEntity> questionsByPeriod;
 	
 	public DepartmentEntity() {
 		
@@ -82,6 +86,22 @@ public class DepartmentEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<DisciplinaryAreaEntity> getDisciplinaryAreas() {
+		return disciplinaryAreas;
+	}
+
+	public void setDisciplinaryAreas(List<DisciplinaryAreaEntity> disciplinaryAreas) {
+		this.disciplinaryAreas = disciplinaryAreas;
+	}
+
+	public List<QuestionByPeriodEntity> getQuestionsByPeriod() {
+		return questionsByPeriod;
+	}
+
+	public void setQuestionsByPeriod(List<QuestionByPeriodEntity> questionsByPeriod) {
+		this.questionsByPeriod = questionsByPeriod;
 	}
 
 	@Override

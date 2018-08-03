@@ -20,6 +20,15 @@ $(document)
 								$('.container').fadeOut(0).load('/SistemaEvaluacionDocente/Teachers/').fadeIn('slow');
 
 							});
+					
+					$('#subjects').click(
+							function(event) {
+
+								event.preventDefault();
+
+								$('.container').fadeOut(0).load('./Subjects/').fadeIn('slow');
+
+							});
 
 					$('#faculties').click(
 							function(event) {
@@ -55,6 +64,15 @@ $(document)
 								event.preventDefault();
 
 								$('.container').fadeOut(0).load('./Departments/').fadeIn('slow');
+
+							});
+					
+					$('#academicPeriods').click(
+							function(event) {
+
+								event.preventDefault();
+
+								$('.container').fadeOut(0).load('./AcademicPeriods/').fadeIn('slow');
 
 							});
 					

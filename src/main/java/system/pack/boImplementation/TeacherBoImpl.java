@@ -27,6 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.TeacherConverter;
+import system.pack.daoInterface.SubjectByTeacherDaoInterface;
+import system.pack.daoInterface.SubjectByTeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
@@ -38,22 +40,30 @@ import system.pack.entity.TeacherStatusEntity;
 import system.pack.helper.Constants;
 import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
+import system.pack.vo.SubjectByProgramBean;
+import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
 @Service
 public class TeacherBoImpl implements TeacherBoInterface {
 
 	@Autowired
-	TeacherDaoInterface teacherDaoInterface;
-	
-	@Autowired
-	TeacherDaoJpaRepository teacherDaoJpaRepository;
-
-	@Autowired
 	TeacherStatusDaoJpaRepository teacherStatusDaoJpaRepository;
 
 	@Autowired
 	TeacherStatusDaoInterface teacherStatusDaoInterface;
+	
+	@Autowired
+	SubjectByTeacherDaoInterface subjectByTeacherDaoInterface;
+	
+	@Autowired
+	SubjectByTeacherDaoJpaRepository subjectByTeacherDaoJpaRepository;
+	
+	@Autowired
+	TeacherDaoInterface teacherDaoInterface;
+	
+	@Autowired
+	TeacherDaoJpaRepository teacherDaoJpaRepository;
 
 	private final String FILE_NAME = "teachers";
 
@@ -507,5 +517,60 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 		return errorMessage;
 	}
+	
+	
+	@Transactional
+	@Override
+	public JsonResponse<TeacherBean, TeacherEntity> addSubjects(SubjectByTeacherBean subjectByTeacherBean, BindingResult bindingResult) {
+		
+		try {
+
+			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+//
+//			if (bindingResult.hasErrors()) {
+//
+//				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+//						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+//
+//				jsonResponse.setErrorMessages(errorMessages);
+//
+//				jsonResponse.setIsValid(false);
+//
+//			} else {
+//
+//				teacherBean.setTeacherStatus("1");
+//
+//				TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
+//
+//				teacherDaoInterface.create(teacherEntity);
+//
+//				jsonResponse.setIsValid(true);
+//
+//				jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
+//
+//			}
+//			
+			return jsonResponse;
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+
+//			throw new RuntimeException("");
+
+			return null;
+			
+		}
+
+	}
+
+	@Override
+	public JsonResponse<TeacherBean, TeacherEntity> searchSubjecstByTeacher(TeacherBean teacherBean, BindingResult bindingResult) {
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		return jsonResponse;
+	}
+	
 
 }
