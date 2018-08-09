@@ -72,10 +72,6 @@ public class UserBoImpl implements UserBoInterface {
 			JsonResponse<UserBean, UserEntity> jsonResponse = new JsonResponse<UserBean, UserEntity>();
 
 			if (bindingResult.hasErrors()) {
-				
-				for(FieldError fieldError : bindingResult.getFieldErrors()){
-					System.out.println("Object: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
-				}
 
 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
 						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
@@ -195,8 +191,6 @@ public class UserBoImpl implements UserBoInterface {
 		try {
 
 			JsonResponse<UserBean, UserEntity> jsonResponse = new JsonResponse<UserBean, UserEntity>();
-
-			System.out.println("UserIdBean " +userBean.getUserId());
 			
 			UserEntity userEntity = userDaoInterface.findById(userBean.getUserId());
 
