@@ -4,12 +4,14 @@ import java.util.Date;
 
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class AcademicPeriodBean {
 
 
 	private String academicPeriodId;
 
-	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
+	@NotEmpty(message = "El campo \"Nombre\" es requerido")
 	private String name;
 	
 	@Pattern(regexp="\\d{4}\\-\\d{2}\\-\\d{2}", message="El campo \"Fecha de Inicio\" no cumple el formato adecuado. Ejm: dd/mm/yyyy")

@@ -9,6 +9,13 @@ $(document).ready(function() {
 		
 	});
 	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
 	
 	$('#buttonUpdateTeacher').click(function(event) {
 
@@ -92,6 +99,14 @@ function ajaxUpdateTeacher() {
 			console.log(jsonResponse);
 			
 			if(jsonResponse.isValid) {
+				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+
+				} else {
 			
 				$('#teacherIdSearch').val($('#teacherIdUpdate').val());
 				
@@ -121,7 +136,7 @@ function ajaxUpdateTeacher() {
 					
 					})
 					
-				
+				}
 			
 			} else {
 

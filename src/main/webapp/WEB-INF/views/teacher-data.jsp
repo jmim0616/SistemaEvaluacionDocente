@@ -28,6 +28,7 @@
 				<th>Telefono Fijo</th>
 				<th>Telefono Celular</th>
 				<th>Experiencia</th>
+				<th>Asignaturas</th>
 				<th>Estado</th>
 				<th>Acciones</th>
 			</tr>

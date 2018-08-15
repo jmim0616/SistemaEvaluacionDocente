@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+	setDates();
+
 	$('.success .close').click(function(event) {
 
 		event.preventDefault();
@@ -8,6 +10,14 @@ $(document).ready(function() {
 
 	});
 
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
+	
 	$('#buttonUpdateAcademicPeriod').click(function(event) {
 
 		event.preventDefault();
@@ -18,6 +28,32 @@ $(document).ready(function() {
 
 });
 
+
+function setDates() {
+
+	var year = (new Date).getFullYear();
+
+	$("#initialDateUpdate").datepicker({
+		minDate : new Date(year, 0, 1),
+		maxDate : new Date(year, 11, 31),
+		dateFormat : 'yy-mm-dd'
+	});
+
+	$("#endDateUpdate").datepicker({
+		minDate : new Date(year, 0, 1),
+		maxDate : new Date(year, 11, 31),
+		dateFormat : 'yy-mm-dd'
+	});
+
+	$(function() {
+		$.datepicker.setDefaults($.datepicker.regional["es"]);
+		$("#nameUpdate1").datepicker({
+			dateFormat : 'yy'
+		}).datepicker("setDate", new Date());
+	});
+
+}
+
 function ajaxUpdateAcademicPeriod() {
 
 	$('#nameUpdateError').text('');
@@ -25,7 +61,8 @@ function ajaxUpdateAcademicPeriod() {
 	$('#endDateUpdateError').text('');
 
 	var academicPeriodId = $('#academicPeriodIdUpdate').val();
-	var name = $('#nameUpdate').val();
+	var name = $('#nameUpdate1').val() + "-"
+	+ $('#nameUpdate2 option:selected').val();
 	var initialDate = $('#initialDateUpdate').val();
 	var endDate = $('#endDateUpdate').val();
 
@@ -59,25 +96,33 @@ function ajaxUpdateAcademicPeriod() {
 
 			if (jsonResponse.isValid) {
 
-				$('#nameSearch').val($('#nameUpdate').val());
+				if (jsonResponse.errorMessage != null) {
 
-				$('#nameUpdate').val('');
-				$('#initialDateUpdate').val('');
-				$('#endDateUpdate').val('');
+					$('.error .message').text(jsonResponse.errorMessage);
 
-				$('.success .message').text(jsonResponse.successMessage);
+					$('.error').show().fadeIn('slow');
 
-				$('.success').show().fadeIn('slow');
+				} else {
 
-				
-				$.get('./AcademicPeriods/Data', function(view) {
+					$('#nameSearch').val(name);
 
-					$('.content').fadeOut(0).html(view).fadeIn('slow');
+					$('#nameUpdate2 option:selected').val('1');
+					$('#initialDateCreate').val('');
+					$('#endDateCreate').val('');
 
-					ajaxSearchAcademicPeriod();
+					$('.success .message').text(jsonResponse.successMessage);
 
-				})
-				
+					$('.success').show().fadeIn('slow');
+
+						$.get('./AcademicPeriods/Data', function(view) {
+
+						$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+						ajaxSearchAcademicPeriod();
+
+					})
+
+				}
 
 			} else {
 

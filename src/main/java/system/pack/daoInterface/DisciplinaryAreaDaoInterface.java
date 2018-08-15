@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.DepartmentEntity;
@@ -15,7 +16,7 @@ public interface DisciplinaryAreaDaoInterface {
 	
 	public void update(DisciplinaryAreaEntity disciplinaryAreaEntity);
 	
-	public DisciplinaryAreaEntity findByName(String name);
+	public Optional<DisciplinaryAreaEntity> findByName(String name);
 	
 	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty);
 

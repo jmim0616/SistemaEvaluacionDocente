@@ -3,6 +3,7 @@ package system.pack.boImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import system.pack.daoInterface.SubjectByTeacherDaoInterface;
 import system.pack.daoInterface.SubjectByTeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
+import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
@@ -55,8 +57,6 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 	
 	@Autowired
 	AcademicProgramDaoJpaRepository academicProgramDaoJpaRepository;
-	
-
 	
 	
 	@Transactional
@@ -91,16 +91,26 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
-
+				
+				jsonResponse.setIsValid(true);
+				
+				Optional<AcademicProgramEntity> academicProgram = academicProgramDaoInterface.findByName(academicProgramBean.getName());
+				
+				if (academicProgram.isPresent()) {
+					
+					jsonResponse.setErrorMessage("El programa academico que se quiere registrar ya existe");
+				
+				} else {
+				
 				AcademicProgramEntity academicProgramEntity = AcademicProgramConverter.ConvertToEntity1(academicProgramBean);
 
 				academicProgramDaoInterface.create(academicProgramEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("El programa academico ha sido guardado con exito");
 
 			}
+			
+		}
 
 			return jsonResponse;
 
@@ -134,20 +144,30 @@ public class AcademicProgramBoImpl implements AcademicProgramBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
-				
-				FacultyEntity facultyEntity = facultyDaoInterface.findByName(academicProgramBean.getFaculty());
-
-				academicProgramBean.setFaculty(Integer.toString(facultyEntity.getFacultyId()));
-				
-				AcademicProgramEntity academicProgramEntity = AcademicProgramConverter.ConvertToEntity2(academicProgramBean);
-
-				academicProgramDaoInterface.update(academicProgramEntity);
-
+		
 				jsonResponse.setIsValid(true);
+				
+				Optional<AcademicProgramEntity> academicProgram = academicProgramDaoInterface.findByName(academicProgramBean.getName());
+				
+				if (academicProgram.isPresent() && academicProgram.get().getAcademicProgramId() != Integer.parseInt(academicProgramBean.getAcademicProgramId())) {
+
+					jsonResponse.setErrorMessage("El programa academico que se quiere modificar ya existe");
+					
+				} else {
+				
+				Optional<FacultyEntity> facultyEntity = facultyDaoInterface.findByName(academicProgramBean.getFaculty());
+
+				academicProgramBean.setFaculty(Integer.toString(facultyEntity.get().getFacultyId()));
+					
+				AcademicProgramEntity academicProgramEntity = AcademicProgramConverter.ConvertToEntity2(academicProgramBean);
+	
+				academicProgramDaoInterface.update(academicProgramEntity);
 
 				jsonResponse.setSuccessMessage("El programa academico ha sido modificado con exito");
 
 			}
+			
+		}
 
 			return jsonResponse;
 

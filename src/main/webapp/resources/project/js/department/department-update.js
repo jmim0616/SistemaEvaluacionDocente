@@ -25,6 +25,14 @@ $(document).ready(function() {
 		
 	});
 	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
+	
 	$('#buttonUpdateDepartment').click(function(event) {
 
 		event.preventDefault();
@@ -76,6 +84,16 @@ function ajaxUpdateDepartment() {
 
 			if (jsonResponse.isValid) {
 				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+					
+					$('.updateDepartment .modalContainer').show().fadeOut('slow');
+
+				} else {
+				
 				$('#nameUpdate').val('');
 
 				$('.updateDepartment .modalContainer').show().fadeOut('slow');
@@ -90,6 +108,8 @@ function ajaxUpdateDepartment() {
 						ajaxSearchDepartment();
 					  });
 
+			}
+				
 			} else {
 
 			

@@ -15,8 +15,10 @@ public interface SubjectByProgramDaoInterface {
 	
 	public SubjectByProgramEntity findById(int id);
 	
-	public List<SubjectByProgramEntity> findBySubjectId(String subject);
+	public List<SubjectByProgramEntity> findBySubjectId(int subject);
 	
 	public List<SubjectByProgramEntity> findByAcademicProgramId(String academicProgram);
+
+	void deleteByAcademicProgramIdSubjectId(int academicProgram, int subject);
 
 }

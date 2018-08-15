@@ -3,6 +3,7 @@ package system.pack.daoImplementation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,9 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByProgramEntity> findBySubjectId(String subject) {
+	public List<SubjectByProgramEntity> findBySubjectId(int subject) {
 
-		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.getSubjectId() =:subject", SubjectByProgramEntity.class);
+		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.subjectId =:subject", SubjectByProgramEntity.class);
 		
 		query.setParameter("subject", subject);
 		
@@ -67,6 +68,19 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 		List<SubjectByProgramEntity> subjectsByProgram = query.getResultList();
 		
 		return subjectsByProgram;
+		
+	}
+	
+	@Override
+	public void deleteByAcademicProgramIdSubjectId(int academicProgram, int subject) {
+		
+		Query query = entityManager.createQuery("delete from SubjectByProgramEntity sp where sp.academicProgram.academicProgramId =:academicProgram and sp.subject.subjectId =:subject");
+		
+		query.setParameter("academicProgram", academicProgram);
+		
+		query.setParameter("subject", subject);
+		
+		query.executeUpdate();
 		
 	}
 

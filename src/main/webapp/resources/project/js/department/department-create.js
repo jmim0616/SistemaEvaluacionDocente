@@ -33,6 +33,14 @@ $(document).ready(function() {
 		$('.success').show().fadeOut('slow');
 		
 	});
+	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
 
 });
 
@@ -71,6 +79,16 @@ function ajaxCreateDepartment() {
 
 			if (jsonResponse.isValid) {
 				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+					
+					$('.createDepartment .modalContainer').show().fadeOut('slow');
+
+				} else {
+				
 				$('#nameCreate').val('');
 
 				$('.createDepartment .modalContainer').show().fadeOut('slow');
@@ -85,6 +103,8 @@ function ajaxCreateDepartment() {
 						ajaxSearchDepartment();
 					  });
 
+			}
+				
 			} else {
 
 				$.each(jsonResponse.errorMessages, function(key, value) {

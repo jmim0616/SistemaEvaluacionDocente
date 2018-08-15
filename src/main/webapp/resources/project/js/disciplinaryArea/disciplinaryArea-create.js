@@ -33,6 +33,13 @@ $(document).ready(function() {
 
 	});
 
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
 	
 });
 
@@ -74,6 +81,16 @@ function ajaxCreateDisciplinaryArea() {
 
 			if (jsonResponse.isValid) {
 
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+					
+					$('.createDisciplinaryArea .modalContainer').show().fadeOut('slow');
+
+				} else {
+				
 				$('#nameCreate').val('');
 
 				$('.success .message').text(jsonResponse.successMessage);
@@ -88,6 +105,8 @@ function ajaxCreateDisciplinaryArea() {
 						ajaxSearchDisciplinaryArea();
 					  });
 
+			}
+			
 			} else {
 
 				$.each(jsonResponse.errorMessages, function(key, value) {

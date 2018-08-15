@@ -33,8 +33,13 @@ import org.springframework.web.servlet.ModelAndView;
 import system.pack.boImplementation.TeacherBoImpl;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
+import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.SubjectByTeacherEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
+import system.pack.vo.AcademicProgramBean;
+import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
 
@@ -99,12 +104,12 @@ public class TeacherController {
 		
 	}
 	
-	@GetMapping(value = "/addSubjects")
+	@GetMapping(value = "/AddSubjects")
 	public String showAddSubjectsTeacherView(Model model) {
 		
 		model.addAttribute("teacher", new TeacherBean());
 		
-		return "teacher-add-subject";
+		return "teacher-add-subjects";
 		
 	}
 	
@@ -114,6 +119,20 @@ public class TeacherController {
 		return "teacher-search";
 		
 	}
+	
+	@PostMapping(value = "/GetSubjects",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<SubjectBean, SubjectEntity> getAcademicPrograms() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+		
+		jsonResponse = teacherBoInterface.getAllSubjects(); 
+		
+		return jsonResponse;
+	}
+	
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -143,11 +162,11 @@ public class TeacherController {
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<TeacherBean, TeacherEntity> searchTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> searchTeacher(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + teacherBean);
 		
-		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> jsonResponse = new JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity>();
 		
 		jsonResponse = teacherBoInterface.search(teacherBean, bindingResult); 
 		

@@ -1,5 +1,9 @@
 package system.pack.vo;
 
+import java.util.List;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class SubjectByTeacherBean {
 	
 	private String subjectByTeacherId;
@@ -8,16 +12,24 @@ public class SubjectByTeacherBean {
 
 	private String teacher;
 
+	private List<String> subjectAdded;
+
+	private List<String> subjectDeleted;
+
 	
 	public SubjectByTeacherBean() {
 
 	}
 	
 	
-	public SubjectByTeacherBean(String subjectByTeacherId, String subject, String teacher) {
+
+	public SubjectByTeacherBean(String subjectByTeacherId, String subject, String teacher, List<String> subjectAdded,
+			List<String> subjectDeleted) {
 		this.subjectByTeacherId = subjectByTeacherId;
 		this.subject = subject;
 		this.teacher = teacher;
+		this.subjectAdded = subjectAdded;
+		this.subjectDeleted = subjectDeleted;
 	}
 
 
@@ -51,10 +63,35 @@ public class SubjectByTeacherBean {
 	}
 
 
+
+	public List<String> getSubjectAdded() {
+		return subjectAdded;
+	}
+
+
+
+	public void setSubjectAdded(List<String> subjectAdded) {
+		this.subjectAdded = subjectAdded;
+	}
+
+
+
+	public List<String> getSubjectDeleted() {
+		return subjectDeleted;
+	}
+
+
+
+	public void setSubjectDeleted(List<String> subjectDeleted) {
+		this.subjectDeleted = subjectDeleted;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "SubjectByTeacherBean [subjectByTeacherId=" + subjectByTeacherId + ", subject=" + subject + ", teacher="
-				+ teacher + "]";
+				+ teacher + ", subjectAdded=" + subjectAdded + ", subjectDeleted=" + subjectDeleted + "]";
 	}
 	
 	

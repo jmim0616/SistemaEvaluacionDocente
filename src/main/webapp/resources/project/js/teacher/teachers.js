@@ -120,33 +120,37 @@ function ajaxSearchTeacher() {
 						
 						var identificationType = null;
 						
-						if (jsonResponse.objectBean.identificationType == 1) {
+						if (jsonResponse.objectEntity.teacher.identificationType == 1) {
 							identificationType = "Cedula de Ciudadania";
-						} else if (jsonResponse.objectBean.identificationType == 2) {
+						} else if (jsonResponse.objectEntity.teacher.identificationType == 2) {
 							identificationType = "Cedula de Extranjeria";
 						}
 						
 						$("#tableTeacherData").append(
 								"<tr>" +
-								"<td>"+ jsonResponse.objectBean.teacherId +"</td> " +
-								"<td>"+ jsonResponse.objectBean.name +"</td> " +
-								"<td>"+ jsonResponse.objectBean.lastName +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.teacherId +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.lastName +"</td> " +
 								"<td>"+ identificationType +"</td> " +
-								"<td>"+ jsonResponse.objectBean.underDegree +"</td> " +
-								"<td>"+ jsonResponse.objectBean.masterDegree +"</td> " +
-								"<td>"+ jsonResponse.objectBean.doctorDegree +"</td> " +
-								"<td>"+ jsonResponse.objectBean.institutionalMail +"</td> " +
-								"<td>"+ jsonResponse.objectBean.personalMail +"</td> " +
-								"<td>"+ jsonResponse.objectBean.cellNumber +"</td>" +
-								"<td>"+ jsonResponse.objectBean.homeNumber +"</td> " +
-								"<td>"+ jsonResponse.objectBean.experience +"</td> " +
-								"<td>"+ jsonResponse.objectBean.teacherStatus +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.underDegree +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.masterDegree +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.doctorDegree +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.institutionalMail +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.personalMail +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.cellNumber +"</td>" +
+								"<td>"+ jsonResponse.objectEntity.teacher.homeNumber +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.experience +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.teacher.teacherStatus.status +"</td> " +
 								"<td>"+ '<div class="actions"> '+
 										 '<a class="button edit-button buttonUpdateTeacherToolbar">' +
 										 '<ion-icon name="create"></ion-icon>' +
 										 '</a>'+ 
 										  '<a class="button inactivate-button buttonUpdateStateTeacherToolbar">' +
 										  '<ion-icon name="remove-circle"></ion-icon>' +
+										  '</a>' +
+										  '<a class="button add-button buttonAddSubjectTeacherToolbar">' +
+										  'Agregar Asignaturas' +
 										  '</a>' +
 										  '</div>' +
 										  "</td> " +

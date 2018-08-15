@@ -33,6 +33,14 @@ $(document).ready(function() {
 		
 	}); 
 	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
+	
 });
 
 
@@ -75,6 +83,16 @@ function ajaxUpdateAcademicProgram() {
 
 			if (jsonResponse.isValid) {
 
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+					
+					$('.updateAcademicProgram .modalContainer').show().fadeOut('slow');
+
+				} else {
+				
 				$('#nameUpdate').val('');
 
 				$('.success .message').text(jsonResponse.successMessage);
@@ -89,6 +107,8 @@ function ajaxUpdateAcademicProgram() {
 						ajaxSearchAcademicProgram();
 					  });
 
+			}
+				
 			} else {
 
 				$.each(jsonResponse.errorMessages, function(key,value) {

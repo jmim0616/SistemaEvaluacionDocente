@@ -18,8 +18,12 @@ public interface SubjectByTeacherDaoInterface {
 	
 	public List<SubjectByTeacherEntity> findBySubjectId(String subject);
 	
-	public List<SubjectByTeacherEntity> findByTeacherId(String teacher);
+	List<SubjectByTeacherEntity> findByTeacherId(int teacherId);
 	
 	public List<SubjectEntity> searchSubjecstByTeacher(TeacherBean teacherBean);
+
+	public void deleteByTeacherIdSubjectId(int academicProgramId, int subjectId);
+
+
 	
 }

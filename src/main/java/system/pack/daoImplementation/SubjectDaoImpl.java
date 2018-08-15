@@ -1,5 +1,8 @@
 package system.pack.daoImplementation;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import system.pack.daoInterface.SubjectDaoInterface;
+import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 
@@ -17,76 +21,90 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Override
 	public void create(SubjectEntity subjectEntity) {
-		
+
 		entityManager.merge(subjectEntity);
-		
+
 	}
 
 	@Override
 	public void update(SubjectEntity subjectEntity) {
-		
+
 		entityManager.merge(subjectEntity);
-		
+
 	}
 
 	@Override
 	public void updateState(SubjectEntity subjectEntity) {
-		
+
 		entityManager.merge(subjectEntity);
-		
+
 	}
 
 	@Override
 	public SubjectEntity findById(int id) {
-		
-		SubjectEntity subject =  entityManager.find(SubjectEntity.class, id);
-		
+
+		SubjectEntity subject = entityManager.find(SubjectEntity.class, id);
+
 		return subject;
-		
+
 	}
 
 	@Override
-	public SubjectEntity findByName(String name) {
+	public Optional<SubjectEntity> findByName(String name) {
 
-		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.name =:name", SubjectEntity.class);
-		
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.name =:name",
+				SubjectEntity.class);
+
 		query.setParameter("name", name);
-		
-		SubjectEntity subject = query.getSingleResult();
-		
+
+		Optional<SubjectEntity> subject = query.getResultList().stream().findFirst();
+
 		return subject;
-		
+
 	}
 
 	@Override
 	public SubjectEntity findByDisciplinaryAreaId(String disciplinaryArea) {
-		
-		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.disciplinaryArea.getDisciplinaryArea() =:disciplinaryArea", SubjectEntity.class);
-		
+
+		TypedQuery<SubjectEntity> query = entityManager.createQuery(
+				"select s from SubjectEntity s where s.disciplinaryArea.getDisciplinaryArea() =:disciplinaryArea",
+				SubjectEntity.class);
+
 		query.setParameter("disciplinaryArea", disciplinaryArea);
-		
+
 		SubjectEntity subject = query.getSingleResult();
-		
+
 		return subject;
-		
+
 	}
 
 	@Override
 	public SubjectEntity findBySubjectStatusId(String subjectStatus) {
-		
-		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.subjectStatus.getSubjectStatus() =:subjectStatus", SubjectEntity.class);
-		
+
+		TypedQuery<SubjectEntity> query = entityManager.createQuery(
+				"select s from SubjectEntity s where s.subjectStatus.getSubjectStatus() =:subjectStatus",
+				SubjectEntity.class);
+
 		query.setParameter("subjectStatus", subjectStatus);
-		
+
 		SubjectEntity subject = query.getSingleResult();
-		
+
 		return subject;
-		
+
 	}
 
-	
-	
+	@Override
+	public List<SubjectEntity> getAll() {
+
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s",
+				SubjectEntity.class);
+
+		List<SubjectEntity> subjects = query.getResultList();
+
+		return subjects;
+	}
+
 }

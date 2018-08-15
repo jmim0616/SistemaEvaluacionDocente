@@ -1,6 +1,7 @@
 package system.pack.daoImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
@@ -49,13 +50,13 @@ public class AcademicPeriodDaoImpl implements AcademicPeriodDaoInterface {
 	}
 
 	@Override
-	public AcademicPeriodEntity findByName(String name) {
+	public Optional<AcademicPeriodEntity> findByName(String name) {
 	
 		TypedQuery<AcademicPeriodEntity> query = entityManager.createQuery("select ap from AcademicPeriodEntity ap where ap.name =:name", AcademicPeriodEntity.class);
 		
 		query.setParameter("name", name);
 		
-		AcademicPeriodEntity academicPeriod = query.getSingleResult();
+		Optional<AcademicPeriodEntity> academicPeriod = query.getResultList().stream().findFirst();
 		
 		return academicPeriod;
 		
@@ -89,13 +90,25 @@ public class AcademicPeriodDaoImpl implements AcademicPeriodDaoInterface {
 	@Override
 	public List<AcademicPeriodEntity> findByYear(String year) {
 		
-		TypedQuery<AcademicPeriodEntity> query = entityManager.createQuery("select ap from AcademicPeriodEntity ap where ap.name like '%year%'", AcademicPeriodEntity.class);
+		TypedQuery<AcademicPeriodEntity> query = entityManager.createQuery("select ap from AcademicPeriodEntity ap where ap.name like CONCAT('%',:year,'%')", AcademicPeriodEntity.class);
 		
-		query.setParameter("endDate", year);
+		query.setParameter("year", year);
 		
 		List<AcademicPeriodEntity> academicPeriods = query.getResultList();
 		
 		return academicPeriods;
+		
+	}
+	
+	
+	@Override
+	public AcademicPeriodEntity getlastRecord() {
+		
+		TypedQuery<AcademicPeriodEntity> query = entityManager.createQuery("select max(ap) from AcademicPeriodEntity ap", AcademicPeriodEntity.class);
+		
+		AcademicPeriodEntity academicPeriod = query.getSingleResult();
+		
+		return academicPeriod;
 		
 	}
 	

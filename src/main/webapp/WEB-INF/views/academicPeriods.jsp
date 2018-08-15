@@ -28,7 +28,7 @@
 						<form:form id="formSearchAcademicPeriod" modelAttribute="academicPeriod">
 
 							<fieldset>
-								<form:label path="name">Año del Periodo Academico</form:label>
+								<form:label path="name">Nombre del Periodo Academico</form:label>
 								<form:input path="name" type="text" id="nameSearch" />
 								<label id="nameSearchError" class="validation-error"> </label>
 							</fieldset>

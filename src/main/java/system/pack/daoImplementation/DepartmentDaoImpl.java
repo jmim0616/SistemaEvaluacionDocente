@@ -1,6 +1,7 @@
 package system.pack.daoImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -48,13 +49,13 @@ public class DepartmentDaoImpl implements DepartmentDaoInterface {
 	}
 	
 	@Override
-	public DepartmentEntity findByName(String name) {
+	public Optional<DepartmentEntity> findByName(String name) {
 		
 		TypedQuery<DepartmentEntity> query = entityManager.createQuery("select d from DepartmentEntity d where d.name =:name", DepartmentEntity.class);
 		
 		query.setParameter("name", name);
 		
-		DepartmentEntity department = query.getSingleResult();
+		Optional<DepartmentEntity> department = query.getResultList().stream().findFirst();
 		
 		return department;
 	}

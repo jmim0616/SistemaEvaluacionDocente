@@ -216,7 +216,7 @@ input[type="date"], input[type="password"] {
 
 input[type="text"], input[type="email"] {
 	font-size: 80%;
-	padding: 10px 70px 5px 5px;
+	padding: 10px 30px 5px 5px;
 	border-radius: 10px;
 	border: 1px solid #000000;
 }
@@ -393,6 +393,13 @@ input[type="checkbox"] {
 	text-rendering: optimizeLegibility;
 	border-collapse: collapse;
 	margin: 10px;
+	padding: 0px 7px 0px 7px;
+	
+}
+
+.table td {
+
+	padding: 0px 7px 0px 7px;
 	
 }
 
@@ -424,7 +431,7 @@ input[type="checkbox"] {
 }
 
 .standard-table td {
-	padding: 2px;
+	padding: 5px;
 }
 
 /* -------------------- */

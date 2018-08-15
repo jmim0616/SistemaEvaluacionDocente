@@ -3,6 +3,7 @@ package system.pack.daoImplementation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class SubjectByTeacherDaoImpl implements SubjectByTeacherDaoInterface {
 	@Override
 	public List<SubjectByTeacherEntity> findBySubjectId(String subject) {
 
-		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.getSubjectId() =:subject", SubjectByTeacherEntity.class);
+		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.subjectId =:subject", SubjectByTeacherEntity.class);
 		
 		query.setParameter("subject", subject);
 		
@@ -58,15 +59,28 @@ public class SubjectByTeacherDaoImpl implements SubjectByTeacherDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByTeacherEntity> findByTeacherId(String teacher) {
+	public List<SubjectByTeacherEntity> findByTeacherId(int teacherId) {
 		
-		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.teacher.getTeacherId() =:teacher", SubjectByTeacherEntity.class);
+		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.teacher.teacherId =:teacherId", SubjectByTeacherEntity.class);
 		
-		query.setParameter("teacher", teacher);
+		query.setParameter("teacherId", teacherId);
 		
 		List<SubjectByTeacherEntity> subjectsByTeacher = query.getResultList();
 		
 		return subjectsByTeacher;
+		
+	}
+	
+	@Override
+	public void deleteByTeacherIdSubjectId(int teacherId, int subjectId) {
+		
+		Query query = entityManager.createQuery("delete from SubjectByTeacherEntity st where st.teacher.teacherId =:teacherId and st.subject.subjectId =:subjectId");
+		
+		query.setParameter("teacherId", teacherId);
+		
+		query.setParameter("subjectId", subjectId);
+		
+		query.executeUpdate();
 		
 	}
 

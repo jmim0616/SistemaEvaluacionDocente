@@ -1,6 +1,6 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--academicPeriod-create-->
+<!--academicPeriod-update-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/academicPeriod/academicPeriod-update.js"></script>
 
@@ -23,7 +23,16 @@
 				<td>
 					<fieldset>
 						<form:label path="name">Nombre</form:label>
-						<form:input path="name" type="text" id="nameUpdate" />
+						<form:input path="name" type="text" id="nameUpdate1" disabled="true" />
+						-
+						<form:select path="name"
+							id="nameUpdate2">
+							<option class="actualValue" hidden></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</form:select>	
 						<label id="nameUpdateError" class="validation-error"> </label>
 					</fieldset>
 				</td>
@@ -35,20 +44,22 @@
 				<td>
 					<fieldset>
 						<form:label path="initialDate">Fecha de Inicio</form:label>
-						<form:input path="initialDate" type="date" id="initialDateUpdate" />
+<%-- 						<form:input path="initialDate" type="date" id="initialDateCreate" /> --%>
+							<input type="text" id="initialDateUpdate">
 						<label id="initialDateUpdateError" class="validation-error">
 						</label>
 					</fieldset>
-
 				</td>
 
 			</tr>
 
 			<tr>
 				<td>
+				
 					<fieldset>
 						<form:label path="endDate">Fecha de Fin</form:label>
-						<form:input path="endDate" type="date" id="endDateUpdate" />
+<%-- 						<form:input path="endDate" type="date" id="endDateCreate" /> --%>
+							<input type="text" id="endDateUpdate">
 						<label id="endDateUpdateError" class="validation-error"> </label>
 					</fieldset>
 				</td>
@@ -56,7 +67,8 @@
 
 		</table>
 
-		<input id="buttonUpdateAcademicPeriod" class="button add-button"
+
+		<input id="buttonUpdateAcademicPeriod" class="button edit-button"
 			type="submit" value="Modificar Periodo Academico" />
 
 	</form:form>

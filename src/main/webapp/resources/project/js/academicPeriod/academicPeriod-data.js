@@ -29,7 +29,6 @@ function initAcademicPeriodData() {
 	});
 
 	
-
 	$('.error .close').click(function(event) {
 
 		event.preventDefault();
@@ -37,7 +36,6 @@ function initAcademicPeriodData() {
 		$('.error').show().fadeOut('slow');
 		
 	});
-
 	
 }
 
@@ -55,8 +53,10 @@ function ajaxShowUpdateAcademicPeriod() {
 		
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 			
-			$('#academicPeriodId').val(arrayItemsStandardTable[0]);
-			$('#nameUpdate').val(arrayItemsStandardTable[1]);
+			var arrayName = arrayItemsStandardTable[1].split("-");
+			
+			$('#academicPeriodIdUpdate').val(arrayItemsStandardTable[0]);
+			$('#nameUpdate2 .actualValue').text(arrayName[1]);
 			$('#initialDateUpdate').val(arrayItemsStandardTable[2]);
 			$('#endDateUpdate').val(arrayItemsStandardTable[3]);
 			

@@ -8,6 +8,13 @@ $(document).ready(function() {
 		
 	});
 	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
 	
 	$('#buttonCreateTeacher').click(function(event) {
 
@@ -93,6 +100,14 @@ function ajaxCreateTeacher() {
 			
 			if (jsonResponse.isValid) {
 				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+
+				} else {
+				
 				$('#teacherIdSearch').val($('#teacherIdCreate').val());
 				
 				$('#teacherIdCreate').val('');
@@ -109,11 +124,9 @@ function ajaxCreateTeacher() {
 				$('#homeNumberCreate').val('');
 				$('#experienceCreate').val('');
 				
-				
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
-				
 				
 				$.get('./Teachers/Data', function(view){
 					
@@ -123,6 +136,7 @@ function ajaxCreateTeacher() {
 					
 					})
 				
+				}
 				
 			} else {
 			
@@ -133,7 +147,6 @@ function ajaxCreateTeacher() {
 			})
 			
 			}
-			
 			
 		},
 		error: function(){

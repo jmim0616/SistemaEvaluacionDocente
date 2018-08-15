@@ -35,10 +35,13 @@ import system.pack.bointerface.SubjectBoInterface;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.DepartmentEntity;
+import system.pack.entity.SubjectByProgramEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
+import system.pack.vo.DepartmentBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
 import system.pack.vo.TeacherBean;
@@ -66,6 +69,8 @@ public class SubjectController {
 		
 		model.addAttribute("subject", new SubjectBean());
 		
+		model.addAttribute("disciplinaryAreas", subjectBoInterface.getAllDisciplinaryAreas().getObjectEntityList());
+		
 		return "subject-create";
 		
 	}
@@ -88,8 +93,10 @@ public class SubjectController {
 	
 	@GetMapping(value = "/Update")
 	public String showUpdateSubjectView(Model model) {
-		
+
 		model.addAttribute("subject", new SubjectBean());
+		
+		model.addAttribute("disciplinaryAreas", subjectBoInterface.getAllDisciplinaryAreas().getObjectEntityList());
 		
 		return "subject-update";
 		
@@ -105,6 +112,20 @@ public class SubjectController {
 	}
 	
 	
+	
+	@PostMapping(value = "/GetAcademicPrograms",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<AcademicProgramBean, AcademicProgramEntity> getAcademicPrograms() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<AcademicProgramBean, AcademicProgramEntity> jsonResponse = new JsonResponse<AcademicProgramBean, AcademicProgramEntity>();
+		
+		jsonResponse = subjectBoInterface.getAllAcademicPrograms(); 
+		
+		return jsonResponse;
+	}
+	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public JsonResponse<SubjectBean, SubjectEntity> createSubject(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
@@ -116,6 +137,7 @@ public class SubjectController {
 		jsonResponse = subjectBoInterface.create(subjectBean, bindingResult); 
 		
 		return jsonResponse;
+		
 	}
 	
 	@PostMapping(value = "/CreateExcel", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
@@ -131,11 +153,11 @@ public class SubjectController {
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<SubjectBean, SubjectEntity> searchSubject(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
+	public JsonResponse<SubjectByProgramBean, SubjectByProgramEntity> searchSubject(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + subjectBean);
 		
-		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+		JsonResponse<SubjectByProgramBean, SubjectByProgramEntity>  jsonResponse = new JsonResponse<SubjectByProgramBean, SubjectByProgramEntity>();
 		
 		jsonResponse = subjectBoInterface.search(subjectBean, bindingResult); 
 		

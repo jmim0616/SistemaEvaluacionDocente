@@ -4,6 +4,12 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/subject/subject-update.js"></script>
 
+<!-- taify -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/vendors/js/tagify/tagify.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/vendors/js/tagify/tagify.css" />
 
 <div class="updateTeacher scroll">
 
@@ -14,7 +20,7 @@
 
 	<form:form id="formUpdateSubject" modelAttribute="subject">
 
-	<form:hidden path="subjectId" id="subjectIdUpdate" />
+		<form:hidden path="subjectId" id="subjectIdUpdate" />
 
 		<table>
 
@@ -24,7 +30,7 @@
 					<fieldset>
 						<form:label path="disciplinaryArea">Area Disciplinaria</form:label>
 						<form:select path="disciplinaryArea" id="disciplinaryAreaUpdate">
-						<option class="actualValue" hidden></option>
+							<option class="actualValue" hidden></option>
 							<c:forEach items="${disciplinaryAreas}" var="item">
 								<option value="${item.disciplinaryAreaId}">${item.name}</option>
 							</c:forEach>
@@ -83,9 +89,8 @@
 				<td>
 
 					<fieldset>
-						<form:label path="academicProgram">Programas Académicos</form:label>
-						<form:input path="academicProgram" type="text"
-							id="academicProgramUpdate" />
+						<label>Agregar Programas Academicos </label>
+						<textarea name="academicProgramUpdate" id="academicProgramUpdate"></textarea>
 						<label id="academicProgramUpdateError" class="validation-error">
 						</label>
 					</fieldset>
