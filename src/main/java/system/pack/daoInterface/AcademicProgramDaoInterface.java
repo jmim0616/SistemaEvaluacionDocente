@@ -17,7 +17,7 @@ public interface AcademicProgramDaoInterface {
 	
 	public Optional<AcademicProgramEntity> findByName(String name);
 	
-	public List<AcademicProgramEntity> findByFacultyId(String faculty);
+	public List<AcademicProgramEntity> findByFacultyId(int facultyId);
 	
 	public List<AcademicProgramEntity> getAll();
 	

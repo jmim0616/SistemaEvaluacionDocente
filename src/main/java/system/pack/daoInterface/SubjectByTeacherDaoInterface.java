@@ -16,7 +16,7 @@ public interface SubjectByTeacherDaoInterface {
 	
 	public SubjectByTeacherEntity findById(int id);
 	
-	public List<SubjectByTeacherEntity> findBySubjectId(String subject);
+	public List<SubjectByTeacherEntity> findBySubjectId(int subjectId);
 	
 	List<SubjectByTeacherEntity> findByTeacherId(int teacherId);
 	

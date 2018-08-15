@@ -18,7 +18,7 @@ public interface DisciplinaryAreaDaoInterface {
 	
 	public Optional<DisciplinaryAreaEntity> findByName(String name);
 	
-	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty);
+	public List<DisciplinaryAreaEntity> findByFacultyId(int facultyId);
 
 	List<DisciplinaryAreaEntity> getAll();
 	

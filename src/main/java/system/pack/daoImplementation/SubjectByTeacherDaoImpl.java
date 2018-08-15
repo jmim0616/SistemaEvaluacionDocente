@@ -46,11 +46,11 @@ public class SubjectByTeacherDaoImpl implements SubjectByTeacherDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByTeacherEntity> findBySubjectId(String subject) {
+	public List<SubjectByTeacherEntity> findBySubjectId(int subjectId) {
 
-		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.subjectId =:subject", SubjectByTeacherEntity.class);
+		TypedQuery<SubjectByTeacherEntity> query = entityManager.createQuery("select st from SubjectByTeacherEntity st where st.subject.subjectId =:subjectId", SubjectByTeacherEntity.class);
 		
-		query.setParameter("subject", subject);
+		query.setParameter("subjectId", subjectId);
 		
 		List<SubjectByTeacherEntity> subjectsByTeacher = query.getResultList();
 		

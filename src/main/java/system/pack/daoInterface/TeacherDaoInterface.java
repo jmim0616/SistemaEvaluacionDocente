@@ -25,7 +25,7 @@ public interface TeacherDaoInterface {
 	
 	public TeacherEntity findByIdentificationType(String identificationType);
 	
-	public TeacherEntity findByTeacherStatusId(String teacherStatus);
+	public TeacherEntity findByTeacherStatusId(int teacherStatusId);
 	
 
 }

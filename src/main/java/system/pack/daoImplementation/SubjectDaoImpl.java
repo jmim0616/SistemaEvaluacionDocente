@@ -67,13 +67,12 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 	}
 
 	@Override
-	public SubjectEntity findByDisciplinaryAreaId(String disciplinaryArea) {
+	public SubjectEntity findByDisciplinaryAreaId(int disciplinaryAreaId) {
 
-		TypedQuery<SubjectEntity> query = entityManager.createQuery(
-				"select s from SubjectEntity s where s.disciplinaryArea.getDisciplinaryArea() =:disciplinaryArea",
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.disciplinaryArea.disciplinaryAreaId =:disciplinaryAreaId",
 				SubjectEntity.class);
 
-		query.setParameter("disciplinaryArea", disciplinaryArea);
+		query.setParameter("disciplinaryAreaId", disciplinaryAreaId);
 
 		SubjectEntity subject = query.getSingleResult();
 
@@ -82,13 +81,11 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 	}
 
 	@Override
-	public SubjectEntity findBySubjectStatusId(String subjectStatus) {
+	public SubjectEntity findBySubjectStatusId(int subjectStatusId) {
 
-		TypedQuery<SubjectEntity> query = entityManager.createQuery(
-				"select s from SubjectEntity s where s.subjectStatus.getSubjectStatus() =:subjectStatus",
-				SubjectEntity.class);
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.subjectStatus.subjectStatusId =:subjectStatusId", SubjectEntity.class);
 
-		query.setParameter("subjectStatus", subjectStatus);
+		query.setParameter("subjectStatusId", subjectStatusId);
 
 		SubjectEntity subject = query.getSingleResult();
 

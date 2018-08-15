@@ -91,11 +91,11 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 	}
 
 	@Override
-	public TeacherEntity findByTeacherStatusId(String teacherStatus) {
+	public TeacherEntity findByTeacherStatusId(int teacherStatusId) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus.getTeacherStatusId() =:teacherStatus", TeacherEntity.class);
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus.teacherStatusId =:teacherStatusId", TeacherEntity.class);
 		
-		query.setParameter("teacherStatus", teacherStatus);
+		query.setParameter("teacherStatusId", teacherStatusId);
 		
 		TeacherEntity teacher = query.getSingleResult();
 		
