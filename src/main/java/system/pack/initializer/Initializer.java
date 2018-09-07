@@ -1,5 +1,6 @@
 package system.pack.initializer;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration.Dynamic;
@@ -45,6 +46,9 @@ public class Initializer implements WebApplicationInitializer {
 		// defining the dispatcher servlet and what urls spring mvc will mapping
 		// for the project
 		Dynamic servlet = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(applicationContext));
+	      MultipartConfigElement multipartConfig = new MultipartConfigElement("D:/", 1048576,
+	              10485760, 0);
+	    servlet.setMultipartConfig(multipartConfig);
 		servlet.addMapping("/");
 		servlet.setLoadOnStartup(1);
 

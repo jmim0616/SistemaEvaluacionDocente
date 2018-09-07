@@ -1,42 +1,34 @@
 package system.pack.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.io.IOException;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import system.pack.boImplementation.TeacherBoImpl;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
+import system.pack.bointerface.UserBoInterface;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.UserEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
 import system.pack.vo.SubjectBean;
@@ -48,32 +40,42 @@ import system.pack.vo.TeacherBean;
 @RequestMapping(value="/Teachers")
 public class TeacherController {
 
+	@Autowired
+	UserBoInterface UserBoInterface;
 	
 	@Autowired
 	TeacherBoInterface teacherBoInterface;
 	
 	@GetMapping(value = "/")
-	public String showTeachersView(Model model) {
+	public ModelAndView showTeachersView(Model model,  HttpSession session) {
 
 		model.addAttribute("teacher", new TeacherBean());
+		ModelAndView modelAndView = new ModelAndView();
+		session.getId();
+		modelAndView.addObject("thought", session.getId());
+		session.setAttribute("thought", "Holi" );
 		
-		return "teachers";
-	}
-	
+		modelAndView.setViewName("teachers");
+		System.out.println(session.getAttribute("thought"));
+		
+		return modelAndView;
+	}	
 	
 	@GetMapping(value = "/Create")
-	public String showInsertTeacherView(Model model) {
+	public ModelAndView showInsertTeacherView(Model model, HttpSession session) {
 		
 		model.addAttribute("teacher", new TeacherBean());
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(session.getAttribute("thought"));
+		modelAndView.addObject("thought", "Testing");
 		
-		return "teacher-create";
+		modelAndView.setViewName("teacher-create");
+		return modelAndView;
 		
 	}
 	
 	@GetMapping(value = "/CreateExcel")
-	public String showInsertTeacherExcelView(Model model) {
-		
-		model.addAttribute("teacher", new TeacherBean());
+	public String showInsertTeacherExcelView(Model model, HttpSession session) {
 		
 		return "teacher-create-excel";
 		
@@ -147,15 +149,28 @@ public class TeacherController {
 		return jsonResponse;
 	}
 	
-	
-	@PostMapping(value = "/CreateExcel", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value = "/CreateExcel", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<TeacherBean, TeacherEntity> createTeacherExcel(@Valid @RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
-
-		System.out.println("00000" + teacherBean);
-
-		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+	public JsonResponse<TeacherBean, TeacherEntity> createTeacherExcel( 
+			MultipartFile file) throws IOException {
 		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<>();
+	   
+		if (file.getSize() == 0){
+			jsonResponse.setErrorMessage("Debe seleccionar un archivo en formato Excel.");
+			return jsonResponse;
+		}
+		
+	    String response = teacherBoInterface.createExcel(file);
+	    
+	    if (response == ""){
+	    	jsonResponse.setSuccessMessage("El archivo ha sido procesado exitosamente.");
+	    }
+	    else
+	    {
+	    	jsonResponse.setErrorMessage(response);
+	    }
+	
 		return jsonResponse;
 	}
 	

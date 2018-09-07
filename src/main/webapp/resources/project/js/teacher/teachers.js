@@ -15,8 +15,7 @@ $(document).ready(function() {
 
 		e.preventDefault();
 
-		$('.sub-menu-content').removeClass('true');
-		
+		$('.sub-menu-content').removeClass('true');		
 
 	});
 
@@ -29,14 +28,7 @@ $(document).ready(function() {
 		
 	});
 	
-	
-	$('#linkCreateExcelTeacher').click(function(event) {
-		
-		event.preventDefault();
 
-		$('.content').fadeOut(0).load('./Teachers/CreateExcel').fadeIn('slow');
-		
-	});
 	
 
 	$('#buttonSearchTeacher').click(function(event) {
@@ -59,12 +51,17 @@ $(document).ready(function() {
 			
 		
 	});
-	
 
 	
 });
 
-
+$('#linkCreateExcelTeacher').click(function(event) {
+	
+	event.preventDefault();
+	
+	$('.content').html('<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
+	
+});
 
 function ajaxSearchTeacher() {
 	
@@ -222,4 +219,3 @@ function ajaxShow() {
 	});
 
 }
-

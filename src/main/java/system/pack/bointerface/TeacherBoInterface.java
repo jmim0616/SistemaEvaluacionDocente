@@ -1,6 +1,7 @@
 package system.pack.bointerface;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
@@ -21,6 +22,8 @@ public interface TeacherBoInterface {
 	public JsonResponse updateStatus(TeacherBean teacherBean, BindingResult bindingResult);
 	
 	public JsonResponse search(TeacherBean teacherBean, BindingResult bindingResult);
+
+	public String createExcel(MultipartFile file);
 	
 	JsonResponse<SubjectBean, SubjectEntity> getAllSubjects();
 	
@@ -28,6 +31,4 @@ public interface TeacherBoInterface {
 	
 	public JsonResponse searchSubjecstByTeacher(TeacherBean teacherBean, BindingResult bindingResult);
 
-
-	
 }

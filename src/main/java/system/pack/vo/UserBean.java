@@ -1,56 +1,68 @@
 package system.pack.vo;
 
 
-public class UserBean {
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class UserBean {
 	
-	private String userId;
+	private int userId;
 	
+	@NotEmpty(message="El campo \"nombre de usuario\" es requerido.")
+	@Pattern(regexp="^[a-zA-Z]*$", message="En el campo \"nombre de usuario\" solo se pueden ingresar letras, "
+			+ "sin incluir espacios.")
 	private String mask;
-	
+
+	@NotEmpty(message="El campo \"contraseña\" es requerido.")
 	private String password;
 	
+	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 	
+	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String personalMail;
 
-	private String jobPosition;
-	
+	@NotEmpty(message="El campo \"nombre\" es requerido.")
+	@Pattern(regexp="^[a-zA-Z ]*$", message="En el campo \"Nombre\" solo se pueden ingresar letras.")
 	private String name;
 	
-	private String status;
+	@NotEmpty(message="El campo \"cargo laboral\" es requerido.")
+	private String jobPosition;   
 	
-	private String userType;
+	private int status;
 	
+	private int userType;
 	
+
 	public UserBean() {
-		
+	
 	}
 
-	public UserBean(String userId) {
-		this.userId = userId;
-	}
+	public UserBean(int userId, String mask, String password, String institutionalMail, String personalMail,
+			String name, String jobPosition) {
 
-	public UserBean(String userId, String mask, String password, String institutionalMail, String personalMail,
-			String jobPosition, String name, String status, String userType) {
 		this.userId = userId;
 		this.mask = mask;
 		this.password = password;
 		this.institutionalMail = institutionalMail;
 		this.personalMail = personalMail;
-		this.jobPosition = jobPosition;
 		this.name = name;
-		this.status = status;
-		this.userType = userType;
+		this.jobPosition = jobPosition;
 	}
 
+	public UserBean(int userId) {
+		this.userId = userId;
+	}
 
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
@@ -68,7 +80,6 @@ public class UserBean {
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
@@ -94,17 +105,6 @@ public class UserBean {
 		this.personalMail = personalMail;
 	}
 
-
-	public String getJobPosition() {
-		return jobPosition;
-	}
-
-
-	public void setJobPosition(String jobPosition) {
-		this.jobPosition = jobPosition;
-	}
-
-
 	public String getName() {
 		return name;
 	}
@@ -114,34 +114,38 @@ public class UserBean {
 		this.name = name;
 	}
 
+	public String getJobPosition() {
+		return jobPosition;
+	}
 
-	public String getStatus() {
+	public void setJobPosition(String jobPosition) {
+		this.jobPosition = jobPosition;
+	}	
+	
+	
+	
+	public int getStatus() {
 		return status;
 	}
 
-
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
-
-	public String getUserType() {
+	public int getUserType() {
 		return userType;
 	}
 
-
-	public void setUserType(String userType) {
+	public void setUserType(int userType) {
 		this.userType = userType;
 	}
-
 
 	@Override
 	public String toString() {
 		return "UserBean [userId=" + userId + ", mask=" + mask + ", password=" + password + ", institutionalMail="
-				+ institutionalMail + ", personalMail=" + personalMail + ", jobPosition=" + jobPosition + ", name="
-				+ name + ", status=" + status + ", userType=" + userType + "]";
+				+ institutionalMail + ", personalMail=" + personalMail + ", name=" + name + ", jobPosition="
+				+ jobPosition + "]";
 	}
 	
-	
-
 }
+
