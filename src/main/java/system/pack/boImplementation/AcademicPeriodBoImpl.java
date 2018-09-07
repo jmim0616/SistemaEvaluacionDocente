@@ -87,7 +87,7 @@ public class AcademicPeriodBoImpl implements AcademicPeriodBoInterface {
 
 						if (academicPeriodEntity.getInitialDate().before(lastAcademicPeriod.getEndDate())) {
 
-							errorMessage += "La fecha de inicio del periodo academico que quiere registrar"
+							errorMessage += "La fecha de inicio del periodo academico que quiere registrar \n"
 									+ " es menor a la fecha de fin del ultimo periodo academico registrado ("
 									+ lastAcademicPeriod.getName() + ") \n";
 
@@ -96,7 +96,7 @@ public class AcademicPeriodBoImpl implements AcademicPeriodBoInterface {
 
 						if (academicPeriodEntity.getEndDate().before(academicPeriodEntity.getInitialDate())) {
 
-							errorMessage += "La fecha de fin del periodo academico que quiere registrar"
+							errorMessage += "La fecha de fin del periodo academico que quiere registrar \n"
 									+ " es menor a la fecha de inicio del periodo academico que quiere registrar";
 
 							jsonResponse.setErrorMessage(errorMessage);
@@ -115,7 +115,7 @@ public class AcademicPeriodBoImpl implements AcademicPeriodBoInterface {
 
 						if (academicPeriodEntity.getEndDate().before(academicPeriodEntity.getInitialDate())) {
 
-							jsonResponse.setErrorMessage("La fecha de fin del periodo academico que quiere registrar"
+							jsonResponse.setErrorMessage("La fecha de fin del periodo academico que quiere registrar \n"
 									+ " es menor a la fecha de inicio del periodo academico que quiere registrar");
 
 						} else {
@@ -241,7 +241,7 @@ public class AcademicPeriodBoImpl implements AcademicPeriodBoInterface {
 
 						if (academicPeriodEntity.getEndDate().before(academicPeriodEntity.getInitialDate())) {
 							
-							errorMessage += "La fecha de fin del periodo academico que quiere modificar"
+							errorMessage += "La fecha de fin del periodo academico que quiere modificar \n"
 									+ " es menor a la fecha de inicio del periodo academico que quiere modificar";
 
 							jsonResponse.setErrorMessage(errorMessage);

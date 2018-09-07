@@ -103,7 +103,7 @@
 
 			<tr>
 
-				<td><input id="buttonUpdateSubject" class="button add-button"
+				<td><input id="buttonUpdateSubject" class="button edit-button"
 					type="submit" value="Modificar Asignatura" /></td>
 
 			</tr>

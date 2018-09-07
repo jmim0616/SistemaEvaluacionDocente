@@ -68,7 +68,7 @@ public class FacultyBoImpl implements FacultyBoInterface {
 				
 				if (faculty.isPresent()) {
 					
-					jsonResponse.setErrorMessage("al facultad que se quiere registrar ya existe");
+					jsonResponse.setErrorMessage("la facultad que se quiere registrar ya existe");
 				
 				} else {
 				
