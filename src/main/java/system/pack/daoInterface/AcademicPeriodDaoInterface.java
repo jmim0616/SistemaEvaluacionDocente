@@ -20,5 +20,7 @@ public interface AcademicPeriodDaoInterface {
 	public AcademicPeriodEntity findByEndDate(String endDate);
 	
 	public List<AcademicPeriodEntity> findByYear(String year);
+
+	public int getAcademicPeriodByName(String stringCellValue);
 	
 }

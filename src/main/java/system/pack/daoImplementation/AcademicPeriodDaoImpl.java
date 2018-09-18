@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NamedQuery;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.entity.AcademicPeriodEntity;
+import system.pack.entity.CourseEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.UserEntity;
 
 
 @Repository
@@ -97,6 +100,33 @@ public class AcademicPeriodDaoImpl implements AcademicPeriodDaoInterface {
 		
 		return academicPeriods;
 		
+	}
+
+	@Override
+	public int getAcademicPeriodByName(String academicPeriodName) {
+		
+		int academicPeriodId = 0;
+		
+		Query query = entityManager.createNativeQuery
+				("select "
+						+ "academicPeriodId"
+						+ " from academic_periods t "
+						+ "USE INDEX (academicPeriods_index1218) "
+						+ "where t.name =:name "
+						);
+		
+		query.setParameter("name", academicPeriodName);
+		
+		List<Object[]> courseEntities  = query.getResultList();
+		
+		if (!courseEntities.isEmpty()){
+			Object result = courseEntities.get(0);
+			if (result instanceof Integer){
+				academicPeriodId = (Integer) result;
+			}
+		}
+		
+		return academicPeriodId;
 	}
 	
 	

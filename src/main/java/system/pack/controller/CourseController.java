@@ -1,5 +1,6 @@
 package system.pack.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import system.pack.boImplementation.TeacherBoImpl;
@@ -70,6 +72,37 @@ public class CourseController {
 		
 	}
 	
+	@PostMapping(value = "/CreateExcel", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity> createCourseExcel( 
+			MultipartFile file) throws IOException {
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<>();
+	   
+		if (file.getSize() == 0){
+			jsonResponse.setErrorMessage("Debe seleccionar un archivo en formato Excel.");
+			return jsonResponse;
+		}
+		
+	    String response = CourseBoInterface.createExcel(file);
+	    
+	    if (response == ""){
+	    	jsonResponse.setSuccessMessage("El archivo ha sido procesado exitosamente.");
+	    }
+	    else
+	    {
+	    	jsonResponse.setErrorMessage(response);
+	    }
+	
+		return jsonResponse;
+	}
+	
+	@GetMapping(value = "/CreateExcel")
+	public String showCreateExcelView(Model model) {
+
+		return "course-create-excel";
+		
+	}
 
 	
 	@GetMapping(value = "/Data")

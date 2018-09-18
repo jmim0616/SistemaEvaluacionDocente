@@ -1,16 +1,29 @@
 package system.pack.boImplementation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLDataException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.bointerface.CourseBoInterface;
 
@@ -30,11 +43,15 @@ import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
+import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
+import system.pack.helper.Constants;
+import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.CourseBean;
@@ -75,6 +92,8 @@ public class CourseBoImpl implements CourseBoInterface {
 	
 	@Autowired
 	CourseDaoJpaRepository courseDaoJpaRepository;
+	
+	private final String FILE_NAME = "courses";
 
 	@Transactional
 	@Override
@@ -362,6 +381,179 @@ public class CourseBoImpl implements CourseBoInterface {
 		
 		return jsonResponse;
 	}
-	
+
+
+	@Override
+	public String createExcel(MultipartFile file) {
+		ExcelHelper excelHelper = new ExcelHelper();
+		String result = "";
+
+		try {
+			excelHelper.createFile(file, FILE_NAME);
+			result = createCourseFromExcel();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+
+	private String createCourseFromExcel() throws IOException {
+		File excel = new File(new Constants().FILE_SAVING_ROUTE + FILE_NAME + ".xlsx");
+		FileInputStream fileInputStream = null;
+		String[] format = { "Periodo académico", "Profesor", "Asignatura", "Grupos", "Virtual"};
+
+		try {
+			fileInputStream = new FileInputStream(excel);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String errorMessage = "";
+
+		int position = 0;
+
+		int rows = 0;
+
+		CourseEntity courseEntity = new CourseEntity();
+
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
+
+		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
+
+		Iterator<Row> rowIt = xssfSheet.iterator();
+
+		Row row = rowIt.next();
+		
+		
+		while (rowIt.hasNext()) {
+			
+			rows += 1;
+			position = 0;
+			courseEntity = new CourseEntity();
+			boolean isValidRow = true;
+			Iterator<Cell> cellIterator = row.cellIterator();
+			
+			inner_loop: while (cellIterator.hasNext()) {
+
+				Cell cell = cellIterator.next();
+				// Periodo académico
+				if (position == 0) {
+					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ " El periodo académico no puede estar vacio.";
+						break inner_loop;
+					}
+					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+						System.out.println("PA");
+						int academicPeriodId= academicPeriodDaoInterface.getAcademicPeriodByName(cell.getStringCellValue());
+						System.out.println("academicPeriodId " + academicPeriodId);
+						courseEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriodId));
+						
+					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						isValidRow = false;
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El periodo académico no es válido.";
+					}
+					else if (cell.getCellType() == cell.CELL_TYPE_FORMULA){
+						System.out.println("It's numeric");
+					}
+					else{
+						System.out.println("Finally");
+					}
+				}
+				// Identificador del docente
+				else if (position == 1) {
+					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
+								+ "El número de identificación del docente no puede estar vacio";
+						break inner_loop;
+					}
+					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+"El número de identificación del docente no es válido";
+						isValidRow = false;
+						break inner_loop;
+					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						courseEntity.setTeacher(new TeacherEntity((int)cell.getNumericCellValue()));
+					}
+				}
+				// Asignatura
+				else if (position == 2) {
+					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
+								+ "El número de identificación de la asignatura no puede estar vacio";
+						break inner_loop;
+					}
+					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+"El número de identificación de la asignatura no es válido";
+						isValidRow = false;
+						break inner_loop;
+					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						courseEntity.setSubject(new SubjectEntity((int)cell.getNumericCellValue()));
+					}
+				}
+				// Grupo
+				else if (position == 3) {
+
+					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
+								+ "El número del grupo no puede estar vacio";
+						break inner_loop;
+					}
+					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+"El número del grupo no es válido";
+						isValidRow = false;
+						break inner_loop;
+					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						courseEntity.setGroupId(((int)cell.getNumericCellValue()));
+					}
+				}
+				// Indicador si es virtual
+				else if (position == 4) {
+
+					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "Debe indicarse si la asignatura es virtual o no.";
+						break inner_loop;
+					}
+					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+						courseEntity.setIsVirtual(cell.getStringCellValue());
+						
+					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						isValidRow = false;
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+								+ "El valor ingresado para indicar si la asignatura es virtual o no es inválido.";
+					}
+				}				
+				position++;
+			}
+
+			if (isValidRow) {
+				
+				System.out.println(courseEntity.toString());
+
+				// Insert
+				courseDaoInterface.create(courseEntity);
+			}
+
+			row = rowIt.next();			
+		}
+
+		xssfWorkbook.close();
+		fileInputStream.close();
+
+		Path filePath = Paths.get(new Constants().FILE_SAVING_ROUTE + FILE_NAME + ".xlsx");
+		Files.delete(filePath);
+
+		System.out.println(errorMessage);
+
+		return errorMessage;
+	}	
 
 }
