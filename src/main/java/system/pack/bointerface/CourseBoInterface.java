@@ -1,6 +1,7 @@
 package system.pack.bointerface;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
@@ -30,6 +31,8 @@ public interface CourseBoInterface {
 	public JsonResponse searchEvaluationsByCourse(CourseBean courseBean, BindingResult bindingResult);
 	
 	public JsonResponse searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
+
+	public String createExcel(MultipartFile file);
 
 	
 }

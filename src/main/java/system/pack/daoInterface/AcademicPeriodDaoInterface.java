@@ -24,4 +24,7 @@ public interface AcademicPeriodDaoInterface {
 
 	public AcademicPeriodEntity getlastRecord();
 	
+	public int getAcademicPeriodByName(String stringCellValue);
+
+	
 }

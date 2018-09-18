@@ -43,6 +43,7 @@
                     <li><a id="departments" href="#">Departamentos</a></li>
 <!--                     <li><a href="#">Personas</a></li> -->
                     <li><a id="academicPeriods" href="#">Periodos Academicos</a></li>
+                    <li><a id="courses" href="#">Cursos</a></li>
                 </ul>
             </nav>
             

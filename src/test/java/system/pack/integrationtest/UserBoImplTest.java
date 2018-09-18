@@ -74,8 +74,7 @@ public class UserBoImplTest {
 	@Test
 	public void givingInvalidUserWhenCreateUserThenReturnInvalidJsonResponse(){
 		
-		// Arrange
-		
+		// Arrange		
 		when(bindingResult.hasErrors()).thenReturn(true);
 		UserBean userBean = Mockito.mock(UserBean.class);
 		LinkedList<FieldError> errors = new LinkedList<FieldError>();
