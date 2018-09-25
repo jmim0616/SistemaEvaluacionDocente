@@ -1,6 +1,9 @@
+var arrayCourses = [];
+
 $(document)
 		.ready(
 				function() {
+					ajaxSearchCourses();
 
 					$('.sub-menu-content').click(function(e) {
 
@@ -55,6 +58,84 @@ $(document)
 					
 
 				});
+
+
+function AutocompleteForCourses() {
+
+	$("#groupIdSearch").autocomplete({
+		source : arrayCourses
+	});
+
+}
+
+function AutocompleteForSubjects() {
+
+	$("#subjectSearch").autocomplete({
+		source : arraySubjects
+	});
+
+}
+
+function AutocompleteForTeachers() {
+
+	$("#teacherSearch").autocomplete({
+		source : arrayTeachers
+	});
+
+}
+
+function AutocompleteForAcademicPeriods() {
+
+	$("#academicPeriodSearch").autocomplete({
+		source : arrayAcademicPeriods
+	});
+
+}
+
+
+function ajaxSearchCourses() {
+
+	$.ajax({
+		url : './Courses/GetCourses',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arrayCourses.push(jsonResponse.objectEntityList[key].groupId);
+
+			});
+
+		},
+		complete : function() {
+
+			AutocompleteForCourses();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
 
 function ajaxSearchCourse() {
 

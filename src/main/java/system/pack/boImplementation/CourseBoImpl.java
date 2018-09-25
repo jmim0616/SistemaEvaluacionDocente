@@ -102,6 +102,21 @@ public class CourseBoImpl implements CourseBoInterface {
 	private final String FILE_NAME = "courses";
 	
 	
+	
+	@Transactional
+	@Override
+	public JsonResponse<CourseBean, CourseEntity> getAllCourses() {
+
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+
+		List<CourseEntity> courses = courseDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(courses);
+
+		return jsonResponse;
+
+	}
+	
 	@Transactional
 	@Override
 	public JsonResponse<SubjectBean, SubjectEntity> getAllSubjects() {

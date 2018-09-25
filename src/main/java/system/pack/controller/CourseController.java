@@ -111,6 +111,8 @@ public class CourseController {
 		
 	}
 	
+	
+	
 	@GetMapping(value = "/AddFeedback")
 	public String showAddFeedbackCourseView(@RequestParam(name="groupId") String groupId, Model model) {
 		
@@ -128,6 +130,19 @@ public class CourseController {
 
 		return "course-delete";
 		
+	}
+	
+	@PostMapping(value = "/GetCourses",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity>getCourses() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+		
+		jsonResponse = courseBoInterface.getAllCourses(); 
+		
+		return jsonResponse;
 	}
 	
 	@PostMapping(value = "/GetSubjects",  produces = MediaType.APPLICATION_JSON_VALUE)

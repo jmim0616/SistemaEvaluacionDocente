@@ -4,6 +4,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.entity.AcademicPeriodEntity;
+import system.pack.entity.CourseEntity;
 import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
@@ -45,6 +46,8 @@ public interface CourseBoInterface {
 	JsonResponse getAllAcademicPeriods();
 	
 	public JsonResponse validateCourseFeedbacksAdd();
+
+	public JsonResponse  getAllCourses();
 
 	
 }

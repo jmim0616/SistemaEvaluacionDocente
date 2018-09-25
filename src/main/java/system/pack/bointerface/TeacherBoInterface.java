@@ -31,4 +31,6 @@ public interface TeacherBoInterface {
 	
 	public JsonResponse searchSubjecstByTeacher(TeacherBean teacherBean, BindingResult bindingResult);
 
+	JsonResponse getAllTeachers();
+
 }

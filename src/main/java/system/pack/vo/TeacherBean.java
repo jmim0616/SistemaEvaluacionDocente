@@ -58,10 +58,11 @@ public class TeacherBean {
 
 	}
 
+
 	public TeacherBean(String teacherId, String teacherStatus, String name, String lastName, String identificationType,
 			String underDegree, String masterDegree, String doctorDegree, String institutionalMail, String personalMail,
 			String cellNumber, String homeNumber, String experience) {
-		
+
 		this.teacherId = teacherId;
 		this.teacherStatus = teacherStatus;
 		this.name = name;
@@ -75,7 +76,6 @@ public class TeacherBean {
 		this.cellNumber = cellNumber;
 		this.homeNumber = homeNumber;
 		this.experience = experience;
-
 	}
 
 	public String getTeacherId() {
@@ -190,6 +190,7 @@ public class TeacherBean {
 		this.subjectSearch = subjectSearch;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "TeacherBean [teacherId=" + teacherId + ", teacherStatus=" + teacherStatus + ", name=" + name

@@ -82,6 +82,22 @@ public class TeacherBoImpl implements TeacherBoInterface {
 	SubjectDaoJpaRepository subjectDaoJpaRepository;
 	
 	
+	
+	@Transactional
+	@Override
+	public JsonResponse<TeacherBean, TeacherEntity> getAllTeachers() {
+
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+
+		List<TeacherEntity> teachers = teacherDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(teachers);
+
+		return jsonResponse;
+
+	}
+	
+	
 	@Transactional
 	@Override
 	public JsonResponse<SubjectBean, SubjectEntity> getAllSubjects() {

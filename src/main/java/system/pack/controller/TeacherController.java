@@ -122,6 +122,19 @@ public class TeacherController {
 		
 	}
 	
+	@PostMapping(value = "/GetTeachers",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<TeacherBean, TeacherEntity> getTeachers() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		jsonResponse = teacherBoInterface.getAllTeachers(); 
+		
+		return jsonResponse;
+	}
+	
 	@PostMapping(value = "/GetSubjects",  produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public JsonResponse<SubjectBean, SubjectEntity> getSubjects() {

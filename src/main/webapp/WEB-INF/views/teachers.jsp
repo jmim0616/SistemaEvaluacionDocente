@@ -7,9 +7,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
-<!--teacher -->
-<!-- <script type="text/javascript" -->
-<%-- 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script> --%>
 
 
 <script type="text/javascript"

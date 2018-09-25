@@ -6,13 +6,15 @@
 <!--Menu -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
+	
+		<!--course-create-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/course/course-create.js"></script>
 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/course/courses.js"></script>
 	
-	<!--course-create-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/course/course-create.js"></script>
+
 
 
 

@@ -153,11 +153,11 @@ function ajaxSearchTeachers() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arrayTeachers.push(jsonResponse.objectEntityList[key].name);
-
-
+				arrayTeachers.push(JSON.stringify(jsonResponse.objectEntityList[key].teacherId));
 
 			});
+			
+//			console.log(arrayTeachers);
 
 		},
 		complete : function() {
