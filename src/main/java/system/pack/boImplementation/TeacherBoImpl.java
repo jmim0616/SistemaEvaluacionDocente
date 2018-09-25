@@ -170,6 +170,8 @@ public class TeacherBoImpl implements TeacherBoInterface {
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 
 			if (bindingResult.hasErrors()) {
+				
+				Map<String, ArrayList<String>> errorMessages1;
 
 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
 						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));

@@ -20,10 +20,10 @@ public class UserBean {
 	@NotEmpty(message="El campo \"contraseña\" es requerido.")
 	private String password;
 	
-	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message="El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 	
-	@Pattern(regexp="([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message="El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message="El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String personalMail;
 
 	@NotEmpty(message="El campo \"nombre\" es requerido.")

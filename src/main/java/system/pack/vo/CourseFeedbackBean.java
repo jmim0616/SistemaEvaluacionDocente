@@ -38,6 +38,12 @@ public class CourseFeedbackBean {
 
 	}
 	
+	public CourseFeedbackBean(String course) {
+
+		this.course = course;
+
+	}
+	
 	public CourseFeedbackBean(String courseFeedBackId, String user, String feedBackType, String course,
 			String creationDate, String comment, String lastModifiedDate) {
 

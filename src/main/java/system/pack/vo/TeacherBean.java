@@ -33,10 +33,10 @@ public class TeacherBean {
 	@Pattern(regexp = "^([a-zA-Z-][a-zA-Z -]*){0,1}$", message = "El campo \"Titulo de Doctorado\" debe ser diligenciado solo con letras")
 	private String doctorDegree;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message = "El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+\\.[a-zA-Z]{2,4}){0,1}", message = "El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
 	private String personalMail;
 
 	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Telefono Celular\" solo se permiten numeros")
@@ -46,6 +46,8 @@ public class TeacherBean {
 	private String homeNumber;
 
 	private String experience;
+	
+	private String subjectSearch;
 
 	public TeacherBean() {
 
@@ -59,6 +61,7 @@ public class TeacherBean {
 	public TeacherBean(String teacherId, String teacherStatus, String name, String lastName, String identificationType,
 			String underDegree, String masterDegree, String doctorDegree, String institutionalMail, String personalMail,
 			String cellNumber, String homeNumber, String experience) {
+		
 		this.teacherId = teacherId;
 		this.teacherStatus = teacherStatus;
 		this.name = name;
@@ -72,6 +75,7 @@ public class TeacherBean {
 		this.cellNumber = cellNumber;
 		this.homeNumber = homeNumber;
 		this.experience = experience;
+
 	}
 
 	public String getTeacherId() {
@@ -178,6 +182,14 @@ public class TeacherBean {
 		this.experience = experience;
 	}
 
+	public String getSubjectSearch() {
+		return subjectSearch;
+	}
+
+	public void setSubjectSearch(String subjectSearch) {
+		this.subjectSearch = subjectSearch;
+	}
+
 	@Override
 	public String toString() {
 		return "TeacherBean [teacherId=" + teacherId + ", teacherStatus=" + teacherStatus + ", name=" + name
@@ -186,6 +198,9 @@ public class TeacherBean {
 				+ ", institutionalMail=" + institutionalMail + ", personalMail=" + personalMail + ", cellNumber="
 				+ cellNumber + ", homeNumber=" + homeNumber + ", experience=" + experience + "]";
 	}
+
+	
+	
 
 
 }

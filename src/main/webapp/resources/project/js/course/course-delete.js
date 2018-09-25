@@ -4,13 +4,13 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
+		$('#groupIdSearch').val($('#groupIdDelete').val());
 
-		$.get('./Teachers/Data', function(view) {
+		$.get('./Courses/Data', function(view) {
 
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 
-			ajaxSearchTeacher();
+			ajaxSearchCourse();
 
 		})
 
@@ -22,13 +22,13 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
+		$('#groupIdSearch').val($('#groupIdDelete').val());
 
-		$.get('./Teachers/Data', function(view) {
+		$.get('./Courses/Data', function(view) {
 
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 
-			ajaxSearchTeacher();
+			ajaxSearchCourse();
 
 		})
 
@@ -36,11 +36,11 @@ $(document).ready(function() {
 
 	});
 
-	$('#buttonUpdateStatusTeacher').click(function(event) {
+	$('#buttonDeleteCourse').click(function(event) {
 
 		event.preventDefault();
 
-		ajaxUpdateTeacherStatus();
+		ajaxDeleteCourse();
 
 	});
 
@@ -54,23 +54,22 @@ $(document).ready(function() {
 
 });
 
-function ajaxUpdateTeacherStatus() {
+function ajaxDeleteCourse() {
 
 	$('.modalContainer').show().fadeOut('slow');
 
-	var teacherId = $('#teacherIdUpdateStatus').val();
-	var teacherStatus = $('.status').text();
+	var groupId = $('#groupIdDelete').val();
 
 	var json = {
-		"teacherId" : teacherId,
-		"teacherStatus" : teacherStatus
+
+		"groupId" : groupId
 
 	}
 
 	console.log(json);
 
 	$.ajax({
-		url : "./Teachers/UpdateStatus",
+		url : "./Courses/Delete",
 		data : JSON.stringify(json),
 		contentType : "application/json",
 		method : "POST",
@@ -94,13 +93,13 @@ function ajaxUpdateTeacherStatus() {
 
 			$('.success').show().fadeIn('slow');
 
-			$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
+			$('#groupIdSearch').val($('#groupIdDelete').val());
 
-			$.get('./Teachers/Data', function(view) {
+			$.get('./Courses/Data', function(view) {
 
 				$('.content').fadeOut(0).html(view).fadeIn('slow');
 
-				ajaxSearchTeacher();
+				ajaxSearchCourse();
 
 			})
 

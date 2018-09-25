@@ -36,7 +36,7 @@ function ajaxCreateTeacher() {
 	$('#teacherIdCreateError').text('');
 	$('#nameCreateError').text('');
 	$('#lastNameCreateError').text('');
-	$('#identificationTypeCreateError option:selected').text('1');
+	$('#identificationTypeCreate option:selected').text('1');
 	$('#underDegreeCreateError').text('');
 	$('#masterDegreeCreateError').text('');
 	$('#masterDegreeCreateError').text('');
@@ -109,6 +109,9 @@ function ajaxCreateTeacher() {
 				} else {
 				
 				$('#teacherIdSearch').val($('#teacherIdCreate').val());
+				$('#nameSearch').val($('#nameCreate').val());
+//				$('#subjectSearch').val($('#').val());
+			
 				
 				$('#teacherIdCreate').val('');
 				$('#nameCreate').val('');

@@ -103,7 +103,6 @@ function ajaxCreateAcademicPeriod() {
 
 					$('#nameSearch').val(name);
 
-					$('#nameCreate2 option:selected').val('1');
 					$('#initialDateCreate').val('');
 					$('#endDateCreate').val('');
 

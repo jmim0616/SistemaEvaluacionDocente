@@ -4,13 +4,9 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-update-status.js"></script>
 
-
 <div class="updateTeacherStatus">
 
-
-	<h2>DOCENTES</h2>
-
-
+		<h2>DOCENTES</h2>
 
 	<div class="modalContainer">
 

@@ -55,6 +55,7 @@ $(document).ready(function() {
 	
 });
 
+
 $('#linkCreateExcelTeacher').click(function(event) {
 	
 	event.preventDefault();
@@ -66,13 +67,17 @@ $('#linkCreateExcelTeacher').click(function(event) {
 function ajaxSearchTeacher() {
 	
 	$('#teacherIdSearchError').text("");
+	$('#nameSearchError').text("");
+	$('#subjectSearchError').text("");
 	
 	var teacherId = $('#teacherIdSearch').val();
+	var name = $('#nameSearch').val();
+	var subjectSearch = $('#subjectSearch').val();
 	
 	var json = {
 		"teacherId" : teacherId,
-		"name": "noaplica",
-		"lastName": "noaplica"
+		"name": name,
+		"subjectSearch": subjectSearch
 	};
 	
 	$.ajax({
@@ -159,6 +164,11 @@ function ajaxSearchTeacher() {
 				} else {
 					
 					$('#teacherIdSearchError').append(jsonResponse.errorMessages.teacherId);
+					
+					$('#nameSearchError').append(jsonResponse.errorMessages.name);
+					
+					$('#subjectSearchError').append(jsonResponse.errorMessages.subjectSearch);
+					
 				}
 
 

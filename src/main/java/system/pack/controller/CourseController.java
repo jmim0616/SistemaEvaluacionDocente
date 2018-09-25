@@ -34,12 +34,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import system.pack.boImplementation.TeacherBoImpl;
 import system.pack.bointerface.CourseBoInterface;
+import system.pack.bointerface.DepartmentBoInterface;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
+import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
+import system.pack.entity.CourseFeedbackEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
+import system.pack.vo.AcademicPeriodBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByTeacherBean;
@@ -52,7 +57,8 @@ public class CourseController {
 
 	
 	@Autowired
-	CourseBoInterface CourseBoInterface;
+	CourseBoInterface courseBoInterface;
+	
 	
 	@GetMapping(value = "/")
 	public String showCoursesView(Model model) {
@@ -72,30 +78,7 @@ public class CourseController {
 		
 	}
 	
-	@PostMapping(value = "/CreateExcel", produces=MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public JsonResponse<CourseBean, CourseEntity> createCourseExcel( 
-			MultipartFile file) throws IOException {
-		
-		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<>();
-	   
-		if (file.getSize() == 0){
-			jsonResponse.setErrorMessage("Debe seleccionar un archivo en formato Excel.");
-			return jsonResponse;
-		}
-		
-	    String response = CourseBoInterface.createExcel(file);
-	    
-	    if (response == ""){
-	    	jsonResponse.setSuccessMessage("El archivo ha sido procesado exitosamente.");
-	    }
-	    else
-	    {
-	    	jsonResponse.setErrorMessage(response);
-	    }
-	
-		return jsonResponse;
-	}
+
 	
 	@GetMapping(value = "/CreateExcel")
 	public String showCreateExcelView(Model model) {
@@ -128,6 +111,101 @@ public class CourseController {
 		
 	}
 	
+	@GetMapping(value = "/AddFeedback")
+	public String showAddFeedbackCourseView(@RequestParam(name="groupId") String groupId, Model model) {
+		
+		model.addAttribute("courseFeedback", new CourseFeedbackBean(groupId));
+
+		return "course-add-feedbacks";
+		
+	}
+	
+	
+	@GetMapping(value = "/Delete")
+	public String showDeleteCourseView(@RequestParam(name="groupId") String groupId, Model model) {
+		
+		model.addAttribute("course", new CourseBean(groupId));
+
+		return "course-delete";
+		
+	}
+	
+	@PostMapping(value = "/GetSubjects",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<SubjectBean, SubjectEntity> getSubjects() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+		
+		jsonResponse = courseBoInterface.getAllSubjects(); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/GetTeachers",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<TeacherBean, TeacherEntity> getTeachers() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+		
+		jsonResponse = courseBoInterface.getAllTeachers(); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/GetAcademicPeriods",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> getAcademicPeriods() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> jsonResponse = new JsonResponse<AcademicPeriodBean, AcademicPeriodEntity>();
+		
+		jsonResponse = courseBoInterface.getAllAcademicPeriods(); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/ValidateCourseFeedbacksAdd",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> validateCourseFeedbacksAdd() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
+		
+		jsonResponse = courseBoInterface.validateCourseFeedbacksAdd(); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/CreateExcel", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity> createCourseExcel( 
+			MultipartFile file) throws IOException {
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<>();
+	   
+		if (file.getSize() == 0){
+			jsonResponse.setErrorMessage("Debe seleccionar un archivo en formato Excel.");
+			return jsonResponse;
+		}
+		
+	    String response = courseBoInterface.createExcel(file);
+	    
+	    if (response == ""){
+	    	jsonResponse.setSuccessMessage("El archivo ha sido procesado exitosamente.");
+	    }
+	    else
+	    {
+	    	jsonResponse.setErrorMessage(response);
+	    }
+	
+		return jsonResponse;
+	}
 	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -137,7 +215,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.create(courseBean, bindingResult); 
+		jsonResponse = courseBoInterface.create(courseBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -151,7 +229,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.search(courseBean, bindingResult); 
+		jsonResponse = courseBoInterface.search(courseBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -165,7 +243,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.update(courseBean, bindingResult); 
+		jsonResponse = courseBoInterface.update(courseBean, bindingResult); 
 		
 		return jsonResponse;
 	
@@ -180,7 +258,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.delete(courseBean, bindingResult); 
+		jsonResponse = courseBoInterface.delete(courseBean, bindingResult); 
 		
 		return jsonResponse;
 	
@@ -188,7 +266,7 @@ public class CourseController {
 	}
 	
 	
-	@PostMapping(value = "/CourseFeedbacks", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@PostMapping(value = "/AddFeedback", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
 
@@ -196,7 +274,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.addCourseFeedbacks(courseFeedbackBean, bindingResult); 
+		jsonResponse = courseBoInterface.addCourseFeedback(courseFeedbackBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -210,7 +288,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.searchAcademicPeriodsBySubjectOfTeacher(subjectBean, bindingResult); 
+		jsonResponse = courseBoInterface.searchAcademicPeriodsBySubjectOfTeacher(subjectBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -224,7 +302,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.searchEvaluationsByAcademicPeriodOfTeacher(subjectBean, bindingResult); 
+		jsonResponse = courseBoInterface.searchEvaluationsByAcademicPeriodOfTeacher(subjectBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -237,7 +315,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.searchEvaluationsByCourse(courseBean, bindingResult); 
+		jsonResponse = courseBoInterface.searchEvaluationsByCourse(courseBean, bindingResult); 
 		
 		return jsonResponse;
 	}
@@ -250,7 +328,7 @@ public class CourseController {
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = CourseBoInterface.searchCoursesBySubject(subjectBean, bindingResult); 
+		jsonResponse = courseBoInterface.searchCoursesBySubject(subjectBean, bindingResult); 
 		
 		return jsonResponse;
 	}

@@ -143,6 +143,8 @@ function ajaxAddSubjectsTeacher() {
 			if (jsonResponse.isValid) {
 				
 				$('#teacherIdSearch').val($('#teacherId').text());
+				$('#nameSearch').val($('#name').text());
+//				$('#subjectSearch').val($('#').val());
 				
 //				$('#teacherIdCreate').val('');
 //				$('#nameCreate').val('');
