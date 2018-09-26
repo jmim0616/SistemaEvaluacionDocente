@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLDataException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
+import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
 import system.pack.entity.SubjectEntity;
@@ -54,6 +56,7 @@ import system.pack.helper.Constants;
 import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
+import system.pack.vo.AcademicPeriodBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
@@ -94,6 +97,92 @@ public class CourseBoImpl implements CourseBoInterface {
 	CourseDaoJpaRepository courseDaoJpaRepository;
 	
 	private final String FILE_NAME = "courses";
+	
+	@Transactional
+	@Override
+	public JsonResponse<CourseBean, CourseEntity> getAllCourses() {
+
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+
+		List<CourseEntity> courses = courseDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(courses);
+
+		return jsonResponse;
+
+	}
+	
+	@Transactional
+	@Override
+	public JsonResponse<SubjectBean, SubjectEntity> getAllSubjects() {
+
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+
+		List<SubjectEntity> subjects = subjectDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(subjects);
+
+		return jsonResponse;
+
+	}
+	
+	
+	@Transactional
+	@Override
+	public JsonResponse<TeacherBean, TeacherEntity> getAllTeachers() {
+
+		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
+
+		List<TeacherEntity> teachers = teacherDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(teachers);
+
+		return jsonResponse;
+
+	}
+	
+	@Transactional
+	@Override
+	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> getAllAcademicPeriods() {
+
+		JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> jsonResponse = new JsonResponse<AcademicPeriodBean, AcademicPeriodEntity>();
+
+		List<AcademicPeriodEntity> academicPeriods = academicPeriodDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(academicPeriods);
+
+		return jsonResponse;
+
+	}
+	
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> validateCourseFeedbacksAdd() {
+		
+		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
+		
+		List<CourseFeedbackEntity> courseFeedbacks = courseFeedbackDaoJpaRepository.findAll();
+
+		Map<CourseFeedbackEntity, String> variableEntityStates = new HashMap<CourseFeedbackEntity, String>();
+		
+		for (CourseFeedbackEntity item : courseFeedbacks) {
+			//coevaluacion
+			if ((item.getFeedBackType().getFeedBackTypeId() == 1)) {
+				variableEntityStates.put(new CourseFeedbackEntity(item.getCourseFeedBackId(),null, item.getFeedBackType(),
+						null, null, null, null), "false");
+			}
+			//opnion del coordinador
+			if ((item.getFeedBackType().getFeedBackTypeId() == 3)) {
+				variableEntityStates.put(new CourseFeedbackEntity(item.getCourseFeedBackId(),null, item.getFeedBackType(),
+						null, null, null, null), "false");
+			}
+			
+		}
+		
+		jsonResponse.setVariableEntityStates(variableEntityStates);
+		
+		return jsonResponse;
+		
+	}
+	
 
 	@Transactional
 	@Override
@@ -300,7 +389,7 @@ public class CourseBoImpl implements CourseBoInterface {
 	
 	@Transactional
 	@Override
-	public JsonResponse<CourseBean, CourseEntity> addCourseFeedbacks(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
 		
 		try {
 
