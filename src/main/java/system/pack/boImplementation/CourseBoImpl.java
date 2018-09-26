@@ -131,6 +131,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	}
 	
+	
 	@Transactional
 	@Override
 	public JsonResponse<TeacherBean, TeacherEntity> getAllTeachers() {
