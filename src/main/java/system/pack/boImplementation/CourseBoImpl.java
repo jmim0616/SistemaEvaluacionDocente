@@ -480,6 +480,7 @@ public class CourseBoImpl implements CourseBoInterface {
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+						
 						courseEntity.setTeacher(new TeacherEntity((int)cell.getNumericCellValue()));
 					}
 				}

@@ -14,6 +14,8 @@
 	
 <div class="scroll academicProgramData">
 
+	<h2>PROGRAMAS ACADEMICOS</h2>
+
 	<h3>Resultado de Programas Academicos</h3>
 
 	<table id="tableAcademicProgramData" class="table standard-table">

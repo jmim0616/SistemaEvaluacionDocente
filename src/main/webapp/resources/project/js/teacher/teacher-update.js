@@ -9,6 +9,13 @@ $(document).ready(function() {
 		
 	});
 	
+	$('.error .close').click(function(event) {
+
+		event.preventDefault();
+
+		$('.error').show().fadeOut('slow');
+
+	});
 	
 	$('#buttonUpdateTeacher').click(function(event) {
 
@@ -29,7 +36,7 @@ function ajaxUpdateTeacher() {
 	$('#teacherIdUpdateError').text('');
 	$('#nameUpdateError').text('');
 	$('#lastNameUpdateError').text('');
-	$('#identificationTypeUpdateError option:selected').text('1');
+	$('#identificationTypeUpdate option:selected').text('1');
 	$('#underDegreeUpdateError').text('');
 	$('#masterDegreeUpdateError').text('');
 	$('#masterDegreeUpdateError').text('');
@@ -92,8 +99,18 @@ function ajaxUpdateTeacher() {
 			console.log(jsonResponse);
 			
 			if(jsonResponse.isValid) {
+				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+
+				} else {
 			
-				$('#teacherIdSearch').val($('#teacherIdUpdate').val());
+					$('#teacherIdSearch').val($('#teacherIdUpdate').val());
+					$('#nameSearch').val($('#nameUpdate').val());
+//					$('#subjectSearch').val($('#').val());
 				
 				$('#teacherIdUpdate').val('');
 				$('#nameUpdate').val('');
@@ -121,7 +138,7 @@ function ajaxUpdateTeacher() {
 					
 					})
 					
-				
+				}
 			
 			} else {
 

@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import system.pack.entity.AcademicPeriodEntity;
 
@@ -13,7 +14,7 @@ public interface AcademicPeriodDaoInterface {
 	
 	public AcademicPeriodEntity findById(int id);
 	
-	public AcademicPeriodEntity findByName(String name);
+	public Optional<AcademicPeriodEntity> findByName(String name);
 	
 	public AcademicPeriodEntity findByInitialDate(String initialDate);
 	
@@ -21,6 +22,9 @@ public interface AcademicPeriodDaoInterface {
 	
 	public List<AcademicPeriodEntity> findByYear(String year);
 
+	public AcademicPeriodEntity getlastRecord();
+	
 	public int getAcademicPeriodByName(String stringCellValue);
+
 	
 }

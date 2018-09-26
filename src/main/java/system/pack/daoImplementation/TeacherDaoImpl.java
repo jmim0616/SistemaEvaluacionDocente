@@ -2,6 +2,7 @@ package system.pack.daoImplementation;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -52,13 +53,13 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 	}
 	
 	@Override
-	public TeacherEntity findByName(String name) {
+	public Optional<TeacherEntity> findByName(String name) {
 		
 		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.name =:name", TeacherEntity.class);
 		
 		query.setParameter("name", name);
 		
-		TeacherEntity teacher = query.getSingleResult();
+		Optional<TeacherEntity> teacher = query.getResultList().stream().findFirst();
 		
 		return teacher;
 	}
@@ -90,11 +91,11 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 	}
 
 	@Override
-	public TeacherEntity findByTeacherStatusId(String teacherStatus) {
+	public TeacherEntity findByTeacherStatusId(int teacherStatusId) {
 		
-		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus.getTeacherStatusId() =:teacherStatus", TeacherEntity.class);
+		TypedQuery<TeacherEntity> query = entityManager.createQuery("select t from TeacherEntity t where t.teacherStatus.teacherStatusId =:teacherStatusId", TeacherEntity.class);
 		
-		query.setParameter("teacherStatus", teacherStatus);
+		query.setParameter("teacherStatusId", teacherStatusId);
 		
 		TeacherEntity teacher = query.getSingleResult();
 		

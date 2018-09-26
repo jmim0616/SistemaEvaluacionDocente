@@ -67,7 +67,7 @@ function ajaxShowUpdateSubject() {
 			$('#subjectIdUpdate').val(arrayItemsStandardTable[0]);
 			$('#disciplinaryAreaUpdate .actualValue').text(arrayItemsStandardTable[1]);
 			$('#nameUpdate').val(arrayItemsStandardTable[2]);
-			$('#numberOfCreditsUpdate .actualValue').val(arrayItemsStandardTable[3]);
+			$('#numberOfCreditsUpdate .actualValue').text(arrayItemsStandardTable[3]);
 			$('#academicProgramUpdate').val(arrayItemsStandardTable[4]);
 			$('#subjectStatusUpdate').val(arrayItemsStandardTable[5]);
 		

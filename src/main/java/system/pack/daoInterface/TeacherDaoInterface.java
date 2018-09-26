@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.validation.BindingResult;
 
@@ -18,13 +19,13 @@ public interface TeacherDaoInterface {
 	
 	public TeacherEntity findById(int id);
 	
-	public TeacherEntity findByName(String name);
+	public Optional<TeacherEntity> findByName(String name);
 	
 	public TeacherEntity findByLastName(String lastName);
 	
 	public TeacherEntity findByIdentificationType(String identificationType);
 	
-	public TeacherEntity findByTeacherStatusId(String teacherStatus);
+	public TeacherEntity findByTeacherStatusId(int teacherStatusId);
 	
 
 }

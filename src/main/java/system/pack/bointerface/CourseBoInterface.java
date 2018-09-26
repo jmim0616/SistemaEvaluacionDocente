@@ -3,9 +3,14 @@ package system.pack.bointerface;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import system.pack.entity.AcademicPeriodEntity;
+import system.pack.entity.CourseEntity;
+import system.pack.entity.CourseFeedbackEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
+import system.pack.vo.AcademicPeriodBean;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
@@ -22,7 +27,7 @@ public interface CourseBoInterface {
 	
 	public JsonResponse search(CourseBean courseBean, BindingResult bindingResult);
 	
-	public JsonResponse addCourseFeedbacks(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult);
+	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult);
 	
 	public JsonResponse searchAcademicPeriodsBySubjectOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
 	
@@ -33,6 +38,16 @@ public interface CourseBoInterface {
 	public JsonResponse searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
 
 	public String createExcel(MultipartFile file);
+
+	JsonResponse getAllSubjects();
+
+	JsonResponse getAllTeachers();
+
+	JsonResponse getAllAcademicPeriods();
+	
+	public JsonResponse validateCourseFeedbacksAdd();
+
+	public JsonResponse  getAllCourses();
 
 	
 }

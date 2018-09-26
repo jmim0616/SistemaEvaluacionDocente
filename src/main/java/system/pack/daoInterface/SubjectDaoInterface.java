@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
@@ -16,11 +17,13 @@ public interface SubjectDaoInterface {
 	
 	public SubjectEntity findById(int id);
 	
-	public SubjectEntity findByName(String name);
+	public Optional<SubjectEntity> findByName(String name);
 	
-	public SubjectEntity findByDisciplinaryAreaId(String disciplinaryArea);
+	public SubjectEntity findByDisciplinaryAreaId(int disciplinaryAreaId);
 	
-	public SubjectEntity findBySubjectStatusId(String subjectStatus);
+	public SubjectEntity findBySubjectStatusId(int subjectStatusId);
+	
+	public List<SubjectEntity> getAll();
 	
 
 }

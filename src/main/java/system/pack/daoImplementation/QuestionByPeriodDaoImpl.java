@@ -29,11 +29,11 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 		
 	}
 
-	public List<QuestionByPeriodEntity> findByDepartmentId(String department) {
+	public List<QuestionByPeriodEntity> findByDepartmentId(int departmentId) {
 		
-		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.department.getDepartmentId() =:department", QuestionByPeriodEntity.class);
+		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.department.departmentId =:departmentId", QuestionByPeriodEntity.class);
 		
-		query.setParameter("department", department);
+		query.setParameter("departmentId", departmentId);
 		
 		List<QuestionByPeriodEntity> questionsByPeriod = query.getResultList();
 		
@@ -41,23 +41,11 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 	}
 	
 	
-	public List<QuestionByPeriodEntity> findByCourseId(String course) {
+	public List<QuestionByPeriodEntity> findByCourseId(int courseId) {
 		
-		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.course.getCourseId() =:course", QuestionByPeriodEntity.class);
+		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.course.courseId =:courseId", QuestionByPeriodEntity.class);
 		
-		query.setParameter("course", course);
-		
-		List<QuestionByPeriodEntity> questionsByPeriod = query.getResultList();
-		
-		return questionsByPeriod;
-		
-	}
-	
-	public List<QuestionByPeriodEntity> findByQuestionId(String question) {
-		
-		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.question.getQuestionId() =:question", QuestionByPeriodEntity.class);
-		
-		query.setParameter("question", question);
+		query.setParameter("courseId", courseId);
 		
 		List<QuestionByPeriodEntity> questionsByPeriod = query.getResultList();
 		
@@ -65,11 +53,23 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 		
 	}
 	
-	public List<QuestionByPeriodEntity> findByAcademicPeriodId(String academicPeriod) {
+	public List<QuestionByPeriodEntity> findByQuestionId(int questionId) {
 		
-		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.academicPeriod.getAcademicPeriodId() =:academicPeriod", QuestionByPeriodEntity.class);
+		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.question.questionIds =:questionId", QuestionByPeriodEntity.class);
 		
-		query.setParameter("academicPeriod", academicPeriod);
+		query.setParameter("questionId", questionId);
+		
+		List<QuestionByPeriodEntity> questionsByPeriod = query.getResultList();
+		
+		return questionsByPeriod;
+		
+	}
+	
+	public List<QuestionByPeriodEntity> findByAcademicPeriodId(int academicPeriodId) {
+		
+		TypedQuery<QuestionByPeriodEntity> query = entityManager.createQuery("select qp from QuestionByPeriodEntity qp where qp.academicPeriod.academicPeriodId =:academicPeriodId", QuestionByPeriodEntity.class);
+		
+		query.setParameter("academicPeriodId", academicPeriodId);
 		
 		List<QuestionByPeriodEntity> questionsByPeriod = query.getResultList();
 		

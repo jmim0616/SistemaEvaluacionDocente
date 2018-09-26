@@ -1,6 +1,7 @@
 package system.pack.daoImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -45,23 +46,24 @@ public class DisciplinaryAreaDaoImpl implements DisciplinaryAreaDaoInterface {
 	}
 	
 	@Override
-	public DisciplinaryAreaEntity findByName(String name) {
+	public Optional<DisciplinaryAreaEntity> findByName(String name) {
 		
 		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.name =:name", DisciplinaryAreaEntity.class);
 		
 		query.setParameter("name", name);
 		
-		DisciplinaryAreaEntity disciplinaryArea = query.getSingleResult();
+		Optional<DisciplinaryAreaEntity> disciplinaryArea = query.getResultList().stream().findFirst();
 		
 		return disciplinaryArea;
 	}
 	
+	
 	@Override
-	public List<DisciplinaryAreaEntity> findByFacultyId(String faculty) {
+	public List<DisciplinaryAreaEntity> findByFacultyId(int facultyId) {
 		
-		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty.getFacultyId() =:faculty", DisciplinaryAreaEntity.class);
+		TypedQuery<DisciplinaryAreaEntity> query = entityManager.createQuery("select da from DisciplinaryAreaEntity da where da.faculty.facultyId =:facultyId", DisciplinaryAreaEntity.class);
 		
-		query.setParameter("faculty", faculty);
+		query.setParameter("facultyId", facultyId);
 		
 		List<DisciplinaryAreaEntity> disciplinaryAreas = query.getResultList();
 		

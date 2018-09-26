@@ -3,7 +3,13 @@
 <!--subject-create-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/subject/subject-create.js"></script>
+	
+<!-- taify -->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/vendors/js/tagify/tagify.min.js"></script>
 
+	 <link rel="stylesheet" type="text/css" 
+	 href="${pageContext.request.contextPath}/resources/vendors/js/tagify/tagify.css" />
 
 <div class="createTeacher scroll">
 
@@ -79,9 +85,8 @@
 				<td>
 
 					<fieldset>
-						<form:label path="academicProgram">Programas Académicos</form:label>
-						<form:input path="academicProgram" type="text"
-							id="academicProgramCreate" />
+						<label>Agregar Programas Academicos </label>
+						<textarea name="academicProgramCreate" id="academicProgramCreate" ></textarea>
 						<label id="academicProgramCreateError" class="validation-error">
 						</label>
 					</fieldset>

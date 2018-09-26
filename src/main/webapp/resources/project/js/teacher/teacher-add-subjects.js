@@ -1,4 +1,10 @@
+var arraySubjects = [];
+var arraySubjectsAdded = [];
+var arraySubjectsDeleted = [];
+
 $(document).ready(function() {
+	
+	ajaxSearchSubjects();
 
 	$('.success .close').click(function(event) {
 
@@ -9,70 +15,113 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#buttonCreateTeacher').click(function(event) {
+	$('#buttonAddSubjects').click(function(event) {
 
 		event.preventDefault();
 		
-		ajaxCreateTeacher();
+		ajaxAddSubjectsTeacher();
 
 	});
-
-
 
 	
 });
 
 
 
-function ajaxCreateTeacher() {
+function tagingSubjects() {
+
+	var input = document.querySelector('textarea[name=subjectAdd]'), tagify = new Tagify(
+			input, {
+				enforceWhitelist : true,
+				whitelist : arraySubjects,
+				dropdown : {
+					enabled : 2,
+					maxItems : 5
+				},
+			//    callbacks : {
+			//        add    : console.log,  // callback when adding a tag
+			//        remove : console.log   // callback when removing a tag
+			//    }
+			});
+
+	tagify.on('remove', function(e) {
+
+		arraySubjectsDeleted.push(e.detail.value);
+	});
+
+	tagify.on('add', function(e) {
+
+		arraySubjectsAdded.push(e.detail.value);
+	});
+
+}
+
+
+
+function ajaxSearchSubjects() {
+
+	$.ajax({
+		url : './Teachers/GetSubjects',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+
+				//$("#academicProgramCreate").append(arrayAcademicPrograms + " , ");
+
+			});
+
+		},
+		complete : function() {
+
+			tagingSubjects();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
+
+function ajaxAddSubjectsTeacher() {
 	
-	$('#teacherIdCreateError').text('');
-	$('#nameCreateError').text('');
-	$('#lastNameCreateError').text('');
-	$('#identificationTypeCreateError option:selected').text('1');
-	$('#underDegreeCreateError').text('');
-	$('#masterDegreeCreateError').text('');
-	$('#masterDegreeCreateError').text('');
-	$('#doctorDegreeCreateError').text('');
-	$('#institutionalMailCreateError').text('');
-	$('#personalMailCreateError').text('');
-	$('#cellNumberCreateError').text('');
-	$('#homeNumberCreateError').text('');
-	$('#experienceCreateError').text('');
-	
-	var teacherId = $('#teacherIdCreate').val();
-	var name = $('#nameCreate').val();
-	var lastName = $('#lastNameCreate').val();
-	var identificationType = $('#identificationTypeCreate option:selected').val();
-	var underDegree = $('#underDegreeCreate').val();
-	var masterDegree = $('#masterDegreeCreate').val();
-	var masterDegree = $('#masterDegreeCreate').val();
-	var doctorDegree = $('#doctorDegreeCreate').val();
-	var institutionalMail = $('#institutionalMailCreate').val();
-	var personalMail = $('#personalMailCreate').val();
-	var cellNumber = $('#cellNumberCreate').val();
-	var homeNumber = $('#homeNumberCreate').val();
-	var experience = $('#experienceCreate').val();
+	$('#subjectAddError').text('');
+
+	var teacher = $('#teacherId').text();
+	var subject = $('#subjectAdd').val();
 	
 	var json = {
-			"teacherId": teacherId,
-			"name": name,
-			"lastName": lastName,
-			"identificationType": identificationType,
-			"underDegree": underDegree,
-			"masterDegree": masterDegree,
-			"doctorDegree": doctorDegree,
-			"institutionalMail": institutionalMail,
-			"personalMail": personalMail,
-			"cellNumber": cellNumber,
-			"homeNumber": homeNumber,
-			"experience": experience
+			"teacher": teacher,
+			"subject": subject,
+			"subjectAdded" : arraySubjectsAdded,
+			"subjectDeleted" : arraySubjectsDeleted
 			}
 	
 	console.log(json);
 	
 	$.ajax({
-		url: "./Teachers/Create",
+		url: "./Teachers/AddSubjects",
 		data: JSON.stringify(json),
 		contentType : "application/json",
 		method: "POST",
@@ -93,21 +142,23 @@ function ajaxCreateTeacher() {
 			
 			if (jsonResponse.isValid) {
 				
-				$('#teacherIdSearch').val($('#teacherIdCreate').val());
+				$('#teacherIdSearch').val($('#teacherId').text());
+				$('#nameSearch').val($('#name').text());
+//				$('#subjectSearch').val($('#').val());
 				
-				$('#teacherIdCreate').val('');
-				$('#nameCreate').val('');
-				$('#lastNameCreate').val('');
-				$('#identificationTypeCreate option:selected').val('1');
-				$('#underDegreeCreate').val('');
-				$('#masterDegreeCreate').val('');
-				$('#masterDegreeCreate').val('');
-				$('#doctorDegreeCreate').val('');
-				$('#institutionalMailCreate').val('');
-				$('#personalMailCreate').val('');
-				$('#cellNumberCreate').val('');
-				$('#homeNumberCreate').val('');
-				$('#experienceCreate').val('');
+//				$('#teacherIdCreate').val('');
+//				$('#nameCreate').val('');
+//				$('#lastNameCreate').val('');
+//				$('#identificationTypeCreate option:selected').val('1');
+//				$('#underDegreeCreate').val('');
+//				$('#masterDegreeCreate').val('');
+//				$('#masterDegreeCreate').val('');
+//				$('#doctorDegreeCreate').val('');
+//				$('#institutionalMailCreate').val('');
+//				$('#personalMailCreate').val('');
+//				$('#cellNumberCreate').val('');
+//				$('#homeNumberCreate').val('');
+//				$('#experienceCreate').val('');
 				
 				
 				$('.success .message').text(jsonResponse.successMessage);
@@ -128,7 +179,7 @@ function ajaxCreateTeacher() {
 			
 			$.each(jsonResponse.errorMessages, function(key,value) {
 				
-				$("#"+key+"CreateError").text(value);
+				$("#"+key+"").text(value);
 				
 			})
 			

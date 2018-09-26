@@ -3,6 +3,7 @@ package system.pack.boImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,14 +62,24 @@ public class FacultyBoImpl implements FacultyBoInterface {
 
 			} else {
 
+				jsonResponse.setIsValid(true);
+				
+				Optional<FacultyEntity> faculty = facultyDaoInterface.findByName(facultyBean.getName());
+				
+				if (faculty.isPresent()) {
+					
+					jsonResponse.setErrorMessage("la facultad que se quiere registrar ya existe");
+				
+				} else {
+				
 				FacultyEntity facultyEntity = FacultyConverter.ConvertToEntity1(facultyBean);
 
 				facultyDaoInterface.create(facultyEntity);
-
-				jsonResponse.setIsValid(true);
-
+				
 				jsonResponse.setSuccessMessage("La facultad ha sido guardada con exito");
 
+			}
+				
 			}
 
 			return jsonResponse;
@@ -103,15 +114,25 @@ public class FacultyBoImpl implements FacultyBoInterface {
 
 			} else {
 				
+				jsonResponse.setIsValid(true);
+				
+				Optional<FacultyEntity> faculty = facultyDaoInterface.findByName(facultyBean.getName());
+				
+				if (faculty.isPresent() && faculty.get().getFacultyId() != Integer.parseInt(facultyBean.getFacultyId())) {
+					
+					jsonResponse.setErrorMessage("la facultad que se quiere modificar ya existe");
+				
+				} else {
+				
 				FacultyEntity facultyEntity = FacultyConverter.ConvertToEntity2(facultyBean);
 
 				facultyDaoInterface.update(facultyEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("La facultad ha sido modificada con exito");
 
 			}
+			
+		}
 
 			return jsonResponse;
 

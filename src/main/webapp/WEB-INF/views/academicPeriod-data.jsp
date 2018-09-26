@@ -16,7 +16,6 @@
 			<tr class="not">
 			
 				<th>Codigo</th>
-				<th>Codigo</th>
 				<th>Nombre</th>
 				<th>Fecha de Inicio</th>
 				<th>Fecha de Fin</th>

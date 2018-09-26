@@ -19,6 +19,8 @@ public class JsonResponse <T, S>  {
 	
 	private Map<String, String> errorMessages;
 	
+	private Map<S, String> variableEntityStates;
+	
 	private String successMessage;
 	
 	private String errorMessage;
@@ -75,6 +77,14 @@ public class JsonResponse <T, S>  {
 
 	public void setErrorMessages(Map<String, String> errorMessages) {
 		this.errorMessages = errorMessages;
+	}
+
+	public Map<S, String> getVariableEntityStates() {
+		return variableEntityStates;
+	}
+
+	public void setVariableEntityStates(Map<S, String> variableEntityStates) {
+		this.variableEntityStates = variableEntityStates;
 	}
 
 	public String getSuccessMessage() {

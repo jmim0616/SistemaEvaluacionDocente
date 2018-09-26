@@ -75,7 +75,7 @@ public class TeacherBoImplTest extends Mockito {
 		// arrange
 
 		TeacherBean teacherBean = new TeacherBean("12345", "", "Pedro", "Casas", "1", "Ingeniero de Sistemas",
-				"Maestria en Ingenieria", "", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
+				"Maestria en Ingenieria", "Doctorado en Ingenieria", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
 				"20 años como auditor");
 		
 		BindingResult bindingResult = mock(BindingResult.class);
@@ -131,13 +131,13 @@ public class TeacherBoImplTest extends Mockito {
 		// arrange
 
 		TeacherBean teacherBeanInitial = new TeacherBean("12345", "1", "Pedro", "Casas", "1", "Ingeniero de Sistemas",
-				"Maestria en Ingenieria", "", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
+				"Maestria en Ingenieria", "Doctorado en Ingenieria", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
 				"20 años como auditor");
 		
 		teacherDaoJpaRepository.save(TeacherConverter.ConvertToEntity(teacherBeanInitial));
 		
 		TeacherBean teacherBeanUpdated = new TeacherBean("12345", "1", "Pedro Alberto", "Casas Rojas", "2", "Ingeniero de Sistemas",
-				"Maestria en Ingenieria", "", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
+				"Maestria en Ingenieria", "Doctorado en Ingenieria", "pedro.casas@uao.edu.co", "pedro_casas@gmailcom", "9999999999", "9999999",
 				"20 años como auditor");
 		
 		int teacherId = 12345;

@@ -66,10 +66,10 @@ function ajaxSearchSubject() {
 	
 	$('#nameSearchError').text("");
 	
-	var nameSearch = $('#nameSearch').val();
+	var name = $('#nameSearch').val();
 	
 	var json = {
-		"name": "nameSearch",
+		"name": name
 	};
 	
 	$.ajax({
@@ -107,15 +107,15 @@ function ajaxSearchSubject() {
 						$('.error').show().fadeIn('slow');
 						
 					} else {
-						
+
 						$("#tableSubjectData").append(
 								"<tr>" +
-								"<td>"+ jsonResponse.objectBean.subjectId +"</td> " +
-								"<td>"+ jsonResponse.objectBean.disciplinaryArea +"</td> " +
-								"<td>"+ jsonResponse.objectBean.name +"</td> " +
-								"<td>"+ jsonResponse.objectBean.numberOfCredits +"</td> " +
-								"<td>"+ jsonResponse.objectBean.subjectStatus +"</td> " +
-								"<td>"+ jsonResponse.objectBean.academicProgram +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.subjectId +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.disciplinaryArea.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.numberOfCredits +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.academicProgram.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.subject.subjectStatus.status +"</td> " +
 								"<td>"+ '<div class="actions"> '+
 										 '<a class="button edit-button buttonUpdateSubjectToolbar">' +
 										 '<ion-icon name="create"></ion-icon>' +
@@ -127,6 +127,7 @@ function ajaxSearchSubject() {
 										  "</td> " +
 								"</tr>");
 
+					
 					
 					}
 					

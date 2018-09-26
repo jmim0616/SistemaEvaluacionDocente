@@ -35,6 +35,7 @@ $(document).ready(function() {
 		
 	});
 	
+	
 });
 
 
@@ -81,10 +82,8 @@ function ajaxUpdateSubjectStatus() {
 			
 			$('.success').show().fadeIn('slow');
 			
-			
-			$('#nameSearch').val($(arrayItemsStandardTable[2]).val());
-			
-			
+			$('#nameSearch').val(jsonResponse.objectBean.name);
+
 			$.get('./Subjects/Data', function(view){
 				
 				$('.content').fadeOut(0).html(view).fadeIn('slow');
@@ -92,6 +91,7 @@ function ajaxUpdateSubjectStatus() {
 				ajaxSearchSubject();
 				
 				})
+				
 			
 		},
 		error: function(){

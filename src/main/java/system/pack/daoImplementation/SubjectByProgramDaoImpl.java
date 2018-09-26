@@ -3,6 +3,7 @@ package system.pack.daoImplementation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,11 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByProgramEntity> findBySubjectId(String subject) {
+	public List<SubjectByProgramEntity> findBySubjectId(int subjectId) {
 
-		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.getSubjectId() =:subject", SubjectByProgramEntity.class);
+		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.subject.subjectId =:subjectId", SubjectByProgramEntity.class);
 		
-		query.setParameter("subject", subject);
+		query.setParameter("subjectId", subjectId);
 		
 		List<SubjectByProgramEntity> subjectsByProgram = query.getResultList();
 		
@@ -58,15 +59,28 @@ public class SubjectByProgramDaoImpl implements SubjectByProgramDaoInterface {
 	}
 
 	@Override
-	public List<SubjectByProgramEntity> findByAcademicProgramId(String academicProgram) {
+	public List<SubjectByProgramEntity> findByAcademicProgramId(int academicProgramId) {
 		
-		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.academicProgram.getAcademicProgramId() =:academicProgram", SubjectByProgramEntity.class);
+		TypedQuery<SubjectByProgramEntity> query = entityManager.createQuery("select sp from SubjectByProgramEntity sp where sp.academicProgram.academicProgramId =:academicProgramId", SubjectByProgramEntity.class);
 		
-		query.setParameter("academicProgram", academicProgram);
+		query.setParameter("academicProgramId", academicProgramId);
 		
 		List<SubjectByProgramEntity> subjectsByProgram = query.getResultList();
 		
 		return subjectsByProgram;
+		
+	}
+	
+	@Override
+	public void deleteByAcademicProgramIdSubjectId(int academicProgramId, int subjectId) {
+		
+		Query query = entityManager.createQuery("delete from SubjectByProgramEntity sp where sp.academicProgram.academicProgramId =:academicProgramId and sp.subject.subjectId =:subjectId");
+		
+		query.setParameter("academicProgramId", academicProgramId);
+		
+		query.setParameter("subjectId", subjectId);
+		
+		query.executeUpdate();
 		
 	}
 

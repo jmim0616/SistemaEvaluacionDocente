@@ -20,11 +20,11 @@ public interface CourseDaoInterface {
 	
 	public CourseEntity findById(int id);
 
-	public List<CourseEntity> findByAcademicPeriodId(String academicPeriod);
+	public List<CourseEntity> findByAcademicPeriodId(int academicPeriodId);
 	
-	public List<CourseEntity> findByTeacherId(String teacher);
+	public List<CourseEntity> findByTeacherId(int teacherId);
 	
-	public List<CourseEntity> findBySubjectId(String subject);
+	public List<CourseEntity> findBySubjectId(int subjectId);
 	
 	public List<AcademicPeriodEntity> searchAcademicPeriodsBySubjectOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
 	

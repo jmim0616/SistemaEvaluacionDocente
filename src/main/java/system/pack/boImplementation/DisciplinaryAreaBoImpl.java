@@ -3,6 +3,7 @@ package system.pack.boImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,14 +88,24 @@ public class DisciplinaryAreaBoImpl implements DisciplinaryAreaBoInterface {
 
 			} else {
 
+				jsonResponse.setIsValid(true);
+				
+				Optional<DisciplinaryAreaEntity> disciplinaryArea = disciplinaryAreaDaoInterface.findByName(disciplinaryAreaBean.getName());
+				
+				if (disciplinaryArea.isPresent()) {
+					
+					jsonResponse.setErrorMessage("El area disciplinaria que se quiere registrar ya existe");
+				
+				} else {
+				
 				DisciplinaryAreaEntity disciplinaryAreaEntity = DisciplinaryAreaConverter.ConvertToEntity1(disciplinaryAreaBean);
 
 				disciplinaryAreaDaoInterface.create(disciplinaryAreaEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("El area disciplinaria ha sido guardada con exito");
 
+			}
+				
 			}
 
 			return jsonResponse;
@@ -130,18 +141,28 @@ public class DisciplinaryAreaBoImpl implements DisciplinaryAreaBoInterface {
 
 			} else {
 				
-				DepartmentEntity departmentEntity = departmentDaoInterface.findByName(disciplinaryAreaBean.getDepartment());
+				jsonResponse.setIsValid(true);
+				
+				Optional<DisciplinaryAreaEntity> disciplinaryArea = disciplinaryAreaDaoInterface.findByName(disciplinaryAreaBean.getName());
+				
+				if (disciplinaryArea.isPresent() && disciplinaryArea.get().getDisciplinaryAreaId() != Integer.parseInt(disciplinaryAreaBean.getDisciplinaryAreaId())) {
+					
+					jsonResponse.setErrorMessage("El area disciplinaria que se quiere modificar ya existe");
+				
+				} else {
+				
+				Optional<DepartmentEntity> departmentEntity = departmentDaoInterface.findByName(disciplinaryAreaBean.getDepartment());
 
-				disciplinaryAreaBean.setDepartment(Integer.toString(departmentEntity.getDepartmentId()));
+				disciplinaryAreaBean.setDepartment(Integer.toString(departmentEntity.get().getDepartmentId()));
 				
 				DisciplinaryAreaEntity disciplinaryAreaEntity = DisciplinaryAreaConverter.ConvertToEntity2(disciplinaryAreaBean);
 
 				disciplinaryAreaDaoInterface.update(disciplinaryAreaEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("El area disciplinaria ha sido modificada con exito");
 
+			}
+				
 			}
 
 			return jsonResponse;

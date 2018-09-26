@@ -28,8 +28,6 @@ $(document).ready(function() {
 		$.get('./AcademicPeriods/Create', function(view){
 			
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-//			ajaxSearchAcademicPeriod();
 			
 			})
 		
@@ -44,7 +42,7 @@ $(document).ready(function() {
 			
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 
-//			ajaxSearchAcademicPeriod();
+			ajaxSearchAcademicPeriod();
 			
 			})
 			
@@ -60,14 +58,12 @@ $(document).ready(function() {
 
 function ajaxSearchAcademicPeriod() {
 	
-	$('#nameSearch').text("");
+	$('#nameSearchError').text("");
 	
 	var name = $('#nameSearch').val();
 	
 	var json = {
-		"name" : name,
-		"initialDate": "noaplica",
-		"endDate": "noaplica"
+		"name" : name
 	};
 	
 	$.ajax({
@@ -107,13 +103,13 @@ function ajaxSearchAcademicPeriod() {
 						$('.error').show().fadeIn('slow');
 						
 					} else {
-						
+					
 						$("#tableAcademicPeriodData").append(
 								"<tr>" +
-								"<td>"+ jsonResponse.objectBean.academicPeriodId +"</td> " +
-								"<td>"+ jsonResponse.objectBean.name +"</td> " +
-								"<td>"+ jsonResponse.objectBean.initialDate +"</td> " +
-								"<td>"+ jsonResponse.objectBean.endDate +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.academicPeriodId +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.name +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.initialDate +"</td> " +
+								"<td>"+ jsonResponse.objectEntity.endDate +"</td> " +
 								"<td>"+ '<div class="actions"> '+
 										 '<a class="button edit-button buttonUpdateAcademicPeriodToolbar">' +
 										 '<ion-icon name="create"></ion-icon>' +
@@ -121,7 +117,7 @@ function ajaxSearchAcademicPeriod() {
 										  '</div>' +
 										  "</td> " +
 								"</tr>" );
-
+						
 					
 					}
 					

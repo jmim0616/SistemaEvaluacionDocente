@@ -1,9 +1,9 @@
 <!--teacher-data-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-data.js"></script>
-	
-	
-<div class="scroll teacherData" >
+
+
+<div class="scroll teacherData">
 
 
 	<h2>DOCENTES</h2>
@@ -15,7 +15,7 @@
 		<thead>
 
 			<tr class="not">
-			
+
 				<th>Codigo</th>
 				<th>Nombre</th>
 				<th>Apellido</th>
@@ -28,16 +28,16 @@
 				<th>Telefono Fijo</th>
 				<th>Telefono Celular</th>
 				<th>Experiencia</th>
+				<th>Asignaturas</th>
 				<th>Estado</th>
 				<th>Acciones</th>
 			</tr>
 
 		</thead>
 
-		
+
 
 	</table>
-
 
 
 

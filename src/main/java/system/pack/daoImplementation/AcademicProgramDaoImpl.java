@@ -1,6 +1,7 @@
 package system.pack.daoImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -43,23 +44,23 @@ public class AcademicProgramDaoImpl implements AcademicProgramDaoInterface {
 	}
 	
 	@Override
-	public AcademicProgramEntity findByName(String name) {
+	public Optional<AcademicProgramEntity> findByName(String name) {
 		
 		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.name =:name", AcademicProgramEntity.class);
 		
 		query.setParameter("name", name);
 		
-		AcademicProgramEntity academicProgram = query.getSingleResult();
+		Optional<AcademicProgramEntity> academicProgram = query.getResultList().stream().findFirst();
 		
 		return academicProgram;
 	}
 	
 	@Override
-	public List<AcademicProgramEntity> findByFacultyId(String faculty) {
+	public List<AcademicProgramEntity> findByFacultyId(int facultyId) {
 		
-		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty.getFacultyId() =:faculty", AcademicProgramEntity.class);
+		TypedQuery<AcademicProgramEntity> query = entityManager.createQuery("select ap from AcademicProgramEntity ap where ap.faculty.facultyId =:facultyId", AcademicProgramEntity.class);
 		
-		query.setParameter("faculty", faculty);
+		query.setParameter("facultyId", facultyId);
 		
 		List<AcademicProgramEntity> academicPrograms = query.getResultList();
 		

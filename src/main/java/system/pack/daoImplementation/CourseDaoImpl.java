@@ -52,24 +52,11 @@ public class CourseDaoImpl implements CourseDaoInterface {
 	}
 	
 	@Override
-	public List<CourseEntity> findByAcademicPeriodId(String academicPeriod) {
+	public List<CourseEntity> findByAcademicPeriodId(int academicPeriodId) {
 		
-		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.academicPeriod.getAcademicPeriodId() =:academicPeriod", CourseEntity.class);
+		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.academicPeriod.academicPeriodId =:academicPeriodId", CourseEntity.class);
 		
-		query.setParameter("academicPeriod", academicPeriod);
-		
-		List<CourseEntity> courses = query.getResultList();
-		
-		return courses;
-		
-	}
-	
-	@Override
-	public List<CourseEntity> findByTeacherId(String teacher) {
-		
-		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.teacher.getTeacherId() =:teacher", CourseEntity.class);
-		
-		query.setParameter("teacher", teacher);
+		query.setParameter("academicPeriodId", academicPeriodId);
 		
 		List<CourseEntity> courses = query.getResultList();
 		
@@ -78,11 +65,24 @@ public class CourseDaoImpl implements CourseDaoInterface {
 	}
 	
 	@Override
-	public List<CourseEntity> findBySubjectId(String subject) {
+	public List<CourseEntity> findByTeacherId(int teacherId) {
 		
-		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.subject.getSubjectId() =:subject", CourseEntity.class);
+		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.teacher.teacherId =:teacherId", CourseEntity.class);
 		
-		query.setParameter("subject", subject);
+		query.setParameter("teacherId", teacherId);
+		
+		List<CourseEntity> courses = query.getResultList();
+		
+		return courses;
+		
+	}
+	
+	@Override
+	public List<CourseEntity> findBySubjectId(int subjectId) {
+		
+		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.subject.subjectId =:subjectId", CourseEntity.class);
+		
+		query.setParameter("subjectId", subjectId);
 		
 		List<CourseEntity> courses = query.getResultList();
 		

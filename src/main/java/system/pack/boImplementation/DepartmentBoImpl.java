@@ -3,6 +3,7 @@ package system.pack.boImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import system.pack.daoInterface.FacultyDaoInterface;
 import system.pack.daoInterface.FacultyDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
+import system.pack.entity.AcademicProgramEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
 import system.pack.entity.TeacherEntity;
@@ -78,14 +80,24 @@ public class DepartmentBoImpl implements DepartmentBoInterface {
 
 			} else {
 
+				jsonResponse.setIsValid(true);
+				
+				Optional<DepartmentEntity> department = departmentDaoInterface.findByName(departmentBean.getName());
+				
+				if (department.isPresent()) {
+					
+					jsonResponse.setErrorMessage("El departamento que se quiere registrar ya existe");
+				
+				} else {
+				
 				DepartmentEntity departmentEntity = DepartmentConverter.ConvertToEntity1(departmentBean);
 
 				departmentDaoInterface.create(departmentEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("El departamento ha sido guardado con exito");
 
+			}
+				
 			}
 
 			return jsonResponse;
@@ -123,18 +135,28 @@ public class DepartmentBoImpl implements DepartmentBoInterface {
 
 			} else {
 				
-				FacultyEntity facultyEntity = facultyDaoInterface.findByName(departmentBean.getFaculty());
+				jsonResponse.setIsValid(true);
+				
+				Optional<DepartmentEntity> department = departmentDaoInterface.findByName(departmentBean.getName());
+				
+				if (department.isPresent() && department.get().getDepartmentId() != Integer.parseInt(departmentBean.getDepartmentId())) {
+					
+					jsonResponse.setErrorMessage("El departamento que se quiere modificar ya existe");
+				
+				} else {
+				
+					Optional<FacultyEntity> facultyEntity = facultyDaoInterface.findByName(departmentBean.getFaculty());
 
-				departmentBean.setFaculty(Integer.toString(facultyEntity.getFacultyId()));
+				departmentBean.setFaculty(Integer.toString(facultyEntity.get().getFacultyId()));
 				
 				DepartmentEntity departmentEntity = DepartmentConverter.ConvertToEntity2(departmentBean);
 
 				departmentDaoInterface.update(departmentEntity);
 
-				jsonResponse.setIsValid(true);
-
 				jsonResponse.setSuccessMessage("El departamento ha sido modificado con exito");
-
+				
+				}
+				
 			}
 
 			return jsonResponse;

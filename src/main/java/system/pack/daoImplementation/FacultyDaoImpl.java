@@ -1,6 +1,7 @@
 package system.pack.daoImplementation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -41,13 +42,13 @@ public class FacultyDaoImpl implements FacultyDaoInterface {
 	}
 	
 	@Override
-	public FacultyEntity findByName(String name) {
+	public Optional<FacultyEntity> findByName(String name) {
 		
 		TypedQuery<FacultyEntity> query = entityManager.createQuery("select f from FacultyEntity f where f.name =:name", FacultyEntity.class);
 		
 		query.setParameter("name", name);
 		
-		FacultyEntity faculty = query.getSingleResult();
+		Optional<FacultyEntity> faculty = query.getResultList().stream().findFirst();
 		
 		return faculty;
 	}

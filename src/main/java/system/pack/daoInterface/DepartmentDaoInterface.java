@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.TeacherEntity;
@@ -14,7 +15,7 @@ public interface DepartmentDaoInterface {
 	
 	DepartmentEntity findById(int id);
 	
-	public DepartmentEntity findByName(String name);
+	public Optional<DepartmentEntity> findByName(String name);
 
 	List<DepartmentEntity> getAll();
 

@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.SubjectEntity;
@@ -16,18 +19,29 @@ public class CourseBean {
 	
 	private String courseId;
 	
+	@Pattern(regexp = "^[0-9]{4}\\-[0-9]{1}", message = "El campo \"Periodo Academico\" no cumple el formato adecuado. Ej: 2018-1")
 	private String academicPeriod;
 	
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Profesor\" debe ser diligenciado solo con letras")
 	private String teacher;
 	
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Asignatura\" debe ser diligenciado solo con letras")
 	private String subject;
 
+	@NotEmpty(message = "El campo \"Identificador de Grupo\" es requerido")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Identificador de Grupo\" solo se permiten numeros")
 	private String groupId;
 	
 	private String isVirtual;
 	
 	
 	public CourseBean() {
+
+	}
+	
+	public CourseBean(String groupId) {
+		
+		this.groupId = groupId;
 
 	}
 

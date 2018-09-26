@@ -7,9 +7,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
-<!--teacher -->
-<!-- <script type="text/javascript" -->
-<%-- 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher.js"></script> --%>
 
 
 <script type="text/javascript"
@@ -51,6 +48,19 @@
 								<form:label path="teacherId">Identificacion del Docente</form:label>
 								<form:input path="teacherId" type="text" id="teacherIdSearch" />
 								<label id="teacherIdSearchError" class="validation-error"> </label>
+							</fieldset>
+							
+							<fieldset>
+								<form:label path="name">Nombre del Docente</form:label>
+								<form:input path="name" type="text" id="nameSearch" />
+								<label id="nameSearchError" class="validation-error"> </label>
+							</fieldset>
+
+							<fieldset>
+									<form:label path="subjectSearch">Nombre de la Asignatura</form:label>
+									<form:input path="subjectSearch" type="text" id="subjectSearch" />
+									<label id="subjectSearchError" class="validation-error">
+									</label>
 							</fieldset>
 
 							<input id="buttonSearchTeacher" class="button sent-button"

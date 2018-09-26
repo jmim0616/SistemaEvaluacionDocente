@@ -55,6 +55,17 @@ function initTeacherData() {
 		ajaxShowUpdateStatusTeacher();
 
 	});
+	
+	
+	$('.buttonAddSubjectTeacherToolbar').click(function(event) {
+
+		event.preventDefault();
+		
+		obtainValuesTagTd(this);
+		
+		ajaxShowAddSubjectTeacher();
+
+	});
 
 	$('.error .close').click(function(event) {
 
@@ -125,9 +136,38 @@ function ajaxShowUpdateStatusTeacher() {
 		
 			$('.content').fadeOut(0).html(view).fadeIn('slow');
 			
-			$('#dialogModal .status').text(arrayItemsStandardTable[12]);
+			$('#dialogModal .status').text(arrayItemsStandardTable[13]);
 
 			$('.updateTeacherStatus .modalContainer').show().fadeIn('slow');
+			
+		}
+		
+	});
+
+}
+
+
+
+function ajaxShowAddSubjectTeacher() {
+	
+	$.ajax({ 
+		url : "./Teachers/AddSubjects",
+		method : 'GET',
+        beforeSend: function(xhr) {
+        	
+        },
+        success: function(view) {
+		
+			$('.content').fadeOut(0).html(view).fadeIn('slow');
+			
+			$('#teacherId').text(arrayItemsStandardTable[0]);
+			$('#name').text(arrayItemsStandardTable[1]);
+			$('#lastName').text(arrayItemsStandardTable[2]);
+			$('#underDegree').text(arrayItemsStandardTable[4]);
+			$('#masterDegree').text(arrayItemsStandardTable[5]);
+			$('#doctorDegree').text(arrayItemsStandardTable[6]);
+			$('#experience').text(arrayItemsStandardTable[11]);
+			$('#subjectAdd').val(arrayItemsStandardTable[12]);
 			
 		}
 		

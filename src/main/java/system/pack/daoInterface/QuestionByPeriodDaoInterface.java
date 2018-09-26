@@ -10,12 +10,12 @@ public interface QuestionByPeriodDaoInterface {
 	
 	public void create(QuestionByPeriodEntity questionByPeriodEntity);
 	
-	public List<QuestionByPeriodEntity> findByDepartmentId(String department);
+	public List<QuestionByPeriodEntity> findByDepartmentId(int departmentId);
 	
-	public List<QuestionByPeriodEntity> findByCourseId(String course);
+	public List<QuestionByPeriodEntity> findByCourseId(int courseId);
 	
-	public List<QuestionByPeriodEntity> findByQuestionId(String question);
+	public List<QuestionByPeriodEntity> findByQuestionId(int questionId);
 	
-	public List<QuestionByPeriodEntity> findByAcademicPeriodId(String academicPeriod);
+	public List<QuestionByPeriodEntity> findByAcademicPeriodId(int academicPeriodId);
 	
 }
