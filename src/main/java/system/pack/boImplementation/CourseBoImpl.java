@@ -424,13 +424,14 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
 
-		Iterator<Row> rowIt = xssfSheet.iterator();
-
-		Row row = rowIt.next();
+		Iterator<Row> rowIt = xssfSheet.rowIterator();	
 		
+		Row row;
 		
 		while (rowIt.hasNext()) {
 			
+			row = rowIt.next();	
+				
 			rows += 1;
 			position = 0;
 			courseEntity = new CourseEntity();
@@ -445,24 +446,24 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ " El periodo académico no puede estar vacio.";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						System.out.println("PA");
-						int academicPeriodId= academicPeriodDaoInterface.getAcademicPeriodByName(cell.getStringCellValue());
-						System.out.println("academicPeriodId " + academicPeriodId);
-						courseEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriodId));
+							System.out.println("PA");
+							int academicPeriodId= academicPeriodDaoInterface.getAcademicPeriodByName(cell.getStringCellValue());
+							System.out.println("academicPeriodId " + academicPeriodId);
+							if (academicPeriodId == 0){
+								isValidRow = false;
+								errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+										+ " El periodo académico no existe.";
+							}
+							courseEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriodId));
 						
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						isValidRow = false;
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El periodo académico no es válido.";
-					}
-					else if (cell.getCellType() == cell.CELL_TYPE_FORMULA){
-						System.out.println("It's numeric");
-					}
-					else{
-						System.out.println("Finally");
 					}
 				}
 				// Identificador del docente
@@ -470,6 +471,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
 								+ "El número de identificación del docente no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -486,6 +488,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
 								+ "El número de identificación de la asignatura no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -503,6 +506,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
 								+ "El número del grupo no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -520,6 +524,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "Debe indicarse si la asignatura es virtual o no.";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -530,19 +535,16 @@ public class CourseBoImpl implements CourseBoInterface {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El valor ingresado para indicar si la asignatura es virtual o no es inválido.";
 					}
-				}				
+				}			
+				
 				position++;
 			}
 
 			if (isValidRow) {
-				
-				System.out.println(courseEntity.toString());
-
 				// Insert
 				courseDaoInterface.create(courseEntity);
+				
 			}
-
-			row = rowIt.next();			
 		}
 
 		xssfWorkbook.close();
