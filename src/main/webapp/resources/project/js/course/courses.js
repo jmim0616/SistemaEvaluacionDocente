@@ -1,9 +1,16 @@
 var arrayCourses = [];
+var arraySubjects = [];
+var arrayTeachers = [];
+var arrayAcademicPeriods = [];
 
 $(document)
 		.ready(
 				function() {
+					
 					ajaxSearchCourses();
+					ajaxSearchSubjects();
+					ajaxSearchTeachers();
+					ajaxSearchAcademicPeriods();
 
 					$('.sub-menu-content').click(function(e) {
 
@@ -21,15 +28,7 @@ $(document)
 
 					});
 
-					$('#linkCreateCourse').click(
-							function(event) {
-
-								event.preventDefault();
-								
-								$('.createCourse .modalContainer').show().fadeIn('slow');
-
-							});
-
+					
 					$('#buttonSearchCourse').click(function(event) {
 
 						event.preventDefault();
@@ -43,9 +42,17 @@ $(document)
 						})
 
 					});
+					
+					$('#linkCreateCourse').click(function(event) {
 
-					$('#linkCreateExcelCourse')
-							.click(
+								event.preventDefault();
+								
+								$('.createCourse .modalContainer').show().fadeIn('slow');
+
+							});
+
+
+					$('#linkCreateExcelCourse').click(
 									function(event) {
 
 										event.preventDefault();
@@ -60,7 +67,7 @@ $(document)
 				});
 
 
-function AutocompleteForCourses() {
+function AutocompleteForCoursesSearch() {
 
 	$("#groupIdSearch").autocomplete({
 		source : arrayCourses
@@ -68,7 +75,7 @@ function AutocompleteForCourses() {
 
 }
 
-function AutocompleteForSubjects() {
+function AutocompleteForSubjectsSearch() {
 
 	$("#subjectSearch").autocomplete({
 		source : arraySubjects
@@ -76,7 +83,7 @@ function AutocompleteForSubjects() {
 
 }
 
-function AutocompleteForTeachers() {
+function AutocompleteForTeachersSearch() {
 
 	$("#teacherSearch").autocomplete({
 		source : arrayTeachers
@@ -84,7 +91,7 @@ function AutocompleteForTeachers() {
 
 }
 
-function AutocompleteForAcademicPeriods() {
+function AutocompleteForAcademicPeriodsSearch() {
 
 	$("#academicPeriodSearch").autocomplete({
 		source : arrayAcademicPeriods
@@ -123,7 +130,142 @@ function ajaxSearchCourses() {
 		},
 		complete : function() {
 
-			AutocompleteForCourses();
+			AutocompleteForCoursesSearch();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
+function ajaxSearchSubjects() {
+
+	$.ajax({
+		url : './Courses/GetSubjects',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+
+
+
+			});
+
+		},
+		complete : function() {
+
+			AutocompleteForSubjectsSearch();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
+
+function ajaxSearchTeachers() {
+
+	$.ajax({
+		url : './Courses/GetTeachers',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arrayTeachers.push(JSON.stringify(jsonResponse.objectEntityList[key].teacherId));
+
+			});
+			
+//			console.log(arrayTeachers);
+
+		},
+		complete : function() {
+
+			AutocompleteForTeachersSearch();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
+
+function ajaxSearchAcademicPeriods() {
+
+	$.ajax({
+		url : './Courses/GetAcademicPeriods',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arrayAcademicPeriods.push(jsonResponse.objectEntityList[key].name);
+
+			});
+
+		},
+		complete : function() {
+
+			AutocompleteForAcademicPeriodsSearch();
 
 		},
 		error : function() {

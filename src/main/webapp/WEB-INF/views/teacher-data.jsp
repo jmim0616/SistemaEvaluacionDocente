@@ -2,6 +2,10 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-data.js"></script>
 
+<!--teacher-update-status-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-update-status.js"></script>
+
 
 <div class="scroll teacherData">
 
@@ -39,6 +43,7 @@
 
 	</table>
 
+	<%@include file="/WEB-INF/views/teacher-update-status.jsp"%>
 
 
 </div>

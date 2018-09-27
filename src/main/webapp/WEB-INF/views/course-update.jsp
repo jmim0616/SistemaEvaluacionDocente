@@ -28,7 +28,7 @@
 								<td>
 									<fieldset>
 										<form:label path="groupId">Identificador de Grupo</form:label>
-										<form:input path="groupId" type="text" id="groupIdUpdate" />
+										<form:input path="groupId" type="text" id="groupIdUpdate" disabled="true"/>
 										<label id="groupIdUpdateError" class="validation-error">
 										</label>
 									</fieldset>

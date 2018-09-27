@@ -91,6 +91,8 @@ public class CourseController {
 	@GetMapping(value = "/Data")
 	public String showDataCourseView(Model model) {
 
+		model.addAttribute("course", new CourseBean());
+		
 		return "course-data";
 		
 	}

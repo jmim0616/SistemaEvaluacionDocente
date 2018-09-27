@@ -1,5 +1,13 @@
 $(document).ready(function() {
 	
+	$('#buttonUpdateUser').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxUpdateUser();
+
+	});
+	
 	$('.updateUser #buttonCancel').click(function(event) {
 
 		event.preventDefault();
@@ -16,6 +24,8 @@ $(document).ready(function() {
 
 	});
 
+
+
 	$('.success .close').click(function (event){
 		
 		event.preventDefault();
@@ -24,15 +34,6 @@ $(document).ready(function() {
 		
 	}); 
 	
-	
-	$('#buttonUpdateUser').click(function(event) {
-
-		event.preventDefault();
-		
-		ajaxUpdateUser();
-
-	});
-
 	
 });
 
@@ -107,6 +108,16 @@ function ajaxUpdateUser() {
 			
 			if(jsonResponse.isValid) {
 				
+				if (jsonResponse.errorMessage != null) {
+
+					$('.error .message').text(jsonResponse.errorMessage);
+
+					$('.error').show().fadeIn('slow');
+
+					$('.updateUser .modalContainer').show().fadeOut('slow');
+
+				} else {
+				
 				$('#userIdUpdate').val('');
 				$('#maskUpdate').val('');
 				$('#nameUpdate').val('');
@@ -129,7 +140,7 @@ function ajaxUpdateUser() {
 					
 					})
 					
-				
+			}	
 			
 			} else {
 

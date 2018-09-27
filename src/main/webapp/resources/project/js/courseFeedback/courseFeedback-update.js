@@ -1,39 +1,39 @@
 $(document).ready(function() {
 
-	$('#buttonCreateDisciplinaryArea').click(function(event) {
+	$('#buttonUpdateCourseFeedback').click(function(event) {
 
 		event.preventDefault();
 		
-		ajaxCreateDisciplinaryArea();
+		ajaxUpdateCourseFeedback();
 
 	});
+
 	
-	
-	$('.createDisciplinaryArea #buttonCancel').click(function(event) {
+	$('.updateCourseFeedback #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.createDisciplinaryArea .modalContainer').show().fadeOut('slow');
+		$('.updateCourseFeedback .modalContainer').show().fadeOut('slow');
 
 	});
 	
-	$('.createDisciplinaryArea #closeModal').click(function(event) {
+	$('.updateCourseFeedback #closeModal').click(function(event) {
 
 		event.preventDefault();
 		
-		$('.createDisciplinaryArea .modalContainer').show().fadeOut('slow');
+		$('.updateCourseFeedback .modalContainer').show().fadeOut('slow');
 
 	});
-	
 
+	
 	$('.success .close').click(function(event) {
 
 		event.preventDefault();
-
+		
 		$('.success').show().fadeOut('slow');
-
+		
 	});
-
+	
 	$('.error .close').click(function(event) {
 
 		event.preventDefault();
@@ -42,26 +42,30 @@ $(document).ready(function() {
 
 	});
 	
+
+	
 });
 
 
 
-function ajaxCreateDisciplinaryArea() {
+function ajaxUpdateCourseFeedback() {
 	
-	$('#nameCreateError').text('');
+	$('#commentUpdateError').text('');
 	
-	var department = $('#departmentCreate option:selected').val();
-	var name = $('#nameCreate').val();
+	var courseFeedBackId = $('#courseFeedBackIdUpdate').val();
+	var comment = $('#commentUpdate').val();
 	
 	var json = {
-			"department": department,
-			"name": name
+			
+			"courseFeedBackId": courseFeedBackId,
+			"comment": comment
+			
 			}
 	
 	console.log(json);
 	
 	$.ajax({
-		url: "./DisciplinaryAreas/Create",
+		url: "./CourseFeedbacks/Update",
 		data: JSON.stringify(json),
 		contentType : "application/json",
 		method: "POST",
@@ -81,39 +85,40 @@ function ajaxCreateDisciplinaryArea() {
 			console.log(jsonResponse);
 
 			if (jsonResponse.isValid) {
-
+				
 				if (jsonResponse.errorMessage != null) {
 
 					$('.error .message').text(jsonResponse.errorMessage);
 
 					$('.error').show().fadeIn('slow');
 					
-					$('.createDisciplinaryArea .modalContainer').show().fadeOut('slow');
+					$('.updateCourseFeedback .modalContainer').show().fadeOut('slow');
 
 				} else {
 				
-				$('#nameCreate').val('');
-
+				$('#commentUpdate').val('');
+				
 				$('.success .message').text(jsonResponse.successMessage);
-
+				
 				$('.success').show().fadeIn('slow');
 				
-				$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
-					  $('.content').fadeOut(0).html(view).fadeIn('slow');
-					}).done(function() {
-						ajaxSearchDisciplinaryArea();
-					  });
+//				$.get('./Courses/Data', function(view, status, xhr){
+//					  $('.content').fadeOut(0).html(view).fadeIn('slow');
+//					}).done(function() {
+//						ajaxSearchDepartment();
+//					  });
 
 			}
-			
+				
 			} else {
 
-				$.each(jsonResponse.errorMessages, function(key, value) {
-
-					$("#" + key + "CreateError").text(value);
-
-				})
-
+			
+			$.each(jsonResponse.errorMessages, function(key,value) {
+				
+				$("#"+key+"UpdateError").text(value);
+				
+			})
+			
 			}
 			
 		},

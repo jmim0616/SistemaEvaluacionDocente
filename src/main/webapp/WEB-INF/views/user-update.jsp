@@ -1,8 +1,7 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
 
-<div class="updateUser">
-
+<div class="updateUser" >
 
 	<div class="modalContainer">
 

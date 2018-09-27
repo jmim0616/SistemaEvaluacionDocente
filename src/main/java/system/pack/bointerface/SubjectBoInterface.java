@@ -3,6 +3,7 @@ package system.pack.bointerface;
 import org.springframework.validation.BindingResult;
 
 import system.pack.entity.DisciplinaryAreaEntity;
+import system.pack.entity.SubjectEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.DisciplinaryAreaBean;
 import system.pack.vo.SubjectBean;
@@ -21,6 +22,8 @@ public interface SubjectBoInterface {
 	public JsonResponse getAllDisciplinaryAreas();
 	
 	public JsonResponse getAllAcademicPrograms();
+
+	JsonResponse getAllSubjects();
 	
 	
 }

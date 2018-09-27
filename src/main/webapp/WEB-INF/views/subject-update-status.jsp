@@ -1,15 +1,7 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--subject-update-status-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/subject/subject-update-status.js"></script>
-
 
 <div class="updateSubjectStatus">
-
-
-	<h2>ASIGNATURAS</h2>
-
 
 
 	<div class="modalContainer">

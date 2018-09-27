@@ -31,6 +31,17 @@ $(document).ready(function() {
 		$('.content').fadeOut(0).load('./Teachers/Create').fadeIn('slow');
 
 	});
+	
+	$('#linkCreateExcelTeacher').click(
+			function(event) {
+
+				event.preventDefault();
+
+				$('.content')
+						.html(
+								'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
+
+			});
 
 	$('#buttonSearchTeacher').click(function(event) {
 
@@ -54,7 +65,7 @@ $(document).ready(function() {
 
 
 
-function AutocompleteForTeachersId() {
+function AutocompleteForTeachersIdSearch() {
 
 	$("#teacherIdSearch").autocomplete({
 		source : arrayTeachersId
@@ -62,7 +73,7 @@ function AutocompleteForTeachersId() {
 
 }
 
-function AutocompleteForTeachersName() {
+function AutocompleteForTeachersNameSearch() {
 
 	$("#nameSearch").autocomplete({
 		source : arrayTeachersName
@@ -71,7 +82,7 @@ function AutocompleteForTeachersName() {
 }
 
 
-function AutocompleteForSubjects() {
+function AutocompleteForSubjectsSearch() {
 
 	$("#subjectSearch").autocomplete({
 		source : arraySubjects
@@ -83,8 +94,7 @@ function AutocompleteForSubjects() {
 
 function ajaxSearchTeachers() {
 
-	$
-			.ajax({
+	$.ajax({
 				url : './Courses/GetTeachers',
 				contentType : 'application/json',
 				method : 'POST',
@@ -120,8 +130,8 @@ function ajaxSearchTeachers() {
 				},
 				complete : function() {
 
-					AutocompleteForTeachersId();
-					AutocompleteForTeachersName();
+					AutocompleteForTeachersIdSearch();
+					AutocompleteForTeachersNameSearch();
 
 				},
 				error : function() {
@@ -133,6 +143,7 @@ function ajaxSearchTeachers() {
 			});
 
 }
+
 
 function ajaxSearchSubjects() {
 
@@ -164,7 +175,7 @@ function ajaxSearchSubjects() {
 		},
 		complete : function() {
 
-			AutocompleteForSubjects();
+			AutocompleteForSubjectsSearch();
 
 		},
 		error : function() {
@@ -177,17 +188,7 @@ function ajaxSearchSubjects() {
 
 }
 
-$('#linkCreateExcelTeacher')
-		.click(
-				function(event) {
 
-					event.preventDefault();
-
-					$('.content')
-							.html(
-									'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
-
-				});
 
 function ajaxSearchTeacher() {
 
@@ -340,34 +341,34 @@ function ajaxSearchTeacher() {
 
 }
 
-function ajaxShow() {
-
-	$.ajax({
-		// url : "./Teachers/Data",
-		method : 'GET',
-		beforeSend : function(xhr) {
-
-		},
-		done : function(view) {
-
-		},
-		success : function(view) {
-
-			//			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			//        	$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
-
-			//			$('.content').html(view);
-
-			//			ajaxSearchTeacher();
-
-			console.log("AAAAAAAAAAAA");
-
-		},
-		complete : function() {
-
-		},
-
-	});
-
-}
+//function ajaxShow() {
+//
+//	$.ajax({
+//		// url : "./Teachers/Data",
+//		method : 'GET',
+//		beforeSend : function(xhr) {
+//
+//		},
+//		done : function(view) {
+//
+//		},
+//		success : function(view) {
+//
+//			//			$('.content').fadeOut(0).html(view).fadeIn('slow');
+//
+//			//        	$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
+//
+//			//			$('.content').html(view);
+//
+//			//			ajaxSearchTeacher();
+//
+//			console.log("AAAAAAAAAAAA");
+//
+//		},
+//		complete : function() {
+//
+//		},
+//
+//	});
+//
+//}

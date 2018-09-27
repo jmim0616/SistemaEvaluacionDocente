@@ -1,46 +1,26 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
-
-		event.preventDefault();
-
-		$('#groupIdSearch').val($('#groupIdDelete').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
-
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
-	$('#closeModal').click(function(event) {
-
-		event.preventDefault();
-
-		$('#groupIdSearch').val($('#groupIdDelete').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
-
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
 	$('#buttonDeleteCourse').click(function(event) {
 
 		event.preventDefault();
 
 		ajaxDeleteCourse();
+
+	});
+
+	$('.deleteCourse #buttonCancel').click(function(event) {
+
+		event.preventDefault();
+
+		$('.deleteCourse .modalContainer').show().fadeOut('slow');
+
+	});
+
+	$('.deleteCourse #closeModal').click(function(event) {
+
+		event.preventDefault();
+
+		$('.deleteCourse .modalContainer').show().fadeOut('slow');
 
 	});
 
@@ -55,8 +35,6 @@ $(document).ready(function() {
 });
 
 function ajaxDeleteCourse() {
-
-	$('.modalContainer').show().fadeOut('slow');
 
 	var groupId = $('#groupIdDelete').val();
 
@@ -87,21 +65,28 @@ function ajaxDeleteCourse() {
 
 			console.log(jsonResponse);
 
-			$('.modalContainer').show().fadeOut('slow');
+			if (jsonResponse.isValid) {
 
-			$('.success .message').text(jsonResponse.successMessage);
+				if (jsonResponse.errorMessage != null) {
 
-			$('.success').show().fadeIn('slow');
+					$('.error .message').text(jsonResponse.errorMessage);
 
-			$('#groupIdSearch').val($('#groupIdDelete').val());
+					$('.error').show().fadeIn('slow');
 
-			$.get('./Courses/Data', function(view) {
+					$('.deleteCourse .modalContainer').show().fadeOut('slow');
 
-				$('.content').fadeOut(0).html(view).fadeIn('slow');
+				} else {
+					
 
-				ajaxSearchCourse();
+					$('.success .message').text(jsonResponse.successMessage);
 
-			})
+					$('.success').show().fadeIn('slow');
+
+					$('.deleteCourse .modalContainer').show().fadeOut('slow');
+
+				}
+
+			}
 
 		},
 		error : function() {

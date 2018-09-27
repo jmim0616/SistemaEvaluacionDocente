@@ -14,18 +14,7 @@ $(document).ready(function() {
 		
 	});
 	
-	
-//	$('#linkSearchDepartment').click(function(event) {
-//
-//		event.preventDefault();
-//		
-//		$.get('./Departments/Data', function(view, status, xhr){
-//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-//			}).done(function() {
-//				ajaxSearchDepartment();
-//			  });
-//
-//	});
+
 	
 
 	

@@ -84,6 +84,8 @@ public class TeacherController {
 	@GetMapping(value = "/Data")
 	public String showDataTeacherView(Model model) {
 
+		model.addAttribute("teacher", new TeacherBean());
+		
 		return "teacher-data";
 		
 	}
@@ -101,6 +103,7 @@ public class TeacherController {
 	public String showUpdateTeacherStatusView(@RequestParam(name="teacherId") String teacherId, Model model) {
 		
 		model.addAttribute("teacher", new TeacherBean(teacherId));
+		
 		
 		return "teacher-update-status";
 		

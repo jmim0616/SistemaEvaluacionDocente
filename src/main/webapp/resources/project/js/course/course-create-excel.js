@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	$('#buttonCreateCourseExcel').click(function(event) {
+		event.preventDefault();
+		
+		ajaxCreateCourseExcel();
+
+	});
+	
 	$('.success .close', window.parent.document).click(function(event) {
 
 		event.preventDefault();
@@ -16,12 +23,7 @@ $(document).ready(function() {
 		
 	});
 	
-	$('#buttonCreateCourseExcel').click(function(event) {
-		event.preventDefault();
-		
-		ajaxCreateCourseExcel();
 
-	});
 
 	
 });

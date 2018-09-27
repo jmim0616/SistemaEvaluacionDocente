@@ -1,4 +1,11 @@
 $(document).ready(function() {
+	
+	$('#buttonCreateTeacherExcel').click(function(event) {
+		event.preventDefault();
+		
+		ajaxCreateTeacherExcel();
+
+	});
 
 	$('.success .close', window.parent.document).click(function(event) {
 
@@ -15,13 +22,7 @@ $(document).ready(function() {
 		$('.error .close', window.parent.document).show().fadeOut('slow');
 		
 	});
-	
-	$('#buttonCreateTeacherExcel').click(function(event) {
-		event.preventDefault();
-		
-		ajaxCreateTeacherExcel();
 
-	});
 
 	
 });

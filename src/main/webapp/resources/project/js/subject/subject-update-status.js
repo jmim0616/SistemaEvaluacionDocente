@@ -1,24 +1,5 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
-
-		event.preventDefault();
-		
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
-	
-	
-	$('#closeModal').click(function(event) {
-
-		event.preventDefault();
-		
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-	
-	
 	$('#buttonUpdateStatusSubject').click(function(event) {
 
 		event.preventDefault();
@@ -26,6 +7,24 @@ $(document).ready(function() {
 		ajaxUpdateSubjectStatus();
 
 	});
+	
+	$('.updateSubjectStatus #buttonCancel').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.updateSubjectStatus .modalContainer').show().fadeOut('slow');
+
+	});
+	
+	
+	$('.updateSubjectStatus #closeModal').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.updateSubjectStatus .modalContainer').show().fadeOut('slow');
+
+	});
+
 	
 	$('.success .close').click(function(event) {
 
@@ -41,8 +40,6 @@ $(document).ready(function() {
 
 
 function ajaxUpdateSubjectStatus() {
-	
-	$('.modalContainer').show().fadeOut('slow');
 	
 	var subjectId = $('#subjectIdUpdateStatus').val();
 	var subjectStatus = $('.status').text();
@@ -76,8 +73,7 @@ function ajaxUpdateSubjectStatus() {
 			
 			console.log(jsonResponse);
 			
-			$('.modalContainer').show().fadeOut('slow');
-			
+
 			$('.success .message').text(jsonResponse.successMessage);
 			
 			$('.success').show().fadeIn('slow');

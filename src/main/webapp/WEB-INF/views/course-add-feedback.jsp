@@ -1,12 +1,7 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--course-add-feedback-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/course/course-add-feedback.js"></script>
 
 <div class="addFeedbackCourse">
-
-	<h2>CURSOS</h2>
 
 	<div class="modalContainer">
 
@@ -37,7 +32,7 @@
 										</label>
 									</fieldset>
 								</td>
-							<tr>
+							</tr>
 							<tr>
 								<td>
 									<fieldset>
@@ -47,7 +42,8 @@
 										</label>
 									</fieldset>
 								</td>
-							<tr>
+							</tr>
+						
 						</table>
 
 

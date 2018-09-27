@@ -1,189 +1,68 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--teacher-update-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/teacher/teacher-update.js"></script>
+
+<div class="updateCourseFeedback">
 
 
-<div class="updateTeacher scroll">
+	<div class="modalContainer">
 
-	<h2>DOCENTES</h2>
+		<div class="modalDialog">
 
-	<h3>Modificar Docente</h3>
+			<section class="modalHeader">
+				<a href="#" id="closeModal">X</a>
+			</section>
 
-	<form:form id="formUpdateTeacher" modelAttribute="teacher">
+			<form:form id="formUpdateCourseFeedback" modelAttribute="courseFeedback">
+			
+				<form:hidden path="courseFeedBackId" id="courseFeedBackIdUpdate" />
 
-	<table>
+				<section class="modalBody">
 
-			<tr>
+					<h2 id="tittleModal">Modificar Retroalimentacion</h2>
+					<div id="dialogModal">
 
-				<td>
-					<fieldset class="row">
-						<form:label path="teacherId">Documento de Identificacion</form:label>
-						<form:input path="teacherId" type="text" id="teacherIdUpdate" disabled="true" />
-						<label id="teacherIdUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-				</td>
+						<table>
 
-				<td>
+							<tr>
+								<td>
+									<fieldset>
+										<form:label path="feedBackType">Tipo de Retroalimentacion</form:label>
+										<form:label path="feedBackType" id="feedBackTypeUpdate"></form:label>
+									</fieldset>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<fieldset>
+										<form:label path="comment">Comentario</form:label>
+										<form:textarea path="comment" id="commentUpdate" />
+										<label id="commentUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+								</td>
+							</tr>
 
-					<fieldset>
-						<form:label path="identificationType">Tipo de identificacion</form:label>
-						<form:select path="identificationType"
-							id="identificationTypeUpdate">
-							<option class="actualValue" hidden></option>
-							<option value="1">Cedula de Ciudadania</option>
-							<option value="2">Cedula de Extranjeria</option>
-						</form:select>
-					</fieldset>
-
-				</td>
-
-
-
-			</tr>
-
-			<tr>
-
-				<td>
-
-					<fieldset>
-						<form:label path="name">Nombre</form:label>
-						<form:input path="name" type="text" id="nameUpdate" />
-						<label id="nameUpdateError" class="validation-error"> </label>
-					</fieldset>
-
-				</td>
-
-				<td>
-
-					<fieldset>
-						<form:label path="lastName">Apellido</form:label>
-						<form:input path="lastName" type="text" id="lastNameUpdate" />
-						<label id="lastNameUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-
-					<fieldset>
-						<form:label path="underDegree">Titulo de Profesional</form:label>
-						<form:input path="underDegree" type="text" id="underDegreeUpdate" />
-						<label id="underDegreeUpdateError" class="validation-error">
-						</label>
-					</fieldset>
+						</table>
 
 
-				</td>
+
+					</div>
+
+				</section>
+
+				<section class="modalFooter">
+					<input id="buttonUpdateCourseFeedback" class="button edit-button"
+						type="submit" value="Modificar Retroalimentacion del Curso" /> <input
+						id="buttonCancel" class="button delete-button" type="submit"
+						value="Cancelar" />
+				</section>
+
+			</form:form>
+
+		</div>
+
+	</div>
 
 
-				<td>
-
-					<fieldset>
-						<form:label path="masterDegree">Titulo de Maestria</form:label>
-						<form:input path="masterDegree" type="text"
-							id="masterDegreeUpdate" />
-						<label id="masterDegreeUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-
-
-					<fieldset>
-						<form:label path="doctorDegree">Titulo de Doctorado</form:label>
-						<form:input path="doctorDegree" type="text"
-							id="doctorDegreeUpdate" />
-						<label id="doctorDegreeUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-				<td>
-
-					<fieldset>
-						<form:label path="institutionalMail">Correo Electronico Institucional</form:label>
-						<form:input path="institutionalMail" type="text"
-							id="institutionalMailUpdate" />
-						<label id="institutionalMailUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-
-					<fieldset>
-						<form:label path="personalMail">Correo Electronico Personal</form:label>
-						<form:input path="personalMail" type="text"
-							id="personalMailUpdate" />
-						<label id="personalMailUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-				<td>
-
-					<fieldset>
-						<form:label path="cellNumber">Telefono Celular</form:label>
-						<form:input path="cellNumber" type="text" id="cellNumberUpdate" />
-						<label id="cellNumberUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-
-				</td>
-
-			</tr>
-
-			<tr>
-				<td>
-					<fieldset>
-						<form:label path="homeNumber">Telefono Fijo</form:label>
-						<form:input path="homeNumber" type="text" id="homeNumberUpdate" />
-						<label id="homeNumberUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-
-				</td>
-
-				<td>
-					<fieldset>
-						<form:label path="experience">Experiencia</form:label>
-						<form:textarea path="experience" id="experienceUpdate" />
-						<label id="experienceUpdateError" class="validation-error">
-						</label>
-					</fieldset>
-				</td>
-
-			</tr>
-
-			<tr>
-				<td></td>
-
-				<td><input id="buttonUpdateTeacher" class="button edit-button"
-					type="submit" value="Modificar Docente" /></td>
-
-			</tr>
-
-		</table>
-
-	</form:form>
 
 </div>

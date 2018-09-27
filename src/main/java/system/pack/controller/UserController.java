@@ -62,6 +62,15 @@ public class UserController {
 		return "user-create";
 	}
 	
+	@GetMapping(value = "/Data")
+	public String showDataUserView(Model model) {
+
+		model.addAttribute("user", new UserBean());
+		
+		return "user-data";
+		
+	}
+	
 	@GetMapping(value = "/UpdateStatus")
 	public String showUpdateUserStatusView(@RequestParam(name="userId") int userId, Model model) {
 		
@@ -97,14 +106,7 @@ public class UserController {
 		return jsonResponse;
 	}
 	
-	@GetMapping(value = "/Data")
-	public String showDataUserView(Model model) {
 
-		model.addAttribute("user", new UserBean());
-		
-		return "user-data";
-		
-	}
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

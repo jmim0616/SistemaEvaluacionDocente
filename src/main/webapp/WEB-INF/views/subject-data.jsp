@@ -2,6 +2,11 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/subject/subject-data.js"></script>
 
+<!--subject-update-status-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/subject/subject-update-status.js"></script>
+
+
 
 <div class="scroll subjectData" >
 
@@ -29,5 +34,6 @@
 		
 	</table>
 
+	<%@include file="/WEB-INF/views/subject-update-status.jsp"%>
 
 </div>

@@ -1,20 +1,18 @@
 $(document).ready(function() {
 
 	ajaxSearchCourseFeedbacks();
+	
+	$('#buttonAddFeedbackCourse').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxAddFeedbackCourse();
+
+	});
 
 	$('.addFeedbackCourse #buttonCancel').click(function(event) {
 
 		event.preventDefault();
-
-		$('#groupIdSearch').val($('#courseAdd').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
 
 		$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
@@ -24,27 +22,11 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		$('#groupIdSearch').val($('#courseAdd').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
-
 		$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
 	});
 
-	$('#buttonAddFeedbackCourse').click(function(event) {
 
-		event.preventDefault();
-
-		ajaxAddFeedbackCourse();
-
-	});
 
 	$('.success .close').click(function(event) {
 
@@ -106,7 +88,6 @@ function ajaxSearchCourseFeedbacks() {
 
 function ajaxAddFeedbackCourse() {
 
-	$('#feedBackTypeAdd option:selected').text('1');
 	$('#commentAddError').text('');
 
 	var course = $('#courseAdd').val();
@@ -149,15 +130,13 @@ function ajaxAddFeedbackCourse() {
 					$('.error .message').text(jsonResponse.errorMessage);
 
 					$('.error').show().fadeIn('slow');
+					
+					$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
 				} else {
 
 					$('#groupIdSearch').val($('#courseAdd').val());
-					//					$('#teacherSearch').val($('#').val());
-					//					$('#subjectSearch').val($('#').val());
-					//					$('#academicPeriodSearch').val($('#').val());
 
-					$('#feedBackTypeAdd option:selected').text('1');
 					$('#commentAdd').val('');
 
 					$('.success .message').text(jsonResponse.successMessage);

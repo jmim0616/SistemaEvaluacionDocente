@@ -1,4 +1,12 @@
 $(document).ready(function() {
+	
+	$('#buttonUpdateStatusTeacher').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxUpdateTeacherStatus();
+
+	});
 
 	$('#buttonCancel').click(function(event) {
 
@@ -6,13 +14,6 @@ $(document).ready(function() {
 
 		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
 
-		$.get('./Teachers/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchTeacher();
-
-		})
 
 		$('.modalContainer').show().fadeOut('slow');
 
@@ -24,25 +25,10 @@ $(document).ready(function() {
 
 		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
 
-		$.get('./Teachers/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchTeacher();
-
-		})
-
 		$('.modalContainer').show().fadeOut('slow');
 
 	});
 
-	$('#buttonUpdateStatusTeacher').click(function(event) {
-
-		event.preventDefault();
-
-		ajaxUpdateTeacherStatus();
-
-	});
 
 	$('.success .close').click(function(event) {
 
@@ -55,8 +41,6 @@ $(document).ready(function() {
 });
 
 function ajaxUpdateTeacherStatus() {
-
-	$('.modalContainer').show().fadeOut('slow');
 
 	var teacherId = $('#teacherIdUpdateStatus').val();
 	var teacherStatus = $('.status').text();
@@ -88,12 +72,11 @@ function ajaxUpdateTeacherStatus() {
 
 			console.log(jsonResponse);
 
-			$('.modalContainer').show().fadeOut('slow');
-
 			$('.success .message').text(jsonResponse.successMessage);
 
 			$('.success').show().fadeIn('slow');
 
+			
 			$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
 
 			$.get('./Teachers/Data', function(view) {

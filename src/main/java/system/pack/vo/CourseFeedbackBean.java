@@ -34,6 +34,7 @@ public class CourseFeedbackBean {
 	
 	private String lastModifiedDate;
 
+	
 	public CourseFeedbackBean() {
 
 	}

@@ -3,8 +3,14 @@ var arrayAcademicPrograms = [];
 $(document).ready(function() {
 
 	ajaxSearchAcademicProgram();
-	
 
+	$('#buttonCreateSubject').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxCreateSubject();
+
+	});
 
 	$('.success .close').click(function(event) {
 
@@ -23,14 +29,6 @@ $(document).ready(function() {
 
 	});
 	
-
-	$('#buttonCreateSubject').click(function(event) {
-
-		event.preventDefault();
-
-		ajaxCreateSubject();
-
-	});
 
 });
 

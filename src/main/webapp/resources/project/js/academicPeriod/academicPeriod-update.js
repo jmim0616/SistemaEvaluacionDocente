@@ -1,6 +1,14 @@
 $(document).ready(function() {
 
 	setDates();
+	
+	$('#buttonUpdateAcademicPeriod').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxUpdateAcademicPeriod();
+
+	});
 
 	$('.success .close').click(function(event) {
 
@@ -18,13 +26,7 @@ $(document).ready(function() {
 
 	});
 	
-	$('#buttonUpdateAcademicPeriod').click(function(event) {
 
-		event.preventDefault();
-
-		ajaxUpdateAcademicPeriod();
-
-	});
 
 });
 
@@ -104,7 +106,7 @@ function ajaxUpdateAcademicPeriod() {
 
 				} else {
 
-					$('#nameSearch').val(name);
+				
 
 					$('#initialDateCreate').val('');
 					$('#endDateCreate').val('');
@@ -112,6 +114,8 @@ function ajaxUpdateAcademicPeriod() {
 					$('.success .message').text(jsonResponse.successMessage);
 
 					$('.success').show().fadeIn('slow');
+					
+					$('#nameSearch').val(name);
 
 						$.get('./AcademicPeriods/Data', function(view) {
 

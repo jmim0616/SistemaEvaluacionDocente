@@ -66,6 +66,20 @@ public class AcademicPeriodController {
 	}
 	
 	
+	@PostMapping(value = "/GetAcademicPeriods",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> getAcademicPeriods() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> jsonResponse = new JsonResponse<AcademicPeriodBean, AcademicPeriodEntity>();
+		
+		jsonResponse = academicPeriodBoInterface.getAllAcademicPeriods(); 
+		
+		return jsonResponse;
+	}
+	
+	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> createAcademicPeriod(@Valid @RequestBody AcademicPeriodBean academicPeriodBean, BindingResult bindingResult) {

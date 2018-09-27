@@ -13,7 +13,7 @@ import system.pack.entity.CourseFeedbackEntity;
 
 @Repository
 @Transactional
-public class CourseFeedBackDaoImpl implements CourseFeedbackDaoInterface {
+public class CourseFeedbackDaoImpl implements CourseFeedbackDaoInterface {
 
 	@Autowired
 	private EntityManager entityManager;

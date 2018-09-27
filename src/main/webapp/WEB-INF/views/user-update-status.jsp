@@ -1,16 +1,7 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--teacher-update-status-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/user/user-update-status.js"></script>
-
 
 <div class="updateUserStatus">
-
-
-	<h2>USUARIOS</h2>
-
-
 
 	<div class="modalContainer">
 

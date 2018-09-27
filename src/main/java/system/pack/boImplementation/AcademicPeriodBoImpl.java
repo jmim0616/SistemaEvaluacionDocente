@@ -45,6 +45,23 @@ public class AcademicPeriodBoImpl implements AcademicPeriodBoInterface {
 	@Autowired
 	AcademicPeriodDaoJpaRepository academicPeriodDaoJpaRepository;
 
+	
+	
+	@Transactional
+	@Override
+	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> getAllAcademicPeriods() {
+
+		JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> jsonResponse = new JsonResponse<AcademicPeriodBean, AcademicPeriodEntity>();
+
+		List<AcademicPeriodEntity> academicPeriods = academicPeriodDaoJpaRepository.findAll();
+
+		jsonResponse.setObjectEntityList(academicPeriods);
+
+		return jsonResponse;
+
+	}
+	
+	
 	@Transactional
 	@Override
 	public JsonResponse<AcademicPeriodBean, AcademicPeriodEntity> create(AcademicPeriodBean academicPeriodBean,

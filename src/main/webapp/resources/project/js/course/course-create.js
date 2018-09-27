@@ -1,12 +1,16 @@
-var arraySubjects = [];
-var arrayTeachers = [];
-var arrayAcademicPeriods = [];
-
 $(document).ready(function() {
+
+	AutocompleteForSubjectsCreate();
+	AutocompleteForTeachersCreate();
+	AutocompleteForAcademicPeriodsCreate();
 	
-	ajaxSearchSubjects();
-	ajaxSearchTeachers();
-	ajaxSearchAcademicPeriods();
+	$('#buttonCreateCourse').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxCreateCourse();
+
+	});
 	
 	$('.createCourse #buttonCancel').click(function(event) {
 
@@ -25,16 +29,6 @@ $(document).ready(function() {
 	});
 
 
-	
-	$('#buttonCreateCourse').click(function(event) {
-
-		event.preventDefault();
-		
-		ajaxCreateCourse();
-
-	});
-
-	
 	$('.success .close').click(function(event) {
 
 		event.preventDefault();
@@ -56,9 +50,7 @@ $(document).ready(function() {
 });
 
 
-
-
-function AutocompleteForSubjects() {
+function AutocompleteForSubjectsCreate() {
 
 	$("#subjectCreate").autocomplete({
 		source : arraySubjects
@@ -66,7 +58,7 @@ function AutocompleteForSubjects() {
 
 }
 
-function AutocompleteForTeachers() {
+function AutocompleteForTeachersCreate() {
 
 	$("#teacherCreate").autocomplete({
 		source : arrayTeachers
@@ -74,151 +66,13 @@ function AutocompleteForTeachers() {
 
 }
 
-function AutocompleteForAcademicPeriods() {
+function AutocompleteForAcademicPeriodsCreate() {
 
 	$("#academicPeriodCreate").autocomplete({
 		source : arrayAcademicPeriods
 	});
 
 }
-
-
-
-function ajaxSearchSubjects() {
-
-	$.ajax({
-		url : './Courses/GetSubjects',
-		contentType : 'application/json',
-		method : 'POST',
-		done : function() {
-
-		},
-		success : function(jsonResponse) {
-
-			if (typeof jsonResponse == "string") {
-
-				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
-
-				$('.error').show().fadeIn('slow');
-
-			}
-
-			console.log(jsonResponse);
-
-			$.each(jsonResponse.objectEntityList, function(key, value) {
-
-				arraySubjects.push(jsonResponse.objectEntityList[key].name);
-
-
-
-			});
-
-		},
-		complete : function() {
-
-			AutocompleteForSubjects();
-
-		},
-		error : function() {
-
-			console.log("No se ha podido obtener la información");
-
-		}
-
-	});
-
-}
-
-
-function ajaxSearchTeachers() {
-
-	$.ajax({
-		url : './Courses/GetTeachers',
-		contentType : 'application/json',
-		method : 'POST',
-		done : function() {
-
-		},
-		success : function(jsonResponse) {
-
-			if (typeof jsonResponse == "string") {
-
-				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
-
-				$('.error').show().fadeIn('slow');
-
-			}
-
-			console.log(jsonResponse);
-
-			$.each(jsonResponse.objectEntityList, function(key, value) {
-
-				arrayTeachers.push(JSON.stringify(jsonResponse.objectEntityList[key].teacherId));
-
-			});
-			
-//			console.log(arrayTeachers);
-
-		},
-		complete : function() {
-
-			AutocompleteForTeachers();
-
-		},
-		error : function() {
-
-			console.log("No se ha podido obtener la información");
-
-		}
-
-	});
-
-}
-
-
-function ajaxSearchAcademicPeriods() {
-
-	$.ajax({
-		url : './Courses/GetAcademicPeriods',
-		contentType : 'application/json',
-		method : 'POST',
-		done : function() {
-
-		},
-		success : function(jsonResponse) {
-
-			if (typeof jsonResponse == "string") {
-
-				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
-
-				$('.error').show().fadeIn('slow');
-
-			}
-
-			console.log(jsonResponse);
-
-			$.each(jsonResponse.objectEntityList, function(key, value) {
-
-				arrayAcademicPeriods.push(jsonResponse.objectEntityList[key].name);
-
-			});
-
-		},
-		complete : function() {
-
-			AutocompleteForAcademicPeriods();
-
-		},
-		error : function() {
-
-			console.log("No se ha podido obtener la información");
-
-		}
-
-	});
-
-}
-
 
 
 function ajaxCreateCourse() {
@@ -275,6 +129,8 @@ function ajaxCreateCourse() {
 					$('.error .message').text(jsonResponse.errorMessage);
 
 					$('.error').show().fadeIn('slow');
+					
+					$('.createCourse .modalContainer').show().fadeOut('slow');
 
 				} else {
 				
