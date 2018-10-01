@@ -255,7 +255,7 @@ function ajaxSearchTeacher() {
 
 							$("#tableTeacherData")
 									.append(
-											"<tr>" + "<td>"
+											"<tr class='selected'>" + "<td>"
 													+ jsonResponse.objectEntity.teacher.teacherId
 													+ "</td> "
 													+ "<td>"

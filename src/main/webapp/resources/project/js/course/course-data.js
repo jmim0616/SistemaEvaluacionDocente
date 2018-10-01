@@ -60,6 +60,9 @@ function initCourseData() {
 	});
 
 	
+	
+	
+	
 	$('.buttonUpdateCourseFeedbackToolbar').click(function(event) {
 
 		event.preventDefault();
