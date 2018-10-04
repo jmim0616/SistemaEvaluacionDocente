@@ -22,82 +22,143 @@ function ajaxSearchStudentsSurveyCourses() {
 
 	console.log(json);
 
+//	var jsonQuery1 = {
+//		"objectEntityList" : [ {
+//
+//			"questionsByPeriodId" : "1",
+//			"department" : {
+//				"name" : "Operaciones y Sistemas"
+//			},
+//			"course" : {
+//				"groupId" : "1",
+//				"subject" : {
+//					"name" : "POO"
+//				},
+//				"teacher" : {
+//					"teacherId" : "1144080680"
+//				}
+//			},
+//			"question" : {
+//				"questionId" : "1",
+//				"question" : "El cabron explica bien ?"
+//			},
+//			"academicPeriod" : {
+//				"name" : "2018-1"
+//			},
+//			"percentage" : "80"
+//		}, {
+//			"questionsByPeriodId" : "1",
+//			"department" : {
+//				"name" : "Operaciones y Sistemas"
+//			},
+//			"course" : {
+//				"groupId" : "1",
+//				"subject" : {
+//					"name" : "Bases de Datos"
+//				},
+//				"teacher" : {
+//					"teacherId" : "16646114"
+//				}
+//			},
+//			"question" : {
+//				"questionId" : "1",
+//				"question" : "El cabron usa recursos audiovisuales ?"
+//			},
+//			"academicPeriod" : {
+//				"name" : "2018-1"
+//			},
+//			"percentage" : "50"
+//		} ]
+//	};
+	
+	
 	var jsonQuery1 = {
-		"objectEntityList" : [ {
-
-			"questionsByPeriodId" : "1",
-			"department" : {
-				"name" : "Operaciones y Sistemas"
-			},
-			"course" : {
-				"groupId" : "1",
-				"subject" : {
-					"name" : "POO"
+			"objectEntityList" : [ {
+				
+				"questionByPeriod" : {
+				"questionsByPeriodId" : "1",
+				"department" : {
+					"name" : "Operaciones y Sistemas"
 				},
-				"teacher" : {
-					"teacherId" : "1144080680"
-				}
-			},
-			"question" : {
-				"questionId" : "1",
-				"question" : "El cabron explica bien ?"
-			},
-			"academicPeriod" : {
-				"name" : "2018-1"
-			},
-			"percentage" : "80"
-		}, {
-			"questionsByPeriodId" : "1",
-			"department" : {
-				"name" : "Operaciones y Sistemas"
-			},
-			"course" : {
-				"groupId" : "1",
-				"subject" : {
-					"name" : "Bases de Datos"
+				"course" : {
+					"groupId" : "1",
+					"subject" : {
+						"name" : "POO"
+					},
+					"teacher" : {
+						"teacherId" : "1144080680"
+					}
 				},
-				"teacher" : {
-					"teacherId" : "16646114"
+				"question" : {
+					"questionId" : "1",
+					"question" : "El cabron explica bien ?"
+				},
+				"academicPeriod" : {
+					"name" : "2018-1"
+				},
+				"percentage" : "80"
+			}
+			
+			},
+			
+			{
+				"questionByPeriod" : {
+				"questionsByPeriodId" : "1",
+				"department" : {
+					"name" : "Operaciones y Sistemas"
+				},
+				"course" : {
+					"groupId" : "1",
+					"subject" : {
+						"name" : "Bases de Datos"
+					},
+					"teacher" : {
+						"teacherId" : "16646114"
+					}
+				},
+				"question" : {
+					"questionId" : "1",
+					"question" : "El cabron usa recursos audiovisuales ?"
+				},
+				"academicPeriod" : {
+					"name" : "2018-1"
+				},
+				"percentage" : "50"
 				}
-			},
-			"question" : {
-				"questionId" : "1",
-				"question" : "El cabron usa recursos audiovisuales ?"
-			},
-			"academicPeriod" : {
-				"name" : "2018-1"
-			},
-			"percentage" : "50"
-		} ]
-	};
+			} ]
+		};
 
 	console.log(jsonQuery1);
 
-	$
-			.each(
+	$.each(
 					jsonQuery1.objectEntityList,
 					function(key, value) {
 
+//						console.log("AAAAAAAAAA");
+//						console.log(key);
+//						console.log("BBBBBBBBBB");
+//						console.log(value);
+//						
 						$("#tableStudentsSurveyCoursesData")
 								.append(
 										"<tr>"
 												+'<td>'
-												+ jsonQuery1.objectEntityList[key].academicPeriod.name
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.academicPeriod.name
 												+ "</td> "
 												+ '<td>'
-												+ jsonQuery1.objectEntityList[key].department.name
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.department.name
 												+ "</td> "
 												+ '<td>'
-												+ jsonQuery1.objectEntityList[key].course.subject.name
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.course.subject.name
 												+ "</td> "
 												+ '<td>'
-												+ jsonQuery1.objectEntityList[key].course.groupId
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.course.groupId
 												+ "</td> "
 												+ '<td>'
-												+ jsonQuery1.objectEntityList[key].course.teacher.teacherId
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.course.teacher.teacherId
 												+ "</td> "
 												+ '<td>'
-												+ jsonQuery1.objectEntityList[key].question.question
+												+ jsonQuery1.objectEntityList[key].questionByPeriod.question.question
 												+ "</td> " + "</tr>");
 
 					})
