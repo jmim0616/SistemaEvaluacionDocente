@@ -90,6 +90,8 @@ public class CourseController {
 	
 	@GetMapping(value = "/Data")
 	public String showDataCourseView(Model model) {
+		
+		model.addAttribute("courseFeedback", new CourseFeedbackBean());
 
 		model.addAttribute("course", new CourseBean());
 		
@@ -112,7 +114,23 @@ public class CourseController {
 		return "course-search";
 		
 	}
+
 	
+	@GetMapping(value = "/DataStudentsSurveyCourses")
+	public String showDataStudentsSurveyCoursesView(
+			@RequestParam(name="groupId") String groupId,
+			@RequestParam(name="teacher") String teacher,
+			@RequestParam(name="subject") String subject,
+			@RequestParam(name="academicPeriod") String academicPeriod,
+			Model model) {
+		
+		System.out.println("CourseBean " + groupId +" "+ teacher +" "+  subject +" "+ academicPeriod);
+		
+		model.addAttribute("course", new CourseBean("", academicPeriod, teacher, subject, groupId, ""));
+		
+		return "studentsSurvey-data-courses";
+		
+	}
 	
 	
 	@GetMapping(value = "/AddFeedback")
@@ -241,6 +259,19 @@ public class CourseController {
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public JsonResponse<CourseBean, CourseEntity> searchCourse(@Valid @RequestBody CourseBean courseBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + courseBean);
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+		
+		jsonResponse = courseBoInterface.search(courseBean, bindingResult); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/SearchStudentsSurveyCourses", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity> searchStudentsSurveyCourses(@Valid @RequestBody CourseBean courseBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + courseBean);
 		

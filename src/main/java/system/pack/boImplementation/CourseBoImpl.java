@@ -51,6 +51,7 @@ import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
 import system.pack.entity.FeedbackTypeEntity;
+import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
@@ -348,48 +349,52 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-//			if (bindingResult.hasErrors()) {
-//
-//				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-//						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-//
-//				jsonResponse.setErrorMessages(errorMessages);
-//
-//				jsonResponse.setIsValid(false);
-//
-//			} else {
-//
-//				jsonResponse.setIsValid(true);
-//				
-//				TeacherEntity teacherEntity = teacherDaoJpaRepository.findById(Integer.parseInt(teacherBean.getTeacherId()));
-//				
-//				if (teacherEntity == null) {
-//					
-//					jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
-//					
-//				} else {
-//					
-//					TeacherBean TeacherBean1 = TeacherConverter.ConverToVO(teacherEntity);
-//					
-//					jsonResponse.setObjectBean(TeacherBean1);;
-//					
-//				}
-//				
-//
-//			}
-
-			return jsonResponse;
-
-		} catch (Exception e) {
-
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-
-//			throw new RuntimeException("");
-
-			return null;
 			
-		}
+				if (bindingResult.hasErrors()) {
+
+					Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+							.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+
+					jsonResponse.setErrorMessages(errorMessages);
+
+					jsonResponse.setIsValid(false);
+
+				} else {
+
+					jsonResponse.setIsValid(true);
+
+					CourseEntity courseEntity = courseDaoInterface.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
+
+					if (courseEntity == null) {
+
+						jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
+
+					} else {
+
+						List<CourseEntity> listCourses = new ArrayList<CourseEntity>();
+						
+						listCourses.add(courseEntity);
+						
+							jsonResponse.setObjectEntityList(listCourses);
+						
+					}
+
+				}
+
+				return jsonResponse;
+
+			} catch (Exception e) {
+
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+
+				// throw new RuntimeException("");
+
+				return null;
+
+			}
+
+
 
 	}
 	

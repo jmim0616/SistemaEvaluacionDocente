@@ -18,6 +18,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/courseFeedback/courseFeedback-update.js"></script>
 
+<div class="data">
 
 <div class="scroll courseData">
 
@@ -32,10 +33,11 @@
 
 			<tr class="not">
 
-				<th>Identificador de Grupo</th>
-				<th>Asignatura</th>
-				<th>Profesor</th>
+				<th>Codigo</th>
 				<th>Periodo Academico</th>
+				<th>Profesor</th>
+				<th>Asignatura</th>
+				<th>Identificador de Grupo</th>
 				<th>Es virtual</th>
 				<th>Acciones</th>
 
@@ -50,7 +52,39 @@
 	<%@include file="/WEB-INF/views/course-update.jsp"%>
 	<%@include file="/WEB-INF/views/course-add-feedback.jsp"%>
 	<%@include file="/WEB-INF/views/course-delete.jsp"%>
-	<%@include file="/WEB-INF/views/courseFeedback-update.jsp"%>
+
+</div>
+
+<br>
+<br>
+
+<div class="scroll courseFeedbackData">
+
+	<h3>Resultado de las Retroalimentaciones del Curso</h3>
+
+	<table id="tableCourseFeedbackData" class="table standard-table">
+
+		<thead>
+
+			<tr class="not">
+
+				<th>Codigo de la Retroalimentacion</th>
+				<th>Tipo de Retroalimentacion</th>
+				<th>Comentario</th>
+				<th>Usuario</th>
+				<th>Fecha de Modificacion</th>
+				<th>Puntuacion Promedio</th>
+				<th>Acciones</th>
+			</tr>
+
+		</thead>
+
+	</table>
+	
+		<%@include file="/WEB-INF/views/courseFeedback-update.jsp"%>
+
+
+</div>
 
 </div>
 

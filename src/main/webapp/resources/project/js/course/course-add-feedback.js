@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	ajaxSearchCourseFeedbacks();
+//	ajaxSearchCourseFeedbacks();
 	
 	$('#buttonAddFeedbackCourse').click(function(event) {
 

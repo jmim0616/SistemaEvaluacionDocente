@@ -319,13 +319,22 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 					SubjectByTeacherEntity subjectByTeacherEntity = new SubjectByTeacherEntity();
 
+					// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
+					List<SubjectByTeacherEntity> subjectsByTeacherEntityPrueba = new ArrayList<SubjectByTeacherEntity>();
+					//
+					
 					if (subjectsByTeacherEntity.size() < 1) {
 
 						subjectByTeacherEntity.setTeacher(teacherEntity);
 						subjectByTeacherEntity.setSubject(new SubjectEntity(null, null, "", 0));
 
 						jsonResponse.setObjectEntity(subjectByTeacherEntity);
-
+						
+						// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
+						subjectsByTeacherEntityPrueba.add(subjectByTeacherEntity);
+						jsonResponse.setObjectEntityList(subjectsByTeacherEntityPrueba);
+						//
+						
 					} else if (subjectsByTeacherEntity.size() > 0) {
 
 						String subjectName = "";
@@ -340,6 +349,11 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 						subjectByTeacherEntity.setSubject(new SubjectEntity(null, null, subjectName, 0));
 						
 						jsonResponse.setObjectEntity(subjectByTeacherEntity);
+						
+						// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
+						subjectsByTeacherEntityPrueba.add(subjectByTeacherEntity);
+						jsonResponse.setObjectEntityList(subjectsByTeacherEntityPrueba);
+						//
 					
 					}
 					

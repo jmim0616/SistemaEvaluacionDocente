@@ -116,8 +116,7 @@ function ajaxSearchSubject() {
 		"name" : name
 	};
 
-	$
-			.ajax({
+	$.ajax({
 				url : './Subjects/Search',
 				data : JSON.stringify(json),
 				contentType : "application/json",

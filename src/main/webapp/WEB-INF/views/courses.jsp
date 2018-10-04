@@ -6,12 +6,12 @@
 <!--Menu -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
-	
-		<!--courses-->
-	<script type="text/javascript"
+
+<!--courses-->
+<script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/course/courses.js"></script>
-	
-		<!--course-create-->
+
+<!--course-create-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/course/course-create.js"></script>
 
@@ -81,6 +81,11 @@
 
 								<input id="buttonSearchCourse" class="button sent-button"
 									type="submit" value="Buscar Curso" />
+
+								<br><br>
+
+								<input id="buttonSearchStudentsSurveyCourses" class="button sent-button"
+									type="submit" value="Buscar Resultados Encuestas Web" />
 
 							</form:form>
 

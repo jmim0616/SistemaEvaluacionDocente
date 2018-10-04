@@ -26,6 +26,8 @@ public interface CourseDaoInterface {
 	
 	public List<CourseEntity> findBySubjectId(int subjectId);
 	
+	CourseEntity findByGroupId(int groupId);
+	
 	public List<AcademicPeriodEntity> searchAcademicPeriodsBySubjectOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
 	
 	public List searchEvaluationsByAcademicPeriodOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
@@ -33,6 +35,8 @@ public interface CourseDaoInterface {
 	public List searchEvaluationsByCourse(CourseBean courseBean, BindingResult bindingResult);
 	
 	public List<CourseEntity> searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
+
+
 
 	
 }

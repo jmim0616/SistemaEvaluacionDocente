@@ -52,6 +52,19 @@ public class CourseDaoImpl implements CourseDaoInterface {
 	}
 	
 	@Override
+	public CourseEntity findByGroupId(int groupId) {
+		
+		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.groupId =:groupId", CourseEntity.class);
+		
+		query.setParameter("groupId", groupId);
+		
+		CourseEntity courseEntity = query.getSingleResult();
+		
+		return courseEntity;
+	}
+	
+	
+	@Override
 	public List<CourseEntity> findByAcademicPeriodId(int academicPeriodId) {
 		
 		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.academicPeriod.academicPeriodId =:academicPeriodId", CourseEntity.class);

@@ -8,14 +8,11 @@ $(document).ready(function() {
 
 	});
 
-	$('#buttonCancel').click(function(event) {
+	$('.updateTeacherStatus #buttonCancel').click(function(event) {
 
 		event.preventDefault();
 
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
-
-
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateTeacherStatus .modalContainer').show().fadeOut('slow');
 
 	});
 
@@ -23,9 +20,7 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
-
-		$('.modalContainer').show().fadeOut('slow');
+		$('.updateTeacherStatus .modalContainer').show().fadeOut('slow');
 
 	});
 
