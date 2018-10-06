@@ -16,6 +16,8 @@ public interface CourseDaoInterface {
 	
 	public void create(CourseEntity courseEntity);
 	
+	void update(CourseEntity courseEntity);
+	
 	public void delete(CourseEntity courseEntity);
 	
 	public CourseEntity findById(int id);
@@ -35,6 +37,7 @@ public interface CourseDaoInterface {
 	public List searchEvaluationsByCourse(CourseBean courseBean, BindingResult bindingResult);
 	
 	public List<CourseEntity> searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
+
 
 
 

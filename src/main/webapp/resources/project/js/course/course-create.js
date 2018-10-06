@@ -45,13 +45,13 @@ $(document).ready(function() {
 
 	});
 
-
+	
 	
 });
 
 
 function AutocompleteForSubjectsCreate() {
-
+	
 	$("#subjectCreate").autocomplete({
 		source : arraySubjects
 	});
@@ -75,7 +75,10 @@ function AutocompleteForAcademicPeriodsCreate() {
 }
 
 
+
+
 function ajaxCreateCourse() {
+
 	
 	$('#groupIdCreateError').text('');
 	$('#subjectCreateError').text('');

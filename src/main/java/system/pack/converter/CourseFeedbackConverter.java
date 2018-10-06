@@ -6,6 +6,7 @@ import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CoevaluationEntity;
 import system.pack.entity.CourseEntity;
 import system.pack.entity.CourseFeedbackEntity;
+import system.pack.entity.FeedbackTypeEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.UserEntity;
@@ -38,10 +39,11 @@ public class CourseFeedbackConverter {
 		CourseFeedbackEntity courseFeedbackEntity = new CourseFeedbackEntity();
 
 		courseFeedbackEntity.setUser(new UserEntity(Integer.parseInt(courseFeedbackBean.getUser())));
+		courseFeedbackEntity.setFeedBackType(new FeedbackTypeEntity(Integer.parseInt(courseFeedbackBean.getFeedBackType())));
 		courseFeedbackEntity.setCourse(new CourseEntity(Integer.parseInt(courseFeedbackBean.getCourse())));
-		courseFeedbackEntity.setCreationDate(Date.valueOf(courseFeedbackBean.getCreationDate().toString()));
+		courseFeedbackEntity.setCreationDate(Date.valueOf(courseFeedbackBean.getCreationDate()));
 		courseFeedbackEntity.setComment(courseFeedbackBean.getComment());
-		courseFeedbackEntity.setLastModifiedDate(Date.valueOf(courseFeedbackBean.getLastModifiedDate().toString()));
+		courseFeedbackEntity.setLastModifiedDate(Date.valueOf(courseFeedbackBean.getLastModifiedDate()));
 		
 		return courseFeedbackEntity;
 

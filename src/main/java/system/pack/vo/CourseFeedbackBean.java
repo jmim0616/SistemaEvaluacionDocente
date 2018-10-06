@@ -26,7 +26,6 @@ public class CourseFeedbackBean {
 	
 	private String course;
 	
-	@Pattern(regexp="\\d{4}\\-\\d{2}\\-\\d{2}", message="El campo \"Fecha de Creacion\" no cumple el formato adecuado. Ejm: dd/mm/yyyy")
 	private String creationDate;
 	
 	@NotEmpty(message="El campo \"comentario\" es requerido")

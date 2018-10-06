@@ -1,6 +1,6 @@
-$(document).ready(function() {
-
-//	ajaxSearchCourseFeedbacks();
+function initAddFeedbackCourse() {
+	
+	ajaxSearchCourseFeedbacks();
 	
 	$('#buttonAddFeedbackCourse').click(function(event) {
 
@@ -44,9 +44,17 @@ $(document).ready(function() {
 
 	});
 
-});
+}
 
 function ajaxSearchCourseFeedbacks() {
+	
+	var courseId = $('#courseAdd').val();
+	
+	var json = {
+			"courseId" : courseId
+		};
+	
+	console.log(json);
 	
 	$.ajax({
 		url : "./Courses/ValidateCourseFeedbacksAdd",
@@ -67,15 +75,18 @@ function ajaxSearchCourseFeedbacks() {
 
 			console.log(jsonResponse);
 
-			//Pendiente
+				var estate = "";
 			
-//				$.each(jsonResponse.variableEntityStates, function(key, value) {
-//
-//					$("#feedBackTypeAdd").append(
-//							'<option value=' + jsonResponse.variableEntityStates + '>'+ jsonResponse.variableEntityStates + '</option>');
-//
-//				})
+				$.each(jsonResponse.variables, function(key, value) {
 
+					if (value == "true"){
+						estate = "disabled";
+					}
+
+					$("#feedBackTypeAdd").append(
+							'<option value="" '+estate+' >'+ key + '</option>');
+
+				})
 
 		},
 		error : function() {
@@ -87,11 +98,15 @@ function ajaxSearchCourseFeedbacks() {
 }
 
 function ajaxAddFeedbackCourse() {
+	
+	var groupId = $('#groupIdAdd').val();
+	
+	console.log("groupIdAdd " + groupId);
 
 	$('#commentAddError').text('');
 
 	var course = $('#courseAdd').val();
-	var feedBackType = $('#feedBackTypeAdd option:selected').val();
+	var feedBackType = $('#feedBackTypeAdd option:selected').text();
 	var comment = $('#commentAdd').val();
 
 	var json = {
@@ -135,7 +150,7 @@ function ajaxAddFeedbackCourse() {
 
 				} else {
 
-					$('#groupIdSearch').val($('#courseAdd').val());
+					$('#groupIdSearch').val($('#groupIdAdd').val());
 
 					$('#commentAdd').val('');
 

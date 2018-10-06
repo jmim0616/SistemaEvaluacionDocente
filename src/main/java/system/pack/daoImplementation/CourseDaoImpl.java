@@ -34,6 +34,14 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		entityManager.merge(courseEntity);
 		
 	}
+	
+
+	@Override
+	public void update(CourseEntity courseEntity) {
+
+		entityManager.merge(courseEntity);
+		
+	}
 
 	@Override
 	public void delete(CourseEntity courseEntity) {

@@ -49,7 +49,7 @@
 							<form:form id="formSearchCourse" modelAttribute="course">
 
 								<fieldset>
-									<form:label path="groupId">Identificador del Curso</form:label>
+									<form:label path="groupId">Identificador de Grupo</form:label>
 									<form:input path="groupId" type="text" id="groupIdSearch" />
 									<label id="groupIdSearchError" class="validation-error">
 									</label>

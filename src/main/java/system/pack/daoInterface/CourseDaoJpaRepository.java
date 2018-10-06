@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,8 @@ public interface CourseDaoJpaRepository extends JpaRepository<CourseEntity, Inte
 
 
 	CourseEntity findById(int id);
+	
+	Optional<CourseEntity> findByGroupId(int groupId);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

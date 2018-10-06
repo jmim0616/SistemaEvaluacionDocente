@@ -60,11 +60,12 @@ function initCourseData() {
 
 		obtainValuesTdActions(this);
 		
-		$('#groupIdUpdate').val(arrayItemsStandardTable[0]);
-		$('#subjectUpdate').val(arrayItemsStandardTable[1]);
+		$('#courseIdUpdate').val(arrayItemsStandardTable[0]);
+		$('#groupIdUpdate').val(arrayItemsStandardTable[4]);
+		$('#subjectUpdate').val(arrayItemsStandardTable[3]);
 		$('#teacherUpdate').val(arrayItemsStandardTable[2]);
-		$('#academicPeriodUpdate').val(arrayItemsStandardTable[3]);
-		$('#isVirtualUpdate .actualValue').text(arrayItemsStandardTable[4]);
+		$('#academicPeriodUpdate').val(arrayItemsStandardTable[1]);
+		$('#isVirtualUpdate .actualValue').text(arrayItemsStandardTable[5]);
 		
 		$('.updateCourse .modalContainer').show().fadeIn('slow');
 
@@ -77,8 +78,11 @@ function initCourseData() {
 		obtainValuesTdActions(this);
 
 		$('#courseAdd').val(arrayItemsStandardTable[0]);
+		$('#groupIdAdd').val(arrayItemsStandardTable[4]);
 		
 		$('.addFeedbackCourse .modalContainer').show().fadeIn('slow');
+		
+		initAddFeedbackCourse();
 		
 	});
 
@@ -120,6 +124,16 @@ function initCourseData() {
 		$('.error').show().fadeOut('slow');
 
 	});
+	
+	$('#linkCreateCourse').click(
+			function(event) {
+
+				event.preventDefault();
+
+				$('.createCourse .modalContainer').show()
+						.fadeIn('slow');
+
+			});
 
 }
 

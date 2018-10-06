@@ -13,7 +13,7 @@
 
 			<form:form id="formUpdateCourse" modelAttribute="course">
 
-				<form:hidden path="groupId" id="groupIdUpdate" />
+				<form:hidden path="courseId" id="courseIdUpdate" />
 
 				<section class="modalBody">
 					<h2 id="tittleModal">Modificar Curso</h2>
@@ -28,7 +28,7 @@
 								<td>
 									<fieldset>
 										<form:label path="groupId">Identificador de Grupo</form:label>
-										<form:input path="groupId" type="text" id="groupIdUpdate" disabled="true"/>
+										<form:input path="groupId" type="text" id="groupIdUpdate"/>
 										<label id="groupIdUpdateError" class="validation-error">
 										</label>
 									</fieldset>

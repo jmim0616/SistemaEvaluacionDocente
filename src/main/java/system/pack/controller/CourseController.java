@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -204,15 +205,15 @@ public class CourseController {
 		return jsonResponse;
 	}
 	
-	@PostMapping(value = "/ValidateCourseFeedbacksAdd",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/ValidateCourseFeedbacksAdd",  consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> validateCourseFeedbacksAdd() {
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> validateCourseFeedbacksAdd(@RequestBody CourseBean courseBean) {
 
 		System.out.println("00000" );
 		
 		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
 		
-		jsonResponse = courseBoInterface.validateCourseFeedbacksAdd(); 
+		jsonResponse = courseBoInterface.validateCourseFeedbacksAdd(courseBean); 
 		
 		return jsonResponse;
 	}
@@ -316,13 +317,13 @@ public class CourseController {
 	
 	@PostMapping(value = "/AddFeedback", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> addCoevaluationCourse(@Valid @RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult, Model model, HttpSession session) {
 
 		System.out.println("00000" + courseFeedbackBean);
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
-		jsonResponse = courseBoInterface.addCourseFeedback(courseFeedbackBean, bindingResult); 
+		jsonResponse = courseBoInterface.addCourseFeedback(courseFeedbackBean, bindingResult, session); 
 		
 		return jsonResponse;
 	}

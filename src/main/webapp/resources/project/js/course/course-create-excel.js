@@ -22,8 +22,6 @@ $(document).ready(function() {
 		$('.error .close', window.parent.document).show().fadeOut('slow');
 		
 	});
-	
-
 
 	
 });

@@ -1,6 +1,7 @@
 package system.pack.daoInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ public interface TeacherDaoJpaRepository extends JpaRepository<TeacherEntity, In
 
 	TeacherEntity findByName(String name);
 	
-	TeacherEntity findById(int id);
+	Optional<TeacherEntity> findById(int id);
 
 //	@Query("Select  c  From Course c where name like '%course'")
 //	List<TeacherEntity> courseWith100StepsInName();

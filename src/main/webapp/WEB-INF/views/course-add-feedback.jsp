@@ -13,6 +13,7 @@
 
 			<form:form id="formAddFeedbackCourse" modelAttribute="courseFeedback">
 				<form:hidden path="course" id="courseAdd" />
+				<input type="text" style="display: none;" id="groupIdAdd">
 
 				<section class="modalBody">
 

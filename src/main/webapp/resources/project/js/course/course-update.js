@@ -82,15 +82,18 @@ function ajaxUpdateCourse() {
 	$('#teacherUpdateError').text('');
 	$('#academicPeriodUpdateError').text('');
 
+	
 
+	var courseId = $('#courseIdUpdate').val();
 	var groupId = $('#groupIdUpdate').val();
 	var subject = $('#subjectUpdate').val();
 	var teacher = $('#teacherUpdate').val();
-	var academicPeriod = $('#academicPeriodUpdate').text();
+	var academicPeriod = $('#academicPeriodUpdate').val();
 	var isVirtual = $('#isVirtualUpdate option:selected').text();
 
 	var json = {
 			
+		"courseId" : courseId,
 		"groupId" : groupId,
 		"subject" : subject,
 		"teacher" : teacher,

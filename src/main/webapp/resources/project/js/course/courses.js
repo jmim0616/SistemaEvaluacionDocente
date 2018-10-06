@@ -363,14 +363,12 @@ function ajaxSearchCourse() {
 
 							var isVirtual = null;
 
-							$
-									.each(
-											jsonResponse.objectEntityList,
+							$.each(jsonResponse.objectEntityList,
 											function(key, value) {
 
-												if (jsonResponse.objectEntityList[key].isVirtual == "s") {
+												if (jsonResponse.objectEntityList[key].isVirtual == "S") {
 													isVirtual = "Si";
-												} else if (jsonResponse.objectEntityList[key].isVirtual == "n") {
+												} else if (jsonResponse.objectEntityList[key].isVirtual == "N") {
 													isVirtual = "No";
 												}
 
