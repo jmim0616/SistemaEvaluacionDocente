@@ -26,6 +26,8 @@ public interface TeacherDaoInterface {
 	public TeacherEntity findByIdentificationType(String identificationType);
 	
 	public TeacherEntity findByTeacherStatusId(int teacherStatusId);
+
+	public boolean isValidTeacherId(int teacherId);
 	
 
 }

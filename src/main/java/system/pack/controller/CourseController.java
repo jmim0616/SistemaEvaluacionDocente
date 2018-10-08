@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,6 +43,10 @@ import system.pack.entity.CourseEntity;
 import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.fullview.Data;
+import system.pack.fullview.Period;
+import system.pack.fullview.Questions;
+import system.pack.fullview.Row;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.AcademicPeriodBean;
@@ -87,6 +92,13 @@ public class CourseController {
 		
 	}
 
+	@GetMapping(value = "/CreateOnlineFeedBack")
+	public String showCreateNotesView(Model model) {
+
+		return "course-create-notes";
+		
+	}
+	
 	
 	@GetMapping(value = "/Data")
 	public String showDataCourseView(Model model) {
@@ -222,6 +234,31 @@ public class CourseController {
 		return jsonResponse;
 	}
 	
+	@PostMapping(value = "/CreateOnlineFeedBack", produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity> createOnlineFeedBack( 
+			MultipartFile file) throws IOException {
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<>();
+	   
+		if (file.getSize() == 0){
+			jsonResponse.setErrorMessage("Debe seleccionar un archivo en formato Excel.");
+			return jsonResponse;
+		}
+		
+	    String response = courseBoInterface.createOnlineFeedBack(file, 1);
+	    
+	    if (response == ""){
+	    	jsonResponse.setSuccessMessage("El archivo ha sido procesado exitosamente.");
+	    }
+	    else
+	    {
+	    	jsonResponse.setErrorMessage(response);
+	    }
+	
+		return jsonResponse;
+	}
+	
 	@PostMapping(value = "/Create", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public JsonResponse<CourseBean, CourseEntity> createCourse(@Valid @RequestBody CourseBean courseBean, BindingResult bindingResult) {
@@ -234,6 +271,32 @@ public class CourseController {
 		
 		return jsonResponse;
 	}
+	
+	@PostMapping(value = "/CompareView", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public Data createtest(@RequestBody CourseBean courseBean) {		
+		
+		Questions q1 =  new Questions("Q1", 10);
+		Questions q2 =  new Questions("Q2", 20);
+		Questions q3 =  new Questions("Q3", 30);
+		
+		List<Questions> listq = new LinkedList<>();
+		listq.add(q1);
+		listq.add(q2);
+		listq.add(q3);		
+		
+		Row row = new Row("2018-01", "Sistemas", "Ing sof 1", 1024, 5, listq);
+		
+		List<Row> rows = new LinkedList<>();
+		rows.add(row);
+		
+		Period period = new Period(rows);
+		List<Period> periods = new LinkedList<>();
+		periods.add(period);
+		
+		return new Data(periods);
+	}
+	
 	
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

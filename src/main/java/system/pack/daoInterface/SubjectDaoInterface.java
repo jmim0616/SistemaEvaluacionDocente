@@ -24,6 +24,8 @@ public interface SubjectDaoInterface {
 	public SubjectEntity findBySubjectStatusId(int subjectStatusId);
 	
 	public List<SubjectEntity> getAll();
+
+	public boolean isValidSubjectId(int subjectId);
 	
 
 }

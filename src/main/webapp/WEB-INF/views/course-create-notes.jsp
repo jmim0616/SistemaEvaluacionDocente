@@ -12,7 +12,7 @@
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/course/course-create-excel.js"></script>
+	src="${pageContext.request.contextPath}/resources/project/js/course/notes-create-excel.js"></script>
 
     <title>INDEX</title>
 
@@ -37,12 +37,12 @@
 		enctype="multipart/form-data">
 		Seleccionar archivo
 		<br>	
-		<input id="excelfile" type="file"  name="file" accept= ".xls, .xlsx" lang = "es" />
+		<input id="excelfile" type="file"  name="file" accept= ".xls, .xlsx"  lang = "es"/>
 
 	<br> 
 	<br>
 
-	<input id="buttonCreateCourseExcel" class="button add-button"
+	<input id="buttonCreateNotesExcel" class="button add-button"
 	type="submit" value="Procesar archivo" />
 	
 	</form:form>

@@ -25,8 +25,9 @@ $(document)
 							function(event) {
 
 								event.preventDefault();
-								
-								$('.createCourse .modalContainer').show().fadeIn('slow');
+
+								$('.createCourse .modalContainer').show()
+										.fadeIn('slow');
 
 							});
 
@@ -52,13 +53,23 @@ $(document)
 
 										$('.content')
 												.html(
-														'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Courses/CreateExcel" width="500">  </iframe>');
+														'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Courses/CreateExcel" lang="es" width="500">  </iframe>');
 
 									});
-					
+
+					$('#linkCreateNotesExcel')
+							.click(
+									function(event) {
+
+										event.preventDefault();
+
+										$('.content')
+												.html(
+														'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Courses/CreateOnlineFeedBack" lang="es" width="500">  </iframe>');
+
+									});
 
 				});
-
 
 function AutocompleteForCourses() {
 
@@ -91,7 +102,6 @@ function AutocompleteForAcademicPeriods() {
 	});
 
 }
-
 
 function ajaxSearchCourses() {
 
@@ -135,7 +145,6 @@ function ajaxSearchCourses() {
 	});
 
 }
-
 
 function ajaxSearchCourse() {
 
@@ -181,8 +190,6 @@ function ajaxSearchCourse() {
 					console.log(jsonResponse);
 
 					if (jsonResponse.isValid) {
-
-	
 
 						if (jsonResponse.errorMessage != null) {
 
@@ -231,19 +238,19 @@ function ajaxSearchCourse() {
 						}
 
 					} else {
-						
+
 						$('#groupIdSearchError').append(
 								jsonResponse.errorMessages.groupId);
-						
+
 						$('#teacherSearchError').append(
 								jsonResponse.errorMessages.teacher);
-						
+
 						$('#subjectSearchError').append(
 								jsonResponse.errorMessages.subject);
-						
+
 						$('#academicPeriodSearchError').append(
 								jsonResponse.errorMessages.academicPeriod);
-						
+
 					}
 
 				},

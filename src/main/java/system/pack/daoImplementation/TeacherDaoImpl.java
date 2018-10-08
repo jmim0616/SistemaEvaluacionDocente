@@ -103,6 +103,11 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 		
 	}
 
+	@Override
+	public boolean isValidTeacherId(int teacherId) {
+		return findById(teacherId) != null;
+	}
+
 	
 
 	

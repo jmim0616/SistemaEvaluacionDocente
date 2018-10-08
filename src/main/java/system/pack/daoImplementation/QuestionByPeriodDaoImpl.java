@@ -3,6 +3,7 @@ package system.pack.daoImplementation;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import system.pack.daoInterface.SubjectByTeacherDaoInterface;
 import system.pack.entity.QuestionByPeriodEntity;
 import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.entity.UserEntity;
 
 @Repository
 @Transactional
@@ -75,6 +77,32 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 		
 		return questionsByPeriod;
 		
+	}
+
+	@Override
+	public int getCourseId(int subjectId, int groupId, int teacherId, int academicPeriod) {
+		Query query = entityManager.createNativeQuery
+				("select "
+						+ "courseId"
+						+ " from courses t "
+						+ "where t.academicPeriodId =:academicPeriodId "
+						+ "and t.teacherId = :teacherId "
+						+ "and t.subjectId = :subjectId "
+						+ "and t.groupId = :groupId");
+		
+		query.setParameter("academicPeriodId", academicPeriod);		
+		query.setParameter("teacherId", teacherId);
+		query.setParameter("subjectId", subjectId);
+		query.setParameter("groupId", groupId);
+		
+		List<Integer> courseList  = query.getResultList();
+		
+		if (courseList.size() > 0){
+			return (int) courseList.get(0);
+		}
+		else{
+			return 0;
+		}
 	}
 
 

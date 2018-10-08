@@ -49,5 +49,7 @@ public interface CourseBoInterface {
 
 	public JsonResponse  getAllCourses();
 
+	public String createOnlineFeedBack(MultipartFile file, int i);
+
 	
 }
