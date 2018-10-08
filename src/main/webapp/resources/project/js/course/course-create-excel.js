@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	$('#buttonCreateCourseExcel').click(function(event) {
+		event.preventDefault();
+		
+		ajaxCreateCourseExcel();
+
+	});
+	
 	$('.success .close', window.parent.document).click(function(event) {
 
 		event.preventDefault();
@@ -14,13 +21,6 @@ $(document).ready(function() {
 		
 		$('.error .close', window.parent.document).show().fadeOut('slow');
 		
-	});
-	
-	$('#buttonCreateCourseExcel').click(function(event) {
-		event.preventDefault();
-		
-		ajaxCreateCourseExcel();
-
 	});
 
 	

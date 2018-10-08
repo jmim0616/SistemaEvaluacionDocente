@@ -929,5 +929,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		return errorMessage;
 	}
+	
+	
 
 }

@@ -5,15 +5,6 @@ var arraySubjectsDeleted = [];
 $(document).ready(function() {
 	
 	ajaxSearchSubjects();
-
-	$('.success .close').click(function(event) {
-
-		event.preventDefault();
-		
-		$('.success').show().fadeOut('slow');
-		
-	});
-	
 	
 	$('#buttonAddSubjects').click(function(event) {
 
@@ -23,6 +14,13 @@ $(document).ready(function() {
 
 	});
 
+	$('.success .close').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.success').show().fadeOut('slow');
+		
+	});
 	
 });
 
@@ -144,22 +142,7 @@ function ajaxAddSubjectsTeacher() {
 				
 				$('#teacherIdSearch').val($('#teacherId').text());
 				$('#nameSearch').val($('#name').text());
-//				$('#subjectSearch').val($('#').val());
-				
-//				$('#teacherIdCreate').val('');
-//				$('#nameCreate').val('');
-//				$('#lastNameCreate').val('');
-//				$('#identificationTypeCreate option:selected').val('1');
-//				$('#underDegreeCreate').val('');
-//				$('#masterDegreeCreate').val('');
-//				$('#masterDegreeCreate').val('');
-//				$('#doctorDegreeCreate').val('');
-//				$('#institutionalMailCreate').val('');
-//				$('#personalMailCreate').val('');
-//				$('#cellNumberCreate').val('');
-//				$('#homeNumberCreate').val('');
-//				$('#experienceCreate').val('');
-				
+			
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				

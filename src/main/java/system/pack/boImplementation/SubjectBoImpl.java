@@ -81,6 +81,22 @@ public class SubjectBoImpl implements SubjectBoInterface {
 	@Autowired
 	SubjectDaoJpaRepository subjectDaoJpaRepository;
 
+	
+	
+	@Transactional
+	@Override
+	public JsonResponse<SubjectBean, SubjectEntity> getAllSubjects() {
+
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+
+		List<SubjectEntity> subjects = subjectDaoInterface.getAll();
+
+		jsonResponse.setObjectEntityList(subjects);
+
+		return jsonResponse;
+
+	}
+	
 	@Transactional
 	@Override
 	public JsonResponse<DisciplinaryAreaBean, DisciplinaryAreaEntity> getAllDisciplinaryAreas() {

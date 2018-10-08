@@ -1,7 +1,7 @@
 var arrayItemsStandardTable = null;
 
 function initUserData() {
-
+	
 	function obtainValuesTagTd(button){
 		
 		var items = new Array();
@@ -24,7 +24,12 @@ function initUserData() {
 		
 		obtainValuesTagTd(this);
 		
-		ajaxShowUpdateStatusUser();
+		$('#userIdUpdateStatus').val(arrayItemsStandardTable[0]);
+		
+		$('#dialogModal .status').text(arrayItemsStandardTable[6]);
+
+		$('.updateUserStatus .modalContainer').show().fadeIn('slow');
+		
 
 	});
 
@@ -34,8 +39,6 @@ function initUserData() {
 		event.preventDefault();
 
 		obtainValuesTagTd(this);
-		
-		$('.updateUser .modalContainer').show().fadeIn('slow');
 
 		$('#userIdUpdate').val(arrayItemsStandardTable[0]);
 		$('#maskUpdate').val(arrayItemsStandardTable[1]);
@@ -47,42 +50,11 @@ function initUserData() {
 		$('#userTypeUpdate').val(arrayItemsStandardTable[9]);
 		$('#jobPositionUpdate').val(arrayItemsStandardTable[10]);
 		
+		$('.updateUser .modalContainer').show().fadeIn('slow');
+		
 
 	});
 	
-	function ajaxShowUpdateStatusUser() {
-
-		var statusToShow = "";
-
-		var userId = arrayItemsStandardTable[0];
-		
-		console.log("user " + userId);
-		
-		var json = {
-				"userId": userId
-
-				}
-		
-		$.ajax({ 
-			url : "./Users/UpdateStatus",
-			data: json,
-			contentType : "application/json",
-			method : 'GET',
-	        beforeSend: function(xhr) {
-	        	
-	        },
-	        success: function(view) {
-			
-				$('.content').fadeOut(0).html(view).fadeIn('slow');
-				
-				$('#dialogModal .status').text(arrayItemsStandardTable[6]);
-
-				$('.updateUserStatus .modalContainer').show().fadeIn('slow');
-				
-			}
-			
-		});
-	}
 
 	$('.error .close').click(function(event) {
 

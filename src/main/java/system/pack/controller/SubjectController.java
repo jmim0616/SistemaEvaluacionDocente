@@ -87,6 +87,8 @@ public class SubjectController {
 	@GetMapping(value = "/Data")
 	public String showDataSubjectView(Model model) {
 
+		model.addAttribute("subject", new SubjectBean());
+		
 		return "subject-data";
 		
 	}
@@ -111,6 +113,19 @@ public class SubjectController {
 		
 	}
 	
+	
+	@PostMapping(value = "/GetSubjects",  produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<SubjectBean, SubjectEntity> getSubjects() {
+
+		System.out.println("00000" );
+		
+		JsonResponse<SubjectBean, SubjectEntity> jsonResponse = new JsonResponse<SubjectBean, SubjectEntity>();
+		
+		jsonResponse = subjectBoInterface.getAllSubjects(); 
+		
+		return jsonResponse;
+	}
 	
 	
 	@PostMapping(value = "/GetAcademicPrograms",  produces = MediaType.APPLICATION_JSON_VALUE)

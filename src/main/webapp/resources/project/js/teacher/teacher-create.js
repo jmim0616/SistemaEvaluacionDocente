@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+	$('#buttonCreateTeacher').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxCreateTeacher();
+
+	});
+
+	
 	$('.success .close').click(function(event) {
 
 		event.preventDefault();
@@ -16,16 +25,6 @@ $(document).ready(function() {
 
 	});
 	
-	$('#buttonCreateTeacher').click(function(event) {
-
-		event.preventDefault();
-		
-		ajaxCreateTeacher();
-
-	});
-
-
-
 	
 });
 
@@ -36,7 +35,7 @@ function ajaxCreateTeacher() {
 	$('#teacherIdCreateError').text('');
 	$('#nameCreateError').text('');
 	$('#lastNameCreateError').text('');
-	$('#identificationTypeCreate option:selected').text('1');
+//	$('#identificationTypeCreate option:selected').val('1');
 	$('#underDegreeCreateError').text('');
 	$('#masterDegreeCreateError').text('');
 	$('#masterDegreeCreateError').text('');
@@ -110,13 +109,12 @@ function ajaxCreateTeacher() {
 				
 				$('#teacherIdSearch').val($('#teacherIdCreate').val());
 				$('#nameSearch').val($('#nameCreate').val());
-//				$('#subjectSearch').val($('#').val());
 			
 				
 				$('#teacherIdCreate').val('');
 				$('#nameCreate').val('');
 				$('#lastNameCreate').val('');
-				$('#identificationTypeCreate option:selected').val('1');
+//				$('#identificationTypeCreate option:selected').val('1');
 				$('#underDegreeCreate').val('');
 				$('#masterDegreeCreate').val('');
 				$('#masterDegreeCreate').val('');

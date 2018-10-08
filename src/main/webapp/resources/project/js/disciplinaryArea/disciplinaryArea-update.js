@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+	
+	$('#buttonUpdateDisciplinaryArea').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxUpdateDisciplinaryArea();
+
+	});
+	
+	
 	$('.updateDisciplinaryArea #buttonCancel').click(function(event) {
 
 		event.preventDefault();
@@ -16,14 +26,7 @@ $(document).ready(function() {
 
 	});
 	
-	
-	$('#buttonUpdateDisciplinaryArea').click(function(event) {
 
-		event.preventDefault();
-		
-		ajaxUpdateDisciplinaryArea();
-
-	});
 
 	$('.success .close').click(function (event){
 		
@@ -98,8 +101,6 @@ function ajaxUpdateDisciplinaryArea() {
 				$('.success .message').text(jsonResponse.successMessage);
 
 				$('.success').show().fadeIn('slow');
-
-				$('.updateDisciplinaryArea .modalContainer').show().fadeOut('slow');
 				
 				$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
 					  $('.content').fadeOut(0).html(view).fadeIn('slow');

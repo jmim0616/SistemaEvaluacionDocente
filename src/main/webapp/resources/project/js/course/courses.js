@@ -1,9 +1,16 @@
 var arrayCourses = [];
+var arraySubjects = [];
+var arrayTeachers = [];
+var arrayAcademicPeriods = [];
 
 $(document)
 		.ready(
 				function() {
+
 					ajaxSearchCourses();
+					ajaxSearchSubjects();
+					ajaxSearchTeachers();
+					ajaxSearchAcademicPeriods();
 
 					$('.sub-menu-content').click(function(e) {
 
@@ -45,6 +52,34 @@ $(document)
 
 					});
 
+					$('#buttonSearchStudentsSurveyCourses').click(
+							function(event) {
+
+								event.preventDefault();
+
+								
+								var groupId = $('#groupIdSearch').val();
+								var teacher = $('#teacherSearch').val();
+								var subject = $('#subjectSearch').val();
+								var academicPeriod = $('#academicPeriodSearch').val();
+								
+								window.open("./Courses/DataStudentsSurveyCourses?groupId="+groupId
+										+"&teacher="+teacher+""
+										+"&subject="+subject+""
+										+"&academicPeriod="+academicPeriod+"");
+
+							});
+
+					$('#linkCreateCourse').click(
+							function(event) {
+
+								event.preventDefault();
+
+								$('.createCourse .modalContainer').show()
+										.fadeIn('slow');
+
+							});
+
 					$('#linkCreateExcelCourse')
 							.click(
 									function(event) {
@@ -71,7 +106,7 @@ $(document)
 
 				});
 
-function AutocompleteForCourses() {
+function AutocompleteForCoursesSearch() {
 
 	$("#groupIdSearch").autocomplete({
 		source : arrayCourses
@@ -79,7 +114,7 @@ function AutocompleteForCourses() {
 
 }
 
-function AutocompleteForSubjects() {
+function AutocompleteForSubjectsSearch() {
 
 	$("#subjectSearch").autocomplete({
 		source : arraySubjects
@@ -87,7 +122,7 @@ function AutocompleteForSubjects() {
 
 }
 
-function AutocompleteForTeachers() {
+function AutocompleteForTeachersSearch() {
 
 	$("#teacherSearch").autocomplete({
 		source : arrayTeachers
@@ -95,7 +130,7 @@ function AutocompleteForTeachers() {
 
 }
 
-function AutocompleteForAcademicPeriods() {
+function AutocompleteForAcademicPeriodsSearch() {
 
 	$("#academicPeriodSearch").autocomplete({
 		source : arrayAcademicPeriods
@@ -105,8 +140,58 @@ function AutocompleteForAcademicPeriods() {
 
 function ajaxSearchCourses() {
 
+	$
+			.ajax({
+				url : './Courses/GetCourses',
+				contentType : 'application/json',
+				method : 'POST',
+				done : function() {
+
+				},
+				success : function(jsonResponse) {
+
+					if (typeof jsonResponse == "string") {
+
+						$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+								'slow');
+
+						$('.error').show().fadeIn('slow');
+
+					}
+
+					console.log(jsonResponse);
+
+					$
+							.each(
+									jsonResponse.objectEntityList,
+									function(key, value) {
+
+										arrayCourses
+												.push(JSON
+														.stringify(jsonResponse.objectEntityList[key].groupId));
+
+									});
+
+				},
+				complete : function() {
+
+					AutocompleteForCoursesSearch();
+
+				},
+				error : function() {
+
+					console.log("No se ha podido obtener la información");
+
+				}
+
+			});
+
+}
+
+function ajaxSearchSubjects() {
+
 	$.ajax({
-		url : './Courses/GetCourses',
+		url : './Courses/GetSubjects',
 		contentType : 'application/json',
 		method : 'POST',
 		done : function() {
@@ -126,14 +211,110 @@ function ajaxSearchCourses() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arrayCourses.push(jsonResponse.objectEntityList[key].groupId);
+				arraySubjects.push(jsonResponse.objectEntityList[key].name);
 
 			});
 
 		},
 		complete : function() {
 
-			AutocompleteForCourses();
+			AutocompleteForSubjectsSearch();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
+
+function ajaxSearchTeachers() {
+
+	$
+			.ajax({
+				url : './Courses/GetTeachers',
+				contentType : 'application/json',
+				method : 'POST',
+				done : function() {
+
+				},
+				success : function(jsonResponse) {
+
+					if (typeof jsonResponse == "string") {
+
+						$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+								'slow');
+
+						$('.error').show().fadeIn('slow');
+
+					}
+
+					console.log(jsonResponse);
+
+					$
+							.each(
+									jsonResponse.objectEntityList,
+									function(key, value) {
+
+										arrayTeachers
+												.push(JSON
+														.stringify(jsonResponse.objectEntityList[key].teacherId));
+
+									});
+
+					// console.log(arrayTeachers);
+
+				},
+				complete : function() {
+
+					AutocompleteForTeachersSearch();
+
+				},
+				error : function() {
+
+					console.log("No se ha podido obtener la información");
+
+				}
+
+			});
+
+}
+
+function ajaxSearchAcademicPeriods() {
+
+	$.ajax({
+		url : './Courses/GetAcademicPeriods',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arrayAcademicPeriods
+						.push(jsonResponse.objectEntityList[key].name);
+
+			});
+
+		},
+		complete : function() {
+
+			AutocompleteForAcademicPeriodsSearch();
 
 		},
 		error : function() {
@@ -202,38 +383,54 @@ function ajaxSearchCourse() {
 
 						} else {
 
-							$("#tableCourseData")
-									.append(
-											"<tr>" + "<td>"
-													+ jsonResponse.objectEntity.course.courseId
-													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.course.academicPeriod
-													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.course.teacher
-													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.course.subject
-													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.course.groupId
-													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.course.isVirtual
-													+ "</td> "
-													+ "<td>"
-													+ '<div class="actions"> '
-													+ '<a class="button edit-button buttonUpdateCourseToolbar">'
-													+ '<ion-icon name="create"></ion-icon>'
-													+ '</a>'
-													+ '<a class="button add-button buttonAddFeedbackCourseToolbar">'
-													+ 'Agregar Retroalimentacion'
-													+ '</a>'
-													+ '<a class="button delete-button buttonDeleteCourseToolbar">'
-													+ '<ion-icon name="trash"></ion-icon>'
-													+ '</a>' + '</div>'
-													+ "</td> " + "</tr>");
+							var isVirtual = null;
+
+							$.each(jsonResponse.objectEntityList,
+											function(key, value) {
+
+												if (jsonResponse.objectEntityList[key].isVirtual == "S") {
+													isVirtual = "Si";
+												} else if (jsonResponse.objectEntityList[key].isVirtual == "N") {
+													isVirtual = "No";
+												}
+
+												$("#tableCourseData")
+														.append(
+																"<tr>"
+																		+ '<td class="column">'
+																		+ jsonResponse.objectEntityList[key].courseId
+																		+ "</td> "
+																		+ '<td class="column">'
+																		+ jsonResponse.objectEntityList[key].academicPeriod.name
+																		+ "</td> "
+																		+ '<td class="column">'
+																		+ jsonResponse.objectEntityList[key].teacher.teacherId
+																		+ "</td> "
+																		+ '<td class="column">'
+																		+ jsonResponse.objectEntityList[key].subject.name
+																		+ "</td> "
+																		+ '<td class="column">'
+																		+ jsonResponse.objectEntityList[key].groupId
+																		+ "</td> "
+																		+ '<td class="column">'
+																		+ isVirtual
+																		+ "</td> "
+																		+ '<td class="column-actions">'
+																		+ '<div class="actions"> '
+																		+ '<a class="button edit-button buttonUpdateCourseToolbar">'
+																		+ '<ion-icon name="create"></ion-icon>'
+																		+ '</a>'
+																		+ '<a class="button add-button buttonAddFeedbackCourseToolbar">'
+																		+ 'Agregar Retroalimentacion'
+																		+ '</a>'
+																		+ '<a class="button delete-button buttonDeleteCourseToolbar">'
+																		+ '<ion-icon name="trash"></ion-icon>'
+																		+ '</a>'
+																		+ '</div>'
+																		+ "</td> "
+																		+ "</tr>");
+
+											})
 
 						}
 
@@ -268,3 +465,5 @@ function ajaxSearchCourse() {
 			});
 
 }
+
+

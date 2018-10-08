@@ -1,20 +1,18 @@
-$(document).ready(function() {
-
+function initAddFeedbackCourse() {
+	
 	ajaxSearchCourseFeedbacks();
+	
+	$('#buttonAddFeedbackCourse').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxAddFeedbackCourse();
+
+	});
 
 	$('.addFeedbackCourse #buttonCancel').click(function(event) {
 
 		event.preventDefault();
-
-		$('#groupIdSearch').val($('#courseAdd').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
 
 		$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
@@ -24,27 +22,11 @@ $(document).ready(function() {
 
 		event.preventDefault();
 
-		$('#groupIdSearch').val($('#courseAdd').val());
-
-		$.get('./Courses/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchCourse();
-
-		})
-
 		$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
 	});
 
-	$('#buttonAddFeedbackCourse').click(function(event) {
 
-		event.preventDefault();
-
-		ajaxAddFeedbackCourse();
-
-	});
 
 	$('.success .close').click(function(event) {
 
@@ -62,9 +44,17 @@ $(document).ready(function() {
 
 	});
 
-});
+}
 
 function ajaxSearchCourseFeedbacks() {
+	
+	var courseId = $('#courseAdd').val();
+	
+	var json = {
+			"courseId" : courseId
+		};
+	
+	console.log(json);
 	
 	$.ajax({
 		url : "./Courses/ValidateCourseFeedbacksAdd",
@@ -85,15 +75,18 @@ function ajaxSearchCourseFeedbacks() {
 
 			console.log(jsonResponse);
 
-			//Pendiente
+				var estate = "";
 			
-//				$.each(jsonResponse.variableEntityStates, function(key, value) {
-//
-//					$("#feedBackTypeAdd").append(
-//							'<option value=' + jsonResponse.variableEntityStates + '>'+ jsonResponse.variableEntityStates + '</option>');
-//
-//				})
+				$.each(jsonResponse.variables, function(key, value) {
 
+					if (value == "true"){
+						estate = "disabled";
+					}
+
+					$("#feedBackTypeAdd").append(
+							'<option value="" '+estate+' >'+ key + '</option>');
+
+				})
 
 		},
 		error : function() {
@@ -105,12 +98,15 @@ function ajaxSearchCourseFeedbacks() {
 }
 
 function ajaxAddFeedbackCourse() {
+	
+	var groupId = $('#groupIdAdd').val();
+	
+	console.log("groupIdAdd " + groupId);
 
-	$('#feedBackTypeAdd option:selected').text('1');
 	$('#commentAddError').text('');
 
 	var course = $('#courseAdd').val();
-	var feedBackType = $('#feedBackTypeAdd option:selected').val();
+	var feedBackType = $('#feedBackTypeAdd option:selected').text();
 	var comment = $('#commentAdd').val();
 
 	var json = {
@@ -149,15 +145,13 @@ function ajaxAddFeedbackCourse() {
 					$('.error .message').text(jsonResponse.errorMessage);
 
 					$('.error').show().fadeIn('slow');
+					
+					$('.addFeedbackCourse .modalContainer').show().fadeOut('slow');
 
 				} else {
 
-					$('#groupIdSearch').val($('#courseAdd').val());
-					//					$('#teacherSearch').val($('#').val());
-					//					$('#subjectSearch').val($('#').val());
-					//					$('#academicPeriodSearch').val($('#').val());
+					$('#groupIdSearch').val($('#groupIdAdd').val());
 
-					$('#feedBackTypeAdd option:selected').text('1');
 					$('#commentAdd').val('');
 
 					$('.success .message').text(jsonResponse.successMessage);

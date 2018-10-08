@@ -1,12 +1,7 @@
 <%@include file="/includes/statics-resources/tag-libs.jsp"%>
 
-<!--course-delete-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/course/course-delete.js"></script>
 
 <div class="deleteCourse">
-
-	<h2>CURSOS</h2>
 
 	<div class="modalContainer">
 

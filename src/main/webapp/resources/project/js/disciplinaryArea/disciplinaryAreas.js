@@ -15,19 +15,6 @@ $(document).ready(function() {
 		
 	});
 	
-	
-//	$('#linkSearchDisciplinaryArea').click(function(event) {
-//
-//		event.preventDefault();
-//		
-//		$.get('./DisciplinaryAreas/Data', function(view, status, xhr){
-//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-//			}).done(function() {
-//				ajaxSearchDisciplinaryArea();
-//			  });
-//
-//	});
-	
 
 	
 });

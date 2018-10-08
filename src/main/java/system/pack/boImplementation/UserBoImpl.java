@@ -125,7 +125,7 @@ public class UserBoImpl implements UserBoInterface {
 					
 				} else {
 					
-					jsonResponse.setObjectEntityList(users);;
+					jsonResponse.setObjectEntityList(users);
 					
 				}
 

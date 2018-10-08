@@ -19,7 +19,7 @@ public class JsonResponse <T, S>  {
 	
 	private Map<String, String> errorMessages;
 	
-	private Map<S, String> variableEntityStates;
+	private Map<String, String> variables;
 	
 	private String successMessage;
 	
@@ -79,12 +79,12 @@ public class JsonResponse <T, S>  {
 		this.errorMessages = errorMessages;
 	}
 
-	public Map<S, String> getVariableEntityStates() {
-		return variableEntityStates;
+	public Map<String, String> getVariables() {
+		return variables;
 	}
 
-	public void setVariableEntityStates(Map<S, String> variableEntityStates) {
-		this.variableEntityStates = variableEntityStates;
+	public void setVariables(Map<String, String> variables) {
+		this.variables = variables;
 	}
 
 	public String getSuccessMessage() {

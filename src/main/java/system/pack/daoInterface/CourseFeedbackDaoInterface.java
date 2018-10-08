@@ -12,9 +12,9 @@ public interface CourseFeedbackDaoInterface {
 	
 	public void update(CourseFeedbackEntity courseFeedbackEntity);
 	
-	public List<CourseFeedbackEntity> findByFeedBackTypeId(String feedBackType);
+	public List<CourseFeedbackEntity> findByFeedBackTypeId(int feedBackTypeId);
 	
-	public List<CourseFeedbackEntity> findByCourseId(String course);
+	public List<CourseFeedbackEntity> findByCourseId(int courseId);
 	
 	
 }

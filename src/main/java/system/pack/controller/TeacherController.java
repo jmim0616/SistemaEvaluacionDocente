@@ -31,6 +31,7 @@ import system.pack.entity.TeacherEntity;
 import system.pack.entity.UserEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
+import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByTeacherBean;
 import system.pack.vo.TeacherBean;
@@ -83,7 +84,11 @@ public class TeacherController {
 	
 	@GetMapping(value = "/Data")
 	public String showDataTeacherView(Model model) {
+		
+		model.addAttribute("courseFeedback", new CourseFeedbackBean());
 
+		model.addAttribute("teacher", new TeacherBean());
+		
 		return "teacher-data";
 		
 	}
@@ -101,6 +106,7 @@ public class TeacherController {
 	public String showUpdateTeacherStatusView(@RequestParam(name="teacherId") String teacherId, Model model) {
 		
 		model.addAttribute("teacher", new TeacherBean(teacherId));
+		
 		
 		return "teacher-update-status";
 		

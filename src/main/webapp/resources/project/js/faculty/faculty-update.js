@@ -1,5 +1,14 @@
 $(document).ready(function() {
 
+	$('#buttonUpdateFaculty').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxUpdateFaculty();
+
+	});
+
+	
 	$('.updateFaculty #buttonCancel').click(function(event) {
 
 		event.preventDefault();
@@ -16,13 +25,6 @@ $(document).ready(function() {
 
 	});
 
-	$('#buttonUpdateFaculty').click(function(event) {
-
-		event.preventDefault();
-
-		ajaxUpdateFaculty();
-
-	});
 
 	$('.success .close').click(function(event) {
 
@@ -84,8 +86,6 @@ function ajaxUpdateFaculty() {
 					$('.success .message').text(jsonResponse.successMessage);
 
 					$('.success').show().fadeIn('slow');
-
-					$('.updateFaculty .modalContainer').show().fadeOut('slow');
 
 					$.get('./Faculties/Data', function(view, status, xhr) {
 						$('.content').fadeOut(0).html(view).fadeIn('slow');

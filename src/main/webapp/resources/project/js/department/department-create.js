@@ -1,7 +1,14 @@
 $(document).ready(function() {
-	
-	
 
+	$('#buttonCreateDepartment').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxCreateDepartment();
+
+	});
+	
+	
 	$('.createDepartment  #buttonCancel').click(function(event) {
 
 		event.preventDefault();
@@ -15,14 +22,6 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		$('.createDepartment  .modalContainer').show().fadeOut('slow');
-
-	});
-
-	$('#buttonCreateDepartment').click(function(event) {
-
-		event.preventDefault();
-
-		ajaxCreateDepartment();
 
 	});
 	
@@ -43,6 +42,7 @@ $(document).ready(function() {
 	});
 
 });
+
 
 function ajaxCreateDepartment() {
 
@@ -90,8 +90,6 @@ function ajaxCreateDepartment() {
 				} else {
 				
 				$('#nameCreate').val('');
-
-				$('.createDepartment .modalContainer').show().fadeOut('slow');
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				

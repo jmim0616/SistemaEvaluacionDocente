@@ -27,6 +27,7 @@ import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
+import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
 import system.pack.vo.TeacherBean;
 

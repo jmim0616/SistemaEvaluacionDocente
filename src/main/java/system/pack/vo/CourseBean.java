@@ -22,10 +22,11 @@ public class CourseBean {
 	@Pattern(regexp = "^[0-9]{4}\\-[0-9]{1}", message = "El campo \"Periodo Academico\" no cumple el formato adecuado. Ej: 2018-1")
 	private String academicPeriod;
 	
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Profesor\" debe ser diligenciado solo con letras")
+	@NotEmpty(message = "El campo \"Identificador de Grupo\" es requerido")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Profesor\" solo se permiten numeros")
 	private String teacher;
 	
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Asignatura\" debe ser diligenciado solo con letras")
+	@NotEmpty(message = "El campo \"Identificador de Grupo\" es requerido")
 	private String subject;
 
 	@NotEmpty(message = "El campo \"Identificador de Grupo\" es requerido")

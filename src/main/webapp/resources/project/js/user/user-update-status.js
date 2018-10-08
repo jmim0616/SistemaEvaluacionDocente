@@ -1,37 +1,5 @@
 $(document).ready(function() {
 
-	$('#buttonCancel').click(function(event) {
-
-		event.preventDefault();
-		
-		$.get('./Users/Data', function(view, status, xhr){
-			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-			}).done(function() {
-				  ajaxSearchUser();
-			  });
-		
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
-	
-	
-	$('#closeModal').click(function(event) {
-		
-		event.preventDefault();
-		
-		$.get('./Users/Data', function(view, status, xhr){
-			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-			}).done(function() {
-				  ajaxSearchUser();
-			  });
-
-		
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-	
-	
 	$('#buttonUpdateStatusUser').click(function(event) {
 
 		event.preventDefault();
@@ -39,6 +7,24 @@ $(document).ready(function() {
 		ajaxUpdateUserStatus();
 
 	});
+	
+	$('.updateUserStatus #buttonCancel').click(function(event) {
+
+		event.preventDefault();
+		
+		$('.updateUserStatus .modalContainer').show().fadeOut('slow');
+
+	});
+	
+	
+	$('.updateUserStatus #closeModal').click(function(event) {
+		
+		event.preventDefault();
+
+		$('.updateUserStatus .modalContainer').show().fadeOut('slow');
+
+	});
+
 	
 	$('.success .close').click(function(event) {
 
@@ -53,8 +39,6 @@ $(document).ready(function() {
 
 
 function ajaxUpdateUserStatus() {
-	
-	$('.modalContainer').show().fadeOut('slow');
 	
 	var userId = $('#userIdUpdateStatus').val();
 	var userStatus = $('.status').text();
@@ -93,8 +77,6 @@ function ajaxUpdateUserStatus() {
 			}
 			
 			console.log(jsonResponse);
-			
-			$('.modalContainer').show().fadeOut('slow');
 			
 			$('.success .message').text(jsonResponse.successMessage);
 			

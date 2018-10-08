@@ -34,6 +34,14 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		entityManager.merge(courseEntity);
 		
 	}
+	
+
+	@Override
+	public void update(CourseEntity courseEntity) {
+
+		entityManager.merge(courseEntity);
+		
+	}
 
 	@Override
 	public void delete(CourseEntity courseEntity) {
@@ -50,6 +58,19 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		
 		return course;
 	}
+	
+	@Override
+	public CourseEntity findByGroupId(int groupId) {
+		
+		TypedQuery<CourseEntity> query = entityManager.createQuery("select c from CourseEntity c where c.groupId =:groupId", CourseEntity.class);
+		
+		query.setParameter("groupId", groupId);
+		
+		CourseEntity courseEntity = query.getSingleResult();
+		
+		return courseEntity;
+	}
+	
 	
 	@Override
 	public List<CourseEntity> findByAcademicPeriodId(int academicPeriodId) {

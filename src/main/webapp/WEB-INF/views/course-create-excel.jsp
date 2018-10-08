@@ -11,9 +11,10 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
 
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/course/course-create-excel.js"></script>
-
+	
     <title>INDEX</title>
 
 </head>
@@ -53,6 +54,7 @@
 </body>
 
 </html>
+
 
 
 

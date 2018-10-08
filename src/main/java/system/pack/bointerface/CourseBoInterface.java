@@ -1,5 +1,7 @@
 package system.pack.bointerface;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +29,8 @@ public interface CourseBoInterface {
 	
 	public JsonResponse search(CourseBean courseBean, BindingResult bindingResult);
 	
-	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult);
+	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean,
+			BindingResult bindingResult, HttpSession session);
 	
 	public JsonResponse searchAcademicPeriodsBySubjectOfTeacher(SubjectBean subjectBean, BindingResult bindingResult);
 	
@@ -45,7 +48,7 @@ public interface CourseBoInterface {
 
 	JsonResponse getAllAcademicPeriods();
 	
-	public JsonResponse validateCourseFeedbacksAdd();
+	public JsonResponse validateCourseFeedbacksAdd(CourseBean courseBean);
 
 	public JsonResponse  getAllCourses();
 

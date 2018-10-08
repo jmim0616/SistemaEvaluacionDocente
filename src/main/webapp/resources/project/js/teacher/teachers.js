@@ -31,6 +31,17 @@ $(document).ready(function() {
 		$('.content').fadeOut(0).load('./Teachers/Create').fadeIn('slow');
 
 	});
+	
+	$('#linkCreateExcelTeacher').click(
+			function(event) {
+
+				event.preventDefault();
+
+				$('.content')
+						.html(
+								'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
+
+			});
 
 	$('#buttonSearchTeacher').click(function(event) {
 
@@ -54,7 +65,7 @@ $(document).ready(function() {
 
 
 
-function AutocompleteForTeachersId() {
+function AutocompleteForTeachersIdSearch() {
 
 	$("#teacherIdSearch").autocomplete({
 		source : arrayTeachersId
@@ -62,7 +73,7 @@ function AutocompleteForTeachersId() {
 
 }
 
-function AutocompleteForTeachersName() {
+function AutocompleteForTeachersNameSearch() {
 
 	$("#nameSearch").autocomplete({
 		source : arrayTeachersName
@@ -71,7 +82,7 @@ function AutocompleteForTeachersName() {
 }
 
 
-function AutocompleteForSubjects() {
+function AutocompleteForSubjectsSearch() {
 
 	$("#subjectSearch").autocomplete({
 		source : arraySubjects
@@ -83,8 +94,7 @@ function AutocompleteForSubjects() {
 
 function ajaxSearchTeachers() {
 
-	$
-			.ajax({
+	$.ajax({
 				url : './Courses/GetTeachers',
 				contentType : 'application/json',
 				method : 'POST',
@@ -120,8 +130,8 @@ function ajaxSearchTeachers() {
 				},
 				complete : function() {
 
-					AutocompleteForTeachersId();
-					AutocompleteForTeachersName();
+					AutocompleteForTeachersIdSearch();
+					AutocompleteForTeachersNameSearch();
 
 				},
 				error : function() {
@@ -133,6 +143,7 @@ function ajaxSearchTeachers() {
 			});
 
 }
+
 
 function ajaxSearchSubjects() {
 
@@ -164,7 +175,7 @@ function ajaxSearchSubjects() {
 		},
 		complete : function() {
 
-			AutocompleteForSubjects();
+			AutocompleteForSubjectsSearch();
 
 		},
 		error : function() {
@@ -177,17 +188,7 @@ function ajaxSearchSubjects() {
 
 }
 
-$('#linkCreateExcelTeacher')
-		.click(
-				function(event) {
 
-					event.preventDefault();
-
-					$('.content')
-							.html(
-									'<iframe src="http://localhost:8080/SistemaEvaluacionDocente/Teachers/CreateExcel" width="500">  </iframe>');
-
-				});
 
 function ajaxSearchTeacher() {
 
@@ -205,8 +206,11 @@ function ajaxSearchTeacher() {
 		"subjectSearch" : subjectSearch
 	};
 
-	$
-			.ajax({
+	console.log(json);
+	
+
+	
+	$.ajax({
 				url : './Teachers/Search',
 				data : JSON.stringify(json),
 				contentType : "application/json",
@@ -228,6 +232,8 @@ function ajaxSearchTeacher() {
 					}
 
 					console.log(jsonResponse);
+					
+					
 
 					if (jsonResponse.isValid) {
 
@@ -246,57 +252,59 @@ function ajaxSearchTeacher() {
 
 							var identificationType = null;
 
-							if (jsonResponse.objectEntity.teacher.identificationType == 1) {
+							$.each(jsonResponse.objectEntityList, function(key, value) {
+							
+							if (jsonResponse.objectEntityList[key].teacher.identificationType == 1) {
 								identificationType = "Cedula de Ciudadania";
-							} else if (jsonResponse.objectEntity.teacher.identificationType == 2) {
+							} else if (jsonResponse.objectEntityList[key].teacher.identificationType == 2) {
 								identificationType = "Cedula de Extranjeria";
 							}
 
 							$("#tableTeacherData")
 									.append(
-											"<tr>" + "<td>"
-													+ jsonResponse.objectEntity.teacher.teacherId
+											"<tr>" + '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.teacherId
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.name
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.name
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.lastName
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.lastName
 													+ "</td> "
-													+ "<td>"
+													+ '<td class="column">'
 													+ identificationType
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.underDegree
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.underDegree
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.masterDegree
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.masterDegree
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.doctorDegree
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.doctorDegree
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.institutionalMail
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.institutionalMail
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.personalMail
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.personalMail
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.cellNumber
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.cellNumber
 													+ "</td>"
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.homeNumber
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.homeNumber
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.experience
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.experience
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.subject.name
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].subject.name
 													+ "</td> "
-													+ "<td>"
-													+ jsonResponse.objectEntity.teacher.teacherStatus.status
+													+ '<td class="column">'
+													+ jsonResponse.objectEntityList[key].teacher.teacherStatus.status
 													+ "</td> "
-													+ "<td>"
+													+ '<td class="column-actions">'
 													+ '<div class="actions"> '
 													+ '<a class="button edit-button buttonUpdateTeacherToolbar">'
 													+ '<ion-icon name="create"></ion-icon>'
@@ -309,6 +317,8 @@ function ajaxSearchTeacher() {
 													+ '</a>' + '</div>'
 													+ "</td> " + "</tr>");
 
+						})
+							
 						}
 
 					} else {
@@ -340,34 +350,34 @@ function ajaxSearchTeacher() {
 
 }
 
-function ajaxShow() {
-
-	$.ajax({
-		// url : "./Teachers/Data",
-		method : 'GET',
-		beforeSend : function(xhr) {
-
-		},
-		done : function(view) {
-
-		},
-		success : function(view) {
-
-			//			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			//        	$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
-
-			//			$('.content').html(view);
-
-			//			ajaxSearchTeacher();
-
-			console.log("AAAAAAAAAAAA");
-
-		},
-		complete : function() {
-
-		},
-
-	});
-
-}
+//function ajaxShow() {
+//
+//	$.ajax({
+//		// url : "./Teachers/Data",
+//		method : 'GET',
+//		beforeSend : function(xhr) {
+//
+//		},
+//		done : function(view) {
+//
+//		},
+//		success : function(view) {
+//
+//			//			$('.content').fadeOut(0).html(view).fadeIn('slow');
+//
+//			//        	$('.content').fadeOut(0).load('./Teachers/Data').fadeIn('slow');
+//
+//			//			$('.content').html(view);
+//
+//			//			ajaxSearchTeacher();
+//
+//			console.log("AAAAAAAAAAAA");
+//
+//		},
+//		complete : function() {
+//
+//		},
+//
+//	});
+//
+//}

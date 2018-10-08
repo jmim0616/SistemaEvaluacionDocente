@@ -1,41 +1,5 @@
 $(document).ready(function() {
-
-	$('#buttonCancel').click(function(event) {
-
-		event.preventDefault();
-
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
-
-		$.get('./Teachers/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchTeacher();
-
-		})
-
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
-	$('#closeModal').click(function(event) {
-
-		event.preventDefault();
-
-		$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
-
-		$.get('./Teachers/Data', function(view) {
-
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchTeacher();
-
-		})
-
-		$('.modalContainer').show().fadeOut('slow');
-
-	});
-
+	
 	$('#buttonUpdateStatusTeacher').click(function(event) {
 
 		event.preventDefault();
@@ -43,6 +7,23 @@ $(document).ready(function() {
 		ajaxUpdateTeacherStatus();
 
 	});
+
+	$('.updateTeacherStatus #buttonCancel').click(function(event) {
+
+		event.preventDefault();
+
+		$('.updateTeacherStatus .modalContainer').show().fadeOut('slow');
+
+	});
+
+	$('#closeModal').click(function(event) {
+
+		event.preventDefault();
+
+		$('.updateTeacherStatus .modalContainer').show().fadeOut('slow');
+
+	});
+
 
 	$('.success .close').click(function(event) {
 
@@ -55,8 +36,6 @@ $(document).ready(function() {
 });
 
 function ajaxUpdateTeacherStatus() {
-
-	$('.modalContainer').show().fadeOut('slow');
 
 	var teacherId = $('#teacherIdUpdateStatus').val();
 	var teacherStatus = $('.status').text();
@@ -88,12 +67,11 @@ function ajaxUpdateTeacherStatus() {
 
 			console.log(jsonResponse);
 
-			$('.modalContainer').show().fadeOut('slow');
-
 			$('.success .message').text(jsonResponse.successMessage);
 
 			$('.success').show().fadeIn('slow');
 
+			
 			$('#teacherIdSearch').val($('#teacherIdUpdateStatus').val());
 
 			$.get('./Teachers/Data', function(view) {

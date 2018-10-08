@@ -37,7 +37,7 @@ public class CourseConverter {
 		courseEntity.setTeacher(new TeacherEntity(Integer.parseInt(courseBean.getTeacher())));
 		courseEntity.setSubject(new SubjectEntity(Integer.parseInt(courseBean.getSubject())));
 		courseEntity.setGroupId(Integer.parseInt(courseBean.getGroupId()));
-		courseEntity.setIsVirtual(courseEntity.getIsVirtual());
+		courseEntity.setIsVirtual(courseBean.getIsVirtual());
 		
 		return courseEntity;
 
@@ -53,7 +53,7 @@ public class CourseConverter {
 		courseEntity.setTeacher(new TeacherEntity(Integer.parseInt(courseBean.getTeacher())));
 		courseEntity.setSubject(new SubjectEntity(Integer.parseInt(courseBean.getSubject())));
 		courseEntity.setGroupId(Integer.parseInt(courseBean.getGroupId()));
-		courseEntity.setIsVirtual(courseEntity.getIsVirtual());
+		courseEntity.setIsVirtual(courseBean.getIsVirtual());
 		
 		return courseEntity;
 

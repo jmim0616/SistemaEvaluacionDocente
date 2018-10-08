@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+	$('#buttonUpdateDepartment').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxUpdateDepartment();
+
+	});
+	
 	$('.updateDepartment #buttonCancel').click(function(event) {
 
 		event.preventDefault();
@@ -33,14 +41,6 @@ $(document).ready(function() {
 
 	});
 	
-	$('#buttonUpdateDepartment').click(function(event) {
-
-		event.preventDefault();
-		
-		ajaxUpdateDepartment();
-
-	});
-
 	
 });
 
@@ -95,8 +95,6 @@ function ajaxUpdateDepartment() {
 				} else {
 				
 				$('#nameUpdate').val('');
-
-				$('.updateDepartment .modalContainer').show().fadeOut('slow');
 				
 				$('.success .message').text(jsonResponse.successMessage);
 				

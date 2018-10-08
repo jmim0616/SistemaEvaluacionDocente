@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+	$('#buttonCreateFaculty').click(function(event) {
+
+		event.preventDefault();
+		
+		ajaxCreateFaculty();
+
+	});
 	
 	$('.createFaculty #buttonCancel').click(function(event) {
 
@@ -17,13 +24,7 @@ $(document).ready(function() {
 
 	});
 	
-	$('#buttonCreateFaculty').click(function(event) {
 
-		event.preventDefault();
-		
-		ajaxCreateFaculty();
-
-	});
 
 	$('.success .close').click(function(event) {
 
@@ -94,8 +95,6 @@ function ajaxCreateFaculty() {
 				$('.success .message').text(jsonResponse.successMessage);
 				
 				$('.success').show().fadeIn('slow');
-				
-				$('.createFaculty .modalContainer').show().fadeOut('slow');
 				
 				$.get('./Faculties/Data', function(view, status, xhr){
 					  $('.content').fadeOut(0).html(view).fadeIn('slow');

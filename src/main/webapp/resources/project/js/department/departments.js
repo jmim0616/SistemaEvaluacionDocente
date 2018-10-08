@@ -14,18 +14,7 @@ $(document).ready(function() {
 		
 	});
 	
-	
-//	$('#linkSearchDepartment').click(function(event) {
-//
-//		event.preventDefault();
-//		
-//		$.get('./Departments/Data', function(view, status, xhr){
-//			  $('.content').fadeOut(0).html(view).fadeIn('slow');
-//			}).done(function() {
-//				ajaxSearchDepartment();
-//			  });
-//
-//	});
+
 	
 
 	
@@ -54,6 +43,8 @@ function ajaxSearchDepartment() {
 				
 				console.log(jsonResponse);
 				
+		
+				
 				if (jsonResponse.errorMessage != null) {
 					
 					$('#tableDepartmentData').show().fadeOut('slow');
@@ -66,6 +57,11 @@ function ajaxSearchDepartment() {
 				} else {
 					
 					$.each(jsonResponse.objectEntityList, function(key, value) {
+						
+						 console.log("AAAAAAAAA");
+						 console.log(key);
+						 console.log("BBBBBBBBB");
+						 console.log(value);
 
 						$("#tableDepartmentData").append(
 								"<tr>" +

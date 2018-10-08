@@ -5,6 +5,15 @@ var arrayAcademicProgramsDeleted = [];
 $(document).ready(function() {
 
 	ajaxSearchAcademicPrograms();
+	
+
+	$('#buttonUpdateSubject').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxUpdateSubject();
+
+	});
 
 	$('.success .close').click(function(event) {
 
@@ -14,13 +23,6 @@ $(document).ready(function() {
 
 	});
 
-	$('#buttonUpdateSubject').click(function(event) {
-
-		event.preventDefault();
-
-		ajaxUpdateSubject();
-
-	});
 
 });
 

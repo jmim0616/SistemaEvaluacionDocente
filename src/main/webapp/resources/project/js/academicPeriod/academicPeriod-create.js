@@ -1,6 +1,14 @@
 $(document).ready(function() {
 
 	setDates();
+	
+	$('#buttonCreateAcademicPeriod').click(function(event) {
+
+		event.preventDefault();
+
+		ajaxCreateAcademicPeriod();
+
+	});
 
 	$('.success .close').click(function(event) {
 
@@ -18,13 +26,7 @@ $(document).ready(function() {
 
 	});
 
-	$('#buttonCreateAcademicPeriod').click(function(event) {
 
-		event.preventDefault();
-
-		ajaxCreateAcademicPeriod();
-
-	});
 
 });
 

@@ -6,16 +6,14 @@
 <!--Menu -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/layout/menu/menu.js"></script>
-	
-		<!--course-create-->
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/project/js/course/course-create.js"></script>
 
+<!--courses-->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/project/js/course/courses.js"></script>
-	
 
-
+<!--course-create-->
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/project/js/course/course-create.js"></script>
 
 
 <body>
@@ -53,7 +51,7 @@
 							<form:form id="formSearchCourse" modelAttribute="course">
 
 								<fieldset>
-									<form:label path="groupId">Identificador del Curso</form:label>
+									<form:label path="groupId">Identificador de Grupo</form:label>
 									<form:input path="groupId" type="text" id="groupIdSearch" />
 									<label id="groupIdSearchError" class="validation-error">
 									</label>
@@ -85,6 +83,11 @@
 
 								<input id="buttonSearchCourse" class="button sent-button"
 									type="submit" value="Buscar Curso" />
+
+								<br><br>
+
+								<input id="buttonSearchStudentsSurveyCourses" class="button sent-button"
+									type="submit" value="Buscar Resultados Encuestas Web" />
 
 							</form:form>
 

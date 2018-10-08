@@ -1,5 +1,8 @@
+var arrayAcademicPeriods = [];
+
 $(document).ready(function() {
 
+	ajaxSearchAcademicPeriods();
 	
 	$('.sub-menu-content').click(function(e) {
 
@@ -19,7 +22,21 @@ $(document).ready(function() {
 		
 
 	});
+	
+	$('#buttonSearchAcademicPeriod').click(function(event) {
 
+		event.preventDefault();
+		
+		$.get('./AcademicPeriods/Data', function(view){
+			
+			$('.content').fadeOut(0).html(view).fadeIn('slow');
+
+			ajaxSearchAcademicPeriod();
+			
+			})
+		
+	});
+	
 	
 	$('#linkCreateAcademicPeriod').click(function(event) {
 		
@@ -32,27 +49,64 @@ $(document).ready(function() {
 			})
 		
 	});
-	
-
-	$('#buttonSearchAcademicPeriod').click(function(event) {
-
-		event.preventDefault();
-		
-		$.get('./AcademicPeriods/Data', function(view){
-			
-			$('.content').fadeOut(0).html(view).fadeIn('slow');
-
-			ajaxSearchAcademicPeriod();
-			
-			})
-			
-			
-		
-	});
-	
 
 	
 });
+
+
+
+function AutocompleteForAcademicPeriodsSearch() {
+
+	$("#nameSearch").autocomplete({
+		source : arrayAcademicPeriods
+	});
+
+}
+
+
+
+function ajaxSearchAcademicPeriods() {
+
+	$.ajax({
+		url : './AcademicPeriods/GetAcademicPeriods',
+		contentType : 'application/json',
+		method : 'POST',
+		done : function() {
+
+		},
+		success : function(jsonResponse) {
+
+			if (typeof jsonResponse == "string") {
+
+				$('.content').fadeOut(0).html(jsonResponse).fadeIn('slow');
+
+				$('.error').show().fadeIn('slow');
+
+			}
+
+			console.log(jsonResponse);
+
+			$.each(jsonResponse.objectEntityList, function(key, value) {
+
+				arrayAcademicPeriods.push(jsonResponse.objectEntityList[key].name);
+
+			});
+
+		},
+		complete : function() {
+
+			AutocompleteForAcademicPeriodsSearch();
+
+		},
+		error : function() {
+
+			console.log("No se ha podido obtener la información");
+
+		}
+
+	});
+
+}
 
 
 
