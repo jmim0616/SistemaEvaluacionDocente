@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.fullview.Data;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
@@ -38,8 +39,5 @@ public interface CourseDaoInterface {
 	
 	public List<CourseEntity> searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
 
-
-
-
-	
+	public Data getCompareView(CourseBean courseBean);
 }

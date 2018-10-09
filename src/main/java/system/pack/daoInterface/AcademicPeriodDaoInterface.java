@@ -26,5 +26,7 @@ public interface AcademicPeriodDaoInterface {
 	
 	public int getAcademicPeriodByName(String stringCellValue);
 
+	public List<Integer> getPeriodsToProcess();
+
 	
 }

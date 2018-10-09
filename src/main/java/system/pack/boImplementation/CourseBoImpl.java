@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpSession;
 import javax.swing.text.Position;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -61,6 +62,7 @@ import system.pack.entity.QuestionEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
+import system.pack.fullview.Data;
 import system.pack.helper.Constants;
 import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
@@ -104,6 +106,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	@Autowired
 	CourseDaoJpaRepository courseDaoJpaRepository;
+
 
 	@Autowired
 	QuestionByPeriodDaoInterface questionByPeriodDaoInterface;
@@ -195,7 +198,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		}
 
-		jsonResponse.setVariableEntityStates(variableEntityStates);
+		//jsonResponse.setVariableEntityStates(variableEntityStates);
 
 		return jsonResponse;
 
@@ -418,7 +421,6 @@ public class CourseBoImpl implements CourseBoInterface {
 	}
 
 	@Transactional
-	@Override
 	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean,
 			BindingResult bindingResult) {
 
@@ -928,6 +930,24 @@ public class CourseBoImpl implements CourseBoInterface {
 		System.out.println(errorMessage);
 
 		return errorMessage;
+	}
+
+	@Override
+	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult,
+			HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JsonResponse validateCourseFeedbacksAdd(CourseBean courseBean) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Data getCompareView(CourseBean courseBean) {	
+		return courseDaoInterface.getCompareView(courseBean);
 	}
 	
 	

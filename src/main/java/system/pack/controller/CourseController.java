@@ -297,14 +297,14 @@ public class CourseController {
 	@ResponseBody
 	public Data createtest(@RequestBody CourseBean courseBean) {		
 		
-		Questions q1 =  new Questions("Q1", 10);
+		/*Questions q1 =  new Questions("Q1", 10);
 		Questions q2 =  new Questions("Q2", 20);
 		Questions q3 =  new Questions("Q3", 30);
 		
 		List<Questions> listq = new LinkedList<>();
 		listq.add(q1);
 		listq.add(q2);
-		listq.add(q3);		
+		listq.add(q3); 	
 		
 		Row row = new Row("2018-01", "Sistemas", "Ing sof 1", 1024, 5, listq);
 		
@@ -315,7 +315,9 @@ public class CourseController {
 		List<Period> periods = new LinkedList<>();
 		periods.add(period);
 		
-		return new Data(periods);
+		return new Data(periods);*/
+		
+		return courseBoInterface.getCompareView(courseBean);
 	}
 	
 	
