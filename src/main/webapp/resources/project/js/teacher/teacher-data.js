@@ -164,7 +164,17 @@ function chooseTypeOfQuery() {
 }
 
 function ajaxSearchCoursesByTeacher() {
-	
+
+	$("#tableCourseData tr").remove(); 
+
+	$("#tableCourseData").append(
+			'<thead>' + '<tr class="not">'
+					+ '<th>Codigo</th>'
+					+ '<th>Periodo Academico</th>'
+					+ '<th>Profesor</th>' + '<th>Asignatura</th>'
+					+ '<th>Identificador de Grupo</th>'
+					+ '<th>Es virtual</th>'
+					+ '</tr>' + '</thead>');
 	
 	$("#tableCourseData")
 	.append(
@@ -236,7 +246,7 @@ function ajaxSearchCoursesByTeacher() {
 					+ "</td> "
 					+ "</tr>");
 	
-	
+///////////////// todo hasta arriba se puede borrar
 	
 
 	var teacherId = arrayItemsStandardTable[0];
@@ -305,6 +315,17 @@ function ajaxSearchCoursesByTeacher() {
 //							$('.error').show().fadeIn('slow');
 //
 //						} else {
+//	
+//	$("#tableCourseData tr").remove(); 
+//
+//	$("#tableCourseData").append(
+//			'<thead>' + '<tr class="not">'
+//					+ '<th>Codigo</th>'
+//					+ '<th>Periodo Academico</th>'
+//					+ '<th>Profesor</th>' + '<th>Asignatura</th>'
+//					+ '<th>Identificador de Grupo</th>'
+//					+ '<th>Es virtual</th>'
+//					+ '</tr>' + '</thead>');
 //
 //							$
 //									.each(
@@ -361,6 +382,16 @@ function ajaxSearchCoursesByTeacher() {
 
 function ajaxSearchCourseFeedbackCourseOfTeacher() {
 	
+	$("#tableCourseFeedbackData tr").remove(); 
+	
+	$("#tableCourseFeedbackData").append(
+			'<thead>' + '<tr class="not">'
+					+ '<th>Codigo de la Retroalimentacion</th>'
+					+ '<th>Tipo de Retroalimentacion</th>'
+					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+					+ '<th>Fecha de Modificacion</th>'
+					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+					+ '</tr>' + '</thead>');
 	
 	$("#tableCourseFeedbackData")
 	.append(
@@ -390,7 +421,8 @@ function ajaxSearchCourseFeedbackCourseOfTeacher() {
 					+ '</a>'
 					+ '</div>'
 					+ "</td> " + "</tr>");
-	
+
+	///////////////// todo hasta arriba se puede borrar
 	
 	var courseId = arrayItemsStandardTable[0];
 	var academicPeriod = arrayItemsStandardTable[1];
@@ -450,6 +482,17 @@ function ajaxSearchCourseFeedbackCourseOfTeacher() {
 //								$('.error').show().fadeIn('slow');
 //
 //							} else {
+//	
+//	$("#tableCourseFeedbackData tr").remove(); 
+//	
+//	$("#tableCourseFeedbackData").append(
+//			'<thead>' + '<tr class="not">'
+//					+ '<th>Codigo de la Retroalimentacion</th>'
+//					+ '<th>Tipo de Retroalimentacion</th>'
+//					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+//					+ '<th>Fecha de Modificacion</th>'
+//					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+//					+ '</tr>' + '</thead>');
 //
 //								var buttonUpdateCourseFeedback = null;
 //								

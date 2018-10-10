@@ -4,32 +4,35 @@
 <div class="updateDisciplinaryArea">
 
 
-<div class="modalContainer">
+	<div class="modalContainer">
 
-	<div class="modalDialog">
+		<div class="modalDialog">
 
-		<section class="modalHeader">
-			<a href="#" id="closeModal">X</a>
-		</section>
+			<section class="modalHeader">
+				<a href="#" id="closeModal">X</a>
+			</section>
 
-				<form:form id="formUpdateDisciplinaryArea" modelAttribute="disciplinaryArea">
-				<form:hidden path="disciplinaryAreaId" id="disciplinaryAreaIdUpdate"/>
-				
-		<section class="modalBody">
+			<form:form id="formUpdateDisciplinaryArea"
+				modelAttribute="disciplinaryArea">
+				<form:hidden path="disciplinaryAreaId" id="disciplinaryAreaIdUpdate" />
 
-			<h2 id="tittleModal">Modificar Area Disciplinaria</h2>
-			<div id="dialogModal">
+				<section class="modalBody">
 
+					<h2 id="tittleModal">Modificar Area Disciplinaria</h2>
+					<div id="dialogModal">
 
-					<table>
+						<br> <label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
 
-						<tr>
+						<table>
+
+							<tr>
 
 								<td>
 									<fieldset>
-										<form:label path="department">Departamento</form:label>
+										<form:label path="department">Departamento <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:select path="department" id="departmentUpdate">
-										<option class="actualValue" hidden></option>
+											<option class="actualValue" hidden></option>
 											<c:forEach items="${departments}" var="item">
 												<option value="${item.departmentId}">${item.name}</option>
 											</c:forEach>
@@ -40,40 +43,41 @@
 
 								</td>
 
-						</tr>
+							</tr>
 
-						<tr>
+							<tr>
 
-							<td>
-								<fieldset>
-									<form:label path="name">Nombre</form:label>
-									<form:input path="name" type="text" id="nameUpdate" />
-									<label id="nameUpdateError" class="validation-error"> </label>
-								</fieldset>
-							</td>
-						</tr>
+								<td>
+									<fieldset>
+										<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:input path="name" type="text" id="nameUpdate" />
+										<label id="nameUpdateError" class="validation-error">
+										</label>
+									</fieldset>
+								</td>
+							</tr>
 
-					</table>
+						</table>
 
-				
 
-			</div>
 
-		</section>
+					</div>
 
-		<section class="modalFooter">
-			<input id="buttonUpdateDisciplinaryArea" class="button edit-button"
-				type="submit" value="Modificar Area Disciplinaria" /> <input
-				id="buttonCancel" class="button delete-button" type="submit"
-				value="Cancelar" />
-		</section>
+				</section>
 
-</form:form>
+				<section class="modalFooter">
+					<input id="buttonUpdateDisciplinaryArea" class="button edit-button"
+						type="submit" value="Modificar Area Disciplinaria" /> <input
+						id="buttonCancel" class="button delete-button" type="submit"
+						value="Cancelar" />
+				</section>
+
+			</form:form>
+
+		</div>
 
 	</div>
 
-</div>
 
-	
 
 </div>

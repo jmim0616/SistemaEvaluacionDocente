@@ -150,7 +150,7 @@ function ajaxSearchAcademicPeriod() {
 					
 					if (jsonResponse.errorMessage != null) {
 						
-						$('#tableAcademicPeriodData').show().fadeOut('slow');
+//						$('#tableAcademicPeriodData').show().fadeOut('slow');
 						
 						$('.error .message').text(jsonResponse.errorMessage);
 						

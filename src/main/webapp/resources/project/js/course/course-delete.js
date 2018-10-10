@@ -36,11 +36,11 @@ $(document).ready(function() {
 
 function ajaxDeleteCourse() {
 
-	var groupId = $('#groupIdDelete').val();
+	var courseId = $('#courseIdDelete').val();
 
 	var json = {
 
-		"groupId" : groupId
+		"courseId" : courseId
 
 	}
 
@@ -77,12 +77,14 @@ function ajaxDeleteCourse() {
 
 				} else {
 					
-
 					$('.success .message').text(jsonResponse.successMessage);
 
 					$('.success').show().fadeIn('slow');
 
 					$('.deleteCourse .modalContainer').show().fadeOut('slow');
+					
+					
+					$('.container').fadeOut(0).load('./Courses/').fadeIn('slow');
 
 				}
 

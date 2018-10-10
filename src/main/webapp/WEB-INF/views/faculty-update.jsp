@@ -20,18 +20,24 @@
 					<h2 id="tittleModal">Modificar Facultad</h2>
 					<div id="dialogModal">
 
+						<br> <label>Los campos marcados con asterisco (<a
+							style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
+
+
 						<table>
 
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre</form:label>
+										<form:label path="name">Nombre <a
+												style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:input path="name" type="text" id="nameUpdate" />
 										<label id="nameUpdateError" class="validation-error">
 										</label>
 									</fieldset>
 								</td>
-		
 						</table>
 
 

@@ -20,14 +20,15 @@
 					<h2 id="tittleModal">Registrar Area Disciplinaria</h2>
 					<div id="dialogModal">
 
-
+							<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
 
 						<table>
 
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="department">Departamento</form:label>
+										<form:label path="department">Departamento <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:select path="department" id="departmentCreate">
 											<c:forEach items="${departments}" var="item">
 												<option value="${item.departmentId}">${item.name}</option>
@@ -45,7 +46,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre</form:label>
+										<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="name" type="text" id="nameCreate" />
 										<label id="nameCreateError" class="validation-error">
 										</label>

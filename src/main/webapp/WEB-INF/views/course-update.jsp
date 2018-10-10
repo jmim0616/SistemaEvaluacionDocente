@@ -19,7 +19,10 @@
 					<h2 id="tittleModal">Modificar Curso</h2>
 					<div id="dialogModal">
 
-
+						<br>
+						<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+					
+						
 
 						<table>
 
@@ -27,7 +30,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="groupId">Identificador de Grupo</form:label>
+										<form:label path="groupId">Identificador de Grupo <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="groupId" type="text" id="groupIdUpdate"/>
 										<label id="groupIdUpdateError" class="validation-error">
 										</label>
@@ -36,7 +39,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="subject">Asignatura</form:label>
+										<form:label path="subject">Asignatura <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="subject" type="text" id="subjectUpdate" />
 										<label id="subjectUpdateError" class="validation-error">
 										</label>
@@ -49,7 +52,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="teacher">Profesor</form:label>
+										<form:label path="teacher">Profesor <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="teacher" type="text" id="teacherUpdate" />
 										<label id="teacherUpdateError" class="validation-error">
 										</label>
@@ -58,7 +61,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="academicPeriod">Periodo Academico</form:label>
+										<form:label path="academicPeriod">Periodo Academico <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="academicPeriod" type="text"
 											id="academicPeriodUpdate" />
 										<label id="academicPeriodUpdateError" class="validation-error">
@@ -74,7 +77,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="isVirtual">Es virtual</form:label>
+										<form:label path="isVirtual">Es virtual <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:select path="isVirtual" id="isVirtualUpdate">
 											<option class="actualValue" hidden></option>
 											<option value="1">Si</option>

@@ -16,11 +16,11 @@
 				<h2 id="tittleModal">Eliminar Curso</h2>
 
 				<p id="dialogModal">
-					Esta seguro que desea eliminar el curso ?
+					Esta seguro que desea eliminar el curso seleccionado ? 
 				</p>
 				<form:form modelAttribute="course">
 
-					<form:hidden path="groupId" id="groupIdDelete" />
+					<form:hidden path="courseId" id="courseIdDelete" />
 
 				</form:form>
 			</section>

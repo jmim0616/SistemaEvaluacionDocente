@@ -352,7 +352,9 @@ function ajaxSearchCourse() {
 
 						if (jsonResponse.errorMessage != null) {
 
-							$('#tableCourseData').show().fadeOut('slow');
+//							$('#tableCourseData').show().fadeOut('slow');
+//							
+//							$('#tableCourseFeedbackData').show().fadeOut('slow');
 
 							$('.error .message')
 									.text(jsonResponse.errorMessage);

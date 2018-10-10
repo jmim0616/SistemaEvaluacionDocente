@@ -4,40 +4,35 @@ var tableIdClicked = null;
 
 var classTdTableClicked = null;
 
-
-
 function initCourseData() {
 
 	obtainValuesTdSearch();
 
 	function obtainValuesTdSearch() {
-		
-	$('.data').on('click', '.standard-table tr td', function (e) {
-			
+
+		$('.data').on('click', '.standard-table tr td', function(e) {
+
 			var items = new Array();
-			
+
 			classTdTableClicked = $(this).attr('class');
 			tableIdClicked = $(this).parents("table").attr('id');
-		
-			
+
 			$(this).parents("tr").find("td").each(function(key, value) {
 
 				items.push($(this).html());
-			
-		});
+
+			});
 
 			console.log(items);
 
 			arrayItemsStandardTable = items;
-			
+
 			chooseTypeOfQuery();
-			
+
 		});
 
 	}
 
-	
-	
 	function obtainValuesTdActions(button) {
 
 		var items = new Array();
@@ -51,7 +46,7 @@ function initCourseData() {
 		console.log(items);
 
 		arrayItemsStandardTable = items;
-		
+
 	}
 
 	$('.buttonUpdateCourseToolbar').click(function(event) {
@@ -59,14 +54,14 @@ function initCourseData() {
 		event.preventDefault();
 
 		obtainValuesTdActions(this);
-		
+
 		$('#courseIdUpdate').val(arrayItemsStandardTable[0]);
 		$('#groupIdUpdate').val(arrayItemsStandardTable[4]);
 		$('#subjectUpdate').val(arrayItemsStandardTable[3]);
 		$('#teacherUpdate').val(arrayItemsStandardTable[2]);
 		$('#academicPeriodUpdate').val(arrayItemsStandardTable[1]);
 		$('#isVirtualUpdate .actualValue').text(arrayItemsStandardTable[5]);
-		
+
 		$('.updateCourse .modalContainer').show().fadeIn('slow');
 
 	});
@@ -79,11 +74,11 @@ function initCourseData() {
 
 		$('#courseAdd').val(arrayItemsStandardTable[0]);
 		$('#groupIdAdd').val(arrayItemsStandardTable[4]);
-		
+
 		$('.addFeedbackCourse .modalContainer').show().fadeIn('slow');
-		
+
 		initAddFeedbackCourse();
-		
+
 	});
 
 	$('.buttonDeleteCourseToolbar').click(function(event) {
@@ -91,32 +86,31 @@ function initCourseData() {
 		event.preventDefault();
 
 		obtainValuesTdActions(this);
-		
-		$('#groupIdDelete').val(arrayItemsStandardTable[0]);
+
+		$('#courseIdDelete').val(arrayItemsStandardTable[0]);
 
 		$('.deleteCourse .modalContainer').show().fadeIn('slow');
 
-
 	});
 
-	
-	
-	$('.data').on('click', '.buttonUpdateCourseFeedbackToolbar', function (event) {
-		
-		event.preventDefault();
+	$('.data').on(
+			'click',
+			'.buttonUpdateCourseFeedbackToolbar',
+			function(event) {
 
-		obtainValuesTdActions(this);
-		
-		$('#courseFeedBackIdUpdate').val(arrayItemsStandardTable[0]);
-		$('#feedBackTypeUpdate').text(arrayItemsStandardTable[1]);
-		$('#commentUpdate').val(arrayItemsStandardTable[2]);
+				event.preventDefault();
 
-		$('.updateCourseFeedback .modalContainer').show().fadeIn('slow');
+				obtainValuesTdActions(this);
 
+				$('#courseFeedBackIdUpdate').val(arrayItemsStandardTable[0]);
+				$('#feedBackTypeUpdate').text(arrayItemsStandardTable[1]);
+				$('#commentUpdate').val(arrayItemsStandardTable[2]);
 
-	});
-	
-	
+				$('.updateCourseFeedback .modalContainer').show()
+						.fadeIn('slow');
+
+			});
+
 	$('.error .close').click(function(event) {
 
 		event.preventDefault();
@@ -124,70 +118,76 @@ function initCourseData() {
 		$('.error').show().fadeOut('slow');
 
 	});
-	
-	$('#linkCreateCourse').click(
-			function(event) {
 
-				event.preventDefault();
+	$('#linkCreateCourse').click(function(event) {
 
-				$('.createCourse .modalContainer').show()
-						.fadeIn('slow');
+		event.preventDefault();
 
-			});
+		$('.createCourse .modalContainer').show().fadeIn('slow');
+
+	});
 
 }
-
-
 
 function chooseTypeOfQuery() {
 
 	if ((classTdTableClicked == "column") && (tableIdClicked != null)) {
 
 		if (tableIdClicked == "tableCourseData") {
-			
+
 			ajaxSearchCourseFeedbackOfCourse();
 
 		}
-
 
 	}
 
 }
 
-
 function ajaxSearchCourseFeedbackOfCourse() {
 	
 	
+	$("#tableCourseFeedbackData tr").remove();
+
+	$("#tableCourseFeedbackData").append(
+			'<thead>' + '<tr class="not">'
+					+ '<th>Codigo de la Retroalimentacion</th>'
+					+ '<th>Tipo de Retroalimentacion</th>'
+					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+					+ '<th>Fecha de Modificacion</th>'
+					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+					+ '</tr>' + '</thead>');
+
 	$("#tableCourseFeedbackData")
-	.append(
-			"<tr>"
-					+ "<td>"
-					+ "asdasdsadasd"
-					+ "</td> "
-					+ "<td>"
-					+ "sdfsdfsdfsdf"
-					+ "</td> "
-					+ "<td>"
-					+ "xcvxcvxcvxcv"
-					+ "</td> "
-					+ "<td>"
-					+ "ghjghjgj"
-					+ "</td> "
-					+ "<td>"
-					+ "zxzxczczxc"
-					+ "</td> "
-					+ "<td>"
-					+ "100"
-					+ "</td> "
-					+ "<td>"
-					+ '<div class="actions"> '
-					+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-					+ '<ion-icon name="create"></ion-icon>'
-					+ '</a>'
-					+ '</div>'
-					+ "</td> " + "</tr>");
+			.append(
+					"<tr>"
+							+ "<td>"
+							+ "asdasdsadasd"
+							+ "</td> "
+							+ "<td>"
+							+ "sdfsdfsdfsdf"
+							+ "</td> "
+							+ "<td>"
+							+ "xcvxcvxcvxcv"
+							+ "</td> "
+							+ "<td>"
+							+ "ghjghjgj"
+							+ "</td> "
+							+ "<td>"
+							+ "zxzxczczxc"
+							+ "</td> "
+							+ "<td>"
+							+ "100"
+							+ "</td> "
+							+ "<td>"
+							+ '<div class="actions"> '
+							+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
+							+ '<ion-icon name="create"></ion-icon>' + '</a>'
+							+ '</div>' + "</td> " + "</tr>");
 	
 	
+///////////////// todo hasta arriba se puede borrar
+	
+
 	var courseId = arrayItemsStandardTable[0];
 	var academicPeriod = arrayItemsStandardTable[1];
 	var teacher = arrayItemsStandardTable[2];
@@ -195,113 +195,122 @@ function ajaxSearchCourseFeedbackOfCourse() {
 	var groupId = arrayItemsStandardTable[4];
 	var isVirtual = arrayItemsStandardTable[5];
 
-
-	
 	var json = {
-			
-			"courseId": courseId,
-			"academicPeriod": academicPeriod,
-			"teacher": teacher,
-			"subject": subject,
-			"groupId": groupId,
-			"isVirtual": isVirtual
+
+		"courseId" : courseId,
+		"academicPeriod" : academicPeriod,
+		"teacher" : teacher,
+		"subject" : subject,
+		"groupId" : groupId,
+		"isVirtual" : isVirtual
 
 	}
 
-		console.log(json);
+	console.log(json);
 
-//		$
-//				.ajax({
-//					url : './Courses/',
-//					data : JSON.stringify(json),
-//					contentType : "application/json",
-//					method : 'POST',
-//					beforeSend : function() {
-//
-//					},
-//					done : function() {
-//
-//					},
-//					success : function(jsonResponse) {
-//
-//						if (typeof jsonResponse == "string") {
-//
-//							$('.content').fadeOut(0).html(jsonResponse).fadeIn(
-//									'slow');
-//
-//							$('.error').show().fadeIn('slow');
-//						}
-//
-//						console.log(jsonResponse);
-//
-//						if (jsonResponse.isValid) {
-//
-//							if (jsonResponse.errorMessage != null) {
-//
-//								$('#tableCourseFeedbackData').show().fadeOut('slow');
-//
-//								$('.error .message')
-//										.text(jsonResponse.errorMessage);
-//
-//								$('.error').show().fadeIn('slow');
-//
-//							} else {
-//
-//								var buttonUpdateCourseFeedback = null;
-//								
-//								$.each(jsonResponse.objectEntityList,function(key, value) {
-//													
-//													if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
+	//		$
+	//				.ajax({
+	//					url : './Courses/',
+	//					data : JSON.stringify(json),
+	//					contentType : "application/json",
+	//					method : 'POST',
+	//					beforeSend : function() {
+	//
+	//					},
+	//					done : function() {
+	//
+	//					},
+	//					success : function(jsonResponse) {
+	//
+	//						if (typeof jsonResponse == "string") {
+	//
+	//							$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+	//									'slow');
+	//
+	//							$('.error').show().fadeIn('slow');
+	//						}
+	//
+	//						console.log(jsonResponse);
+	//
+	//						if (jsonResponse.isValid) {
+//	
+//								if (jsonResponse.errorMessage != null) {
+//	
+//									$('#tableCourseFeedbackData').show().fadeOut('slow');
+//	
+//									$('.error .message')
+//											.text(jsonResponse.errorMessage);
+//	
+//									$('.error').show().fadeIn('slow');
+//	
+//								} else {
+//	
+//									
+//    	
+//    	$("#tableCourseFeedbackData tr").remove();
+//    
+//    	$("#tableCourseFeedbackData").append(
+//    			'<thead>' + '<tr class="not">'
+//    					+ '<th>Codigo de la Retroalimentacion</th>'
+//    					+ '<th>Tipo de Retroalimentacion</th>'
+//    					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+//    					+ '<th>Fecha de Modificacion</th>'
+//    					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+//    					+ '</tr>' + '</thead>');
+//  
+//	                                 var buttonUpdateCourseFeedback = null;
+//	
+//									$.each(jsonResponse.objectEntityList,function(key, value) {
 //														
-//														buttonUpdateCourseFeedback = "<td>"
-//															+ '<div class="actions"> '
-//															+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-//															+ '<ion-icon name="create"></ion-icon>'
-//															+ '</a>'
-//															+ '</div>'
-//															+ '</td> ';
-//													}
-//
-//													$("#tableCourseFeedbackData")
-//															.append(
-//																	"<tr>"
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].courseFeedBackId
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].feedBackType.description
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].comment
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].user
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].lastModifiedDate
-//																			+ "</td> "
-//																			+buttonUpdateCourseFeedback
-//																			+ "</tr>");
-//
-//												})
-//							}
-//
-//						} else {
-//
-//						}
-//
-//					},
-//					complete : function() {
-//
-//					},
-//					error : function() {
-//
-//						console.log("No se ha podido obtener la información");
-//
-//					}
-//
-//				});
+//														if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
+//															
+//															buttonUpdateCourseFeedback = "<td>"
+//																+ '<div class="actions"> '
+//																+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
+//																+ '<ion-icon name="create"></ion-icon>'
+//																+ '</a>'
+	//															+ '</div>'
+	//															+ '</td> ';
+	//													}
+	//
+	//													$("#tableCourseFeedbackData")
+	//															.append(
+	//																	"<tr>"
+	//																			+ "<td>"
+	//																			+ jsonResponse.objectEntityList[key].courseFeedBackId
+	//																			+ "</td> "
+	//																			+ "<td>"
+	//																			+ jsonResponse.objectEntityList[key].feedBackType.description
+	//																			+ "</td> "
+	//																			+ "<td>"
+	//																			+ jsonResponse.objectEntityList[key].comment
+	//																			+ "</td> "
+	//																			+ "<td>"
+	//																			+ jsonResponse.objectEntityList[key].user
+	//																			+ "</td> "
+	//																			+ "<td>"
+	//																			+ jsonResponse.objectEntityList[key].lastModifiedDate
+	//																			+ "</td> "
+	//																			+buttonUpdateCourseFeedback
+	//																			+ "</tr>");
+	//
+	//												})
+	//							}
+	//
+	//						} else {
+	//
+	//						}
+	//
+	//					},
+	//					complete : function() {
+	//
+	//					},
+	//					error : function() {
+	//
+	//						console.log("No se ha podido obtener la información");
+	//
+	//					}
+	//
+	//				});
 
-	}
-
-
+}

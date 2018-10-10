@@ -102,10 +102,12 @@ function ajaxUpdateCourseFeedback() {
 				
 				$('.success').show().fadeIn('slow');
 				
+				$('.updateCourseFeedback .modalContainer').show().fadeOut('slow');
+				
 //				$.get('./Courses/Data', function(view, status, xhr){
 //					  $('.content').fadeOut(0).html(view).fadeIn('slow');
 //					}).done(function() {
-//						ajaxSearchDepartment();
+//						ajaxSearchCourse();
 //					  });
 
 			}

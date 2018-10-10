@@ -12,14 +12,20 @@
 				<a href="#" id="closeModal">X</a>
 			</section>
 
-			<form:form id="formUpdateCourseFeedback" modelAttribute="courseFeedback">
-			
+			<form:form id="formUpdateCourseFeedback"
+				modelAttribute="courseFeedback">
+
 				<form:hidden path="courseFeedBackId" id="courseFeedBackIdUpdate" />
 
 				<section class="modalBody">
 
 					<h2 id="tittleModal">Modificar Retroalimentacion</h2>
 					<div id="dialogModal">
+
+						<br> <label>Los campos marcados con asterisco (<a
+							style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
+
 
 						<table>
 
@@ -34,7 +40,7 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="comment">Comentario</form:label>
+										<form:label path="comment">Comentario <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:textarea path="comment" id="commentUpdate" />
 										<label id="commentUpdateError" class="validation-error">
 										</label>

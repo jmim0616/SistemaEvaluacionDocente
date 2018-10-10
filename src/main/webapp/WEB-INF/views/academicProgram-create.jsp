@@ -19,7 +19,8 @@
 			<h2 id="tittleModal">Registrar Programa Academico</h2>
 			<div id="dialogModal">
 
-				
+					<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
 
 					<table>
 
@@ -27,7 +28,7 @@
 
 							<td>
 								<fieldset>
-									<form:label path="faculty">Facultad</form:label>
+									<form:label path="faculty">Facultad <a style="color: red;"><strong>*</strong></a> </form:label>
 									<form:select path="faculty" id="facultyCreate">
 									<c:forEach items="${faculties}" var="item">
 									<option value="${item.facultyId}">${item.name}</option>
@@ -45,7 +46,7 @@
 
 							<td>
 								<fieldset>
-									<form:label path="name">Nombre</form:label>
+									<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 									<form:input path="name" type="text" id="nameCreate" />
 									<label id="nameCreateError" class="validation-error"> </label>
 								</fieldset>

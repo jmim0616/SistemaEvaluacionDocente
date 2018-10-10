@@ -1,5 +1,7 @@
 package system.pack.bointerface;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +21,8 @@ import system.pack.vo.TeacherBean;
 
 public interface CourseFeedbackBoInterface {
 
-	public JsonResponse update(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult);
+	public JsonResponse update(CourseFeedbackBean courseFeedbackBean,
+			BindingResult bindingResult, HttpSession session);
 	
 		
 }

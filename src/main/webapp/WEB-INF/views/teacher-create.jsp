@@ -11,6 +11,9 @@
 	<h2>DOCENTES</h2>
 
 	<h3>Registrar Docente</h3>
+	
+	<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
 
 	<form:form id="formCreateTeacher" modelAttribute="teacher" >
 
@@ -20,7 +23,7 @@
 
 				<td>
 					<fieldset class="row">
-						<form:label path="teacherId">Documento de Identificacion</form:label>
+						<form:label path="teacherId">Documento de Identificacion <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="teacherId" type="text" id="teacherIdCreate" />
 						<label id="teacherIdCreateError" class="validation-error">
 						</label>
@@ -30,12 +33,13 @@
 				<td>
 
 					<fieldset>
-						<form:label path="identificationType">Tipo de identificacion</form:label>
+						<form:label path="identificationType">Tipo de identificacion <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="identificationType"
 							id="identificationTypeCreate">
 							<option value="1">Cedula de Ciudadania</option>
 							<option value="2">Cedula de Extranjeria</option>
 						</form:select>
+						<label id="identificationTypeCreateError" class="validation-error"></label>
 					</fieldset>
 
 				</td>
@@ -49,7 +53,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="name">Nombre</form:label>
+						<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="name" type="text" id="nameCreate" />
 						<label id="nameCreateError" class="validation-error"> </label>
 					</fieldset>
@@ -59,7 +63,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="lastName">Apellido</form:label>
+						<form:label path="lastName">Apellido <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="lastName" type="text" id="lastNameCreate" />
 						<label id="lastNameCreateError" class="validation-error">
 						</label>
@@ -73,7 +77,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="underDegree">Titulo de Profesional</form:label>
+						<form:label path="underDegree">Titulo de Profesional <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="underDegree" type="text" id="underDegreeCreate" />
 						<label id="underDegreeCreateError" class="validation-error">
 						</label>

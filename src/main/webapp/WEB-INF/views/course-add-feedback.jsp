@@ -19,13 +19,17 @@
 
 					<h2 id="tittleModal">Agregar Retroalimentacion al Curso</h2>
 					<div id="dialogModal">
+					
+						<br>
+						<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+					
 
 						<table>
 
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="feedBackType">Tipo de Retroalimentacion</form:label>
+										<form:label path="feedBackType">Tipo de Retroalimentacion <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:select path="feedBackType" id="feedBackTypeAdd">
 								
 										</form:select>
@@ -37,7 +41,7 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="comment">Comentario</form:label>
+										<form:label path="comment">Comentario <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:textarea path="comment" id="commentAdd" />
 										<label id="commentAddError" class="validation-error">
 										</label>

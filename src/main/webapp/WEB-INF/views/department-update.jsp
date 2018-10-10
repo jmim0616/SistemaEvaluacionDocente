@@ -14,21 +14,26 @@
 
 			<form:form id="formCreateDepartment" modelAttribute="department">
 				<form:hidden path="departmentId" id="departmentIdUpdate" />
-				
+
 				<section class="modalBody">
 
 					<h2 id="tittleModal">Modificar Departamento</h2>
 					<div id="dialogModal">
-						
+
+						<br> <label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
+
+
 						<table>
 
 							<tr>
-							
+
 								<td>
 									<fieldset>
-										<form:label path="faculty">Facultad</form:label>
+										<form:label path="faculty">Facultad <a style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:select path="faculty" id="facultyUpdate">
-										<option class="actualValue" hidden></option>
+											<option class="actualValue" hidden></option>
 											<c:forEach items="${faculties}" var="item">
 												<option value="${item.facultyId}">${item.name}</option>
 											</c:forEach>
@@ -41,13 +46,14 @@
 
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre</form:label>
+										<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:input path="name" type="text" id="nameUpdate" />
 										<label id="nameUpdateError" class="validation-error">
 										</label>
 									</fieldset>
 								</td>
-						
+
 
 							</tr>
 
