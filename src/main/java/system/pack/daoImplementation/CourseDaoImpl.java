@@ -234,11 +234,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 			}
 			System.out.println("Last Sql " + sql);
 			
-			List<Object> rows  = query.getResultList();
-			
-			if (rows.get(0) instanceof RowHeader){
-				System.out.println("instanceof");
-			}
+			List<Object[]> rows  = query.getResultList();
 			
 			System.out.println("Count: "  + rows.size() + "Row " + rows.get(0));
 		}		

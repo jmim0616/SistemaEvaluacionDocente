@@ -119,7 +119,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	private final String FILE_NAME = "courses";
 	private final String FILE_FEEDBACK_NAME = "feedback";
-
+	
 	@Transactional
 	@Override
 	public JsonResponse<CourseBean, CourseEntity> getAllCourses() {
