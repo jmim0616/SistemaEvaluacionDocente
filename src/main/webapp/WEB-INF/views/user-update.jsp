@@ -19,12 +19,16 @@
 					<h2 id="tittleModal">Modificar usuario</h2>
 					<div id="dialogModal">
 
+		<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+	
+
 						<table>
 
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="mask">Nombre de usuario</form:label>
+										<form:label path="mask">Nombre de usuario <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="mask" type="text" id="maskUpdate" />
 										<label id="maskUpdateError" class="validation-error">
 										</label>
@@ -33,7 +37,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="password">Contraseña</form:label>
+										<form:label path="password">Contraseña <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="password" type="password" id="passwordUpdate" />
 										<label id="passwordUpdateError" class="validation-error">
 										</label>
@@ -43,7 +47,7 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre</form:label>
+										<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="name" type="text" id="nameUpdate" />
 										<label id="nameUpdateError" class="validation-error">
 										</label>

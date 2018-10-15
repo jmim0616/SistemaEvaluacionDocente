@@ -219,7 +219,9 @@ public class TeacherBoImplTest extends Mockito {
 
 		// assert
 
-		//Assert.assertEquals(2, teacherDaoJpaRepository.findById(Integer.parseInt(teacherBeanStatusUpdated.getTeacherId())).getTeacherStatus().getTeacherStatusId());
+
+		Assert.assertEquals(2, teacherDaoJpaRepository.findById(Integer.parseInt(teacherBeanStatusUpdated.getTeacherId())).get().getTeacherStatus().getTeacherStatusId());
+
 			
 	}
 

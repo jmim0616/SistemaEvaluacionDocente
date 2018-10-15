@@ -39,6 +39,9 @@ public class RowHeader implements Serializable{
 		this.groupId = groupId;
 		this.isVirtual = isVirtual;
 	}
+	public RowHeader() {
+		
+	}
 	public long getCourseId() {
 		return courseId;
 	}

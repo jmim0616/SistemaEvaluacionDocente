@@ -17,6 +17,9 @@ public class Questions implements Serializable{
 		this.response = response;
 	}
 
+	public Questions() {
+	}
+
 	public String getQuestion() {
 		return question;
 	}

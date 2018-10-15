@@ -38,10 +38,10 @@ public class CourseDaoImpl implements CourseDaoInterface {
 
 	@Autowired
 	private EntityManager entityManager;
-	
+
 	@Autowired
 	private SubjectDaoInterface subjectDaoInterface;
-	
+
 	@Autowired
 	private AcademicPeriodDaoInterface academicPeriodDaoImpl;
 
@@ -157,89 +157,127 @@ public class CourseDaoImpl implements CourseDaoInterface {
 
 	@Override
 	public Data getCompareView(CourseBean courseBean) {
-		
-		courseBean.setAcademicPeriod("2018-2");
-		
+
 		System.out.println("CourseBean2 " + courseBean);
-		
+
 		Optional<SubjectEntity> subjectEntity = null;
 		int academicPeriodId = 0;
 		List<Integer> periodsToProcess = new LinkedList<>();
-		
-		String sql = "select " +  "distinct (courses.courseId) courseId, " + "academic_periods.name periodName, " + "departments.name departmentName, " + "subjects.name signatureName, "
-				+ "courses.teacherId, " + "courses.groupId, " + "courses.isVirtual " + "from 	academic_periods, "
+
+		String sql = "select " + "distinct (courses.courseId) courseId, " + "academic_periods.name periodName, "
+				+ "departments.name departmentName, " + "subjects.name signatureName, " + "courses.teacherId, "
+				+ "courses.groupId, " + "courses.isVirtual " + "from 	academic_periods, "
 				+ "courses use index (Courses_index1192), " + "subjects use index (PRIMARY), "
 				+ "questions_by_period use index (courseId), " + "departments use index (PRIMARY) "
 				+ "where	courses.academicPeriodId = academic_periods.academicPeriodId "
-				+ "and	questions_by_period.courseId = courses.courseId " 
+				+ "and	questions_by_period.courseId = courses.courseId "
 				+ "and	departments.departmentId = questions_by_period.departmentId "
 				+ "and	subjects.subjectId = courses.subjectId ";
-		
+
 		System.out.println("Sql");
-		
-		if (courseBean.getCourseId() != null){
+
+		if (!courseBean.getCourseId().equals("")) {
 			sql = sql + " and courses.courseId = :courseId";
 		}
-		
+
 		System.out.println("Sql " + sql);
-		
-		if (courseBean.getTeacher() != null){
+
+		if (!courseBean.getTeacher().equals("")) {
 			sql = sql + " and courses.teacherId = :teacherId";
 		}
-		
+
 		System.out.println("Sql " + sql);
-		
-		if (courseBean.getSubject() != null){
+
+		if (!courseBean.getSubject().equals("")) {
 			subjectEntity = subjectDaoInterface.findByName(courseBean.getSubject());
 			sql = sql + " and courses.subjectId = :subjectId";
 		}
-		
+
 		System.out.println("Sql " + sql);
-		
-		if (courseBean.getAcademicPeriod() != null){
+
+		if (!courseBean.getAcademicPeriod().equals("")) {
 			academicPeriodId = academicPeriodDaoImpl.getAcademicPeriodByName(courseBean.getAcademicPeriod());
 			periodsToProcess.add(academicPeriodId);
 			sql = sql + " and academic_periods.academicPeriodId = :academicPeriodId";
-		}
-		else{
+		} else {
 			periodsToProcess = academicPeriodDaoImpl.getPeriodsToProcess();
 		}
-		
+
 		System.out.println("Sql " + sql);
-		
-		if (courseBean.getCourseId() == null && periodsToProcess.size() == 0){
+
+		if (courseBean.getCourseId() == null && periodsToProcess.size() == 0) {
 			return null;
 		}
-		
+
 		System.out.println("Past valid");
-		
-		for (Integer period : periodsToProcess){
-			
-			Query query = entityManager.createNativeQuery (sql);
-			
-			if (courseBean.getCourseId() != null){
+
+		List<Period> periodsToSend = new LinkedList<>();
+		for (Integer period : periodsToProcess) {
+
+			sql = sql + " and academic_periods.academicPeriodId = :academicPeriodId";
+			Query query = entityManager.createNativeQuery(sql);
+
+			if (!courseBean.getCourseId().equals("")) {
 				query.setParameter("courseId", courseBean.getCourseId());
 			}
 
-			if (courseBean.getTeacher() != null){
+			if (!courseBean.getTeacher().equals("")) {
 				query.setParameter("teacherId", courseBean.getTeacher());
 			}
-			
-			if (courseBean.getSubject() != null){
+
+			if (!courseBean.getSubject().equals("")) {
+				System.out.println("courseBean.getSubject()" + "|" + courseBean.getSubject() + "|");
 				query.setParameter("subjectId", subjectEntity.get().getSubjectId());
 			}
-			
-			if (period != null){
+
+			if (period != null) {
 				query.setParameter("academicPeriodId", period);
 			}
 			System.out.println("Last Sql " + sql);
-			
-			List<Object[]> rows  = query.getResultList();
-			
-			System.out.println("Count: "  + rows.size() + "Row " + rows.get(0));
-		}		
 
-		return null;
+			List<Object[]> rows = query.getResultList();
+
+			if (rows.size() > 0) {
+				List<Row> rowsToSend = new LinkedList<>();
+				for (Object[] row : rows) {
+					RowHeader header = new RowHeader();
+					header.setCourseId((int) row[0]);
+					header.setPeriodName(row[1].toString());
+					header.setDepartmentName(row[2].toString());
+					header.setSignatureName(row[3].toString());
+					header.setTeacherId((int) row[4]);
+					header.setGroupId((int) row[5]);
+					header.setIsVirtual(row[6].toString());
+					System.out.println("Header " + header);
+					
+					sql = "select " + "questions.question, " + "questions_by_period.percentage "
+							+ "from 	questions_by_period, " + "questions "
+							+ "where 	questions_by_period.courseId = :courseId "
+							+ "and	 	questions.questionId = questions_by_period.questionId "
+							+ "order by questions_by_period.questionId";
+
+					query = entityManager.createNativeQuery(sql);
+					query.setParameter("courseId", header.getCourseId());
+
+					rows = query.getResultList();
+
+					List<Questions> questionsToSend = new LinkedList<>();
+					for (Object[] questions : rows) {
+						Questions question = new Questions();
+						question.setQuestion(questions[0].toString());
+						question.setResponse((int) questions[1]);
+						questionsToSend.add(question);
+					}	
+					
+					rowsToSend.add(new Row(header, questionsToSend));
+				}		
+				
+				periodsToSend.add(new Period(rowsToSend));
+			}
+
+		}
+
+		return new Data(periodsToSend);
 	}
 
 }

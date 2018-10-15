@@ -91,8 +91,6 @@ $(document)
 							function(event) {
 
 								event.preventDefault();
-								
-								console.log("AAAAAAAAAAA");
 
 								$('.container').fadeOut(0).load('./Courses/').fadeIn('slow');
 

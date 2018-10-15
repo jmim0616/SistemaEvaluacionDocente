@@ -143,7 +143,7 @@ function ajaxSearchSubject() {
 
 						if (jsonResponse.errorMessage != null) {
 
-							$('#tableSubjectData').show().fadeOut('slow');
+//							$('#tableSubjectData').show().fadeOut('slow');
 
 							$('.error .message')
 									.text(jsonResponse.errorMessage);

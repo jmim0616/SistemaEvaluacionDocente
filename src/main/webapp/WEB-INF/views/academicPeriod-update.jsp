@@ -10,6 +10,10 @@
 	<h2>PERIODOS ACADEMICOS</h2>
 
 	<h3>Modificar Periodo Academico</h3>
+	
+			<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+	
 
 	<form:form id="formUpdateAcademicPeriod"
 		modelAttribute="academicPeriod">
@@ -22,7 +26,7 @@
 
 				<td>
 					<fieldset>
-						<form:label path="name">Nombre</form:label>
+						<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="name" type="text" id="nameUpdate1" disabled="true" />
 						-
 						<form:select path="name"
@@ -43,8 +47,7 @@
 
 				<td>
 					<fieldset>
-						<form:label path="initialDate">Fecha de Inicio</form:label>
-<%-- 						<form:input path="initialDate" type="date" id="initialDateCreate" /> --%>
+						<form:label path="initialDate">Fecha de Inicio <a style="color: red;"><strong>*</strong></a> </form:label>
 							<input type="text" id="initialDateUpdate">
 						<label id="initialDateUpdateError" class="validation-error">
 						</label>
@@ -57,8 +60,7 @@
 				<td>
 				
 					<fieldset>
-						<form:label path="endDate">Fecha de Fin</form:label>
-<%-- 						<form:input path="endDate" type="date" id="endDateCreate" /> --%>
+						<form:label path="endDate">Fecha de Fin <a style="color: red;"><strong>*</strong></a> </form:label>
 							<input type="text" id="endDateUpdate">
 						<label id="endDateUpdateError" class="validation-error"> </label>
 					</fieldset>

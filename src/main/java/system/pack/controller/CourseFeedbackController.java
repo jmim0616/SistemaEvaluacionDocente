@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -73,13 +74,13 @@ public class CourseFeedbackController {
 	
 	@PostMapping(value = "/Update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> updateCourse(@Valid @RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult) {
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> updateCourse(@Valid @RequestBody CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult, Model model, HttpSession session) {
 
 		System.out.println("00000" + courseFeedbackBean);
 		
 		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
 		
-		jsonResponse = courseFeedbackBoInterface.update(courseFeedbackBean, bindingResult); 
+		jsonResponse = courseFeedbackBoInterface.update(courseFeedbackBean, bindingResult, session); 
 		
 		return jsonResponse;
 	

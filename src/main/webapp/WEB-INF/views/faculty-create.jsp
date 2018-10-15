@@ -10,14 +10,16 @@
 			<section class="modalHeader">
 				<a href="#" id="closeModal">X</a>
 			</section>
-			
+
 			<form:form id="formCreateFaculty" modelAttribute="faculty">
-			
+
 				<section class="modalBody">
 					<h2 id="tittleModal">Registrar Facultad</h2>
 					<div id="dialogModal">
 
-
+						<br> <label>Los campos marcados con asterisco (<a
+							style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
 
 						<table>
 
@@ -25,7 +27,9 @@
 
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre</form:label>
+										<form:label path="name">Nombre <a
+												style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:input path="name" type="text" id="nameCreate" />
 										<label id="nameCreateError" class="validation-error">
 										</label>

@@ -46,11 +46,9 @@
 						<th>Periodo Academico</th>
 						<th>Departamento</th>
 						<th>Asignatura</th>
-						<th>Identificador de Grupo</th>
+						<th>Grupo</th>
 						<th>Profesor</th>
-						<th>Preguntas de la Encuesta</th>
-	
-
+						<th>Preguntas de la Encuesta</th>	
 					</tr>
 
 				</thead>

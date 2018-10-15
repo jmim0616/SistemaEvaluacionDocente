@@ -48,6 +48,8 @@ function initAddFeedbackCourse() {
 
 function ajaxSearchCourseFeedbacks() {
 	
+	$("#feedBackTypeAdd option").remove(); 
+	
 	var courseId = $('#courseAdd').val();
 	
 	var json = {
@@ -81,6 +83,8 @@ function ajaxSearchCourseFeedbacks() {
 
 					if (value == "true"){
 						estate = "disabled";
+					} else {
+						estate = "";
 					}
 
 					$("#feedBackTypeAdd").append(
@@ -150,13 +154,13 @@ function ajaxAddFeedbackCourse() {
 
 				} else {
 
-					$('#groupIdSearch').val($('#groupIdAdd').val());
-
 					$('#commentAdd').val('');
 
 					$('.success .message').text(jsonResponse.successMessage);
 
 					$('.success').show().fadeIn('slow');
+					
+					$('#groupIdSearch').val(groupId);
 
 					$.get('./Courses/Data', function(view) {
 

@@ -17,6 +17,10 @@
 	<h2>ASIGNATURAS</h2>
 
 	<h3>Modificar Asignatura</h3>
+	
+		<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+	
 
 	<form:form id="formUpdateSubject" modelAttribute="subject">
 
@@ -28,7 +32,7 @@
 
 				<td>
 					<fieldset>
-						<form:label path="disciplinaryArea">Area Disciplinaria</form:label>
+						<form:label path="disciplinaryArea">Area Disciplinaria <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="disciplinaryArea" id="disciplinaryAreaUpdate">
 							<option class="actualValue" hidden></option>
 							<c:forEach items="${disciplinaryAreas}" var="item">
@@ -48,7 +52,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="name">Nombre</form:label>
+						<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="name" type="text" id="nameUpdate" />
 						<label id="nameUpdateError" class="validation-error"> </label>
 					</fieldset>
@@ -63,7 +67,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="numberOfCredits">Numero de Creditos</form:label>
+						<form:label path="numberOfCredits">Numero de Creditos <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="numberOfCredits" id="numberOfCreditsUpdate">
 							<option class="actualValue" hidden></option>
 							<option value="1">1</option>

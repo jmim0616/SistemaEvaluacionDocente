@@ -10,6 +10,10 @@
 	<h2>USUARIOS</h2>
 
 	<h3>Registrar usuario</h3>
+	
+		<br>
+	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+	
 
 	<form:form id="formCreateUser" modelAttribute="user" >
 
@@ -20,7 +24,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="mask">Nombre de usuario</form:label>
+						<form:label path="mask">Nombre de usuario <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="mask"  type="text" id="maskCreate" />
 						<label id="maskCreateError" class="validation-error"> </label>
 					</fieldset>
@@ -30,7 +34,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="password">Contraseña</form:label>
+						<form:label path="password">Contraseña <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="password" type="password" id="passwordCreate" />
 						<label id="passwordCreateError" class="validation-error"> </label>
 					</fieldset>
@@ -44,7 +48,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="name">Nombre</form:label>
+						<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="name" type="text" id="nameCreate" />
 						<label id="nameCreateError" class="validation-error">
 						</label>
@@ -55,7 +59,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="jobPosition">Cargo laboral</form:label>
+						<form:label path="jobPosition">Cargo laboral <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="jobPosition"
 							id="jobPositionCreate">
 							<option value="1">Jefe de departamento</option>
