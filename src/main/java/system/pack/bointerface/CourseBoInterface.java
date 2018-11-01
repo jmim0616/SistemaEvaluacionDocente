@@ -1,5 +1,7 @@
 package system.pack.bointerface;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import system.pack.entity.CourseEntity;
 import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
+import system.pack.fullview.Data;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.AcademicPeriodBean;
@@ -51,6 +54,12 @@ public interface CourseBoInterface {
 	public JsonResponse validateCourseFeedbacksAdd(CourseBean courseBean);
 
 	public JsonResponse  getAllCourses();
+
+	public String createOnlineFeedBack(MultipartFile file, int i);
+	
+	public Data getCompareView (CourseBean courseBean);
+
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean);
 
 	
 }

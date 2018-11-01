@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.CourseEntity;
 import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.bointerface.UserBoInterface;
@@ -31,6 +32,7 @@ import system.pack.entity.TeacherEntity;
 import system.pack.entity.UserEntity;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
+import system.pack.vo.CourseBean;
 import system.pack.vo.CourseFeedbackBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByTeacherBean;
@@ -203,6 +205,19 @@ public class TeacherController {
 		JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> jsonResponse = new JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity>();
 		
 		jsonResponse = teacherBoInterface.search(teacherBean, bindingResult); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/Courses", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseBean, CourseEntity> getCoursesByTeacher(@RequestBody TeacherBean teacherBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + teacherBean);
+		
+		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+		
+		jsonResponse = teacherBoInterface.getCoursesByTeacher(teacherBean, bindingResult); 
 		
 		return jsonResponse;
 	}

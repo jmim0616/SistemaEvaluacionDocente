@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,7 @@ public class QuestionDaoImpl implements QuestionDaoInterface {
 	@Override
 	public void create(QuestionEntity questionEntity) {
 		
-		entityManager.merge(questionEntity);
+		entityManager.persist(questionEntity);
 		
 	}
 

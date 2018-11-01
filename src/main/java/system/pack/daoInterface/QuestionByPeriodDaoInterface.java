@@ -17,5 +17,7 @@ public interface QuestionByPeriodDaoInterface {
 	public List<QuestionByPeriodEntity> findByQuestionId(int questionId);
 	
 	public List<QuestionByPeriodEntity> findByAcademicPeriodId(int academicPeriodId);
+
+	public int getCourseId(int subjectId, int groupId, int teacherId, int academicPeriod);
 	
 }

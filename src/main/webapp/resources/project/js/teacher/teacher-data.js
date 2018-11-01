@@ -137,14 +137,18 @@ function initTeacherData() {
 
 function chooseTypeOfQuery() {
 
-	if ((classTdTableClicked == "column") && (tableIdClicked != null)) {
+	console.log("tableIdClicked = " + tableIdClicked);
+	
+	if ((classTdTableClicked == "column") || (tableIdClicked != null)) {
 
+		console.log("tableIdClicked = " + tableIdClicked);
+		
 		if (tableIdClicked == "tableTeacherData") {
 			
 			ajaxSearchCoursesByTeacher();
 
 		}
-
+		
 		if (tableIdClicked == "tableCourseData") {
 			
 			ajaxSearchCourseFeedbackCourseOfTeacher();
@@ -164,90 +168,6 @@ function chooseTypeOfQuery() {
 }
 
 function ajaxSearchCoursesByTeacher() {
-
-	$("#tableCourseData tr").remove(); 
-
-	$("#tableCourseData").append(
-			'<thead>' + '<tr class="not">'
-					+ '<th>Codigo</th>'
-					+ '<th>Periodo Academico</th>'
-					+ '<th>Profesor</th>' + '<th>Asignatura</th>'
-					+ '<th>Identificador de Grupo</th>'
-					+ '<th>Es virtual</th>'
-					+ '</tr>' + '</thead>');
-	
-	$("#tableCourseData")
-	.append(
-			"<tr>"
-					+ '<td class="column">'
-					+ "AAAAAAAAA"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "BBBBBBB"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "CCCCCCCC"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "DDDDDDD"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "EEEEEEE"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "OOOOOOO"
-					+ "</td> "
-					+ "</tr>");
-	
-	
-	$("#tableCourseData")
-	.append(
-			"<tr>"
-					+ '<td class="column">'
-					+ "SSSSS"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "DDDDD"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "VVVVV"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "TTTTTTTT"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "HHHHHH"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "YYYYYY"
-					+ "</td> "
-					+ "</tr>");
-	
-	$("#tableCourseData")
-	.append(
-			"<tr>"
-					+ '<td class="column">'
-					+ "MMMM"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "LLLLLL"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "OOOOO"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "RRRRRR"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "ZZZZZZZZ"
-					+ "</td> "
-					+ '<td class="column">'
-					+ "FFFFFFF"
-					+ "</td> "
-					+ "</tr>");
-	
-///////////////// todo hasta arriba se puede borrar
-	
 
 	var teacherId = arrayItemsStandardTable[0];
 	var name = arrayItemsStandardTable[1];
@@ -279,100 +199,100 @@ function ajaxSearchCoursesByTeacher() {
 
 	console.log(json);
 //
-//	$
-//			.ajax({
-//				url : './Teachers/',
-//				data : JSON.stringify(json),
-//				contentType : "application/json",
-//				method : 'POST',
-//				beforeSend : function() {
-//
-//				},
-//				done : function() {
-//
-//				},
-//				success : function(jsonResponse) {
-//
-//					if (typeof jsonResponse == "string") {
-//
-//						$('.content').fadeOut(0).html(jsonResponse).fadeIn(
-//								'slow');
-//
-//						$('.error').show().fadeIn('slow');
-//					}
-//
-//					console.log(jsonResponse);
-//
-//					if (jsonResponse.isValid) {
-//
-//						if (jsonResponse.errorMessage != null) {
-//
-//							$('#tableCourseData').show().fadeOut('slow');
-//
-//							$('.error .message')
-//									.text(jsonResponse.errorMessage);
-//
-//							$('.error').show().fadeIn('slow');
-//
-//						} else {
-//	
-//	$("#tableCourseData tr").remove(); 
-//
-//	$("#tableCourseData").append(
-//			'<thead>' + '<tr class="not">'
-//					+ '<th>Codigo</th>'
-//					+ '<th>Periodo Academico</th>'
-//					+ '<th>Profesor</th>' + '<th>Asignatura</th>'
-//					+ '<th>Identificador de Grupo</th>'
-//					+ '<th>Es virtual</th>'
-//					+ '</tr>' + '</thead>');
-//
-//							$
-//									.each(
-//											jsonResponse.objectEntityList,
-//											function(key, value) {
-//
-//												$("#tableCourseData")
-//														.append(
-//																"<tr>"
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].courseId
-//																		+ "</td> "
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].academicPeriod
-//																		+ "</td> "
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].teacher
-//																		+ "</td> "
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].subject
-//																		+ "</td> "
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].groupId
-//																		+ "</td> "
-//																		+ "<td>"
-//																		+ jsonResponse.objectEntityList[key].isVirtual
-//																		+ "</td> "
-//																		+ "</tr>");
-//
-//											})
-//						}
-//
-//					} else {
-//
-//					}
-//
-//				},
-//				complete : function() {
-//
-//				},
-//				error : function() {
-//
-//					console.log("No se ha podido obtener la información");
-//
-//				}
-//
-//			});
+	$
+			.ajax({
+				url : './Teachers/Courses',
+				data : JSON.stringify(json),
+				contentType : "application/json",
+				method : 'POST',
+				beforeSend : function() {
+
+				},
+				done : function() {
+
+				},
+				success : function(jsonResponse) {
+
+					if (typeof jsonResponse == "string") {
+
+						$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+								'slow');
+
+						$('.error').show().fadeIn('slow');
+					}
+
+					console.log(jsonResponse);
+
+					if (jsonResponse.isValid) {
+
+						if (jsonResponse.errorMessage != null) {
+
+							$('#tableCourseData').show().fadeOut('slow');
+
+							$('.error .message')
+									.text(jsonResponse.errorMessage);
+
+							$('.error').show().fadeIn('slow');
+
+						} else {
+	
+	$("#tableCourseData tr").remove(); 
+
+	$("#tableCourseData").append(
+			'<thead>' + '<tr class="not">'
+					+ '<th>Codigo</th>'
+					+ '<th>Periodo Academico</th>'
+					+ '<th>Profesor</th>' + '<th>Asignatura</th>'
+					+ '<th>Identificador de Grupo</th>'
+					+ '<th>Es virtual</th>'
+					+ '</tr>' + '</thead>');
+
+							$
+									.each(
+											jsonResponse.objectEntityList,
+											function(key, value) {
+
+												$("#tableCourseData")
+														.append(
+																"<tr>"
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].courseId
+																		+ "</td> "
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].academicPeriod.name
+																		+ "</td> "
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].teacher.teacherId
+																		+ "</td> "
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].subject.name
+																		+ "</td> "
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].groupId
+																		+ "</td> "
+																		+ "<td>"
+																		+ jsonResponse.objectEntityList[key].isVirtual
+																		+ "</td> "
+																		+ "</tr>");
+
+											})
+						}
+
+					} else {
+
+					}
+
+				},
+				complete : function() {
+
+				},
+				error : function() {
+
+					console.log("No se ha podido obtener la información");
+
+				}
+
+			});
 
 }
 
@@ -382,47 +302,6 @@ function ajaxSearchCoursesByTeacher() {
 
 function ajaxSearchCourseFeedbackCourseOfTeacher() {
 	
-	$("#tableCourseFeedbackData tr").remove(); 
-	
-	$("#tableCourseFeedbackData").append(
-			'<thead>' + '<tr class="not">'
-					+ '<th>Codigo de la Retroalimentacion</th>'
-					+ '<th>Tipo de Retroalimentacion</th>'
-					+ '<th>Comentario</th>' + '<th>Usuario</th>'
-					+ '<th>Fecha de Modificacion</th>'
-					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
-					+ '</tr>' + '</thead>');
-	
-	$("#tableCourseFeedbackData")
-	.append(
-			"<tr>"
-					+ "<td>"
-					+ "asdasdsadasd"
-					+ "</td> "
-					+ "<td>"
-					+ "sdfsdfsdfsdf"
-					+ "</td> "
-					+ "<td>"
-					+ "xcvxcvxcvxcv"
-					+ "</td> "
-					+ "<td>"
-					+ "ghjghjgj"
-					+ "</td> "
-					+ "<td>"
-					+ "zxzxczczxc"
-					+ "</td> "
-					+ "<td>"
-					+ "100"
-					+ "</td> "
-					+ "<td>"
-					+ '<div class="actions"> '
-					+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-					+ '<ion-icon name="create"></ion-icon>'
-					+ '</a>'
-					+ '</div>'
-					+ "</td> " + "</tr>");
-
-	///////////////// todo hasta arriba se puede borrar
 	
 	var courseId = arrayItemsStandardTable[0];
 	var academicPeriod = arrayItemsStandardTable[1];
@@ -431,7 +310,7 @@ function ajaxSearchCourseFeedbackCourseOfTeacher() {
 	var groupId = arrayItemsStandardTable[4];
 	var isVirtual = arrayItemsStandardTable[5];
 
-
+	console.log('ajaxSearchCourseFeedbackCourseOfTeacher');
 	
 	var json = {
 			
@@ -447,125 +326,108 @@ function ajaxSearchCourseFeedbackCourseOfTeacher() {
 		console.log(json);
 
 
-//		$.ajax({
-//					url : './Courses/',
-//					data : JSON.stringify(json),
-//					contentType : "application/json",
-//					method : 'POST',
-//					beforeSend : function() {
-//
-//					},
-//					done : function() {
-//
-//					},
-//					success : function(jsonResponse) {
-//
-//						if (typeof jsonResponse == "string") {
-//
-//							$('.content').fadeOut(0).html(jsonResponse).fadeIn(
-//									'slow');
-//
-//							$('.error').show().fadeIn('slow');
-//						}
-//
-//						console.log(jsonResponse);
-//
-//						if (jsonResponse.isValid) {
-//
-//							if (jsonResponse.errorMessage != null) {
-//
-//								$('#tableCourseFeedbackData').show().fadeOut('slow');
-//
-//								$('.error .message')
-//										.text(jsonResponse.errorMessage);
-//
-//								$('.error').show().fadeIn('slow');
-//
-//							} else {
-//	
-//	$("#tableCourseFeedbackData tr").remove(); 
-//	
-//	$("#tableCourseFeedbackData").append(
-//			'<thead>' + '<tr class="not">'
-//					+ '<th>Codigo de la Retroalimentacion</th>'
-//					+ '<th>Tipo de Retroalimentacion</th>'
-//					+ '<th>Comentario</th>' + '<th>Usuario</th>'
-//					+ '<th>Fecha de Modificacion</th>'
-//					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
-//					+ '</tr>' + '</thead>');
-//
-//								var buttonUpdateCourseFeedback = null;
-//								
-//								$.each(jsonResponse.objectEntityList,function(key, value) {
-//													
-//													if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
-//														
-//														buttonUpdateCourseFeedback = "<td>"
-//															+ '<div class="actions"> '
-//															+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-//															+ '<ion-icon name="create"></ion-icon>'
-//															+ '</a>'
-//															+ '</div>'
-//															+ '</td> ';
-//													}
-//
-//													$("#tableCourseFeedbackData").append("<tr>"
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].courseFeedBackId
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].feedBackType.description
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].comment
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].user
-//																			+ "</td> "
-//																			+ "<td>"
-//																			+ jsonResponse.objectEntityList[key].lastModifiedDate
-//																			+ "</td> "
-//																			+buttonUpdateCourseFeedback
-//																			+ "</tr>");
-//
-//												})
-//							}
-//
-//						} else {
-//
-//						}
-//
-//					},
-//					complete : function() {
-//
-//					},
-//					error : function() {
-//
-//						console.log("No se ha podido obtener la información");
-//
-//					}
-//
-//				});
+		$.ajax({
+					url : './Courses/Feedbacks',
+					data : JSON.stringify(json),
+					contentType : "application/json",
+					method : 'POST',
+					beforeSend : function() {
+
+					},
+					done : function() {
+
+					},
+					success : function(jsonResponse) {
+
+						if (typeof jsonResponse == "string") {
+
+							$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+									'slow');
+
+							$('.error').show().fadeIn('slow');
+						}
+
+						console.log(jsonResponse);
+
+						if (jsonResponse.isValid) {
+
+							if (jsonResponse.errorMessage != null) {
+
+								$('#tableCourseFeedbackData').show().fadeOut('slow');
+
+								$('.error .message')
+										.text(jsonResponse.errorMessage);
+
+								$('.error').show().fadeIn('slow');
+
+							} else {
+	
+	$("#tableCourseFeedbackData tr").remove(); 
+	
+	$("#tableCourseFeedbackData").append(
+			'<thead>' + '<tr class="not">'
+					+ '<th>Codigo de la Retroalimentacion</th>'
+					+ '<th>Tipo de Retroalimentacion</th>'
+					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+					+ '<th>Fecha de Modificacion</th>'
+					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+					+ '</tr>' + '</thead>');
+
+								var buttonUpdateCourseFeedback = null;
+								
+								$.each(jsonResponse.objectEntityList,function(key, value) {
+													
+													if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
+														
+														buttonUpdateCourseFeedback = "<td>"
+															+ '<div class="actions"> '
+															+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
+															+ '<ion-icon name="create"></ion-icon>'
+															+ '</a>'
+															+ '</div>'
+															+ '</td> ';
+													}
+
+													$("#tableCourseFeedbackData").append("<tr>"
+																			+ "<td>"
+																			+ jsonResponse.objectEntityList[key].courseFeedBackId
+																			+ "</td> "
+																			+ "<td>"
+																			+ jsonResponse.objectEntityList[key].feedBackType.description
+																			+ "</td> "
+																			+ "<td>"
+																			+ jsonResponse.objectEntityList[key].comment
+																			+ "</td> "
+																			+ "<td>"
+																			+ jsonResponse.objectEntityList[key].user.mask
+																			+ "</td> "
+																			+ "<td>"
+																			+ jsonResponse.objectEntityList[key].lastModifiedDate
+																			+ "</td> "
+																			+buttonUpdateCourseFeedback
+																			+ "</tr>");
+
+												})
+							}
+
+						} else {
+
+						}
+
+					},
+					complete : function() {
+
+					},
+					error : function() {
+
+						console.log("No se ha podido obtener la información");
+
+					}
+
+				});
 
 	}
 	
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function ajaxShowUpdateTeacher() {
 

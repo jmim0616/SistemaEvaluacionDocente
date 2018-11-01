@@ -424,6 +424,20 @@ table tr {
 	
 }
 
+.tabla_contenedor_up td {
+    width: 150px;
+    min-width: 150px;
+    vertical-align: top;
+    text-align: left;
+}
+
+.tabla_contenedor_down td {
+    width: 150px;
+    min-width: 150px;
+    vertical-align: top;
+    text-align: center;
+}
+
 .table td {
 
 	padding: 0px 7px 0px 7px;
@@ -451,8 +465,7 @@ table tr {
 }*/
 .standard-table tr:hover td {
 	font-weight: 300;
-	color: #fff;
-	background-color: #424242;
+	background-color: #eee;
 }
 
 .standard-table th {

@@ -70,6 +70,11 @@ public class DepartmentDaoImpl implements DepartmentDaoInterface {
 		return departments;
 	}
 
+	@Override
+	public boolean isValidDepartmentId(int departmentId) {
+		return findById(departmentId) != null;
+	}
+
 	
 	
 }

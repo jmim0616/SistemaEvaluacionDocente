@@ -141,6 +141,19 @@ public class AcademicPeriodDaoImpl implements AcademicPeriodDaoInterface {
 		return academicPeriod;
 		
 	}
+
+	@Override
+	public List<Integer> getPeriodsToProcess() {
+		
+		Query query = entityManager.createNativeQuery(
+				"select academicPeriodId from ( " +
+						"select academicPeriodId " +
+						"from academic_periods t " +
+						"order by initialDate DESC)t limit 3 ");
+		
+		return query.getResultList();
+
+	}
 	
 	
 

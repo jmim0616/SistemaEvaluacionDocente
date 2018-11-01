@@ -131,7 +131,7 @@ function initCourseData() {
 
 function chooseTypeOfQuery() {
 
-	if ((classTdTableClicked == "column") && (tableIdClicked != null)) {
+	if ((classTdTableClicked == "column") || (tableIdClicked != null)) {
 
 		if (tableIdClicked == "tableCourseData") {
 
@@ -145,49 +145,6 @@ function chooseTypeOfQuery() {
 
 function ajaxSearchCourseFeedbackOfCourse() {
 	
-	
-	$("#tableCourseFeedbackData tr").remove();
-
-	$("#tableCourseFeedbackData").append(
-			'<thead>' + '<tr class="not">'
-					+ '<th>Codigo de la Retroalimentacion</th>'
-					+ '<th>Tipo de Retroalimentacion</th>'
-					+ '<th>Comentario</th>' + '<th>Usuario</th>'
-					+ '<th>Fecha de Modificacion</th>'
-					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
-					+ '</tr>' + '</thead>');
-
-	$("#tableCourseFeedbackData")
-			.append(
-					"<tr>"
-							+ "<td>"
-							+ "asdasdsadasd"
-							+ "</td> "
-							+ "<td>"
-							+ "sdfsdfsdfsdf"
-							+ "</td> "
-							+ "<td>"
-							+ "xcvxcvxcvxcv"
-							+ "</td> "
-							+ "<td>"
-							+ "ghjghjgj"
-							+ "</td> "
-							+ "<td>"
-							+ "zxzxczczxc"
-							+ "</td> "
-							+ "<td>"
-							+ "100"
-							+ "</td> "
-							+ "<td>"
-							+ '<div class="actions"> '
-							+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-							+ '<ion-icon name="create"></ion-icon>' + '</a>'
-							+ '</div>' + "</td> " + "</tr>");
-	
-	
-///////////////// todo hasta arriba se puede borrar
-	
-
 	var courseId = arrayItemsStandardTable[0];
 	var academicPeriod = arrayItemsStandardTable[1];
 	var teacher = arrayItemsStandardTable[2];
@@ -201,116 +158,116 @@ function ajaxSearchCourseFeedbackOfCourse() {
 		"academicPeriod" : academicPeriod,
 		"teacher" : teacher,
 		"subject" : subject,
-		"groupId" : groupId,
+		"group" : groupId,
 		"isVirtual" : isVirtual
 
 	}
 
 	console.log(json);
 
-	//		$
-	//				.ajax({
-	//					url : './Courses/',
-	//					data : JSON.stringify(json),
-	//					contentType : "application/json",
-	//					method : 'POST',
-	//					beforeSend : function() {
-	//
-	//					},
-	//					done : function() {
-	//
-	//					},
-	//					success : function(jsonResponse) {
-	//
-	//						if (typeof jsonResponse == "string") {
-	//
-	//							$('.content').fadeOut(0).html(jsonResponse).fadeIn(
-	//									'slow');
-	//
-	//							$('.error').show().fadeIn('slow');
-	//						}
-	//
-	//						console.log(jsonResponse);
-	//
-	//						if (jsonResponse.isValid) {
-//	
-//								if (jsonResponse.errorMessage != null) {
-//	
-//									$('#tableCourseFeedbackData').show().fadeOut('slow');
-//	
-//									$('.error .message')
-//											.text(jsonResponse.errorMessage);
-//	
-//									$('.error').show().fadeIn('slow');
-//	
-//								} else {
-//	
-//									
-//    	
-//    	$("#tableCourseFeedbackData tr").remove();
-//    
-//    	$("#tableCourseFeedbackData").append(
-//    			'<thead>' + '<tr class="not">'
-//    					+ '<th>Codigo de la Retroalimentacion</th>'
-//    					+ '<th>Tipo de Retroalimentacion</th>'
-//    					+ '<th>Comentario</th>' + '<th>Usuario</th>'
-//    					+ '<th>Fecha de Modificacion</th>'
-//    					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
-//    					+ '</tr>' + '</thead>');
-//  
-//	                                 var buttonUpdateCourseFeedback = null;
-//	
-//									$.each(jsonResponse.objectEntityList,function(key, value) {
-//														
-//														if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
-//															
-//															buttonUpdateCourseFeedback = "<td>"
-//																+ '<div class="actions"> '
-//																+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
-//																+ '<ion-icon name="create"></ion-icon>'
-//																+ '</a>'
-	//															+ '</div>'
-	//															+ '</td> ';
-	//													}
-	//
-	//													$("#tableCourseFeedbackData")
-	//															.append(
-	//																	"<tr>"
-	//																			+ "<td>"
-	//																			+ jsonResponse.objectEntityList[key].courseFeedBackId
-	//																			+ "</td> "
-	//																			+ "<td>"
-	//																			+ jsonResponse.objectEntityList[key].feedBackType.description
-	//																			+ "</td> "
-	//																			+ "<td>"
-	//																			+ jsonResponse.objectEntityList[key].comment
-	//																			+ "</td> "
-	//																			+ "<td>"
-	//																			+ jsonResponse.objectEntityList[key].user
-	//																			+ "</td> "
-	//																			+ "<td>"
-	//																			+ jsonResponse.objectEntityList[key].lastModifiedDate
-	//																			+ "</td> "
-	//																			+buttonUpdateCourseFeedback
-	//																			+ "</tr>");
-	//
-	//												})
-	//							}
-	//
-	//						} else {
-	//
-	//						}
-	//
-	//					},
-	//					complete : function() {
-	//
-	//					},
-	//					error : function() {
-	//
-	//						console.log("No se ha podido obtener la información");
-	//
-	//					}
-	//
-	//				});
+			$
+					.ajax({
+						url : './Courses/Feedbacks',
+						data : JSON.stringify(json),
+						contentType : "application/json",
+						method : 'POST',
+						beforeSend : function() {
+	
+						},
+						done : function() {
+	
+						},
+						success : function(jsonResponse) {
+	
+							if (typeof jsonResponse == "string") {
+	
+								$('.content').fadeOut(0).html(jsonResponse).fadeIn(
+										'slow');
+	
+								$('.error').show().fadeIn('slow');
+							}
+	
+							console.log(jsonResponse);
+	
+							if (jsonResponse.isValid) {
+	
+								if (jsonResponse.errorMessage != null) {
+	
+									$('#tableCourseFeedbackData').show().fadeOut('slow');
+	
+									$('.error .message')
+											.text(jsonResponse.errorMessage);
+	
+									$('.error').show().fadeIn('slow');
+	
+								} else {
+	
+									
+    	
+    	$("#tableCourseFeedbackData tr").remove();
+    
+    	$("#tableCourseFeedbackData").append(
+    			'<thead>' + '<tr class="not">'
+    					+ '<th>Codigo de la Retroalimentacion</th>'
+    					+ '<th>Tipo de Retroalimentacion</th>'
+    					+ '<th>Comentario</th>' + '<th>Usuario</th>'
+    					+ '<th>Fecha de Modificacion</th>'
+    					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+    					+ '</tr>' + '</thead>');
+  
+	                                 var buttonUpdateCourseFeedback = null;
+	
+									$.each(jsonResponse.objectEntityList,function(key, value) {
+														
+														if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
+															
+															buttonUpdateCourseFeedback = "<td>"
+																+ '<div class="actions"> '
+																+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
+																+ '<ion-icon name="create"></ion-icon>'
+																+ '</a>'
+																+ '</div>'
+																+ '</td> ';
+														}
+	
+														$("#tableCourseFeedbackData")
+																.append(
+																		"<tr>"
+																				+ "<td>"
+																				+ jsonResponse.objectEntityList[key].courseFeedBackId
+																				+ "</td> "
+																				+ "<td>"
+																				+ jsonResponse.objectEntityList[key].feedBackType.description
+																				+ "</td> "
+																				+ "<td>"
+																				+ jsonResponse.objectEntityList[key].comment
+																				+ "</td> "
+																				+ "<td>"
+																				+ jsonResponse.objectEntityList[key].user.mask
+																				+ "</td> "
+																				+ "<td>"
+																				+ jsonResponse.objectEntityList[key].lastModifiedDate
+																				+ "</td> "
+																				+buttonUpdateCourseFeedback
+																				+ "</tr>");
+	
+													})
+								}
+	
+							} else {
+	
+							}
+	
+						},
+						complete : function() {
+	
+						},
+						error : function() {
+	
+							console.log("No se ha podido obtener la información");
+	
+						}
+	
+					});
 
 }

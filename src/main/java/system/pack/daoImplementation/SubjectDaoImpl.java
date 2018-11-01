@@ -104,4 +104,9 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 		return subjects;
 	}
 
+	@Override
+	public boolean isValidSubjectId(int subjectId) {
+		return findById(subjectId) != null;
+	}
+
 }

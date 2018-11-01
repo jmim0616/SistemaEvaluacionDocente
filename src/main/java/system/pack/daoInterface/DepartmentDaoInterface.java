@@ -19,6 +19,8 @@ public interface DepartmentDaoInterface {
 
 	List<DepartmentEntity> getAll();
 
+	public boolean isValidDepartmentId(int departmentId);
+
 
 	
 

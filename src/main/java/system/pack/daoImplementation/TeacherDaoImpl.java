@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import system.pack.daoInterface.SubjectDaoInterface;
 import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
@@ -22,6 +24,9 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 
 	@Autowired
 	private EntityManager entityManager;
+	
+	@Autowired
+	private SubjectDaoInterface subjectDaoInterfacel;
 
 	@Override
 	public void create(TeacherEntity teacherEntity) {
@@ -100,6 +105,65 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 		TeacherEntity teacher = query.getSingleResult();
 		
 		return teacher;
+		
+	}
+
+	@Override
+	public boolean isValidTeacherId(int teacherId) {
+		return findById(teacherId) != null;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TeacherEntity> getTeachers(TeacherBean teacherBean) {
+		String sql = "select teachers.* from teachers";
+		
+		if (!teacherBean.getSubjectSearch().equals("")){
+			sql += ", subjects_by_teacher where "
+					+ "teachers.teacherId = subjects_by_teacher.teacherId"
+					+ " and subjects_by_teacher.subjectId = :subjectId ";
+		}
+		
+		if (!teacherBean.getTeacherId().equals("")){
+			if (!teacherBean.getSubjectSearch().equals(""))
+				sql += " and subjects_by_teacher.teacherId = :teacherId";
+			else
+				sql += " where teacherId = :teacherId";
+		}
+		
+		if (!teacherBean.getName().equals("")){
+			if (!teacherBean.getSubjectSearch().equals(""))
+				sql += " and upper(name) like CONCAT('%',:name,'%')";	
+			else
+				sql += " where upper(name) like CONCAT('%',:name,'%')";
+					
+		}
+		
+		System.out.println("Sql: " + sql);
+		Query query = entityManager.createNativeQuery (sql, TeacherEntity.class);
+		
+		if (!teacherBean.getSubjectSearch().equals("")){
+
+			if (subjectDaoInterfacel.findByName(teacherBean.getSubjectSearch()).isPresent()){
+				query.setParameter("subjectId", subjectDaoInterfacel.findByName(teacherBean.getSubjectSearch()).get().getSubjectId());
+			}
+			else{
+				query.setParameter("subjectId", "");
+			}
+			
+		}
+		
+		if (!teacherBean.getTeacherId().equals("")){
+			query.setParameter("teacherId", teacherBean.getTeacherId());
+		}
+		
+		if (!teacherBean.getName().equals("")){
+			query.setParameter("name", teacherBean.getName().toUpperCase());			
+		}
+		
+		System.out.println("Size of list: " + query.getResultList().size());
+		
+		return query.getResultList();
 		
 	}
 

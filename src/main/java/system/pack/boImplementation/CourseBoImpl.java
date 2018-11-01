@@ -8,41 +8,44 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLDataException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.text.Position;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.hibernate.dialect.PostgreSQL94Dialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.bointerface.CourseBoInterface;
 
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.CourseConverter;
-import system.pack.converter.CourseFeedbackConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.daoInterface.AcademicPeriodDaoJpaRepository;
 import system.pack.daoInterface.CourseFeedbackDaoInterface;
 import system.pack.daoInterface.CourseFeedbackDaoJpaRepository;
-import system.pack.daoInterface.FeedbackTypeDaoInterface;
+import system.pack.daoInterface.DepartmentDaoInterface;
 import system.pack.daoInterface.FeedbackTypeDaoJpaRepository;
+import system.pack.daoInterface.QuestionByPeriodDaoInterface;
+import system.pack.daoInterface.QuestionDaoInterface;
 import system.pack.daoInterface.CourseDaoInterface;
 import system.pack.daoInterface.CourseDaoJpaRepository;
 import system.pack.daoInterface.SubjectByTeacherDaoInterface;
@@ -59,11 +62,13 @@ import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
 import system.pack.entity.FeedbackTypeEntity;
+import system.pack.entity.QuestionByPeriodEntity;
+import system.pack.entity.QuestionEntity;
 import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
-import system.pack.entity.UserEntity;
+import system.pack.fullview.Data;
 import system.pack.helper.Constants;
 import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
@@ -80,7 +85,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	@Autowired
 	FeedbackTypeDaoJpaRepository feedbackTypeDaoJpaRepository;
-
+	
 	@Autowired
 	CourseFeedbackDaoInterface courseFeedbackDaoInterface;
 
@@ -111,11 +116,39 @@ public class CourseBoImpl implements CourseBoInterface {
 	@Autowired
 	CourseDaoJpaRepository courseDaoJpaRepository;
 
+	@Autowired
+	QuestionByPeriodDaoInterface questionByPeriodDaoInterface;
+
+	@Autowired
+	QuestionDaoInterface questionDaoInterface;
+
+	@Autowired
+	DepartmentDaoInterface departmentDaoInterface;
+	
+
 	private final String FILE_NAME = "courses";
+	private final String FILE_FEEDBACK_NAME = "feedback";
+	
+	@Override
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean) {
+		List<CourseFeedbackEntity> feedBacks = courseDaoInterface.getFeedBacksByCourse(courseBean);
+		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<>();
+		jsonResponse.setIsValid(true);
+		System.out.println("feedBacks " + feedBacks);
+		if (feedBacks.size() == 0) {
 
-	//
-	//
+			jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
 
+		} else {
+
+			//
+			jsonResponse.setObjectEntityList(feedBacks);
+
+		}
+		
+		return jsonResponse;
+	}
+	
 	@Transactional
 	@Override
 	public JsonResponse<CourseBean, CourseEntity> getAllCourses() {
@@ -169,7 +202,6 @@ public class CourseBoImpl implements CourseBoInterface {
 		jsonResponse.setObjectEntityList(academicPeriods);
 
 		return jsonResponse;
-
 	}
 
 	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> validateCourseFeedbacksAdd(CourseBean courseBean) {
@@ -244,7 +276,6 @@ public class CourseBoImpl implements CourseBoInterface {
 		jsonResponse.setVariables(variables);
 
 		return jsonResponse;
-
 	}
 	
 
@@ -255,6 +286,7 @@ public class CourseBoImpl implements CourseBoInterface {
 		try {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+
 
 			if (bindingResult.hasErrors()) {
 
@@ -355,81 +387,32 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-			if (bindingResult.hasErrors()) {
-
-				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-				jsonResponse.setErrorMessages(errorMessages);
-
-				jsonResponse.setIsValid(false);
-
-			} else {
-
-				jsonResponse.setIsValid(true);
-
-				Optional<CourseEntity> course = courseDaoJpaRepository
-						.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
-				Optional<SubjectEntity> subject = subjectDaoInterface.findByName(courseBean.getSubject());
-				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
-						.findById(Integer.parseInt(courseBean.getTeacher()));
-				Optional<AcademicPeriodEntity> academicPeriod = academicPeriodDaoInterface
-						.findByName(courseBean.getAcademicPeriod());
-
-				String errorMessage = "";
-
-				if (!subject.isPresent()) {
-
-					errorMessage = " - El registro de la asignatura no se encuentra en el sistema \n intente con otra asignatura, o cree una nueva.";
-
-					jsonResponse.setErrorMessage(errorMessage);
-
-				}
-
-				if (!teacher.isPresent()) {
-
-					errorMessage += "\n - El registro del profesor no se encuentra en el sistema \n intente con otro profesor, o cree uno nuevo.";
-
-					jsonResponse.setErrorMessage(errorMessage);
-				}
-
-				if (!academicPeriod.isPresent()) {
-
-					errorMessage += "\n - El registro del periodo académico no se encuentra en el sistema \n intente con otro periodo académico, o cree uno nuevo.";
-
-					jsonResponse.setErrorMessage(errorMessage);
-				}
-
-				if (course.isPresent() && course.get().getCourseId() != Integer.parseInt(courseBean.getCourseId())) {
-
-					errorMessage += "\n - El curso que se quiere modificar ya existe";
-
-					jsonResponse.setErrorMessage(errorMessage);
-
-				}
-
-				if (jsonResponse.getErrorMessage() == null) {
-
-					courseBean.setSubject(Integer.toString(subject.get().getSubjectId()));
-					courseBean.setAcademicPeriod(Integer.toString(academicPeriod.get().getAcademicPeriodId()));
-
-					if (courseBean.getIsVirtual().equals("Si")) {
-
-						courseBean.setIsVirtual("S");
-
-					} else {
-						courseBean.setIsVirtual("N");
-					}
-
-					CourseEntity courseEntity = CourseConverter.ConvertToEntity2(courseBean);
-
-					courseDaoInterface.update(courseEntity);
-
-					jsonResponse.setSuccessMessage("El curso ha sido guardado con exito");
-
-				}
-
-			}
+			// if (bindingResult.hasErrors()) {
+			//
+			// Map<String, String> errorMessages =
+			// bindingResult.getFieldErrors().stream()
+			// .collect(Collectors.toMap(FieldError::getField,
+			// FieldError::getDefaultMessage));
+			//
+			// jsonResponse.setErrorMessages(errorMessages);
+			//
+			// jsonResponse.setIsValid(false);
+			//
+			// } else {
+			//
+			// teacherBean.setTeacherStatus("1");
+			//
+			// TeacherEntity teacherEntity =
+			// TeacherConverter.ConvertToEntity(teacherBean);
+			//
+			// teacherDaoInterface.create(teacherEntity);
+			//
+			// jsonResponse.setIsValid(true);
+			//
+			// jsonResponse.setSuccessMessage("El docente ha sido guardado con
+			// exito");
+			//
+			// }
 
 			return jsonResponse;
 
@@ -443,6 +426,7 @@ public class CourseBoImpl implements CourseBoInterface {
 			return null;
 
 		}
+
 	}
 
 	@Transactional
@@ -495,37 +479,12 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-			if (bindingResult.hasErrors()) {
+			jsonResponse.setIsValid(true);
 
-				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-				jsonResponse.setErrorMessages(errorMessages);
-
-				jsonResponse.setIsValid(false);
-
-			} else {
-
-				jsonResponse.setIsValid(true);
-
-				CourseEntity courseEntity = courseDaoInterface.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
-
-				if (courseEntity == null) {
-
-					jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
-
-				} else {
-
-					List<CourseEntity> listCourses = new ArrayList<CourseEntity>();
-
-					listCourses.add(courseEntity);
-
-					jsonResponse.setObjectEntityList(listCourses);
-
-				}
-
-			}
-
+			List<CourseEntity> courseEntityList = courseDaoInterface.getCourses(courseBean);
+			
+			jsonResponse.setObjectEntityList(courseEntityList);
+			//
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -542,51 +501,12 @@ public class CourseBoImpl implements CourseBoInterface {
 	}
 
 	@Transactional
-	@Override
-	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> addCourseFeedback(
-			CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult, HttpSession session) {
+	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean,
+			BindingResult bindingResult) {
 
 		try {
 
-			JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
-
-			if (bindingResult.hasErrors()) {
-
-				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
-				jsonResponse.setErrorMessages(errorMessages);
-
-				jsonResponse.setIsValid(false);
-
-			} else {
-
-				jsonResponse.setIsValid(true);
-
-				FeedbackTypeEntity feedbackTypeEntity = feedbackTypeDaoJpaRepository
-						.findByDescription(courseFeedbackBean.getFeedBackType());
-
-				System.out.println("feedbackTypeEntity " + feedbackTypeEntity);
-
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				String creationDate = sdf.format(new Date());
-				String lastModifiedDate = sdf.format(new Date());
-
-				courseFeedbackBean.setFeedBackType(Integer.toString(feedbackTypeEntity.getFeedBackTypeId()));
-				courseFeedbackBean.setUser(session.getAttribute("UserId").toString());
-				courseFeedbackBean.setCreationDate(creationDate);
-				courseFeedbackBean.setLastModifiedDate(lastModifiedDate);
-
-				CourseFeedbackEntity courseFeedbackEntity = CourseFeedbackConverter
-						.ConvertToEntity1(courseFeedbackBean);
-
-				courseFeedbackDaoJpaRepository.save(courseFeedbackEntity);
-
-				jsonResponse.setSuccessMessage("La retroalimentacion del curso ha sido guardada con exito");
-
-			}
-
-			return jsonResponse;
+			return null;
 
 		} catch (Exception e) {
 
@@ -647,7 +567,7 @@ public class CourseBoImpl implements CourseBoInterface {
 		String result = "";
 
 		try {
-			excelHelper.createFile(file, FILE_NAME);
+			excelHelper.createFile(file, FILE_FEEDBACK_NAME);
 			result = createCourseFromExcel();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -681,11 +601,13 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
 
-		Iterator<Row> rowIt = xssfSheet.iterator();
+		Iterator<Row> rowIt = xssfSheet.rowIterator();
 
-		Row row = rowIt.next();
+		Row row;
 
 		while (rowIt.hasNext()) {
+
+			row = rowIt.next();
 
 			rows += 1;
 			position = 0;
@@ -701,6 +623,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ " El periodo académico no puede estar vacio.";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -708,16 +631,17 @@ public class CourseBoImpl implements CourseBoInterface {
 						int academicPeriodId = academicPeriodDaoInterface
 								.getAcademicPeriodByName(cell.getStringCellValue());
 						System.out.println("academicPeriodId " + academicPeriodId);
+						if (academicPeriodId == 0) {
+							isValidRow = false;
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ " El periodo académico no existe.";
+						}
 						courseEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriodId));
 
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						isValidRow = false;
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El periodo académico no es válido.";
-					} else if (cell.getCellType() == cell.CELL_TYPE_FORMULA) {
-						System.out.println("It's numeric");
-					} else {
-						System.out.println("Finally");
 					}
 				}
 				// Identificador del docente
@@ -725,6 +649,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El número de identificación del docente no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -733,7 +658,15 @@ public class CourseBoImpl implements CourseBoInterface {
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						courseEntity.setTeacher(new TeacherEntity((int) cell.getNumericCellValue()));
+						if (teacherDaoInterface.isValidTeacherId((int) cell.getNumericCellValue())) {
+							courseEntity.setTeacher(new TeacherEntity((int) cell.getNumericCellValue()));
+						} else {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación del docente no existe.";
+							isValidRow = false;
+							break inner_loop;
+						}
+
 					}
 				}
 				// Asignatura
@@ -741,6 +674,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El número de identificación de la asignatura no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -749,7 +683,14 @@ public class CourseBoImpl implements CourseBoInterface {
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						courseEntity.setSubject(new SubjectEntity((int) cell.getNumericCellValue()));
+						if (subjectDaoInterface.isValidSubjectId((int) cell.getNumericCellValue())) {
+							courseEntity.setSubject(new SubjectEntity((int) cell.getNumericCellValue()));
+						} else {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación de la asignatura no existe.";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
 				}
 				// Grupo
@@ -758,6 +699,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El número del grupo no puede estar vacio";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -775,6 +717,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "Debe indicarse si la asignatura es virtual o no.";
+						isValidRow = false;
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -786,18 +729,15 @@ public class CourseBoImpl implements CourseBoInterface {
 								+ "El valor ingresado para indicar si la asignatura es virtual o no es inválido.";
 					}
 				}
+
 				position++;
 			}
 
 			if (isValidRow) {
-
-				System.out.println(courseEntity.toString());
-
 				// Insert
 				courseDaoInterface.create(courseEntity);
-			}
 
-			row = rowIt.next();
+			}
 		}
 
 		xssfWorkbook.close();
@@ -810,5 +750,250 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		return errorMessage;
 	}
+
+	@Override
+	public String createOnlineFeedBack(MultipartFile file, int academicPeriod) {
+		ExcelHelper excelHelper = new ExcelHelper();
+		String result = "";
+
+		try {
+			excelHelper.createFile(file, FILE_FEEDBACK_NAME);
+			result = createOnlineFeedbackExcel(academicPeriod);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	private String createOnlineFeedbackExcel(int academicPeriod) throws IOException {
+		File excel = new File(new Constants().FILE_SAVING_ROUTE + FILE_FEEDBACK_NAME + ".xlsx");
+		FileInputStream fileInputStream = null;
+		String[] format = { "Periodo académico", "Profesor", "Asignatura", "Grupos", "Virtual" };
+
+		try {
+			fileInputStream = new FileInputStream(excel);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		String errorMessage = "";
+
+		int position = 0;
+
+		int rows = 0;
+
+		CourseEntity courseEntity = new CourseEntity();
+
+		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
+
+		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
+
+		Iterator<Row> rowIt = xssfSheet.rowIterator();
+
+		boolean isFirstRow = true;
+
+		Map<Integer, QuestionEntity> map = new HashMap<>();
+
+		Row row;
+
+		while (rowIt.hasNext()) {
+
+			row = rowIt.next();
+
+			rows += 1;
+			if (rows > 1 && isFirstRow)
+				isFirstRow = false;
+
+			position = 0;
+			QuestionByPeriodEntity questionByPeriodEntity = new QuestionByPeriodEntity();
+			boolean isValidRow = true;
+			Iterator<Cell> cellIterator = row.cellIterator();
+			TeacherEntity teacher = new TeacherEntity();
+			SubjectEntity subject = new SubjectEntity();
+			Map<Integer, Double> questionValues = new HashMap<>();
+			int groupId = 0;
+
+			inner_loop: while (cellIterator.hasNext()) {
+
+				Cell cell = cellIterator.next();
+
+				if (isFirstRow) {
+					if (position > 3) {
+						QuestionEntity questionEntity = new QuestionEntity();
+						questionEntity.setQuestion(cell.getStringCellValue());
+						questionDaoInterface.create(questionEntity);
+						map.put(position, questionEntity);
+						System.out.println("Question Id" + questionEntity.getQuestionId());
+					}
+
+				} else {
+					// Departamento
+					if (position == 0) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de departamento no puede estar vacio";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de departamento no es válido";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							if (departmentDaoInterface.isValidDepartmentId((int) cell.getNumericCellValue())) {
+								questionByPeriodEntity
+										.setDepartment((new DepartmentEntity((int) cell.getNumericCellValue())));
+							} else {
+								errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+										+ "El número de departamento no existe.";
+								isValidRow = false;
+								break inner_loop;
+							}
+						}
+					}
+
+					// Asignatura
+					else if (position == 1) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación de la asignatura no puede estar vacio";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación de la asignatura no es válido";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							if (subjectDaoInterface.isValidSubjectId((int) cell.getNumericCellValue())) {
+								subject = new SubjectEntity((int) cell.getNumericCellValue());
+							} else {
+								errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+										+ "El número de identificación de la asignatura no existe.";
+								isValidRow = false;
+								break inner_loop;
+							}
+						}
+					}
+					// Grupo
+					else if (position == 2) {
+
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número del grupo no puede estar vacio";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número del grupo no es válido";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							groupId = (int) cell.getNumericCellValue();
+						}
+					}
+					// Identificador del docente
+					else if (position == 3) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación del docente no puede estar vacio";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación del docente no es válido";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							if (teacherDaoInterface.isValidTeacherId((int) cell.getNumericCellValue())) {
+								teacher = new TeacherEntity((int) cell.getNumericCellValue());
+							} else {
+								errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+										+ "El número de identificación del docente no existe.";
+								isValidRow = false;
+								break inner_loop;
+							}
+
+						}
+					}
+
+					if (position == 4) {
+						int courseId = questionByPeriodDaoInterface.getCourseId(subject.getSubjectId(), groupId,
+								teacher.getTeacherId(), academicPeriod);
+
+						if (courseId == 0) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El curso no existe.";
+							isValidRow = false;
+							break inner_loop;
+						} else {
+							questionByPeriodEntity.setCourse(new CourseEntity(courseId));
+							questionByPeriodEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriod));
+						}
+					}
+
+					if (map.containsKey(position)) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El valor de la pregunta en la columna " + position + " no puede estar vacio.";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El valor de la pregunta en la columna " + position + " no es válido.";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							questionValues.put(map.get(position).getQuestionId(), cell.getNumericCellValue());
+						}
+					}
+				}
+
+				position++;
+			}
+
+			if (isValidRow && !isFirstRow) {
+				// Insert
+				Iterator questions = questionValues.keySet().iterator();
+				while (questions.hasNext()){
+					Integer questionId = (Integer) questions.next();
+					questionByPeriodEntity.setQuestion(new QuestionEntity(questionId));
+					questionByPeriodEntity.setPercentage(questionValues.get(questionId).intValue());
+					questionByPeriodDaoInterface.create(questionByPeriodEntity);
+				}
+			}
+		}
+
+		xssfWorkbook.close();
+		fileInputStream.close();
+
+		Path filePath = Paths.get(new Constants().FILE_SAVING_ROUTE + FILE_FEEDBACK_NAME + ".xlsx");
+		Files.delete(filePath);
+
+		System.out.println(errorMessage);
+
+		return errorMessage;
+	}
+
+	@Override
+	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult,
+			HttpSession session) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Data getCompareView(CourseBean courseBean) {	
+		return courseDaoInterface.getCompareView(courseBean);
+	}
+
 
 }

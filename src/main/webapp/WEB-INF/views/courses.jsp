@@ -37,6 +37,8 @@
 									Formulario </a></li>
 							<li><a id="linkCreateExcelCourse" href="#">Registrar con
 									excel</a></li>
+							<li><a id="linkCreateNotesExcel" href="#">Registrar encuestas 
+									de evaluación</a></li>
 						</ul></li>
 
 
