@@ -64,7 +64,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonCreateDisciplinaryArea" class="button add-button"
-						type="submit" value="Registrar Area Disciplinaria" /> <input
+						type="submit" value="Registrar Área Disciplinaria" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

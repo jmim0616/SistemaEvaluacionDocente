@@ -31,7 +31,7 @@
 
 <div class="content">
 
-	<h2>AREAS DISCIPLINARIAS</h2>
+	<h2>AREAS DISCIPLINARÍAS</h2>
 
 
 </div>

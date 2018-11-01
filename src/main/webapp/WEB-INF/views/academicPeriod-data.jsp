@@ -5,9 +5,9 @@
 
 <div class="scroll academicPeriodData" >
 
-	<h2>PERIODOS ACADEMICOS</h2>
+	<h2>PERIODOS ACADÉMICOS</h2>
 
-	<h3>Resultado de Periodos Academicos</h3>
+	<h3>Resultado de Periodos Académicos</h3>
 
 	<table id="tableAcademicPeriodData" class="table standard-table">
 
@@ -15,7 +15,7 @@
 
 			<tr class="not">
 			
-				<th>Codigo</th>
+				<th>Código</th>
 				<th>Nombre</th>
 				<th>Fecha de Inicio</th>
 				<th>Fecha de Fin</th>

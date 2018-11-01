@@ -29,7 +29,7 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="feedBackType">Tipo de Retroalimentacion <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:label path="feedBackType">Tipo de Retroalimentación <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:select path="feedBackType" id="feedBackTypeAdd">
 								
 										</form:select>
@@ -59,7 +59,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonAddFeedbackCourse" class="button add-button"
-						type="submit" value="Agregar Retroalimentacion" /> <input
+						type="submit" value="Agregar Retroalimentación" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

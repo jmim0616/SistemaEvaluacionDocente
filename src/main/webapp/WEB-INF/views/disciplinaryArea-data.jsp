@@ -15,7 +15,7 @@
 <div class="scroll disciplinaryAreaData">
 
 
-	<h2>AREAS DISCIPLINARIAS</h2>
+	<h2>ÁREAS DISCIPLINARIAS</h2>
 
 	<h3>Resultado de Areas Disciplinarias</h3>
 
@@ -25,7 +25,7 @@
 
 			<tr class="not">
 			
-				<th>Codigo</th>
+				<th>Código</th>
 				<th>Departamento</th>
 				<th>Nombre</th>
 				<th>Acciones</th>

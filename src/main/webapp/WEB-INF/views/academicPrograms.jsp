@@ -31,7 +31,7 @@
 
 <div class="content">
 
-	<h2>PROGRAMAS ACADEMICOS</h2>
+	<h2>PROGRAMAS ACADÉMICOS</h2>
 
 
 </div>

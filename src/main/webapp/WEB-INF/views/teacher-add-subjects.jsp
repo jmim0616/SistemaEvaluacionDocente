@@ -26,8 +26,8 @@
 		<br>
 
 				<td>
-					<label> <strong> Documento de Identificacion </strong> </label>	
-					<label id="teacherId" > <a> Documento de Identificacion </a>	  </label>	
+					<label> <strong> Documento de Identificación </strong> </label>	
+					<label id="teacherId" > <a> Documento de Identificación </a>	  </label>	
 				</td>
 				
 				<td>
@@ -45,17 +45,17 @@
 			<tr>
 
 				<td>
-					<label > <strong> Titulo de Profesional </strong> </label>	
+					<label > <strong> Título de Profesional </strong> </label>	
 					<label id="underDegree" >  </label>	
 				</td>
 				
 				<td>
-					<label > <strong> Titulo de Maestria </strong> </label>	
+					<label > <strong> Título de Maestriía </strong> </label>	
 					<label id="masterDegree" >  </label>	
 				</td>
 				
 				<td>
-					<label > <strong> Titulo de Doctorado </strong> </label>	
+					<label > <strong> Título de Doctorado </strong> </label>	
 					<label id="doctorDegree" >  </label>	
 				</td>
 

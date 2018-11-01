@@ -30,7 +30,7 @@
 
 				<td>
 					<fieldset>
-						<form:label path="disciplinaryArea">Area Disciplinaria <a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:label path="disciplinaryArea">Área Disciplinaria <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="disciplinaryArea" id="disciplinaryAreaCreate">
 							<c:forEach items="${disciplinaryAreas}" var="item">
 								<option value="${item.disciplinaryAreaId}">${item.name}</option>
@@ -64,7 +64,7 @@
 				<td>
 
 					<fieldset>
-						<form:label path="numberOfCredits">Numero de Creditos <a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:label path="numberOfCredits">Número de Créditos <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="numberOfCredits" id="numberOfCreditsCreate">
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -89,7 +89,7 @@
 				<td>
 
 					<fieldset>
-						<label>Agregar Programas Academicos </label>
+						<label>Agregar Programas Académicos </label>
 						<textarea name="academicProgramCreate" id="academicProgramCreate" ></textarea>
 						<label id="academicProgramCreateError" class="validation-error">
 						</label>

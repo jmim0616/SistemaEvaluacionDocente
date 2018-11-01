@@ -21,7 +21,7 @@
 
 			<tr class="not">
 			
-				<th>Codigo</th>
+				<th>Código</th>
 				<th>Nombre</th>
 				<th>Acciones</th>
 

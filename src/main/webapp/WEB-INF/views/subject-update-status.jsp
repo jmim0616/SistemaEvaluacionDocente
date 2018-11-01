@@ -18,7 +18,7 @@
 
 				<p id="dialogModal">
 					El estado de la asignatura es <strong> <span class="status"></span></strong>,
-					desea Cambiar su estado ?
+					desea cambiar su estado ?
 				</p>
 				<form:form modelAttribute="subject">
 

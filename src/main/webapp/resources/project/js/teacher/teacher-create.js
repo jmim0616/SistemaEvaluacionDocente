@@ -140,7 +140,7 @@ function ajaxCreateTeacher() {
 				}
 				
 			} else {
-			
+
 			$.each(jsonResponse.errorMessages, function(key,value) {
 				
 				$("#"+key+"CreateError").text(value);
