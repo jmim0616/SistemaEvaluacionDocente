@@ -345,6 +345,8 @@ function ajaxSearchCourse() {
 		"subject" : subject,
 		"academicPeriod" : academicPeriod
 	};
+	
+	console.log(json);
 
 	$
 			.ajax({
@@ -438,17 +440,6 @@ function ajaxSearchCourse() {
 
 					} else {
 
-						$('#groupIdSearchError').append(
-								jsonResponse.errorMessages.groupId);
-
-						$('#teacherSearchError').append(
-								jsonResponse.errorMessages.teacher);
-
-						$('#subjectSearchError').append(
-								jsonResponse.errorMessages.subject);
-
-						$('#academicPeriodSearchError').append(
-								jsonResponse.errorMessages.academicPeriod);
 
 					}
 

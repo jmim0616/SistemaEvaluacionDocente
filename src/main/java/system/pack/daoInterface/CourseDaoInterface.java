@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 
 import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
+import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.fullview.Data;
 import system.pack.helper.JsonResponse;
@@ -40,4 +41,10 @@ public interface CourseDaoInterface {
 	public List<CourseEntity> searchCoursesBySubject(SubjectBean subjectBean, BindingResult bindingResult);
 
 	public Data getCompareView(CourseBean courseBean);
+
+	public List<CourseEntity> getCoursesByTeacher(String teacherId);
+
+	public List<CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean);
+
+	public List<CourseEntity> getCourses(CourseBean courseBean);
 }

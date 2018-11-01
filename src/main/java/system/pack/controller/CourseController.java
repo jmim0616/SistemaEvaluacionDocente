@@ -324,13 +324,26 @@ public class CourseController {
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<CourseBean, CourseEntity> searchCourse(@Valid @RequestBody CourseBean courseBean, BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> searchCourse(@RequestBody CourseBean courseBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + courseBean);
 		
 		JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 		
 		jsonResponse = courseBoInterface.search(courseBean, bindingResult); 
+		
+		return jsonResponse;
+	}
+	
+	@PostMapping(value = "/Feedbacks", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> searchFeedbacksByCourse(@RequestBody CourseBean courseBean, BindingResult bindingResult) {
+
+		System.out.println("00000" + courseBean);
+		
+		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<CourseFeedbackBean, CourseFeedbackEntity>();
+		
+		jsonResponse = courseBoInterface.getFeedBacksByCourse(courseBean); 		
 		
 		return jsonResponse;
 	}

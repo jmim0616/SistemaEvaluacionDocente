@@ -3,9 +3,12 @@ package system.pack.bointerface;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import system.pack.entity.CourseEntity;
+import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.helper.JsonResponse;
+import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
 import system.pack.vo.SubjectByTeacherBean;
@@ -32,5 +35,8 @@ public interface TeacherBoInterface {
 	public JsonResponse searchSubjecstByTeacher(TeacherBean teacherBean, BindingResult bindingResult);
 
 	JsonResponse getAllTeachers();
+
+	JsonResponse<CourseBean, CourseEntity> getCoursesByTeacher(TeacherBean teacherBean,
+			BindingResult bindingResult);
 
 }

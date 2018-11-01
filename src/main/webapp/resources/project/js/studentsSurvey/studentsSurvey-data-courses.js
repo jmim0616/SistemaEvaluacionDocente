@@ -145,7 +145,7 @@ function ajaxSearchStudentsSurveyCourses() {
 															console
 																	.log(valueRows);
 
-															var questions = '<table>'
+															var questions = '<table class= "tabla_contenedor_up">'
 																	+ '<tr>';
 															//								
 															if (isFirstRow) {
@@ -188,7 +188,7 @@ function ajaxSearchStudentsSurveyCourses() {
 																
 															} 
 
-																questions = '<table>'
+																questions = '<table class= "tabla_contenedor_down">'
 																	+ '<tr>';														
 
 																$

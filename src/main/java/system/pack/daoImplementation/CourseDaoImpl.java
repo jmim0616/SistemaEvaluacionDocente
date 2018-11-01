@@ -20,6 +20,7 @@ import system.pack.daoInterface.SubjectDaoInterface;
 import system.pack.daoInterface.TeacherDaoInterface;
 import system.pack.entity.AcademicPeriodEntity;
 import system.pack.entity.CourseEntity;
+import system.pack.entity.CourseFeedbackEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.fullview.Data;
@@ -249,7 +250,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 					header.setGroupId((int) row[5]);
 					header.setIsVirtual(row[6].toString());
 					System.out.println("Header " + header);
-					
+
 					sql = "select " + "questions.question, " + "questions_by_period.percentage "
 							+ "from 	questions_by_period, " + "questions "
 							+ "where 	questions_by_period.courseId = :courseId "
@@ -267,17 +268,91 @@ public class CourseDaoImpl implements CourseDaoInterface {
 						question.setQuestion(questions[0].toString());
 						question.setResponse((int) questions[1]);
 						questionsToSend.add(question);
-					}	
-					
+					}
+
 					rowsToSend.add(new Row(header, questionsToSend));
-				}		
-				
+				}
+
 				periodsToSend.add(new Period(rowsToSend));
 			}
 
 		}
 
 		return new Data(periodsToSend);
+	}
+
+	@Override
+	public List<CourseEntity> getCoursesByTeacher(String teacherId) {
+
+		String sql = "Select * from courses where teacherId = :teacherId";
+		Query query = entityManager.createNativeQuery(sql, CourseEntity.class);
+
+		query.setParameter("teacherId", teacherId);
+
+		return query.getResultList();
+	}
+
+	@Override
+	public List<CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean) {
+		String sql = "select * from coursefeedbacks where courseId = :courseId";
+		Query query = entityManager.createNativeQuery(sql, CourseFeedbackEntity.class);
+		query.setParameter("courseId", courseBean.getCourseId());
+		return query.getResultList();
+	}
+
+	@Override
+	public List<CourseEntity> getCourses(CourseBean courseBean) {
+		String sql = "Select * from courses where 1=1";
+		if (!courseBean.getGroupId().equals("")) {
+			sql += " and groupId = :groupId";
+		}
+		if (!courseBean.getAcademicPeriod().equals("")) {
+			int academicPeriod = academicPeriodDaoImpl.getAcademicPeriodByName(courseBean.getAcademicPeriod());
+			if (academicPeriod != 0) {
+				sql += " and academicPeriodId = :academicPeriodId";
+			}
+			else{
+				sql += " and -1 = 1";
+			}
+		}
+		if (!courseBean.getTeacher().equals("")) {
+			sql += " and teacherId = :teacherId";
+		}
+		if (!courseBean.getSubject().equals("")) {
+			Optional<SubjectEntity> signature = subjectDaoInterface.findByName(courseBean.getSubject());
+			if (signature.isPresent()) {
+				if (signature.get().getSubjectId() != 0) {
+					sql += " and subjectId = :subjectId";
+				}
+			}
+			else{
+				sql += " and -1 = 1";
+			}
+
+		}
+		Query query = entityManager.createNativeQuery(sql, CourseEntity.class);
+		if (!courseBean.getGroupId().equals("")) {
+			query.setParameter("groupId", courseBean.getGroupId());
+		}
+		if (!courseBean.getAcademicPeriod().equals("")) {
+			int academicPeriod = academicPeriodDaoImpl.getAcademicPeriodByName(courseBean.getAcademicPeriod());
+			if (academicPeriod != 0) {
+				query.setParameter("academicPeriodId", academicPeriod);
+			}
+		}
+		if (!courseBean.getTeacher().equals("")) {
+			query.setParameter("teacherId", courseBean.getTeacher());
+		}
+		if (!courseBean.getSubject().equals("")) {
+			Optional<SubjectEntity> signature = subjectDaoInterface.findByName(courseBean.getSubject());
+			if (signature.isPresent()) {
+				if (signature.get().getSubjectId() != 0) {
+					query.setParameter("subjectId", signature.get().getSubjectId());
+				}
+			}
+
+		}
+		return query.getResultList();
 	}
 
 }

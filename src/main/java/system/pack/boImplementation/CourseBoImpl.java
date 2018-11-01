@@ -30,6 +30,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.bointerface.CourseBoInterface;
@@ -63,6 +64,7 @@ import system.pack.entity.FacultyEntity;
 import system.pack.entity.FeedbackTypeEntity;
 import system.pack.entity.QuestionByPeriodEntity;
 import system.pack.entity.QuestionEntity;
+import system.pack.entity.SubjectByTeacherEntity;
 import system.pack.entity.SubjectEntity;
 import system.pack.entity.TeacherEntity;
 import system.pack.entity.TeacherStatusEntity;
@@ -126,6 +128,26 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	private final String FILE_NAME = "courses";
 	private final String FILE_FEEDBACK_NAME = "feedback";
+	
+	@Override
+	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean) {
+		List<CourseFeedbackEntity> feedBacks = courseDaoInterface.getFeedBacksByCourse(courseBean);
+		JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> jsonResponse = new JsonResponse<>();
+		jsonResponse.setIsValid(true);
+		System.out.println("feedBacks " + feedBacks);
+		if (feedBacks.size() == 0) {
+
+			jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
+
+		} else {
+
+			//
+			jsonResponse.setObjectEntityList(feedBacks);
+
+		}
+		
+		return jsonResponse;
+	}
 	
 	@Transactional
 	@Override
@@ -457,41 +479,12 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-			// if (bindingResult.hasErrors()) {
-			//
-			// Map<String, String> errorMessages =
-			// bindingResult.getFieldErrors().stream()
-			// .collect(Collectors.toMap(FieldError::getField,
-			// FieldError::getDefaultMessage));
-			//
-			// jsonResponse.setErrorMessages(errorMessages);
-			//
-			// jsonResponse.setIsValid(false);
-			//
-			// } else {
-			//
-			// jsonResponse.setIsValid(true);
-			//
-			// TeacherEntity teacherEntity =
-			// teacherDaoJpaRepository.findById(Integer.parseInt(teacherBean.getTeacherId()));
-			//
-			// if (teacherEntity == null) {
-			//
-			// jsonResponse.setErrorMessage("No se encontraron resultados para
-			// la busqueda");
-			//
-			// } else {
-			//
-			// TeacherBean TeacherBean1 =
-			// TeacherConverter.ConverToVO(teacherEntity);
-			//
-			// jsonResponse.setObjectBean(TeacherBean1);;
-			//
-			// }
-			//
-			//
-			// }
+			jsonResponse.setIsValid(true);
 
+			List<CourseEntity> courseEntityList = courseDaoInterface.getCourses(courseBean);
+			
+			jsonResponse.setObjectEntityList(courseEntityList);
+			//
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -513,36 +506,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		try {
 
-			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
-			//
-			// if (bindingResult.hasErrors()) {
-			//
-			// Map<String, String> errorMessages =
-			// bindingResult.getFieldErrors().stream()
-			// .collect(Collectors.toMap(FieldError::getField,
-			// FieldError::getDefaultMessage));
-			//
-			// jsonResponse.setErrorMessages(errorMessages);
-			//
-			// jsonResponse.setIsValid(false);
-			//
-			// } else {
-			//
-			// teacherBean.setTeacherStatus("1");
-			//
-			// TeacherEntity teacherEntity =
-			// TeacherConverter.ConvertToEntity(teacherBean);
-			//
-			// teacherDaoInterface.create(teacherEntity);
-			//
-			// jsonResponse.setIsValid(true);
-			//
-			// jsonResponse.setSuccessMessage("El docente ha sido guardado con
-			// exito");
-			//
-			// }
-			//
-			return jsonResponse;
+			return null;
 
 		} catch (Exception e) {
 
@@ -1030,7 +994,6 @@ public class CourseBoImpl implements CourseBoInterface {
 	public Data getCompareView(CourseBean courseBean) {	
 		return courseDaoInterface.getCompareView(courseBean);
 	}
-	
-	
+
 
 }

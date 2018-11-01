@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.TeacherConverter;
+import system.pack.daoInterface.CourseDaoInterface;
 import system.pack.daoInterface.SubjectByTeacherDaoInterface;
 import system.pack.daoInterface.SubjectByTeacherDaoJpaRepository;
 import system.pack.daoInterface.SubjectDaoInterface;
@@ -37,6 +38,7 @@ import system.pack.daoInterface.TeacherDaoJpaRepository;
 import system.pack.daoInterface.TeacherStatusDaoInterface;
 import system.pack.daoInterface.TeacherStatusDaoJpaRepository;
 import system.pack.entity.AcademicProgramEntity;
+import system.pack.entity.CourseEntity;
 import system.pack.entity.DepartmentEntity;
 import system.pack.entity.FacultyEntity;
 import system.pack.entity.SubjectByProgramEntity;
@@ -48,6 +50,7 @@ import system.pack.helper.Constants;
 import system.pack.helper.ExcelHelper;
 import system.pack.helper.JsonResponse;
 import system.pack.vo.AcademicProgramBean;
+import system.pack.vo.CourseBean;
 import system.pack.vo.SubjectBean;
 import system.pack.vo.SubjectByProgramBean;
 import system.pack.vo.SubjectByTeacherBean;
@@ -61,28 +64,28 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 	@Autowired
 	TeacherStatusDaoInterface teacherStatusDaoInterface;
-	
+
 	@Autowired
 	SubjectByTeacherDaoInterface subjectByTeacherDaoInterface;
-	
+
 	@Autowired
 	SubjectByTeacherDaoJpaRepository subjectByTeacherDaoJpaRepository;
-	
+
 	@Autowired
 	TeacherDaoInterface teacherDaoInterface;
-	
+
 	@Autowired
 	TeacherDaoJpaRepository teacherDaoJpaRepository;
-
 
 	@Autowired
 	SubjectDaoInterface subjectDaoInterface;
 
 	@Autowired
 	SubjectDaoJpaRepository subjectDaoJpaRepository;
-	
-	
-	
+
+	@Autowired
+	CourseDaoInterface courseDaoInterface;
+
 	@Transactional
 	@Override
 	public JsonResponse<TeacherBean, TeacherEntity> getAllTeachers() {
@@ -96,8 +99,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 		return jsonResponse;
 
 	}
-	
-	
+
 	@Transactional
 	@Override
 	public JsonResponse<SubjectBean, SubjectEntity> getAllSubjects() {
@@ -111,14 +113,13 @@ public class TeacherBoImpl implements TeacherBoInterface {
 		return jsonResponse;
 
 	}
-	
 
 	private final String FILE_NAME = "teachers";
 
 	@Transactional
 	@Override
 	public JsonResponse<TeacherBean, TeacherEntity> create(TeacherBean teacherBean, BindingResult bindingResult) {
-		
+
 		try {
 
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
@@ -135,27 +136,27 @@ public class TeacherBoImpl implements TeacherBoInterface {
 			} else {
 
 				jsonResponse.setIsValid(true);
-				
+
 				Optional<TeacherEntity> teacher = teacherDaoInterface.findByName(teacherBean.getName());
-				
+
 				if (teacher.isPresent()) {
-					
+
 					jsonResponse.setErrorMessage("El docente que se quiere registrar ya existe");
-				
+
 				} else {
-				
-				teacherBean.setTeacherStatus("1");
 
-				TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
+					teacherBean.setTeacherStatus("1");
 
-				teacherDaoInterface.create(teacherEntity);
+					TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
 
-				jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
+					teacherDaoInterface.create(teacherEntity);
+
+					jsonResponse.setSuccessMessage("El docente ha sido guardado con exito");
+
+				}
 
 			}
-				
-			}
-			
+
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -186,7 +187,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
 
 			if (bindingResult.hasErrors()) {
-				
+
 				Map<String, ArrayList<String>> errorMessages1;
 
 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
@@ -197,33 +198,34 @@ public class TeacherBoImpl implements TeacherBoInterface {
 				jsonResponse.setIsValid(false);
 
 			} else {
-				
+
 				jsonResponse.setIsValid(true);
-				
+
 				Optional<TeacherEntity> teacher = teacherDaoInterface.findByName(teacherBean.getName());
-				
-				if (teacher.isPresent() && teacher.get().getTeacherId() != Integer.parseInt(teacherBean.getTeacherId())) {
-					
+
+				if (teacher.isPresent()
+						&& teacher.get().getTeacherId() != Integer.parseInt(teacherBean.getTeacherId())) {
+
 					jsonResponse.setErrorMessage("El docente que se quiere modificar ya existe");
-				
+
 				} else {
 
-				teacherBean.setTeacherStatus("1");
+					teacherBean.setTeacherStatus("1");
 
-				if (teacherBean.getIdentificationType().equalsIgnoreCase("Cedula de Ciudadania")) {
-					teacherBean.setIdentificationType("1");
-				} else {
-					teacherBean.setIdentificationType("2");
+					if (teacherBean.getIdentificationType().equalsIgnoreCase("Cedula de Ciudadania")) {
+						teacherBean.setIdentificationType("1");
+					} else {
+						teacherBean.setIdentificationType("2");
+					}
+
+					TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
+
+					teacherDaoInterface.update(teacherEntity);
+
+					jsonResponse.setSuccessMessage("El docente ha sido modificado con exito");
+
 				}
 
-				TeacherEntity teacherEntity = TeacherConverter.ConvertToEntity(teacherBean);
-
-				teacherDaoInterface.update(teacherEntity);
-
-				jsonResponse.setSuccessMessage("El docente ha sido modificado con exito");
-
-			}
-				
 			}
 
 			return jsonResponse;
@@ -257,12 +259,10 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 			} else if (teacherBean.getTeacherStatus().equals("Inactivo")) {
 
-
 				teacherEntity.setTeacherStatus(new TeacherStatusEntity(1));
-jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exito");
+				jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exito");
 
 			}
-
 
 			teacherDaoInterface.update(teacherEntity);
 
@@ -283,58 +283,56 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 	}
 
-	
 	@Transactional
 	@Override
-	public JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> search(TeacherBean teacherBean, BindingResult bindingResult) {
-		
+	public JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> search(TeacherBean teacherBean,
+			BindingResult bindingResult) {
+
 		try {
 
 			JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity> jsonResponse = new JsonResponse<SubjectByTeacherBean, SubjectByTeacherEntity>();
 
-			if (bindingResult.hasErrors()) {
+			jsonResponse.setIsValid(true);
 
-				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
-						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+			List<TeacherEntity> teacherEntityList = teacherDaoInterface.getTeachers(teacherBean);
 
-				jsonResponse.setErrorMessages(errorMessages);
+			if (teacherEntityList.size() == 0) {
 
-				jsonResponse.setIsValid(false);
+				jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
 
 			} else {
 
-				jsonResponse.setIsValid(true);
+				List<SubjectByTeacherEntity> subjectsByTeacherEntityPrueba = new ArrayList<SubjectByTeacherEntity>();
 
-				TeacherEntity teacherEntity = teacherDaoInterface
-						.findById(Integer.parseInt(teacherBean.getTeacherId()));
+				for (TeacherEntity teacher : teacherEntityList) {
 
-				if (teacherEntity == null) {
-
-					jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
-
-				} else {
+					System.out.println("Current teacher: " + teacher);
 
 					List<SubjectByTeacherEntity> subjectsByTeacherEntity = subjectByTeacherDaoInterface
-							.findByTeacherId(teacherEntity.getTeacherId());
+							.findByTeacherId(teacher.getTeacherId());
 
 					SubjectByTeacherEntity subjectByTeacherEntity = new SubjectByTeacherEntity();
 
-					// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
-					List<SubjectByTeacherEntity> subjectsByTeacherEntityPrueba = new ArrayList<SubjectByTeacherEntity>();
+					// Esto no va en el codigo, solo para pruebas sobre las
+					// vista fecha: octubre 2 2018
+					// List<SubjectByTeacherEntity>
+					// subjectsByTeacherEntityPrueba = new
+					// ArrayList<SubjectByTeacherEntity>();
 					//
-					
+
 					if (subjectsByTeacherEntity.size() < 1) {
 
-						subjectByTeacherEntity.setTeacher(teacherEntity);
+						subjectByTeacherEntity.setTeacher(teacher);
 						subjectByTeacherEntity.setSubject(new SubjectEntity(null, null, "", 0));
 
 						jsonResponse.setObjectEntity(subjectByTeacherEntity);
-						
-						// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
+
+						// Esto no va en el codigo, solo para pruebas sobre las
+						// vista fecha: octubre 2 2018
 						subjectsByTeacherEntityPrueba.add(subjectByTeacherEntity);
 						jsonResponse.setObjectEntityList(subjectsByTeacherEntityPrueba);
 						//
-						
+
 					} else if (subjectsByTeacherEntity.size() > 0) {
 
 						String subjectName = "";
@@ -345,21 +343,66 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 						}
 
-						subjectByTeacherEntity.setTeacher(teacherEntity);
+						subjectByTeacherEntity.setTeacher(teacher);
 						subjectByTeacherEntity.setSubject(new SubjectEntity(null, null, subjectName, 0));
-						
+
 						jsonResponse.setObjectEntity(subjectByTeacherEntity);
-						
-						// Esto no va en el codigo, solo para pruebas sobre las vista fecha: octubre 2 2018
+
+						// Esto no va en el codigo, solo para pruebas sobre las
+						// vista fecha: octubre 2 2018
 						subjectsByTeacherEntityPrueba.add(subjectByTeacherEntity);
-						jsonResponse.setObjectEntityList(subjectsByTeacherEntityPrueba);
+
 						//
-					
+
 					}
-					
+
 				}
+				jsonResponse.setObjectEntityList(subjectsByTeacherEntityPrueba);
+			}
+
+			// }
+
+			return jsonResponse;
+
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+
+			// throw new RuntimeException("");
+
+			return null;
+
+		}
+
+	}
+
+	@Transactional
+	@Override
+	public JsonResponse<CourseBean, CourseEntity> getCoursesByTeacher(TeacherBean teacherBean,
+			BindingResult bindingResult) {
+
+		try {
+
+			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+
+			jsonResponse.setIsValid(true);
+
+			List<CourseEntity> courseEntityList = courseDaoInterface.getCoursesByTeacher(teacherBean.getTeacherId());
+
+			System.out.println("courseEntityList " + courseEntityList);
+			if (courseEntityList.size() == 0) {
+
+				jsonResponse.setErrorMessage("No se encontraron resultados para la busqueda");
+
+			} else {
+
+				//
+				jsonResponse.setObjectEntityList(courseEntityList);
 
 			}
+
+			// }
 
 			return jsonResponse;
 
@@ -415,7 +458,6 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 		TeacherEntity teacherEntity = new TeacherEntity();
 
-		
 		XSSFWorkbook xssfWorkbook = new XSSFWorkbook(fileInputStream);
 
 		XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(0);
@@ -423,16 +465,15 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 		Iterator<Row> rowIt = xssfSheet.iterator();
 
 		Row row = rowIt.next();
-		
-		
+
 		while (rowIt.hasNext()) {
-			
+
 			rows += 1;
 			position = 0;
 			teacherEntity = new TeacherEntity();
 			boolean isValidRow = true;
 			Iterator<Cell> cellIterator = row.cellIterator();
-			
+
 			inner_loop: while (cellIterator.hasNext()) {
 
 				Cell cell = cellIterator.next();
@@ -454,13 +495,13 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 1) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" +  "La fila " + rows + " tiene el siguiente error: "
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El número de identificación no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+"El número de identificación no es válido";
+								+ "El número de identificación no es válido";
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
@@ -471,9 +512,8 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				else if (position == 2) {
 
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "La fila " + rows + " tiene el siguiente error: "
-								+ "El nombre no puede estar vacio";
+						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: " + "La fila " + rows
+								+ " tiene el siguiente error: " + "El nombre no puede estar vacio";
 						break inner_loop;
 					}
 					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
@@ -572,7 +612,7 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						System.out.println(cell.getNumericCellValue());
-						teacherEntity.setCellNumber(String.valueOf((long)cell.getNumericCellValue()));
+						teacherEntity.setCellNumber(String.valueOf((long) cell.getNumericCellValue()));
 					}
 				}
 				// fijo
@@ -584,7 +624,7 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 						isValidRow = false;
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						teacherEntity.setHomeNumber(String.valueOf((long)cell.getNumericCellValue()));
+						teacherEntity.setHomeNumber(String.valueOf((long) cell.getNumericCellValue()));
 					}
 				}
 				// fijo
@@ -611,7 +651,7 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				teacherDaoInterface.create(teacherEntity);
 			}
 
-			row = rowIt.next();			
+			row = rowIt.next();
 		}
 
 		xssfWorkbook.close();
@@ -624,12 +664,12 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 		return errorMessage;
 	}
-	
-	
+
 	@Transactional
 	@Override
-	public JsonResponse<TeacherBean, TeacherEntity> addSubjects(SubjectByTeacherBean subjectByTeacherBean, BindingResult bindingResult) {
-		
+	public JsonResponse<TeacherBean, TeacherEntity> addSubjects(SubjectByTeacherBean subjectByTeacherBean,
+			BindingResult bindingResult) {
+
 		try {
 
 			JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
@@ -645,35 +685,36 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 
 			} else {
 
-				TeacherEntity teacher = teacherDaoInterface.findById(Integer.parseInt(subjectByTeacherBean.getTeacher()));
-				
+				TeacherEntity teacher = teacherDaoInterface
+						.findById(Integer.parseInt(subjectByTeacherBean.getTeacher()));
+
 				List<String> subjects = null;
 				SubjectByTeacherEntity subjectByTeacher = null;
-				
+
 				if (subjectByTeacherBean.getSubjectDeleted().size() > 0) {
 
 					subjects = subjectByTeacherBean.getSubjectDeleted();
-					
-					for (int i = 0; i < subjects.size(); i++) {
-					
-						Optional<SubjectEntity> subject = subjectDaoInterface.findByName(subjects.get(i));
-						
-						 subjectByTeacherDaoInterface.deleteByTeacherIdSubjectId(teacher.getTeacherId(), subject.get().getSubjectId());
 
+					for (int i = 0; i < subjects.size(); i++) {
+
+						Optional<SubjectEntity> subject = subjectDaoInterface.findByName(subjects.get(i));
+
+						subjectByTeacherDaoInterface.deleteByTeacherIdSubjectId(teacher.getTeacherId(),
+								subject.get().getSubjectId());
 
 					}
 
 				}
-				
+
 				if (subjectByTeacherBean.getSubjectAdded().size() > 0) {
 
 					subjects = subjectByTeacherBean.getSubjectAdded();
-					
+
 					for (int i = 0; i < subjects.size(); i++) {
-					
+
 						Optional<SubjectEntity> subject = subjectDaoInterface.findByName(subjects.get(i));
-						
-						 subjectByTeacherDaoInterface.create(new SubjectByTeacherEntity(subject.get(), teacher));
+
+						subjectByTeacherDaoInterface.create(new SubjectByTeacherEntity(subject.get(), teacher));
 
 					}
 
@@ -684,7 +725,7 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 				jsonResponse.setSuccessMessage("Se han agregado las asignaturas al docente correctamente");
 
 			}
-			
+
 			return jsonResponse;
 
 		} catch (Exception e) {
@@ -692,20 +733,20 @@ jsonResponse.setSuccessMessage("El estado del docente ha sido modificado con exi
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 
-//			throw new RuntimeException("");
+			// throw new RuntimeException("");
 
 			return null;
-			
+
 		}
 
 	}
 
 	@Override
-	public JsonResponse<TeacherBean, TeacherEntity> searchSubjecstByTeacher(TeacherBean teacherBean, BindingResult bindingResult) {
+	public JsonResponse<TeacherBean, TeacherEntity> searchSubjecstByTeacher(TeacherBean teacherBean,
+			BindingResult bindingResult) {
 		JsonResponse<TeacherBean, TeacherEntity> jsonResponse = new JsonResponse<TeacherBean, TeacherEntity>();
-		
+
 		return jsonResponse;
 	}
-	
 
 }

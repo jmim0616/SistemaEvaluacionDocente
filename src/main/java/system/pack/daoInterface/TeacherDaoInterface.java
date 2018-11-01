@@ -28,6 +28,8 @@ public interface TeacherDaoInterface {
 	public TeacherEntity findByTeacherStatusId(int teacherStatusId);
 
 	public boolean isValidTeacherId(int teacherId);
+
+	public List<TeacherEntity> getTeachers(TeacherBean teacherBean);
 	
 
 }
