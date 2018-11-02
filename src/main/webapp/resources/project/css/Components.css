@@ -176,6 +176,18 @@ label {
 
 
 
+.validation-error-form {
+	font-size: 70%;
+	display: block;
+	margin: 5px 5px 0px 5px;
+	color: #c00;
+	text-align: left;
+	word-spacing: 1px;
+	height: 25px;
+	white-space: pre-line;
+	width: 235px;
+}
+
 .validation-error {
 	font-size: 70%;
 	display: block;
@@ -183,7 +195,7 @@ label {
 	color: #c00;
 	text-align: left;
 	word-spacing: 1px;
-	height: 40px;
+	height: auto;
 	white-space: pre-line;
 	width: 235px;
 }
@@ -407,12 +419,7 @@ input[type="checkbox"] {
 /* TABLES */
 
 /* -------------------- */
-table tr {
 
-	margin: 7px 7px;
-	
-	
-}
 .table {
 	font-weight: 300;
 	font-family: 'Roboto', 'Arial', 'sans-serif';
@@ -530,11 +537,12 @@ table tr {
 
 .modalBody #tittleModal {
 	font-size: 150%;
+	margin: 0px 0px;
 }
 
 .modalBody #dialogModal {
 	display: inline-block;
-	padding: 0px 30px 30px 30px;
+	padding: 0px 30px 10px 30px;
 }
 
 .modalFooter {
@@ -542,7 +550,7 @@ table tr {
 }
 
 .modalFooter #buttonAccept, #buttonCancel {
-	margin: auto 40px auto 40px;
+	margin: auto 0px auto 0px;
 }
 
 /* -------------------- */

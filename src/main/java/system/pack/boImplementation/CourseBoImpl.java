@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLDataException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -37,6 +39,7 @@ import system.pack.bointerface.CourseBoInterface;
 
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.CourseConverter;
+import system.pack.converter.CourseFeedbackConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.daoInterface.AcademicPeriodDaoJpaRepository;
@@ -387,32 +390,50 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-			// if (bindingResult.hasErrors()) {
-			//
-			// Map<String, String> errorMessages =
-			// bindingResult.getFieldErrors().stream()
-			// .collect(Collectors.toMap(FieldError::getField,
-			// FieldError::getDefaultMessage));
-			//
-			// jsonResponse.setErrorMessages(errorMessages);
-			//
-			// jsonResponse.setIsValid(false);
-			//
-			// } else {
-			//
-			// teacherBean.setTeacherStatus("1");
-			//
-			// TeacherEntity teacherEntity =
-			// TeacherConverter.ConvertToEntity(teacherBean);
-			//
-			// teacherDaoInterface.create(teacherEntity);
-			//
-			// jsonResponse.setIsValid(true);
-			//
-			// jsonResponse.setSuccessMessage("El docente ha sido guardado con
-			// exito");
-			//
-			// }
+			if (bindingResult.hasErrors()) {
+ 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+ 				jsonResponse.setErrorMessages(errorMessages);
+ 				jsonResponse.setIsValid(false);
+ 			} else {
+ 				jsonResponse.setIsValid(true);
+ 				Optional<CourseEntity> course = courseDaoJpaRepository
+						.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
+				Optional<SubjectEntity> subject = subjectDaoInterface.findByName(courseBean.getSubject());
+				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
+						.findById(Integer.parseInt(courseBean.getTeacher()));
+				Optional<AcademicPeriodEntity> academicPeriod = academicPeriodDaoInterface
+						.findByName(courseBean.getAcademicPeriod());
+ 				String errorMessage = "";
+ 				if (!subject.isPresent()) {
+ 					errorMessage = " - El registro de la asignatura no se encuentra en el sistema \n intente con otra asignatura, o cree una nueva.";
+ 					jsonResponse.setErrorMessage(errorMessage);
+ 				}
+ 				if (!teacher.isPresent()) {
+ 					errorMessage += "\n - El registro del profesor no se encuentra en el sistema \n intente con otro profesor, o cree uno nuevo.";
+ 					jsonResponse.setErrorMessage(errorMessage);
+				}
+ 				if (!academicPeriod.isPresent()) {
+ 					errorMessage += "\n - El registro del periodo académico no se encuentra en el sistema \n intente con otro periodo académico, o cree uno nuevo.";
+ 					jsonResponse.setErrorMessage(errorMessage);
+				}
+ 				if (course.isPresent() && course.get().getCourseId() != Integer.parseInt(courseBean.getCourseId())) {
+ 					errorMessage += "\n - El curso que se quiere modificar ya existe";
+ 					jsonResponse.setErrorMessage(errorMessage);
+ 				}
+ 				if (jsonResponse.getErrorMessage() == null) {
+ 					courseBean.setSubject(Integer.toString(subject.get().getSubjectId()));
+					courseBean.setAcademicPeriod(Integer.toString(academicPeriod.get().getAcademicPeriodId()));
+ 					if (courseBean.getIsVirtual().equals("Si")) {
+ 						courseBean.setIsVirtual("S");
+ 					} else {
+						courseBean.setIsVirtual("N");
+					}
+ 					CourseEntity courseEntity = CourseConverter.ConvertToEntity2(courseBean);
+ 					courseDaoInterface.update(courseEntity);
+ 					jsonResponse.setSuccessMessage("El curso ha sido guardado con exito");
+ 				}
+ 			}
 
 			return jsonResponse;
 
@@ -501,12 +522,49 @@ public class CourseBoImpl implements CourseBoInterface {
 	}
 
 	@Transactional
-	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean,
-			BindingResult bindingResult) {
+	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult, HttpSession session) {
 
 		try {
 
-			return null;
+			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+			 
+ 			if (bindingResult.hasErrors()) {
+ 
+ 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+ 						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+ 
+ 				jsonResponse.setErrorMessages(errorMessages);
+ 
+ 				jsonResponse.setIsValid(false);
+ 
+ 			} else {
+ 
+ 				jsonResponse.setIsValid(true);
+ 
+ 				FeedbackTypeEntity feedbackTypeEntity = feedbackTypeDaoJpaRepository
+ 						.findByDescription(courseFeedbackBean.getFeedBackType());
+ 
+ 				System.out.println("feedbackTypeEntity " + feedbackTypeEntity);
+ 
+ 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+ 				String creationDate = sdf.format(new Date());
+ 				String lastModifiedDate = sdf.format(new Date());
+ 
+ 				courseFeedbackBean.setFeedBackType(Integer.toString(feedbackTypeEntity.getFeedBackTypeId()));
+ 				courseFeedbackBean.setUser(session.getAttribute("UserId").toString());
+ 				courseFeedbackBean.setCreationDate(creationDate);
+ 				courseFeedbackBean.setLastModifiedDate(lastModifiedDate);
+ 
+ 				CourseFeedbackEntity courseFeedbackEntity = CourseFeedbackConverter
+ 						.ConvertToEntity1(courseFeedbackBean);
+ 
+ 				courseFeedbackDaoJpaRepository.save(courseFeedbackEntity);
+ 
+ 				jsonResponse.setSuccessMessage("La retroalimentacion del curso ha sido guardada con exito");
+ 
+ 			}
+ 
+ 			return jsonResponse;
 
 		} catch (Exception e) {
 
@@ -983,12 +1041,6 @@ public class CourseBoImpl implements CourseBoInterface {
 		return errorMessage;
 	}
 
-	@Override
-	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult,
-			HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public Data getCompareView(CourseBean courseBean) {	

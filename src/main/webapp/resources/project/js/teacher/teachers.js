@@ -237,15 +237,8 @@ function ajaxSearchTeacher() {
 
 					if (jsonResponse.isValid) {
 
-						// $('#teacherIdSearch').val('');
-
 						if (jsonResponse.errorMessage != null) {
 
-//							$('#tableTeacherData').show().fadeOut('slow');
-//							
-//							$('#tableCourseData').show().fadeOut('slow');
-//							
-//							$('#tableCourseFeedbackData').show().fadeOut('slow');
 
 							$('.error .message')
 									.text(jsonResponse.errorMessage);

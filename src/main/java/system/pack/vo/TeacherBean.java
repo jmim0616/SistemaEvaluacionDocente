@@ -33,10 +33,10 @@ public class TeacherBean {
 	@Pattern(regexp = "^([a-zA-Z-][a-zA-Z -]*){0,1}$", message = "El campo \"Titulo de Doctorado\" debe ser diligenciado solo con letras")
 	private String doctorDegree;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Institucional\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Institucional\" no cumple el formato. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Personal\" no cumple el formato adecuado. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Personal\" no cumple el formato. Ej: ejemplo@gmail.com")
 	private String personalMail;
 
 	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Telefono Celular\" solo se permiten numeros")
