@@ -473,6 +473,7 @@ input[type="checkbox"] {
 .standard-table tr:hover td {
 	font-weight: 300;
 	background-color: #eee;
+	color: #000;
 }
 
 .standard-table th {
@@ -560,7 +561,7 @@ input[type="checkbox"] {
 /* -------------------- */
 .active-tr {
 	color: #fff;
-	background-color: #000000;
+	background-color: #aeaeae;
 }
 
 /* -------------------- */

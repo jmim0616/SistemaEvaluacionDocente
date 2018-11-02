@@ -25,6 +25,26 @@ function initTeacherData() {
 	//
 	// });
 	
+	
+	 
+	$('.data').on('click', '.standard-table tr', function (e) {
+		
+	
+		   if ($(this).hasClass("not")) {
+				
+			   
+		      } else {
+		    	  
+				   $("#"+tableIdClicked).find("tr").removeClass("active-tr");
+				   
+				   $(this).addClass('active-tr');
+		    	  
+		      }
+		
+
+		});
+	
+	
 	obtainValuesTdSearch();
 
 	function obtainValuesTdSearch() {
