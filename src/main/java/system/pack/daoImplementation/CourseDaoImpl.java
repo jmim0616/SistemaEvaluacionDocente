@@ -215,8 +215,12 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		List<Period> periodsToSend = new LinkedList<>();
 		for (Integer period : periodsToProcess) {
 
-			sql = sql + " and academic_periods.academicPeriodId = :academicPeriodId";
-			Query query = entityManager.createNativeQuery(sql);
+			System.out.println("Period " + period);
+			
+			System.out.println("Sql pre" + sql );
+			
+			String sqlPeriod = sql + " and academic_periods.academicPeriodId = :academicPeriodId";
+			Query query = entityManager.createNativeQuery(sqlPeriod);
 
 			if (!courseBean.getCourseId().equals("")) {
 				query.setParameter("courseId", courseBean.getCourseId());
@@ -234,7 +238,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 			if (period != null) {
 				query.setParameter("academicPeriodId", period);
 			}
-			System.out.println("Last Sql " + sql);
+			System.out.println("Last Sql " + sqlPeriod);
 
 			List<Object[]> rows = query.getResultList();
 
@@ -251,13 +255,13 @@ public class CourseDaoImpl implements CourseDaoInterface {
 					header.setIsVirtual(row[6].toString());
 					System.out.println("Header " + header);
 
-					sql = "select " + "questions.question, " + "questions_by_period.percentage "
+					String sqlQuestions = "select " + "questions.question, " + "questions_by_period.percentage "
 							+ "from 	questions_by_period, " + "questions "
 							+ "where 	questions_by_period.courseId = :courseId "
 							+ "and	 	questions.questionId = questions_by_period.questionId "
 							+ "order by questions_by_period.questionId";
 
-					query = entityManager.createNativeQuery(sql);
+					query = entityManager.createNativeQuery(sqlQuestions);
 					query.setParameter("courseId", header.getCourseId());
 
 					rows = query.getResultList();

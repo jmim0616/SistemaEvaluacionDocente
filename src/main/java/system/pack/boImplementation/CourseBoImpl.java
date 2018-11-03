@@ -85,7 +85,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	@Autowired
 	FeedbackTypeDaoJpaRepository feedbackTypeDaoJpaRepository;
-	
+
 	@Autowired
 	CourseFeedbackDaoInterface courseFeedbackDaoInterface;
 
@@ -124,11 +124,10 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	@Autowired
 	DepartmentDaoInterface departmentDaoInterface;
-	
 
 	private final String FILE_NAME = "courses";
 	private final String FILE_FEEDBACK_NAME = "feedback";
-	
+
 	@Override
 	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean) {
 		List<CourseFeedbackEntity> feedBacks = courseDaoInterface.getFeedBacksByCourse(courseBean);
@@ -145,10 +144,10 @@ public class CourseBoImpl implements CourseBoInterface {
 			jsonResponse.setObjectEntityList(feedBacks);
 
 		}
-		
+
 		return jsonResponse;
 	}
-	
+
 	@Transactional
 	@Override
 	public JsonResponse<CourseBean, CourseEntity> getAllCourses() {
@@ -215,7 +214,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		Map<String, String> variables = new HashMap<String, String>();
 
-
 		if (courseFeedbacks.size() == 0) {
 
 			variables.put("coevaluacion", "false");
@@ -223,9 +221,9 @@ public class CourseBoImpl implements CourseBoInterface {
 			variables.put("opinion del coordinador", "false");
 
 		} else {
-			
+
 			for (int i = 0; i < courseFeedbacks.size(); i++) {
-				
+
 				if (courseFeedbacks.get(i).getFeedBackType().getDescription().equals("resumen de visita")) {
 
 					courseFeedbacks.get(i).getFeedBackType().setDescription("");
@@ -233,39 +231,42 @@ public class CourseBoImpl implements CourseBoInterface {
 				}
 
 				for (int j = 0; j < feedbackTypes.size(); j++) {
-					
+
 					if (courseFeedbacks.get(i).getFeedBackType().getDescription()
 							.equals(feedbackTypes.get(j).getDescription())) {
 
 						variables.put(feedbackTypes.get(j).getDescription(), "true");
-						
+
 					}
 
 				}
 
 			}
-			
+
 			if (variables.size() > 0) {
 
-				if (((variables.get("coevaluacion")!= null) && (variables.get("coevaluacion").equals("true")))
-						&& ((variables.get("opinion del coordinador")!=null) && (variables.get("opinion del coordinador").equals("true")))) {
+				if (((variables.get("coevaluacion") != null) && (variables.get("coevaluacion").equals("true")))
+						&& ((variables.get("opinion del coordinador") != null)
+								&& (variables.get("opinion del coordinador").equals("true")))) {
 					variables.put("resumen de visita", "false");
-					
+
 				} else {
 
-					if (((variables.get("coevaluacion")!= null) && (variables.get("coevaluacion").equals("true")))) {
+					if (((variables.get("coevaluacion") != null) && (variables.get("coevaluacion").equals("true")))) {
 						variables.put("opinion del coordinador", "false");
 						variables.put("resumen de visita", "false");
 					}
 
-					if (((variables.get("opinion del coordinador") !=null) && (variables.get("opinion del coordinador").equals("true")))) {
+					if (((variables.get("opinion del coordinador") != null)
+							&& (variables.get("opinion del coordinador").equals("true")))) {
 						variables.put("coevaluacion", "false");
 						variables.put("resumen de visita", "false");
 					}
 
 				}
 
-			} if (variables.size() == 0) {
+			}
+			if (variables.size() == 0) {
 				variables.put("coevaluacion", "false");
 				variables.put("resumen de visita", "false");
 				variables.put("opinion del coordinador", "false");
@@ -277,7 +278,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		return jsonResponse;
 	}
-	
 
 	@Transactional
 	@Override
@@ -286,7 +286,6 @@ public class CourseBoImpl implements CourseBoInterface {
 		try {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
-
 
 			if (bindingResult.hasErrors()) {
 
@@ -337,8 +336,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 					errorMessage += "\n - El curso que se quiere registrar ya existe";
 
-					
-
 				}
 
 				if (jsonResponse.getErrorMessage() == null) {
@@ -387,32 +384,27 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
 
-			// if (bindingResult.hasErrors()) {
-			//
-			// Map<String, String> errorMessages =
-			// bindingResult.getFieldErrors().stream()
-			// .collect(Collectors.toMap(FieldError::getField,
-			// FieldError::getDefaultMessage));
-			//
-			// jsonResponse.setErrorMessages(errorMessages);
-			//
-			// jsonResponse.setIsValid(false);
-			//
-			// } else {
-			//
-			// teacherBean.setTeacherStatus("1");
-			//
-			// TeacherEntity teacherEntity =
-			// TeacherConverter.ConvertToEntity(teacherBean);
-			//
-			// teacherDaoInterface.create(teacherEntity);
-			//
-			// jsonResponse.setIsValid(true);
-			//
-			// jsonResponse.setSuccessMessage("El docente ha sido guardado con
-			// exito");
-			//
-			// }
+			if (bindingResult.hasErrors()) {
+
+				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+
+				jsonResponse.setErrorMessages(errorMessages);
+
+				jsonResponse.setIsValid(false);
+
+			} else {
+
+
+				CourseEntity teacherEntity = CourseConverter.ConvertToEntity2(courseBean);
+
+				courseDaoInterface.create(teacherEntity);
+
+				jsonResponse.setIsValid(true);
+
+				jsonResponse.setSuccessMessage("El curso ha sido modificado con exito");
+
+			}
 
 			return jsonResponse;
 
@@ -439,21 +431,22 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			List<CourseFeedbackEntity> courseFeedbacks = courseFeedbackDaoInterface
 					.findByCourseId(Integer.parseInt(courseBean.getCourseId()));
-			
+
 			jsonResponse.setIsValid(true);
-			
+
 			if (courseFeedbacks.size() == 0) {
-				
+
 				CourseEntity courseEntity = new CourseEntity(Integer.parseInt(courseBean.getCourseId()));
-				
+
 				courseDaoJpaRepository.delete(courseEntity);
-				
+
 				jsonResponse.setSuccessMessage("El curso ha sido eliminado con exito");
-				
+
 			} else {
-			
-			jsonResponse.setErrorMessage("El curso no se puede eliminar porque ya tiene retroalimentaciones asociadas");
-			
+
+				jsonResponse
+						.setErrorMessage("El curso no se puede eliminar porque ya tiene retroalimentaciones asociadas");
+
 			}
 
 			return jsonResponse;
@@ -482,7 +475,7 @@ public class CourseBoImpl implements CourseBoInterface {
 			jsonResponse.setIsValid(true);
 
 			List<CourseEntity> courseEntityList = courseDaoInterface.getCourses(courseBean);
-			
+
 			jsonResponse.setObjectEntityList(courseEntityList);
 			//
 			return jsonResponse;
@@ -963,7 +956,7 @@ public class CourseBoImpl implements CourseBoInterface {
 			if (isValidRow && !isFirstRow) {
 				// Insert
 				Iterator questions = questionValues.keySet().iterator();
-				while (questions.hasNext()){
+				while (questions.hasNext()) {
 					Integer questionId = (Integer) questions.next();
 					questionByPeriodEntity.setQuestion(new QuestionEntity(questionId));
 					questionByPeriodEntity.setPercentage(questionValues.get(questionId).intValue());
@@ -991,9 +984,8 @@ public class CourseBoImpl implements CourseBoInterface {
 	}
 
 	@Override
-	public Data getCompareView(CourseBean courseBean) {	
+	public Data getCompareView(CourseBean courseBean) {
 		return courseDaoInterface.getCompareView(courseBean);
 	}
-
 
 }

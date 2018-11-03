@@ -132,7 +132,7 @@ public class TeacherDaoImpl implements TeacherDaoInterface {
 		}
 		
 		if (!teacherBean.getName().equals("")){
-			if (!teacherBean.getSubjectSearch().equals(""))
+			if ((!teacherBean.getSubjectSearch().equals("")) || (!teacherBean.getTeacherId().equals("")))
 				sql += " and upper(name) like CONCAT('%',:name,'%')";	
 			else
 				sql += " where upper(name) like CONCAT('%',:name,'%')";

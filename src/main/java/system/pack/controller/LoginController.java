@@ -30,6 +30,9 @@ public class LoginController {
 			session.setAttribute("UserType", String.valueOf(user.getUserType()));
 			session.setAttribute("UserId", String.valueOf(user.getUserId()));
 		}
+		else{
+			return "login-error";
+		}
 		
 		return "redirect:/";
 
