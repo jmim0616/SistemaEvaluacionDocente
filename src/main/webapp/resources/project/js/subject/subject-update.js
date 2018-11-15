@@ -50,7 +50,19 @@ function tagingAcademicPrograms() {
 	tagify.on('add', function(e) {
 
 		arrayAcademicProgramsAdded.push(e.detail.value);
+		
+		$('#academicProgramUpdateError').text('');
 	});
+	
+	tagify.on('invalid', function(e){
+		var invalidAcademicProgram = e.detail.value;
+		
+	$('#academicProgramUpdateError').text('El programa académico ' + invalidAcademicProgram + 
+	' no se encuentra registrado, por favor registrelo para'
+      + ' poder asociarlo con una asignatura');
+		
+	});
+	
 
 }
 
@@ -102,6 +114,7 @@ function ajaxSearchAcademicPrograms() {
 
 function ajaxUpdateSubject() {
 
+	$('#subjectIdUpdateError').text('');
 	$('#disciplinaryAreaUpdateError').text('');
 	$('#nameUpdateError').text('');
 	$('#numberOfCreditsUpdateError').text('');

@@ -24,9 +24,22 @@
 
 	<form:form id="formUpdateSubject" modelAttribute="subject">
 
-		<form:hidden path="subjectId" id="subjectIdUpdate" />
-
 		<table>
+		
+				<tr>
+
+				<td>
+
+					<fieldset>
+						<form:label path="subjectId">Código de la Asignatura<a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:input path="subjectId" type="text" id="subjectIdUpdate" disabled="true"/>
+						<label id="subjectIdUpdateError" class="validation-error"> </label>
+					</fieldset>
+
+				</td>
+
+
+			</tr>
 
 			<tr>
 

@@ -87,7 +87,10 @@ function ajaxUpdateCourse() {
 	var courseId = $('#courseIdUpdate').val();
 	var groupId = $('#groupIdUpdate').val();
 	var subject = $('#subjectUpdate').val();
-	var teacher = $('#teacherUpdate').val();
+	var teacherComplete = $('#teacherUpdate').val();
+	var teacherIdName = teacherComplete.split(" - ");
+	var teacher = teacherIdName[0];
+	$('#teacherUpdate').val(teacher);
 	var academicPeriod = $('#academicPeriodUpdate').val();
 	var isVirtual = $('#isVirtualUpdate option:selected').text();
 

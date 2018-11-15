@@ -36,16 +36,16 @@ function setDates() {
 
 	$("#initialDateCreate").datepicker({
 		minDate : new Date(year, 0, 1),
-		maxDate : new Date(year, 11, 31),
+		maxDate : new Date(year+1, 11, 31),
 		dateFormat : 'yy-mm-dd'
 	});
 
 	$("#endDateCreate").datepicker({
 		minDate : new Date(year, 0, 1),
-		maxDate : new Date(year, 11, 31),
+		maxDate : new Date(year+1, 11, 31),
 		dateFormat : 'yy-mm-dd'
 	});
-
+	
 	$(function() {
 		$.datepicker.setDefaults($.datepicker.regional["es"]);
 		$("#nameCreate1").datepicker({

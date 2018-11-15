@@ -211,7 +211,7 @@ function ajaxSearchSubjects() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+				arraySubjects.push(JSON.stringify(jsonResponse.objectEntityList[key].subjectId));
 
 			});
 
@@ -260,8 +260,7 @@ function ajaxSearchTeachers() {
 									function(key, value) {
 
 										arrayTeachers
-												.push(JSON
-														.stringify(jsonResponse.objectEntityList[key].teacherId));
+												.push(JSON.stringify(jsonResponse.objectEntityList[key].teacherId) + " - " + jsonResponse.objectEntityList[key].name + " " + jsonResponse.objectEntityList[key].lastName);
 
 									});
 

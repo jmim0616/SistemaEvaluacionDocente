@@ -113,7 +113,8 @@ function ajaxSearchSubject() {
 	var name = $('#nameSearch').val();
 
 	var json = {
-		"name" : name
+		"name" : name,
+		"subjectId" : "1"
 	};
 
 	$.ajax({

@@ -19,7 +19,7 @@ public class CourseBean {
 	
 	private String courseId;
 	
-	@Pattern(regexp = "^[0-9]{4}\\-[0-9]{1}", message = "El campo \"Periodo Academico\" no cumple el formato adecuado. Ej: 2018-1")
+	@Pattern(regexp = "^[0-9]{4}\\-[0-9]{1}", message = "El campo \"Periodo Académico\" no cumple el formato adecuado. Ej: 2018-1")
 	private String academicPeriod;
 	
 	@NotEmpty(message = "El campo \"Profesor\" es requerido")
@@ -27,6 +27,7 @@ public class CourseBean {
 	private String teacher;
 	
 	@NotEmpty(message = "El campo \"Asignatura\" es requerido")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Asignatura\" solo se permiten numeros")
 	private String subject;
 
 	@NotEmpty(message = "El campo \"Identificador de Grupo\" es requerido")

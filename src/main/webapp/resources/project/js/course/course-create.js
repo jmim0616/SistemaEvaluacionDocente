@@ -88,7 +88,10 @@ function ajaxCreateCourse() {
 
 	var groupId = $('#groupIdCreate').val();
 	var subject = $('#subjectCreate').val();
-	var teacher = $('#teacherCreate').val();
+	var teacherComplete = $('#teacherCreate').val();
+	var teacherIdName = teacherComplete.split(" - ");
+	var teacher = teacherIdName[0];
+	$('#teacherCreate').val(teacher);
 	var academicPeriod = $('#academicPeriodCreate').val();
 	var isVirtual = $('#isVirtualCreate option:selected').val();
 

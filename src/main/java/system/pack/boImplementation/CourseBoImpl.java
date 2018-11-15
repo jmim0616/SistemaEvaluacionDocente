@@ -221,9 +221,9 @@ public class CourseBoImpl implements CourseBoInterface {
 
 		if (courseFeedbacks.size() == 0) {
 
-			variables.put("coevaluacion", "false");
+			variables.put("coevaluación", "false");
 			variables.put("resumen de visita", "false");
-			variables.put("opinion del coordinador", "false");
+			variables.put("opinión del coordinador", "false");
 
 		} else {
 			
@@ -250,28 +250,28 @@ public class CourseBoImpl implements CourseBoInterface {
 			
 			if (variables.size() > 0) {
 
-				if (((variables.get("coevaluacion")!= null) && (variables.get("coevaluacion").equals("true")))
-						&& ((variables.get("opinion del coordinador")!=null) && (variables.get("opinion del coordinador").equals("true")))) {
+				if (((variables.get("coevaluación")!= null) && (variables.get("coevaluación").equals("true")))
+						&& ((variables.get("opinión del coordinador")!=null) && (variables.get("opinión del coordinador").equals("true")))) {
 					variables.put("resumen de visita", "false");
 					
 				} else {
 
-					if (((variables.get("coevaluacion")!= null) && (variables.get("coevaluacion").equals("true")))) {
-						variables.put("opinion del coordinador", "false");
+					if (((variables.get("coevaluación")!= null) && (variables.get("coevaluación").equals("true")))) {
+						variables.put("opinión del coordinador", "false");
 						variables.put("resumen de visita", "false");
 					}
 
-					if (((variables.get("opinion del coordinador") !=null) && (variables.get("opinion del coordinador").equals("true")))) {
-						variables.put("coevaluacion", "false");
+					if (((variables.get("opinión del coordinador") !=null) && (variables.get("opinión del coordinador").equals("true")))) {
+						variables.put("coevaluación", "false");
 						variables.put("resumen de visita", "false");
 					}
 
 				}
 
 			} if (variables.size() == 0) {
-				variables.put("coevaluacion", "false");
+				variables.put("coevaluación", "false");
 				variables.put("resumen de visita", "false");
-				variables.put("opinion del coordinador", "false");
+				variables.put("opinión del coordinador", "false");
 			}
 
 		}
@@ -306,7 +306,7 @@ public class CourseBoImpl implements CourseBoInterface {
 
 				Optional<CourseEntity> course = courseDaoJpaRepository
 						.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
-				Optional<SubjectEntity> subject = subjectDaoInterface.findByName(courseBean.getSubject());
+				Optional<SubjectEntity> subject = subjectDaoInterface.findByIdOptional(Integer.parseInt(courseBean.getSubject()));
 				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
 						.findById(Integer.parseInt(courseBean.getTeacher()));
 				Optional<AcademicPeriodEntity> academicPeriod = academicPeriodDaoInterface
@@ -399,7 +399,7 @@ public class CourseBoImpl implements CourseBoInterface {
  				jsonResponse.setIsValid(true);
  				Optional<CourseEntity> course = courseDaoJpaRepository
 						.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
-				Optional<SubjectEntity> subject = subjectDaoInterface.findByName(courseBean.getSubject());
+ 				Optional<SubjectEntity> subject = subjectDaoInterface.findByIdOptional(Integer.parseInt(courseBean.getSubject()));
 				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
 						.findById(Integer.parseInt(courseBean.getTeacher()));
 				Optional<AcademicPeriodEntity> academicPeriod = academicPeriodDaoInterface

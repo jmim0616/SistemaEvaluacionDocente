@@ -37,13 +37,13 @@ function setDates() {
 
 	$("#initialDateUpdate").datepicker({
 		minDate : new Date(year, 0, 1),
-		maxDate : new Date(year, 11, 31),
+		maxDate : new Date(year+1, 11, 31),
 		dateFormat : 'yy-mm-dd'
 	});
 
 	$("#endDateUpdate").datepicker({
 		minDate : new Date(year, 0, 1),
-		maxDate : new Date(year, 11, 31),
+		maxDate : new Date(year+1, 11, 31),
 		dateFormat : 'yy-mm-dd'
 	});
 
