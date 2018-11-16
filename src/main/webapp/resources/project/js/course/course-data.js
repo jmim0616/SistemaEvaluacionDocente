@@ -5,6 +5,23 @@ var tableIdClicked = null;
 var classTdTableClicked = null;
 
 function initCourseData() {
+	
+	
+	$('.data').on('click', '.standard-table tr', function (e) {
+		
+		
+		   if ($(this).hasClass("not")) {
+				
+			   
+		      } else {
+		    	  
+				   $("#"+tableIdClicked).find("tr").removeClass("active-tr");
+				   
+				   $(this).addClass('active-tr');
+		    	  
+		      }
+		
+		});
 
 	obtainValuesTdSearch();
 
@@ -165,8 +182,7 @@ function ajaxSearchCourseFeedbackOfCourse() {
 
 	console.log(json);
 
-			$
-					.ajax({
+			$.ajax({
 						url : './Courses/Feedbacks',
 						data : JSON.stringify(json),
 						contentType : "application/json",
@@ -192,8 +208,8 @@ function ajaxSearchCourseFeedbackOfCourse() {
 							if (jsonResponse.isValid) {
 	
 								if (jsonResponse.errorMessage != null) {
-	
-									$('#tableCourseFeedbackData').show().fadeOut('slow');
+
+									$('#tableCourseFeedbackData .fila').remove();
 	
 									$('.error .message')
 											.text(jsonResponse.errorMessage);
@@ -201,19 +217,18 @@ function ajaxSearchCourseFeedbackOfCourse() {
 									$('.error').show().fadeIn('slow');
 	
 								} else {
-	
 									
-    	
-    	$("#tableCourseFeedbackData tr").remove();
-    
-    	$("#tableCourseFeedbackData").append(
-    			'<thead>' + '<tr class="not">'
-    					+ '<th>Codigo de la Retroalimentacion</th>'
-    					+ '<th>Tipo de Retroalimentacion</th>'
-    					+ '<th>Comentario</th>' + '<th>Usuario</th>'
-    					+ '<th>Fecha de Modificacion</th>'
-    					+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
-    					+ '</tr>' + '</thead>');
+									$("#tableCourseFeedbackData tr").remove(); 
+									
+									$("#tableCourseFeedbackData").append(
+											'<thead>' + '<tr class="not">'
+													+ '<th>Codigo de la Retroalimentacion</th>'
+													+ '<th>Tipo de Retroalimentacion</th>'
+													+ '<th>Comentario</th>' + '<th>Usuario</th>'
+													+ '<th>Fecha de Modificacion</th>'
+													+ '<th>Puntuacion Promedio</th>' + '<th>Acciones</th>'
+													+ '</tr>' + '</thead>');
+	
   
 	                                 var buttonUpdateCourseFeedback = null;
 	
@@ -221,7 +236,10 @@ function ajaxSearchCourseFeedbackOfCourse() {
 														
 														if (!(jsonResponse.objectEntityList[key].feedBackType.description == "encuenta web")) {
 															
-															buttonUpdateCourseFeedback = "<td>"
+															buttonUpdateCourseFeedback = 
+																  "<td>"
+																+ "</td>" 
+																+  "<td>"
 																+ '<div class="actions"> '
 																+ '<a class="button edit-button buttonUpdateCourseFeedbackToolbar">'
 																+ '<ion-icon name="create"></ion-icon>'
@@ -229,10 +247,14 @@ function ajaxSearchCourseFeedbackOfCourse() {
 																+ '</div>'
 																+ '</td> ';
 														}
+														
+														var date = new Date(jsonResponse.objectEntityList[key].lastModifiedDate).toLocaleString();
+														
+														console.log ("date " + date);
 	
 														$("#tableCourseFeedbackData")
 																.append(
-																		"<tr>"
+																		"<tr class='fila' >"
 																				+ "<td>"
 																				+ jsonResponse.objectEntityList[key].courseFeedBackId
 																				+ "</td> "
@@ -246,7 +268,7 @@ function ajaxSearchCourseFeedbackOfCourse() {
 																				+ jsonResponse.objectEntityList[key].user.mask
 																				+ "</td> "
 																				+ "<td>"
-																				+ jsonResponse.objectEntityList[key].lastModifiedDate
+																				+ date
 																				+ "</td> "
 																				+buttonUpdateCourseFeedback
 																				+ "</tr>");

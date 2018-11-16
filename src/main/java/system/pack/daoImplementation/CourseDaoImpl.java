@@ -1,6 +1,8 @@
 package system.pack.daoImplementation;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -301,7 +303,10 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		String sql = "select * from coursefeedbacks where courseId = :courseId";
 		Query query = entityManager.createNativeQuery(sql, CourseFeedbackEntity.class);
 		query.setParameter("courseId", courseBean.getCourseId());
-		return query.getResultList();
+		List<CourseFeedbackEntity> list = query.getResultList();
+
+		System.out.println("Step on");
+		return list;
 	}
 
 	@Override

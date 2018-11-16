@@ -7,9 +7,9 @@
 
 <div class="updateAcademicPeriod">
 
-	<h2>PERIODOS ACADEMICOS</h2>
+	<h2>PERIODOS ACADÉMICOS</h2>
 
-	<h3>Modificar Periodo Academico</h3>
+	<h3>Modificar Periodo Académico</h3>
 	
 			<br>
 	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
@@ -71,7 +71,7 @@
 
 
 		<input id="buttonUpdateAcademicPeriod" class="button edit-button"
-			type="submit" value="Modificar Periodo Academico" />
+			type="submit" value="Modificar Periodo Académico" />
 
 	</form:form>
 

@@ -6,9 +6,9 @@
 
 <div class="createAcademicPeriod">
 
-	<h2>PERIODOS ACADEMICOS</h2>
+	<h2>PERIODOS ACADÉMICOS</h2>
 
-	<h3>Registrar Periodo Academico</h3>
+	<h3>Registrar Periodo Académico</h3>
 	
 		<br>
 	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
@@ -66,7 +66,7 @@
 		</table>
 
 		<input id="buttonCreateAcademicPeriod" class="button add-button"
-			type="submit" value="Registrar Periodo Academico" />
+			type="submit" value="Registrar Periodo Académico" />
 
 	</form:form>
 

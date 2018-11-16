@@ -23,23 +23,22 @@
 
 				<td>
 					<fieldset class="row">
-						<form:label path="teacherId">Documento de Identificacion <a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:label path="teacherId">Documento de Identificación <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="teacherId" type="text" id="teacherIdCreate" />
-						<label id="teacherIdCreateError" class="validation-error">
-						</label>
+						<label id="teacherIdCreateError" class="validation-error-form"></label>
 					</fieldset>
 				</td>
 
 				<td>
 
 					<fieldset>
-						<form:label path="identificationType">Tipo de identificacion <a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:label path="identificationType">Tipo de identificación <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:select path="identificationType"
 							id="identificationTypeCreate">
-							<option value="1">Cedula de Ciudadania</option>
-							<option value="2">Cedula de Extranjeria</option>
+							<option value="1">Cédula de Ciudadanía</option>
+							<option value="2">Cédula de Extranjería</option>
 						</form:select>
-						<label id="identificationTypeCreateError" class="validation-error"></label>
+						<label id="identificationTypeCreateError" class="validation-error-form" style="color: white;"></label>
 					</fieldset>
 
 				</td>
@@ -51,11 +50,11 @@
 			<tr>
 
 				<td>
-
+					
 					<fieldset>
 						<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="name" type="text" id="nameCreate" />
-						<label id="nameCreateError" class="validation-error"> </label>
+						<label id="nameCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -65,8 +64,7 @@
 					<fieldset>
 						<form:label path="lastName">Apellido <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="lastName" type="text" id="lastNameCreate" />
-						<label id="lastNameCreateError" class="validation-error">
-						</label>
+						<label id="lastNameCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -77,10 +75,9 @@
 				<td>
 
 					<fieldset>
-						<form:label path="underDegree">Titulo de Profesional <a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:label path="underDegree">Título de Profesional <a style="color: red;"><strong>*</strong></a> </form:label>
 						<form:input path="underDegree" type="text" id="underDegreeCreate" />
-						<label id="underDegreeCreateError" class="validation-error">
-						</label>
+						<label id="underDegreeCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 
@@ -90,11 +87,10 @@
 				<td>
 
 					<fieldset>
-						<form:label path="masterDegree">Titulo de Maestria</form:label>
+						<form:label path="masterDegree">Título de Maestría</form:label>
 						<form:input path="masterDegree" type="text"
 							id="masterDegreeCreate" />
-						<label id="masterDegreeCreateError" class="validation-error">
-						</label>
+						<label id="masterDegreeCreateError" class="validation-error-form" style="color: white;"></label>
 					</fieldset>
 
 				</td>
@@ -106,11 +102,10 @@
 
 
 					<fieldset>
-						<form:label path="doctorDegree">Titulo de Doctorado</form:label>
+						<form:label path="doctorDegree">Título de Doctorado</form:label>
 						<form:input path="doctorDegree" type="text"
 							id="doctorDegreeCreate" />
-						<label id="doctorDegreeCreateError" class="validation-error">
-						</label>
+						<label id="doctorDegreeCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -118,11 +113,10 @@
 				<td>
 
 					<fieldset>
-						<form:label path="institutionalMail">Correo Electronico Institucional</form:label>
+						<form:label path="institutionalMail">Correo Electrónico Institucional</form:label>
 						<form:input path="institutionalMail" type="text"
 							id="institutionalMailCreate" />
-						<label id="institutionalMailCreateError" class="validation-error">
-						</label>
+						<label id="institutionalMailCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -133,11 +127,10 @@
 				<td>
 
 					<fieldset>
-						<form:label path="personalMail">Correo Electronico Personal</form:label>
+						<form:label path="personalMail">Correo Electrónico Personal</form:label>
 						<form:input path="personalMail" type="text"
 							id="personalMailCreate" />
-						<label id="personalMailCreateError" class="validation-error">
-						</label>
+						<label id="personalMailCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -145,10 +138,9 @@
 				<td>
 
 					<fieldset>
-						<form:label path="cellNumber">Telefono Celular</form:label>
+						<form:label path="cellNumber">Teléfono Celular</form:label>
 						<form:input path="cellNumber" type="text" id="cellNumberCreate" />
-						<label id="cellNumberCreateError" class="validation-error">
-						</label>
+						<label id="cellNumberCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 
@@ -159,10 +151,9 @@
 			<tr>
 				<td>
 					<fieldset>
-						<form:label path="homeNumber">Telefono Fijo</form:label>
+						<form:label path="homeNumber">Teléfono Fijo</form:label>
 						<form:input path="homeNumber" type="text" id="homeNumberCreate" />
-						<label id="homeNumberCreateError" class="validation-error">
-						</label>
+						<label id="homeNumberCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -171,8 +162,7 @@
 					<fieldset>
 						<form:label path="experience">Experiencia</form:label>
 						<form:textarea path="experience" id="experienceCreate" />
-						<label id="experienceCreateError" class="validation-error">
-						</label>
+						<label id="experienceCreateError" class="validation-error-form"></1>
 					</fieldset>
 				</td>
 

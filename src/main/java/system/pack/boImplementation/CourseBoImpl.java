@@ -8,7 +8,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLDataException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -37,6 +39,7 @@ import system.pack.bointerface.CourseBoInterface;
 
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.CourseConverter;
+import system.pack.converter.CourseFeedbackConverter;
 import system.pack.converter.TeacherConverter;
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.daoInterface.AcademicPeriodDaoJpaRepository;
@@ -128,6 +131,7 @@ public class CourseBoImpl implements CourseBoInterface {
 	private final String FILE_NAME = "courses";
 	private final String FILE_FEEDBACK_NAME = "feedback";
 
+	@Transactional
 	@Override
 	public JsonResponse<CourseFeedbackBean, CourseFeedbackEntity> getFeedBacksByCourse(CourseBean courseBean) {
 		List<CourseFeedbackEntity> feedBacks = courseDaoInterface.getFeedBacksByCourse(courseBean);
@@ -388,22 +392,45 @@ public class CourseBoImpl implements CourseBoInterface {
 
 				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
 						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
-
 				jsonResponse.setErrorMessages(errorMessages);
-
 				jsonResponse.setIsValid(false);
-
 			} else {
-
-
-				CourseEntity teacherEntity = CourseConverter.ConvertToEntity2(courseBean);
-
-				courseDaoInterface.create(teacherEntity);
-
 				jsonResponse.setIsValid(true);
-
-				jsonResponse.setSuccessMessage("El curso ha sido modificado con exito");
-
+				CourseEntity course = courseDaoJpaRepository.findById(Integer.parseInt(courseBean.getCourseId()));
+				Optional<SubjectEntity> subject = subjectDaoInterface.findByName(courseBean.getSubject());
+				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
+						.findById(Integer.parseInt(courseBean.getTeacher()));
+				Optional<AcademicPeriodEntity> academicPeriod = academicPeriodDaoInterface
+						.findByName(courseBean.getAcademicPeriod());
+				String errorMessage = "";
+				if (!subject.isPresent()) {
+					errorMessage = " - El registro de la asignatura no se encuentra en el sistema \n intente con otra asignatura, o cree una nueva.";
+					jsonResponse.setErrorMessage(errorMessage);
+				}
+				if (!teacher.isPresent()) {
+					errorMessage += "\n - El registro del profesor no se encuentra en el sistema \n intente con otro profesor, o cree uno nuevo.";
+					jsonResponse.setErrorMessage(errorMessage);
+				}
+				if (!academicPeriod.isPresent()) {
+					errorMessage += "\n - El registro del periodo académico no se encuentra en el sistema \n intente con otro periodo académico, o cree uno nuevo.";
+					jsonResponse.setErrorMessage(errorMessage);
+				}
+				if (course.getCourseId() != Integer.parseInt(courseBean.getCourseId())) {
+					errorMessage += "\n - El curso que se quiere modificar ya existe";
+					jsonResponse.setErrorMessage(errorMessage);
+				}
+				if (jsonResponse.getErrorMessage() == null) {
+					courseBean.setSubject(Integer.toString(subject.get().getSubjectId()));
+					courseBean.setAcademicPeriod(Integer.toString(academicPeriod.get().getAcademicPeriodId()));
+					if (courseBean.getIsVirtual().equals("Si")) {
+						courseBean.setIsVirtual("S");
+					} else {
+						courseBean.setIsVirtual("N");
+					}
+					CourseEntity courseEntity = CourseConverter.ConvertToEntity2(courseBean);
+					courseDaoInterface.update(courseEntity);
+					jsonResponse.setSuccessMessage("El curso ha sido guardado con exito");
+				}
 			}
 
 			return jsonResponse;
@@ -412,8 +439,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-
-			// throw new RuntimeException("");
 
 			return null;
 
@@ -495,11 +520,49 @@ public class CourseBoImpl implements CourseBoInterface {
 
 	@Transactional
 	public JsonResponse<CourseBean, CourseEntity> addCourseFeedback(CourseFeedbackBean courseFeedbackBean,
-			BindingResult bindingResult) {
+			BindingResult bindingResult, HttpSession session) {
 
 		try {
 
-			return null;
+			JsonResponse<CourseBean, CourseEntity> jsonResponse = new JsonResponse<CourseBean, CourseEntity>();
+
+			if (bindingResult.hasErrors()) {
+
+				Map<String, String> errorMessages = bindingResult.getFieldErrors().stream()
+						.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+
+				jsonResponse.setErrorMessages(errorMessages);
+
+				jsonResponse.setIsValid(false);
+
+			} else {
+
+				jsonResponse.setIsValid(true);
+
+				FeedbackTypeEntity feedbackTypeEntity = feedbackTypeDaoJpaRepository
+						.findByDescription(courseFeedbackBean.getFeedBackType());
+
+				System.out.println("feedbackTypeEntity " + feedbackTypeEntity);
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String creationDate = sdf.format(new Date());
+				String lastModifiedDate = sdf.format(new Date());
+
+				courseFeedbackBean.setFeedBackType(Integer.toString(feedbackTypeEntity.getFeedBackTypeId()));
+				courseFeedbackBean.setUser(session.getAttribute("UserId").toString());
+				courseFeedbackBean.setCreationDate(creationDate);
+				courseFeedbackBean.setLastModifiedDate(lastModifiedDate);
+
+				CourseFeedbackEntity courseFeedbackEntity = CourseFeedbackConverter
+						.ConvertToEntity1(courseFeedbackBean);
+
+				courseFeedbackDaoJpaRepository.save(courseFeedbackEntity);
+
+				jsonResponse.setSuccessMessage("La retroalimentacion del curso ha sido guardada con exito");
+
+			}
+
+			return jsonResponse;
 
 		} catch (Exception e) {
 
@@ -560,7 +623,7 @@ public class CourseBoImpl implements CourseBoInterface {
 		String result = "";
 
 		try {
-			excelHelper.createFile(file, FILE_FEEDBACK_NAME);
+			excelHelper.createFile(file, FILE_NAME);
 			result = createCourseFromExcel();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -702,6 +765,15 @@ public class CourseBoImpl implements CourseBoInterface {
 						break inner_loop;
 					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
 						courseEntity.setGroupId(((int) cell.getNumericCellValue()));
+						int courseId = questionByPeriodDaoInterface.getCourseId(courseEntity.getSubject().getSubjectId(),
+								courseEntity.getGroupId(), courseEntity.getTeacher().getTeacherId(),
+								courseEntity.getAcademicPeriod().getAcademicPeriodId());
+						if (courseId == 0){
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "Ya existe un curso con las mismas características en el periodo académico.";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
 				}
 				// Indicador si es virtual
@@ -721,7 +793,7 @@ public class CourseBoImpl implements CourseBoInterface {
 						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 								+ "El valor ingresado para indicar si la asignatura es virtual o no es inválido.";
 					}
-				}
+				} 
 
 				position++;
 			}
@@ -974,13 +1046,6 @@ public class CourseBoImpl implements CourseBoInterface {
 		System.out.println(errorMessage);
 
 		return errorMessage;
-	}
-
-	@Override
-	public JsonResponse addCourseFeedback(CourseFeedbackBean courseFeedbackBean, BindingResult bindingResult,
-			HttpSession session) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

@@ -38,13 +38,12 @@
 					<li><a id="subjects" href="#">Asignaturas</a></li>
 					<li><a id="courses" href="#">Cursos</a></li>
 					<li><a id="faculties" href="./Faculties">Facultades</a></li>
-					<li><a id="disciplinaryAreas" href="./DisciplinaryAreas">Areas
+					<li><a id="disciplinaryAreas" href="./DisciplinaryAreas">Áreas
 							Disciplinarias</a></li>
 					<li><a id="academicPrograms" href="./AcademicPrograms">Programas
-							Academicos</a></li>
+							Académicos</a></li>
 					<li><a id="departments" href="#">Departamentos</a></li>
-					<li><a id="academicPeriods" href="#">Periodos Academicos</a></li>
-					<li><a id="users" href="#">Usuarios</a></li>
+					<li><a id="academicPeriods" href="#">Periodos Académicos</a></li>
 				</ul>
             
             </nav>

@@ -137,9 +137,9 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				Optional<TeacherEntity> teacher = teacherDaoInterface.findByName(teacherBean.getName());
+				TeacherEntity teacher = teacherDaoInterface.findById(Integer.parseInt(teacherBean.getTeacherId()));
 
-				if (teacher.isPresent()) {
+				if (teacher != null) {
 
 					jsonResponse.setErrorMessage("El docente que se quiere registrar ya existe");
 
@@ -435,6 +435,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 		return result;
 	}
 
+	@Transactional
 	private String createTeacherFromExcel() throws IOException {
 
 		File excel = new File(new Constants().FILE_SAVING_ROUTE + FILE_NAME + ".xlsx");
@@ -644,11 +645,15 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 			if (isValidRow) {
 
-				// Insert
-				TeacherStatusEntity teacherStatusEntity = new TeacherStatusEntity();
-				teacherStatusEntity.setTeacherStatusId(1);
-				teacherEntity.setTeacherStatus(teacherStatusEntity);
-				teacherDaoInterface.create(teacherEntity);
+				try {
+					// Insert
+					TeacherStatusEntity teacherStatusEntity = new TeacherStatusEntity();
+					teacherStatusEntity.setTeacherStatusId(1);
+					teacherEntity.setTeacherStatus(teacherStatusEntity);
+					teacherDaoInterface.create(teacherEntity);
+				} catch (Exception e) {
+
+				}
 			}
 
 			row = rowIt.next();

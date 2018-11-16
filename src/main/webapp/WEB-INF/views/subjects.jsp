@@ -21,7 +21,7 @@
 
 				<li><a id="linkCreateSubject" href="#"> Registrar </a></li>
 
-				<li class="sub-menu"><a href="#"> Modificacion <i
+				<li class="sub-menu"><a href="#"> Búsqueda y modificación <i
 						class="icon-right"><ion-icon name="arrow-dropdown"></ion-icon></i></a>
 
 					<ul class="sub-menu-content">

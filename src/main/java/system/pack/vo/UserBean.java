@@ -43,8 +43,7 @@ public class UserBean {
 	}
 
 	public UserBean(int userId, String mask, String password, String institutionalMail, String personalMail,
-			String name, String jobPosition) {
-
+			String name, String jobPosition, int status, int userType) {
 		this.userId = userId;
 		this.mask = mask;
 		this.password = password;
@@ -52,6 +51,8 @@ public class UserBean {
 		this.personalMail = personalMail;
 		this.name = name;
 		this.jobPosition = jobPosition;
+		this.status = status;
+		this.userType = userType;
 	}
 
 	public UserBean(int userId) {
@@ -144,7 +145,7 @@ public class UserBean {
 	public String toString() {
 		return "UserBean [userId=" + userId + ", mask=" + mask + ", password=" + password + ", institutionalMail="
 				+ institutionalMail + ", personalMail=" + personalMail + ", name=" + name + ", jobPosition="
-				+ jobPosition + "]";
+				+ jobPosition + ", status=" + status + ", userType=" + userType + "]";
 	}
 	
 }

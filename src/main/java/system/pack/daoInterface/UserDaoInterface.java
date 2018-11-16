@@ -15,4 +15,6 @@ public interface UserDaoInterface {
 	public List<UserEntity> getAll();
 
 	public void update(UserEntity userEntity);
+
+	public boolean verifyIfUserExist(String mask);
 }

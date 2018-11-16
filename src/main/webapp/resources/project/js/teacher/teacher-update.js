@@ -135,7 +135,7 @@ function ajaxUpdateTeacher() {
 				}
 
 			} else {
-
+				
 				$.each(jsonResponse.errorMessages, function(key, value) {
 
 					$("#" + key + "UpdateError").text(value);

@@ -43,7 +43,7 @@
 
 
 
-					<li class="sub-menu"><a href="#"> Modificacion <i
+					<li class="sub-menu"><a href="#"> Búsqueda y modificación <i
 							class="icon-right"><ion-icon name="arrow-dropdown"></ion-icon></i></a>
 
 						<ul class="sub-menu-content">
@@ -53,29 +53,25 @@
 								<fieldset>
 									<form:label path="groupId">Identificador de Grupo</form:label>
 									<form:input path="groupId" type="text" id="groupIdSearch" />
-									<label id="groupIdSearchError" class="validation-error">
 									</label>
 								</fieldset>
 
 								<fieldset>
-									<form:label path="teacher">Identificacion del Docente</form:label>
+									<form:label path="teacher">Identificación del Docente</form:label>
 									<form:input path="teacher" type="text" id="teacherSearch" />
-									<label id="teacherSearchError" class="validation-error">
 									</label>
 								</fieldset>
 
 								<fieldset>
 									<form:label path="subject">Nombre de la Asignatura</form:label>
 									<form:input path="subject" type="text" id="subjectSearch" />
-									<label id="subjectSearchError" class="validation-error">
 									</label>
 								</fieldset>
 
 								<fieldset>
-									<form:label path="academicPeriod">Nombre del Periodo Academico</form:label>
+									<form:label path="academicPeriod">Nombre del Periodo Académico</form:label>
 									<form:input path="academicPeriod" type="text"
 										id="academicPeriodSearch" />
-									<label id="academicPeriodSearchError" class="validation-error">
 									</label>
 								</fieldset>
 

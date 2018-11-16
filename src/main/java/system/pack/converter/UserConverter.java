@@ -25,6 +25,7 @@ public class UserConverter {
 		userBean.setInstitutionalMail(userEntity.getInstitutionalMail());
 		userBean.setPersonalMail(userEntity.getPersonalMail());
 		userBean.setStatus(userEntity.getStatus());
+		userBean.setUserType(userEntity.getUserType());
 
 		
 		return userBean;
@@ -43,6 +44,7 @@ public class UserConverter {
 		userEntity.setInstitutionalMail(userBean.getInstitutionalMail());
 		userEntity.setPersonalMail(userBean.getPersonalMail());
 		userEntity.setStatus(userBean.getStatus());
+		userEntity.setUserType(userBean.getUserType());
 
 		return userEntity;
 

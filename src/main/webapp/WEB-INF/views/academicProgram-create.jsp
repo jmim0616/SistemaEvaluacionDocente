@@ -16,7 +16,7 @@
 
 		<section class="modalBody">
 
-			<h2 id="tittleModal">Registrar Programa Academico</h2>
+			<h2 id="tittleModal">Registrar Programa Académico</h2>
 			<div id="dialogModal">
 
 					<br>
@@ -63,7 +63,7 @@
 
 		<section class="modalFooter">
 			<input id="buttonCreateAcademicProgram" class="button add-button"
-				type="submit" value="Registrar Programa Academico" /> <input
+				type="submit" value="Registrar Programa Académico" /> <input
 				id="buttonCancel" class="button delete-button" type="submit" value="Cancelar" />
 		</section>
 		

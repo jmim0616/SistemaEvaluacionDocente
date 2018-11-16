@@ -20,11 +20,11 @@
 
 			<tr class="not">
 			
-				<th>Codigo</th>
-				<th>Area Disciplinaria</th>
+				<th>Código</th>
+				<th>Área Disciplinaria</th>
 				<th>Nombre</th>
-				<th>Numero de Creditos</th>
-				<th>Programas Academicos</th>
+				<th>Número de Créditos</th>
+				<th>Programas Académicos</th>
 				<th>Estado</th>
 				<th>Acciones</th>
 			</tr>

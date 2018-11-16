@@ -49,7 +49,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="teacher">Profesor <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:label path="teacher">Identificación del Profesor <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="teacher" type="text" id="teacherCreate" />
 										<label id="teacherCreateError" class="validation-error">
 										</label>
@@ -58,7 +58,7 @@
 
 								<td>
 									<fieldset>
-										<form:label path="academicPeriod">Periodo Academico <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:label path="academicPeriod">Periodo Académico <a style="color: red;"><strong>*</strong></a> </form:label>
 										<form:input path="academicPeriod" type="text"
 											id="academicPeriodCreate" />
 										<label id="academicPeriodCreateError" class="validation-error">

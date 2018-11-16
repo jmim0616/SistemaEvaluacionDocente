@@ -17,7 +17,7 @@
 
 				<section class="modalBody">
 
-					<h2 id="tittleModal">Modificar Programa Academico</h2>
+					<h2 id="tittleModal">Modificar Programa Académico</h2>
 					<div id="dialogModal">
 
 						<br> <label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios
@@ -69,7 +69,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonUpdateAcademicProgram" class="button edit-button"
-						type="submit" value="Modificar Programa Academico" /> <input
+						type="submit" value="Modificar Programa Académico" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

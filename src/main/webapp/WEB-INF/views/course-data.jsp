@@ -37,8 +37,8 @@
 
 			<tr class="not">
 
-				<th>Codigo</th>
-				<th>Periodo Academico</th>
+				<th>Código</th>
+				<th>Periodo Académico</th>
 				<th>Profesor</th>
 				<th>Asignatura</th>
 				<th>Identificador de Grupo</th>
@@ -74,12 +74,12 @@
 
 			<tr class="not">
 
-				<th>Codigo de la Retroalimentacion</th>
-				<th>Tipo de Retroalimentacion</th>
+				<th>Código de la Retroalimentación</th>
+				<th>Tipo de Retroalimentación</th>
 				<th>Comentario</th>
 				<th>Usuario</th>
-				<th>Fecha de Modificacion</th>
-				<th>Puntuacion Promedio</th>
+				<th>Fecha de Modificación</th>
+				<th>Puntuación Promedio</th>
 				<th>Acciones</th>
 			</tr>
 

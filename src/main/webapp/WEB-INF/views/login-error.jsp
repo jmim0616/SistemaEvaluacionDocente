@@ -35,7 +35,7 @@
 			 	<div class="logo-uao-login">
 			 		<img src="/SistemaEvaluacionDocente/resources/project/img/logo-uao.png" />
 			 	</div>
-				<form class="login100-form validate-form flex-sb flex-w" action="Login/login" method="POST">
+				<form class="login100-form validate-form flex-sb flex-w" action="login" method="POST">
 
 					
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">

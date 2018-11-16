@@ -38,13 +38,13 @@
 				<form class="login100-form validate-form flex-sb flex-w" action="Login/login" method="POST">
 
 					
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "El nombre de usuario es requerido">
 						<input class="input100" type="text" name="mask" placeholder="Usuario">
 						<span class="focus-input100"></span>
 					</div>
 					
 					
-					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+					<div class="wrap-input100 validate-input m-b-16" data-validate = "La contraseña es requerida">
 						<input class="input100" type="password" name="passwd" placeholder="Contraseña">
 						<span class="focus-input100"></span>
 					</div>

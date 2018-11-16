@@ -16,7 +16,7 @@ public class HomeController {
 	@GetMapping(value = "/")
 	public String showHomePage(Model model, HttpSession session) {
 		if (session.getAttribute("SessionId") != null){
-			
+			System.out.println("UserType " + session.getAttribute("UserType"));
 			if (session.getAttribute("UserType").equals("0")){
 				return "index-admin";
 			}

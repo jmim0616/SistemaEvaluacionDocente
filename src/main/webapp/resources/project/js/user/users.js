@@ -49,20 +49,20 @@ function ajaxSearchUser() {
 
 		} else {
 
-			$.each(jsonResponse.objectEntityList, function(key, value) {
+			$.each(jsonResponse.objectBeanList, function(key, value) {
 
-				if (jsonResponse.objectEntityList[key].jobPosition == 1){
-					jsonResponse.objectEntityList[key].jobPosition = "Jefe de departamento";
+				if (jsonResponse.objectBeanList[key].jobPosition == 1){
+					jsonResponse.objectBeanList[key].jobPosition = "Jefe de departamento";
 				}
 				else{
-					jsonResponse.objectEntityList[key].jobPosition = "Coordinador de área";
+					jsonResponse.objectBeanList[key].jobPosition = "Coordinador de área";
 				}
 				
-				if (jsonResponse.objectEntityList[key].status == 1){
-					jsonResponse.objectEntityList[key].status = "Activo";
+				if (jsonResponse.objectBeanList[key].status == 1){
+					jsonResponse.objectBeanList[key].status = "Activo";
 				}
 				else{
-					jsonResponse.objectEntityList[key].status = "Inactivo";
+					jsonResponse.objectBeanList[key].status = "Inactivo";
 				}
 				
 				
@@ -70,25 +70,25 @@ function ajaxSearchUser() {
 										.append(
 									"<tr>"
 										+ "<td>"
-										   + jsonResponse.objectEntityList[key].userId
+										   + jsonResponse.objectBeanList[key].userId
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].mask
+										   + jsonResponse.objectBeanList[key].mask
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].name
+										   + jsonResponse.objectBeanList[key].name
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].jobPosition
+										   + jsonResponse.objectBeanList[key].jobPosition
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].institutionalMail
+										   + jsonResponse.objectBeanList[key].institutionalMail
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].personalMail
+										   + jsonResponse.objectBeanList[key].personalMail
 										   + "</td> "
 										   + "<td>"
-										   + jsonResponse.objectEntityList[key].status
+										   + jsonResponse.objectBeanList[key].status
 										   + "</td> "
 										   + "<td>"
 										   + '<div class="actions"> '+
@@ -101,13 +101,13 @@ function ajaxSearchUser() {
 											  '</div>' 
 										   + "</td> "
 										   + "<td style=" + "display:none;" + ">"
-										   + jsonResponse.objectEntityList[key].password
+										   + jsonResponse.objectBeanList[key].password
 										   + "</td> "
 										   + "<td style=" + "display:none;" + ">"
-										   + jsonResponse.objectEntityList[key].userType
+										   + jsonResponse.objectBeanList[key].userType
 										   + "</td> "
 										   + "<td style=" + "display:none;" + ">"
-										   + jsonResponse.objectEntityList[key].jobPosition
+										   + jsonResponse.objectBeanList[key].jobPosition
 										   + "</td> "
 										   + "</tr>");
 

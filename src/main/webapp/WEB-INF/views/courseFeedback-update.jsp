@@ -19,7 +19,7 @@
 
 				<section class="modalBody">
 
-					<h2 id="tittleModal">Modificar Retroalimentacion</h2>
+					<h2 id="tittleModal">Modificar Retroalimentación</h2>
 					<div id="dialogModal">
 
 						<br> <label>Los campos marcados con asterisco (<a
@@ -32,7 +32,7 @@
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="feedBackType">Tipo de Retroalimentacion</form:label>
+										<form:label path="feedBackType">Tipo de Retroalimentación</form:label>
 										<form:label path="feedBackType" id="feedBackTypeUpdate"></form:label>
 									</fieldset>
 								</td>
@@ -58,7 +58,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonUpdateCourseFeedback" class="button edit-button"
-						type="submit" value="Modificar Retroalimentacion del Curso" /> <input
+						type="submit" value="Modificar Retroalimentación del Curso" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

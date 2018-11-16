@@ -55,10 +55,10 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 	@Override
 	public Optional<SubjectEntity> findByName(String name) {
 
-		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.name =:name",
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where upper(s.name) =:name",
 				SubjectEntity.class);
 
-		query.setParameter("name", name);
+		query.setParameter("name", name.toUpperCase());
 
 		Optional<SubjectEntity> subject = query.getResultList().stream().findFirst();
 

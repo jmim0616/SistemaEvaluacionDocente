@@ -61,20 +61,18 @@ public class UserEntity {
 			this.userId = userId;
 		}
 
-
-
-
-		public UserEntity(int userId, String mask,  String name, String jobPosition, String institutionalMail, String personalMail
-				) {
+		public UserEntity(int userId, String mask, String password, String institutionalMail, String personalMail,
+				int userType, int status, String name, String jobPosition) {
 			this.userId = userId;
 			this.mask = mask;
+			this.password = password;
 			this.institutionalMail = institutionalMail;
 			this.personalMail = personalMail;
+			this.userType = userType;
+			this.status = status;
 			this.name = name;
 			this.jobPosition = jobPosition;
 		}
-
-
 
 		public int getUserId() {
 			return userId;
@@ -162,6 +160,21 @@ public class UserEntity {
 		public void setStatus(int status) {
 			this.status = status;
 		}
+
+
+
+
+		@Override
+		public String toString() {
+			return "UserEntity [userId=" + userId + ", mask=" + mask + ", password=" + password + ", institutionalMail="
+					+ institutionalMail + ", personalMail=" + personalMail + ", userType=" + userType + ", status="
+					+ status + ", name=" + name + ", jobPosition=" + jobPosition + "]";
+		}
+
+
+
+		
+		
 		
 		
 }
