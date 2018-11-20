@@ -29,9 +29,9 @@
 						<form:form id="formSearchSubject" modelAttribute="subject">
 
 							<fieldset>
-								<form:label path="name">Nombre de la Asignatura</form:label>
-								<form:input path="name" type="text" id="nameSearch" />
-								<label id="nameSearchError" class="validation-error"> </label>
+								<form:label path="subjectId">Código de la Asignatura</form:label>
+								<form:input path="subjectId" type="text" id="subjectIdSearch" />
+								<label id="subjectIdSearchError" class="validation-error"> </label>
 							</fieldset>
 
 							<input id="buttonSearchSubject" class="button sent-button"

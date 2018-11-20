@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 function AutocompleteForSubjectsSearch() {
 
-	$("#nameSearch").autocomplete({
+	$("#subjectIdSearch").autocomplete({
 		source : arraySubjects
 	});
 
@@ -85,7 +85,7 @@ function ajaxSearchSubjects() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+				arraySubjects.push(JSON.stringify(jsonResponse.objectEntityList[key].subjectId));
 
 			});
 
@@ -108,13 +108,13 @@ function ajaxSearchSubjects() {
 
 function ajaxSearchSubject() {
 
-	$('#nameSearchError').text("");
+	$('#subjectIdSearchError').text("");
 
-	var name = $('#nameSearch').val();
+	var subjectId = $('#subjectIdSearch').val();
 
 	var json = {
-		"name" : name,
-		"subjectId" : "1"
+		"name" : "no aplica",
+		"subjectId" : subjectId
 	};
 
 	$.ajax({
