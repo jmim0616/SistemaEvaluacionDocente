@@ -55,7 +55,7 @@
 							</fieldset>
 
 							<fieldset>
-									<form:label path="subjectSearch">Nombre de la Asignatura</form:label>
+									<form:label path="subjectSearch">Código de la Asignatura</form:label>
 									<form:input path="subjectSearch" type="text" id="subjectSearch" />
 									</label>
 							</fieldset>
