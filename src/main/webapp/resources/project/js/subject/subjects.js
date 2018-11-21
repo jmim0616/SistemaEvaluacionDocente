@@ -85,7 +85,7 @@ function ajaxSearchSubjects() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+				arraySubjects.push(jsonResponse.objectEntityList[key].subjectId);
 
 			});
 
@@ -113,7 +113,7 @@ function ajaxSearchSubject() {
 	var name = $('#nameSearch').val();
 
 	var json = {
-		"name" : name
+		"subjectId" : name
 	};
 
 	$.ajax({

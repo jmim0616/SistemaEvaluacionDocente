@@ -39,7 +39,7 @@
 					<li><a id="courses" href="#">Cursos</a></li>
 					<li><a id="faculties" href="./Faculties">Facultades</a></li>
 					<li><a id="disciplinaryAreas" href="./DisciplinaryAreas">Áreas
-							Disciplinarias</a></li>
+							Disciplinares</a></li>
 					<li><a id="academicPrograms" href="./AcademicPrograms">Programas
 							Académicos</a></li>
 					<li><a id="departments" href="#">Departamentos</a></li>

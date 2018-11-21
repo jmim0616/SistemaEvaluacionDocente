@@ -18,7 +18,7 @@
 
 				<section class="modalBody">
 
-					<h2 id="tittleModal">Modificar 햞ea Disciplinaria</h2>
+					<h2 id="tittleModal">Modificar 햞ea Disciplinar</h2>
 					<div id="dialogModal">
 
 						<br> <label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios
@@ -67,7 +67,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonUpdateDisciplinaryArea" class="button edit-button"
-						type="submit" value="Modificar 햞ea Disciplinaria" /> <input
+						type="submit" value="Modificar 햞ea Disciplinar" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

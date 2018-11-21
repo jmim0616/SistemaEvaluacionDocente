@@ -41,6 +41,7 @@ public class SubjectConverter {
 		
 		SubjectEntity subjectEntity = new SubjectEntity();
 		
+		subjectEntity.setSubjectId(Integer.parseInt(subjectBean.getSubjectId()));
 		subjectEntity.setSubjectStatus(new SubjectStatusEntity(Integer.parseInt(subjectBean.getSubjectStatus())));
 		subjectEntity.setDisciplinaryArea(new DisciplinaryAreaEntity(Integer.parseInt(subjectBean.getDisciplinaryArea())));
 		subjectEntity.setName(subjectBean.getName());

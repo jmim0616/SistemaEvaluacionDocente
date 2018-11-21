@@ -50,7 +50,19 @@ function tagingSubjects() {
 	tagify.on('add', function(e) {
 
 		arraySubjectsAdded.push(e.detail.value);
+		
+		$('#subjectAddError').text('');
 	});
+	
+	tagify.on('invalid', function(e){
+		var invalidSubject= e.detail.value;
+		
+	$('#subjectAddError').text('La asignatura ' + invalidSubject + 
+	' no se encuentra registrada, por favor registrela para'
+      + ' poder asociarla a un docente');
+		
+	});
+	
 
 }
 

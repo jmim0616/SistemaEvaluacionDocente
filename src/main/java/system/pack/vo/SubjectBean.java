@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -18,6 +19,8 @@ import system.pack.entity.SubjectStatusEntity;
 
 public class SubjectBean {
 
+	@NotEmpty(message = "El campo \"Código de la Asignatura\" es requerido")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Código de la Asignatura\" solo se permiten numeros")
 	private String subjectId;
 	
 	private String subjectStatus;

@@ -15,9 +15,9 @@
 <div class="scroll disciplinaryAreaData">
 
 
-	<h2>ÁREAS DISCIPLINARIAS</h2>
+	<h2>ÁREAS DISCIPLINARES</h2>
 
-	<h3>Resultado de Areas Disciplinarias</h3>
+	<h3>Resultado de Áreas Disciplinares</h3>
 
 	<table id="tableDisciplinaryAreaData" class="table standard-table">
 

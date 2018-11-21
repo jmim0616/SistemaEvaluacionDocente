@@ -359,7 +359,7 @@ public class SubjectBoImpl implements SubjectBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				SubjectEntity subjectEntity = subjectDaoJpaRepository.findByName((subjectBean.getName()));
+				SubjectEntity subjectEntity = subjectDaoJpaRepository.findById(Integer.parseInt(subjectBean.getSubjectId()));
 
 				if (subjectEntity == null) {
 

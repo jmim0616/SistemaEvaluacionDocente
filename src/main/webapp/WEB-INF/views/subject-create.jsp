@@ -25,6 +25,21 @@
 	<form:form id="formCreateSubject" modelAttribute="subject">
 
 		<table>
+		
+		 <tr>
+
+				<td>
+
+					<fieldset>
+						<form:label path="subjectId">Código de la Asignatura<a style="color: red;"><strong>*</strong></a> </form:label>
+						<form:input path="subjectId" type="text" id="subjectIdCreate" />
+						<label id="subjectIdCreateError" class="validation-error"> </label>
+					</fieldset>
+
+				</td>
+
+
+			</tr>
 
 			<tr>
 

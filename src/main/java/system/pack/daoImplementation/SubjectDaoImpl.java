@@ -51,6 +51,20 @@ public class SubjectDaoImpl implements SubjectDaoInterface {
 		return subject;
 
 	}
+	
+	@Override
+	public Optional<SubjectEntity> findByIdOptional(int id) {
+
+		TypedQuery<SubjectEntity> query = entityManager.createQuery("select s from SubjectEntity s where s.subjectId =:id",
+				SubjectEntity.class);
+
+		query.setParameter("id", id);
+
+		Optional<SubjectEntity> subject = query.getResultList().stream().findFirst();
+
+		return subject;
+
+	}
 
 	@Override
 	public Optional<SubjectEntity> findByName(String name) {

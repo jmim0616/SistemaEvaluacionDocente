@@ -44,6 +44,20 @@ function tagingAcademicProgramCreate() {
 	 maxItems  : 5
     }
     });
+	
+	
+	tagify.on('invalid', function(e){
+		var invalidAcademicProgram = e.detail.value;
+		
+	$('#academicProgramCreateError').text('El programa académico ' + invalidAcademicProgram + 
+	' no se encuentra registrado, por favor registrelo para'
+      + ' poder asociarlo con una asignatura');
+		
+	});
+	
+	tagify.on('add', function(e){
+		$('#academicProgramCreateError').text('');
+	});
 
 }
 
@@ -97,13 +111,16 @@ function ajaxSearchAcademicProgram() {
 
 
 function ajaxCreateSubject() {
+	
 
+	$('#subjectIdCreateError').text('');
 	$('#disciplinaryAreaCreateError').text('');
 	$('#nameCreateError').text('');
 	$('#numberOfCreditsCreateError').text('');
 	$('#academicProgramCreateError').text('');
 
 
+	var subjectId = $('#subjectIdCreate').val();
 	var disciplinaryArea = $('#disciplinaryAreaCreate option:selected').val();
 	var name = $('#nameCreate').val();
 	var numberOfCredits = $('#numberOfCreditsCreate option:selected').text();
@@ -111,6 +128,7 @@ function ajaxCreateSubject() {
 
 
 	var json = {
+		"subjectId" : subjectId,
 		"disciplinaryArea" : disciplinaryArea,
 		"name" : name,
 		"numberOfCredits" : numberOfCredits,

@@ -17,18 +17,21 @@
 
 				<section class="modalBody">
 
-					<h2 id="tittleModal">Registrar Area Disciplinaria</h2>
+					<h2 id="tittleModal">Registrar Área Disciplinar</h2>
 					<div id="dialogModal">
 
-							<br>
-	<label>Los campos marcados con asterisco (<a style="color: red;"><strong>*</strong></a>), son obligatorios </label>
+						<br> <label>Los campos marcados con asterisco (<a
+							style="color: red;"><strong>*</strong></a>), son obligatorios
+						</label>
 
 						<table>
 
 							<tr>
 								<td>
 									<fieldset>
-										<form:label path="department">Departamento <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:label path="department">Departamento <a
+												style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:select path="department" id="departmentCreate">
 											<c:forEach items="${departments}" var="item">
 												<option value="${item.departmentId}">${item.name}</option>
@@ -46,7 +49,9 @@
 
 								<td>
 									<fieldset>
-										<form:label path="name">Nombre <a style="color: red;"><strong>*</strong></a> </form:label>
+										<form:label path="name">Nombre <a
+												style="color: red;"><strong>*</strong></a>
+										</form:label>
 										<form:input path="name" type="text" id="nameCreate" />
 										<label id="nameCreateError" class="validation-error">
 										</label>
@@ -64,7 +69,7 @@
 
 				<section class="modalFooter">
 					<input id="buttonCreateDisciplinaryArea" class="button add-button"
-						type="submit" value="Registrar Área Disciplinaria" /> <input
+						type="submit" value="Registrar Área Disciplinar" /> <input
 						id="buttonCancel" class="button delete-button" type="submit"
 						value="Cancelar" />
 				</section>

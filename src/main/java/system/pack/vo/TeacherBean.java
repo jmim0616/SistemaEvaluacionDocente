@@ -10,39 +10,39 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class TeacherBean {
 
-	@NotEmpty(message = "El campo \"Identificacion\" es requerido")
-	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Identificacion\" solo se permiten numeros")
+	@NotEmpty(message = "El campo \"Identificación\" es requerido")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Identificación\" solo se permiten numeros")
 	private String teacherId;
 
 	private String teacherStatus;
 
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Nombre\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
 
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Apellido\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Apellido\" debe ser diligenciado solo con letras")
 	private String lastName;
 
 	private String identificationType;
 
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -]*$", message = "El campo \"Titulo Profesional\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Título Profesional\" debe ser diligenciado solo con letras")
 	private String underDegree;
 
-	@Pattern(regexp = "^([a-zA-Z-][a-zA-Z -]*){0,1}$", message = "El campo \"Titulo de Maestria\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Tíitulo de Maestria\" debe ser diligenciado solo con letras")
 	private String masterDegree;
 
-	@Pattern(regexp = "^([a-zA-Z-][a-zA-Z -]*){0,1}$", message = "El campo \"Titulo de Doctorado\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Tíitulo de Doctorado\" debe ser diligenciado solo con letras")
 	private String doctorDegree;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Institucional\" no cumple el formato. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electrónico Institucional\" no cumple el formato. Ej: ejemplo@gmail.com")
 	private String institutionalMail;
 
-	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electronico Personal\" no cumple el formato. Ej: ejemplo@gmail.com")
+	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electrónico Personal\" no cumple el formato. Ej: ejemplo@gmail.com")
 	private String personalMail;
 
-	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Telefono Celular\" solo se permiten numeros")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Teléfono Celular\" solo se permiten numeros")
 	private String cellNumber;
 
-	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Telefono Fijo\" solo se permiten numeros")
+	@Pattern(regexp = "^[0-9]*$", message = "En el campo \"Teléfono Fijo\" solo se permiten numeros")
 	private String homeNumber;
 
 	private String experience;

@@ -168,7 +168,7 @@ public class SubjectController {
 	
 	@PostMapping(value = "/Search", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public JsonResponse<SubjectByProgramBean, SubjectByProgramEntity> searchSubject(@Valid @RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
+	public JsonResponse<SubjectByProgramBean, SubjectByProgramEntity> searchSubject(@RequestBody SubjectBean subjectBean, BindingResult bindingResult) {
 
 		System.out.println("00000" + subjectBean);
 		

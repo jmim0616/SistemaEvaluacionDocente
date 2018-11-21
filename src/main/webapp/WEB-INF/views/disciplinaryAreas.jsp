@@ -21,8 +21,6 @@
 
 				<li><a id="linkCreateDisciplinaryArea" href="#"> Registrar </a></li>
 
-<!-- 				<li><a id="linkSearchDisciplinaryArea" href="#"> Modificar </a></li> -->
-
 			</ul>
 			
 </div>
@@ -31,7 +29,7 @@
 
 <div class="content">
 
-	<h2>AREAS DISCIPLINARÍAS</h2>
+	<h2>ÁREAS DISCIPLINARES</h2>
 
 
 </div>

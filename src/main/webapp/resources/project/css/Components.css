@@ -546,6 +546,19 @@ input[type="checkbox"] {
 	padding: 0px 30px 10px 30px;
 }
 
+.modalBody #dialogModal textarea {
+	font-size: 70%;
+	font-weight: 300;
+	padding: 7px;
+	border-radius: 10px;
+	border: 1px solid #000000;
+    width: 400px;
+	height: auto;
+}
+
+
+
+
 .modalFooter {
 	text-align: center;
 }

@@ -17,6 +17,8 @@ public interface SubjectDaoInterface {
 	
 	public SubjectEntity findById(int id);
 	
+	public Optional<SubjectEntity> findByIdOptional(int id);
+	
 	public Optional<SubjectEntity> findByName(String name);
 	
 	public SubjectEntity findByDisciplinaryAreaId(int disciplinaryAreaId);

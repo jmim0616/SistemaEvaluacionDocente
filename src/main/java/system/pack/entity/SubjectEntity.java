@@ -22,7 +22,6 @@ public class SubjectEntity {
 
 	@Id
 	@Column
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int subjectId;
 	
 	@ManyToOne

@@ -17,7 +17,7 @@
 
 				<section class="modalBody">
 
-					<h2 id="tittleModal">Agregar Retroalimentacion al Curso</h2>
+					<h2 id="tittleModal">Agregar Retroalimentación al Curso</h2>
 					<div id="dialogModal">
 					
 						<br>

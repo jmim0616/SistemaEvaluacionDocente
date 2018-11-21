@@ -114,9 +114,7 @@ function ajaxSearchTeachers() {
 
 					console.log(jsonResponse);
 
-					$
-							.each(
-									jsonResponse.objectEntityList,
+					$.each(jsonResponse.objectEntityList,
 									function(key, value) {
 
 										arrayTeachersId.push(JSON.stringify(jsonResponse.objectEntityList[key].teacherId));

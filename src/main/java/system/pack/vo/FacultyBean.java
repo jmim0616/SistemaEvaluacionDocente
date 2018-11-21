@@ -8,7 +8,7 @@ public class FacultyBean {
 	
 	private String facultyId;
 	
-	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
+	@Pattern(regexp="^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message="El campo \"Nombre\" debe ser diligenciado solo con letras")
 	private String name;
 	
 	public FacultyBean() {

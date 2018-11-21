@@ -29,7 +29,7 @@
 						<form:form id="formSearchSubject" modelAttribute="subject">
 
 							<fieldset>
-								<form:label path="name">Nombre de la Asignatura</form:label>
+								<form:label path="name">Código de la asignatura</form:label>
 								<form:input path="name" type="text" id="nameSearch" />
 								<label id="nameSearchError" class="validation-error"> </label>
 							</fieldset>
