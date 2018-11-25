@@ -406,7 +406,7 @@ function ajaxSearchCourse() {
 																		+ jsonResponse.objectEntityList[key].teacher.teacherId
 																		+ "</td> "
 																		+ '<td class="column">'
-																		+ jsonResponse.objectEntityList[key].subject.name
+																		+ jsonResponse.objectEntityList[key].subject.subjectId
 																		+ "</td> "
 																		+ '<td class="column">'
 																		+ jsonResponse.objectEntityList[key].groupId

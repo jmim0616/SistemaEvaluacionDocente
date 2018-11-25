@@ -27,10 +27,10 @@ public class TeacherBean {
 	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Título Profesional\" debe ser diligenciado solo con letras")
 	private String underDegree;
 
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Tíitulo de Maestria\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^([a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*){0,1}$", message = "El campo \"Tíitulo de Maestria\" debe ser diligenciado solo con letras")
 	private String masterDegree;
 
-	@Pattern(regexp = "^[a-zA-Z-][a-zA-Z -][a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*$", message = "El campo \"Tíitulo de Doctorado\" debe ser diligenciado solo con letras")
+	@Pattern(regexp = "^([a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-ZñÑáéíóúÁÉÍÓÚ -]*){0,1}$", message = "El campo \"Tíitulo de Doctorado\" debe ser diligenciado solo con letras")
 	private String doctorDegree;
 
 	@Pattern(regexp = "([a-zA-Z0-9\\.\\-\\_]+\\@[a-zA-Z0-9\\-\\_]+(\\.[a-zA-Z]{2,4}){1,2}){0,1}", message = "El campo \"Correo Electrónico Institucional\" no cumple el formato. Ej: ejemplo@gmail.com")

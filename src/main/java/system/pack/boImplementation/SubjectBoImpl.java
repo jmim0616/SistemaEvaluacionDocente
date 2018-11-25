@@ -17,6 +17,7 @@ import system.pack.bointerface.SubjectBoInterface;
 import system.pack.bointerface.TeacherBoInterface;
 import system.pack.converter.SubjectConverter;
 import system.pack.converter.TeacherConverter;
+import system.pack.daoImplementation.SubjectDaoImpl;
 import system.pack.daoInterface.AcademicProgramDaoInterface;
 import system.pack.daoInterface.AcademicProgramDaoJpaRepository;
 import system.pack.daoInterface.DisciplinaryAreaDaoInterface;
@@ -358,8 +359,12 @@ public class SubjectBoImpl implements SubjectBoInterface {
 			} else {
 
 				jsonResponse.setIsValid(true);
+				
+				SubjectEntity subjectEntity = null;
 
-				SubjectEntity subjectEntity = subjectDaoJpaRepository.findById(Integer.parseInt(subjectBean.getSubjectId()));
+				if (subjectBean.getSubjectId() != ""){
+					subjectEntity = subjectDaoJpaRepository.findById((Integer.parseInt(subjectBean.getSubjectId())));
+				}
 
 				if (subjectEntity == null) {
 

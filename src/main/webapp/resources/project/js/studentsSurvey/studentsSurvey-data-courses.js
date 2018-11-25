@@ -185,54 +185,64 @@ function ajaxSearchStudentsSurveyCourses() {
 																						+ "</tr>");
 
 																isFirstRow = false;
-																
-															} 
 
-																questions = '<table class= "tabla_contenedor_down">'
-																	+ '<tr>';														
+															}
 
-																$
-																		.each(
-																				jsonResponse.periods[keyPeriods].rows[keyRows].questions,
-																				function(
-																						keyQuestions,
-																						valueQuestions) {
+															questions = '<table class= "tabla_contenedor_down">'
+																	+ '<tr>';
+
+															$
+																	.each(
+																			jsonResponse.periods[keyPeriods].rows[keyRows].questions,
+																			function(
+																					keyQuestions,
+																					valueQuestions) {
+
+																				if (jsonResponse.periods[keyPeriods].rows[keyRows].questions[keyQuestions].response < 80) {
+
+																					questions += "<td style='color: #fa2d2d;'>"
+																							+ jsonResponse.periods[keyPeriods].rows[keyRows].questions[keyQuestions].response
+																							+ "</td> ";
+																					//																																											
+
+																				} else {
+
 																					questions += "<td>"
 																							+ jsonResponse.periods[keyPeriods].rows[keyRows].questions[keyQuestions].response
 																							+ "</td> ";
-																				})
+																				}
+																			})
 
-																questions += "</tr>"
-																		+ '</table>';
+															questions += "</tr>"
+																	+ '</table>';
 
-																console
-																		.log("Questions= "
-																				+ questions);
+															console
+																	.log("Questions= "
+																			+ questions);
 
-																$(
-																		"#tableStudentsSurveyCoursesData")
-																		.append(
-																				"<tr>"
-																						+ '<td>'
-																						+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.periodName
-																						+ "</td> "
-																						+ '<td>'
-																						+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.departmentName
-																						+ "</td> "
-																						+ '<td >'
-																						+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.signatureName
-																						+ "</td> "
-																						+ '<td >'
-																						+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.groupId
-																						+ "</td> "
-																						+ '<td>'
-																						+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.teacherId
-																						+ "</td> "
-																						+ '<td>'
-																						+ questions
-																						+ "</td> "
-																						+ "</tr>");
-															
+															$(
+																	"#tableStudentsSurveyCoursesData")
+																	.append(
+																			"<tr>"
+																					+ '<td>'
+																					+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.periodName
+																					+ "</td> "
+																					+ '<td>'
+																					+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.departmentName
+																					+ "</td> "
+																					+ '<td >'
+																					+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.signatureName
+																					+ "</td> "
+																					+ '<td >'
+																					+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.groupId
+																					+ "</td> "
+																					+ '<td>'
+																					+ jsonResponse.periods[keyPeriods].rows[keyRows].rowHeader.teacherId
+																					+ "</td> "
+																					+ '<td>'
+																					+ questions
+																					+ "</td> "
+																					+ "</tr>");
 
 														})
 									})

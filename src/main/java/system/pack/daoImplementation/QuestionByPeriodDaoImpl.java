@@ -85,7 +85,7 @@ public class QuestionByPeriodDaoImpl implements QuestionByPeriodDaoInterface {
 				("select "
 						+ "courseId"
 						+ " from courses t "
-						+ "where t.academicPeriodId =:academicPeriodId "
+						+ "where t.academicPeriodId = :academicPeriodId "
 						+ "and t.teacherId = :teacherId "
 						+ "and t.subjectId = :subjectId "
 						+ "and t.groupId = :groupId");

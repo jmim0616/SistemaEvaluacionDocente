@@ -166,7 +166,7 @@ function ajaxSearchSubjects() {
 
 			$.each(jsonResponse.objectEntityList, function(key, value) {
 
-				arraySubjects.push(jsonResponse.objectEntityList[key].name);
+				arraySubjects.push(JSON.stringify(jsonResponse.objectEntityList[key].subjectId));
 
 			});
 

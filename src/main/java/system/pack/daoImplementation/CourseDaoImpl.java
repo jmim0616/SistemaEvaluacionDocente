@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import system.pack.daoInterface.AcademicPeriodDaoInterface;
 import system.pack.daoInterface.CourseDaoInterface;
 import system.pack.daoInterface.SubjectDaoInterface;
@@ -163,12 +165,12 @@ public class CourseDaoImpl implements CourseDaoInterface {
 
 		System.out.println("CourseBean2 " + courseBean);
 
-		Optional<SubjectEntity> subjectEntity = null;
+		SubjectEntity subjectEntity = null;
 		int academicPeriodId = 0;
 		List<Integer> periodsToProcess = new LinkedList<>();
 
 		String sql = "select " + "distinct (courses.courseId) courseId, " + "academic_periods.name periodName, "
-				+ "departments.name departmentName, " + "subjects.name signatureName, " + "courses.teacherId, "
+				+ "departments.name departmentName, " + "subjects.subjectId signatureName, " + "courses.teacherId, "
 				+ "courses.groupId, " + "courses.isVirtual " + "from 	academic_periods, "
 				+ "courses use index (Courses_index1192), " + "subjects use index (PRIMARY), "
 				+ "questions_by_period use index (courseId), " + "departments use index (PRIMARY) "
@@ -192,7 +194,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		System.out.println("Sql " + sql);
 
 		if (!courseBean.getSubject().equals("")) {
-			subjectEntity = subjectDaoInterface.findByName(courseBean.getSubject());
+			subjectEntity = subjectDaoInterface.findById(Integer.parseInt(courseBean.getSubject()));
 			sql = sql + " and courses.subjectId = :subjectId";
 		}
 
@@ -218,9 +220,9 @@ public class CourseDaoImpl implements CourseDaoInterface {
 		for (Integer period : periodsToProcess) {
 
 			System.out.println("Period " + period);
-			
-			System.out.println("Sql pre" + sql );
-			
+
+			System.out.println("Sql pre" + sql);
+
 			String sqlPeriod = sql + " and academic_periods.academicPeriodId = :academicPeriodId";
 			Query query = entityManager.createNativeQuery(sqlPeriod);
 
@@ -234,7 +236,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 
 			if (!courseBean.getSubject().equals("")) {
 				System.out.println("courseBean.getSubject()" + "|" + courseBean.getSubject() + "|");
-				query.setParameter("subjectId", subjectEntity.get().getSubjectId());
+				query.setParameter("subjectId", courseBean.getSubject());
 			}
 
 			if (period != null) {
@@ -319,8 +321,7 @@ public class CourseDaoImpl implements CourseDaoInterface {
 			int academicPeriod = academicPeriodDaoImpl.getAcademicPeriodByName(courseBean.getAcademicPeriod());
 			if (academicPeriod != 0) {
 				sql += " and academicPeriodId = :academicPeriodId";
-			}
-			else{
+			} else {
 				sql += " and -1 = 1";
 			}
 		}
@@ -328,15 +329,8 @@ public class CourseDaoImpl implements CourseDaoInterface {
 			sql += " and teacherId = :teacherId";
 		}
 		if (!courseBean.getSubject().equals("")) {
-			Optional<SubjectEntity> signature = subjectDaoInterface.findByName(courseBean.getSubject());
-			if (signature.isPresent()) {
-				if (signature.get().getSubjectId() != 0) {
-					sql += " and subjectId = :subjectId";
-				}
-			}
-			else{
-				sql += " and -1 = 1";
-			}
+
+			sql += " and subjectId = :subjectId";
 
 		}
 		Query query = entityManager.createNativeQuery(sql, CourseEntity.class);
@@ -353,14 +347,12 @@ public class CourseDaoImpl implements CourseDaoInterface {
 			query.setParameter("teacherId", courseBean.getTeacher());
 		}
 		if (!courseBean.getSubject().equals("")) {
-			Optional<SubjectEntity> signature = subjectDaoInterface.findByName(courseBean.getSubject());
-			if (signature.isPresent()) {
-				if (signature.get().getSubjectId() != 0) {
-					query.setParameter("subjectId", signature.get().getSubjectId());
-				}
-			}
+
+			query.setParameter("subjectId", courseBean.getSubject()); 
+			System.out.println("s");
 
 		}
+
 		return query.getResultList();
 	}
 

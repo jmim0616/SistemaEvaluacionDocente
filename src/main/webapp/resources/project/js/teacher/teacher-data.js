@@ -271,6 +271,8 @@ function ajaxSearchCoursesByTeacher() {
 							
 							$.each(jsonResponse.objectEntityList,
 											function(key, value) {
+								
+											var isVirtual = jsonResponse.objectEntityList[key].isVirtual == "S" ? "Si" : "No";
 
 												$("#tableCourseData")
 														.append(
@@ -285,13 +287,13 @@ function ajaxSearchCoursesByTeacher() {
 																		+ jsonResponse.objectEntityList[key].teacher.teacherId
 																		+ "</td> "
 																		+ "<td>"
-																		+ jsonResponse.objectEntityList[key].subject.name
+																		+ jsonResponse.objectEntityList[key].subject.subjectId
 																		+ "</td> "
 																		+ "<td>"
 																		+ jsonResponse.objectEntityList[key].groupId
 																		+ "</td> "
 																		+ "<td>"
-																		+ jsonResponse.objectEntityList[key].isVirtual
+																		+ isVirtual
 																		+ "</td> "
 																		+ "</tr>");
 

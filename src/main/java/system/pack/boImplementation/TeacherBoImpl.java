@@ -443,6 +443,7 @@ public class TeacherBoImpl implements TeacherBoInterface {
 		String[] format = { "Tipo de identificacion", "Identificacion", "Nombre", "Apellido", "Titulo(s) de pregrado",
 				"Titulo(s) de postgrado", "Titulo(s) de doctorado", "Correo institucional", "Correo personal",
 				"Telefono celular", "Telefono fijo", "Resumen de experiencia" };
+		boolean isFirstRow = true;
 
 		try {
 			fileInputStream = new FileInputStream(excel);
@@ -465,10 +466,9 @@ public class TeacherBoImpl implements TeacherBoInterface {
 
 		Iterator<Row> rowIt = xssfSheet.iterator();
 
-		Row row = rowIt.next();
-
 		while (rowIt.hasNext()) {
 
+			Row row = rowIt.next();
 			rows += 1;
 			position = 0;
 			teacherEntity = new TeacherEntity();
@@ -478,172 +478,183 @@ public class TeacherBoImpl implements TeacherBoInterface {
 			inner_loop: while (cellIterator.hasNext()) {
 
 				Cell cell = cellIterator.next();
-				// Tipo de ID
-				if (position == 0) {
-					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ " El tipo de identificación no puede estar vacio";
-						break inner_loop;
+				
+				if (!isFirstRow) {
+					
+					System.out.println("Entré en firstrow false");
+					// Tipo de ID
+					if (position == 0) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ " El tipo de identificación no puede estar vacio";
+							System.out.println("Entró 1" );
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El tipo de identificación no es válido";
+							System.out.println("Entró 2"  + cell.getStringCellValue());
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							teacherEntity.setIdentificationType((int) cell.getNumericCellValue());
+							System.out.println("Entró donde era " + teacherEntity.getIdentificationType() );
+						}
 					}
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El tipo de identificación no es válido";
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						teacherEntity.setIdentificationType((int) cell.getNumericCellValue());
-					}
-				}
-				// Número ID
-				else if (position == 1) {
+					// Número ID
+					else if (position == 1) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El número de identificación no puede estar vacio";
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación no puede estar vacio";
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de identificación no es válido";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							teacherEntity.setTeacherId((int) cell.getNumericCellValue());
+						}
 					}
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El número de identificación no es válido";
-						isValidRow = false;
-						break inner_loop;
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						teacherEntity.setTeacherId((int) cell.getNumericCellValue());
-					}
-				}
-				// Nombre
-				else if (position == 2) {
+					// Nombre
+					else if (position == 2) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: " + "La fila " + rows
-								+ " tiene el siguiente error: " + "El nombre no puede estar vacio";
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: " + "La fila " + rows
+									+ " tiene el siguiente error: " + "El nombre no puede estar vacio";
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setName(cell.getStringCellValue());
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							isValidRow = false;
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El nombre debe contener letras";
+							break inner_loop;
+						}
 					}
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setName(cell.getStringCellValue());
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						isValidRow = false;
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El nombre debe contener letras";
-						break inner_loop;
-					}
-				}
-				// Apellido
-				else if (position == 3) {
+					// Apellido
+					else if (position == 3) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El apellido no puede estar vacio";
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El apellido no puede estar vacio";
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setLastName((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El apellido debe contener letras";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setLastName((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El apellido debe contener letras";
-						isValidRow = false;
-						break inner_loop;
-					}
-				}
-				// pregrado
-				else if (position == 4) {
+					// pregrado
+					else if (position == 4) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setUnderDegree((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El título de pregado no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setUnderDegree((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El título de pregado no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-				}
-				// posgrado
-				else if (position == 5) {
+					// posgrado
+					else if (position == 5) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setMasterDegree((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El título de maestria no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setMasterDegree((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El título de maestria no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-				}
-				// doctorado
-				else if (position == 6) {
+					// doctorado
+					else if (position == 6) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setDoctorDegree((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El título de doctorado no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setDoctorDegree((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El título de doctorado no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-				}
-				// correo institucional
-				else if (position == 7) {
+					// correo institucional
+					else if (position == 7) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setInstitutionalMail((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El correo no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setInstitutionalMail((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El correo no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-				}
-				// correo personal
-				else if (position == 8) {
+					// correo personal
+					else if (position == 8) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setPersonalMail((cell.getStringCellValue()));
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El correo no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setPersonalMail((cell.getStringCellValue()));
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El correo no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
-				}
-				// celular
-				else if (position == 9) {
+					// celular
+					else if (position == 9) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El número del celular no puede tener letras";
-						isValidRow = false;
-						break inner_loop;
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						System.out.println(cell.getNumericCellValue());
-						teacherEntity.setCellNumber(String.valueOf((long) cell.getNumericCellValue()));
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número del celular no puede tener letras";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							System.out.println(cell.getNumericCellValue());
+							teacherEntity.setCellNumber(String.valueOf((long) cell.getNumericCellValue()));
+						}
 					}
-				}
-				// fijo
-				else if (position == 10) {
+					// fijo
+					else if (position == 10) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "El número de teléfono fijo no puede tener letras";
-						isValidRow = false;
-						break inner_loop;
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						teacherEntity.setHomeNumber(String.valueOf((long) cell.getNumericCellValue()));
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El número de teléfono fijo no puede tener letras";
+							isValidRow = false;
+							break inner_loop;
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							teacherEntity.setHomeNumber(String.valueOf((long) cell.getNumericCellValue()));
+						}
 					}
-				}
-				// fijo
-				else if (position == 11) {
+					// fijo
+					else if (position == 11) {
 
-					if (cell.getCellType() == cell.CELL_TYPE_STRING) {
-						teacherEntity.setExperience(cell.getStringCellValue());
-					} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
-						errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
-								+ "La experiencia no puede ser un valor númerico";
-						isValidRow = false;
-						break inner_loop;
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							teacherEntity.setExperience(cell.getStringCellValue());
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "La experiencia no puede ser un valor númerico";
+							isValidRow = false;
+							break inner_loop;
+						}
 					}
+					position++;
 				}
-				position++;
 			}
 
-			if (isValidRow) {
+			if (isFirstRow)
+				isFirstRow = false;
+			
+			if (isValidRow && !isFirstRow) {
 
 				try {
 					// Insert
@@ -652,11 +663,11 @@ public class TeacherBoImpl implements TeacherBoInterface {
 					teacherEntity.setTeacherStatus(teacherStatusEntity);
 					teacherDaoInterface.create(teacherEntity);
 				} catch (Exception e) {
-
+					System.out.println(e);
 				}
 			}
 
-			row = rowIt.next();
+			//row = rowIt.next();
 		}
 
 		xssfWorkbook.close();

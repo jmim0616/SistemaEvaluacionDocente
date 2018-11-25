@@ -166,7 +166,7 @@ function ajaxCreateSubject() {
 					
 				} else {
 
-				$('#nameSearch').val($('#nameCreate').val());
+				$('#subjectIdSearch').val($('#subjectIdCreate').val());
 
 				$('#disciplinaryAreaCreate').val('');
 				$('#nameCreate').val('');

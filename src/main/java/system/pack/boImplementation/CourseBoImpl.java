@@ -303,8 +303,6 @@ public class CourseBoImpl implements CourseBoInterface {
 
 				jsonResponse.setIsValid(true);
 
-				Optional<CourseEntity> course = courseDaoJpaRepository
-						.findByGroupId(Integer.parseInt(courseBean.getGroupId()));
 				Optional<SubjectEntity> subject = subjectDaoInterface.findByIdOptional(Integer.parseInt(courseBean.getSubject()));
 				Optional<TeacherEntity> teacher = teacherDaoJpaRepository
 						.findById(Integer.parseInt(courseBean.getTeacher()));
@@ -312,6 +310,16 @@ public class CourseBoImpl implements CourseBoInterface {
 						.findByName(courseBean.getAcademicPeriod());
 
 				String errorMessage = "";
+				
+				int courseId = questionByPeriodDaoInterface.getCourseId(subject.get().getSubjectId(),
+						Integer.parseInt(courseBean.getGroupId()), teacher.get().getTeacherId(),
+						academicPeriod.get().getAcademicPeriodId());
+				
+				if (courseId != 0){
+					errorMessage = " - Ya existe un curso con las mismas caracteristicas para dicho periodo académico..";
+
+					jsonResponse.setErrorMessage(errorMessage);
+				}
 
 				if (!subject.isPresent()) {
 
@@ -335,11 +343,6 @@ public class CourseBoImpl implements CourseBoInterface {
 					jsonResponse.setErrorMessage(errorMessage);
 				}
 
-				if (course.isPresent()) {
-
-					errorMessage += "\n - El curso que se quiere registrar ya existe";
-
-				}
 
 				if (jsonResponse.getErrorMessage() == null) {
 
@@ -649,6 +652,8 @@ public class CourseBoImpl implements CourseBoInterface {
 		String errorMessage = "";
 
 		int position = 0;
+		
+		boolean isFirstRow = true;
 
 		int rows = 0;
 
@@ -675,6 +680,8 @@ public class CourseBoImpl implements CourseBoInterface {
 			inner_loop: while (cellIterator.hasNext()) {
 
 				Cell cell = cellIterator.next();
+				
+				if (!isFirstRow){
 				// Periodo académico
 				if (position == 0) {
 					if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
@@ -768,8 +775,8 @@ public class CourseBoImpl implements CourseBoInterface {
 						courseEntity.setGroupId(((int) cell.getNumericCellValue()));
 						int courseId = questionByPeriodDaoInterface.getCourseId(courseEntity.getSubject().getSubjectId(),
 								courseEntity.getGroupId(), courseEntity.getTeacher().getTeacherId(),
-								courseEntity.getAcademicPeriod().getAcademicPeriodId());
-						if (courseId == 0){
+								courseEntity.getAcademicPeriod().getAcademicPeriodId()); 
+						if (courseId != 0){
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 									+ "Ya existe un curso con las mismas características en el periodo académico.";
 							isValidRow = false;
@@ -797,13 +804,16 @@ public class CourseBoImpl implements CourseBoInterface {
 				} 
 
 				position++;
+				}
 			}
-
-			if (isValidRow) {
+			
+			if (isValidRow && !isFirstRow) {
 				// Insert
 				courseDaoInterface.create(courseEntity);
-
 			}
+			
+			if (isFirstRow)
+				isFirstRow = false;
 		}
 
 		xssfWorkbook.close();
@@ -887,7 +897,7 @@ public class CourseBoImpl implements CourseBoInterface {
 				Cell cell = cellIterator.next();
 
 				if (isFirstRow) {
-					if (position > 3) {
+					if (position > 4) {
 						QuestionEntity questionEntity = new QuestionEntity();
 						questionEntity.setQuestion(cell.getStringCellValue());
 						questionDaoInterface.create(questionEntity);
@@ -896,8 +906,33 @@ public class CourseBoImpl implements CourseBoInterface {
 					}
 
 				} else {
-					// Departamento
 					if (position == 0) {
+						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ " El periodo académico no puede estar vacio.";
+							isValidRow = false;
+							break inner_loop;
+						}
+						if (cell.getCellType() == cell.CELL_TYPE_STRING) {
+							System.out.println("PA");
+							int academicPeriodId = academicPeriodDaoInterface
+									.getAcademicPeriodByName(cell.getStringCellValue());
+							System.out.println("academicPeriodId " + academicPeriodId);
+							if (academicPeriodId == 0) {
+								isValidRow = false;
+								errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+										+ " El periodo académico no existe.";
+							}
+							courseEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriodId));
+
+						} else if (cell.getCellType() == cell.CELL_TYPE_NUMERIC) {
+							isValidRow = false;
+							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
+									+ "El periodo académico no es válido.";
+						}
+					}
+					// Departamento
+					if (position == 1) {
 						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 									+ "El número de departamento no puede estar vacio";
@@ -923,7 +958,7 @@ public class CourseBoImpl implements CourseBoInterface {
 					}
 
 					// Asignatura
-					else if (position == 1) {
+					else if (position == 2) {
 						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 									+ "El número de identificación de la asignatura no puede estar vacio";
@@ -947,7 +982,7 @@ public class CourseBoImpl implements CourseBoInterface {
 						}
 					}
 					// Grupo
-					else if (position == 2) {
+					else if (position == 3) {
 
 						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
@@ -965,7 +1000,7 @@ public class CourseBoImpl implements CourseBoInterface {
 						}
 					}
 					// Identificador del docente
-					else if (position == 3) {
+					else if (position == 4) {
 						if (cell.getCellType() == cell.CELL_TYPE_BLANK) {
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
 									+ "El número de identificación del docente no puede estar vacio";
@@ -990,9 +1025,9 @@ public class CourseBoImpl implements CourseBoInterface {
 						}
 					}
 
-					if (position == 4) {
+					if (position == 5) {
 						int courseId = questionByPeriodDaoInterface.getCourseId(subject.getSubjectId(), groupId,
-								teacher.getTeacherId(), academicPeriod);
+								teacher.getTeacherId(), courseEntity.getAcademicPeriod().getAcademicPeriodId());
 
 						if (courseId == 0) {
 							errorMessage += "\n" + "La fila " + rows + " tiene el siguiente error: "
@@ -1001,7 +1036,7 @@ public class CourseBoImpl implements CourseBoInterface {
 							break inner_loop;
 						} else {
 							questionByPeriodEntity.setCourse(new CourseEntity(courseId));
-							questionByPeriodEntity.setAcademicPeriod(new AcademicPeriodEntity(academicPeriod));
+							questionByPeriodEntity.setAcademicPeriod(new AcademicPeriodEntity(courseEntity.getAcademicPeriod().getAcademicPeriodId()));
 						}
 					}
 

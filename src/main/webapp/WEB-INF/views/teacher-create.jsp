@@ -38,7 +38,7 @@
 							<option value="1">Cédula de Ciudadanía</option>
 							<option value="2">Cédula de Extranjería</option>
 						</form:select>
-						<label id="identificationTypeCreateError" class="validation-error-form" style="color: white;"></label>
+						<label id="identificationTypeCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>
@@ -90,7 +90,7 @@
 						<form:label path="masterDegree">Título de Maestría</form:label>
 						<form:input path="masterDegree" type="text"
 							id="masterDegreeCreate" />
-						<label id="masterDegreeCreateError" class="validation-error-form" style="color: white;"></label>
+						<label id="masterDegreeCreateError" class="validation-error-form"></label>
 					</fieldset>
 
 				</td>

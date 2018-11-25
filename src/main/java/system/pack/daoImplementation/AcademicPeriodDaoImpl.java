@@ -149,7 +149,7 @@ public class AcademicPeriodDaoImpl implements AcademicPeriodDaoInterface {
 				"select academicPeriodId from ( " +
 						"select academicPeriodId " +
 						"from academic_periods t " +
-						"order by initialDate DESC)t limit 3 ");
+						"order by initialDate DESC)t ");
 		
 		return query.getResultList();
 
